@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Expenses - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        .expense-layout-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .category-badge {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        .payment-mode-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .mode-cash { color: #16a34a; }
+        .mode-easypaisa { color: #059669; }
+        .mode-jazzcash { color: #dc2626; }
+        .mode-bank { color: #2563eb; }
+
+        @media (max-width: 992px) {
+            .expense-layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html" class="active"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Expense Management</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn-export" style="background:#16a34a;" onclick="alert('Exporting Expenses to Excel...')"><i class="fas fa-file-excel"></i> Export Expenses</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Track operational school expenses, utility bills, maintenance, and petty cash</p>
+            </div>
+
+            <!-- EXPENSE SUMMARY STATS -->
+            <div class="enquiry-stats-grid">
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-wallet"></i></div>
+                    <div>
+                        <h3 id="statTotalMonth">Rs. 48,500</h3>
+                        <p>Total Expenses This Month</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-orange"><i class="fas fa-calendar-day"></i></div>
+                    <div>
+                        <h3>Rs. 2,100</h3>
+                        <p>Spent Today</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-blue"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <h3>Utilities & Bills</h3>
+                        <p>Top Expense Head</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-purple"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div>
+                        <h3 id="statTotalCount">4 Entries</h3>
+                        <p>Recorded Vouchers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN WORKSPACE -->
+            <div class="expense-layout-grid">
+                
+                <!-- LEFT: RECORD NEW EXPENSE FORM -->
+                <div class="form-section" style="margin-bottom: 0;">
+                    <h4 class="section-heading"><i class="fas fa-plus-circle text-primary"></i> Record New Expense</h4>
+                    
+                    <form id="recordExpenseForm">
+                        <div class="input-group mb-15">
+                            <label>EXPENSE CATEGORY *</label>
+                            <select id="expCategory" required>
+                                <option value="Electricity / Utility Bills">Electricity / Utility Bills</option>
+                                <option value="Stationery & Exam Sheets">Stationery & Exam Sheets</option>
+                                <option value="Staff Tea & Refreshment">Staff Tea & Refreshment</option>
+                                <option value="Generator Fuel & Maintenance">Generator Fuel & Maintenance</option>
+                                <option value="School Repair & White Wash">School Repair & White Wash</option>
+                                <option value="Internet & Telephone">Internet & Telephone</option>
+                                <option value="Cleaning & Sanitation">Cleaning & Sanitation</option>
+                                <option value="Other Misc Expense">Other Misc Expense</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-15">
+                            <label>EXPENSE TITLE / ITEM NAME *</label>
+                            <input type="text" id="expTitle" placeholder="e.g. LESCO Electricity Bill for October" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div class="input-group">
+                                <label>AMOUNT (Rs.) *</label>
+                                <input type="number" id="expAmount" placeholder="0.00" style="font-weight:700; color:#dc2626;" required>
+                            </div>
+                            <div class="input-group">
+                                <label>DATE *</label>
+                                <input type="date" id="expDate" value="2026-10-31" required>
+                            </div>
+                        </div>
+
+                        <!-- PAKISTANI PAYMENT METHODS -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div class="input-group">
+                                <label>PAID VIA *</label>
+                                <select id="expMethod" required>
+                                    <option value="Cash">Cash (Petty Cash)</option>
+                                    <option value="Easypaisa">Easypaisa</option>
+                                    <option value="JazzCash">JazzCash</option>
+                                    <option value="Bank Transfer">Bank Transfer / Cheque</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>BILL / INVOICE NO</label>
+                                <input type="text" id="expBillNo" placeholder="Optional (e.g. INV-104)">
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-20">
+                            <label>NOTES / DESCRIPTION</label>
+                            <textarea id="expNotes" rows="2" placeholder="e.g. Paid by accountant cash in hand"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit w-100" style="background:#dc2626;">
+                            <i class="fas fa-check-circle"></i> Save Expense Record
+                        </button>
+                    </form>
+                </div>
+
+                <!-- RIGHT: EXPENSE REGISTER TABLE -->
+                <div class="data-table-card">
+                    <!-- Filter bar inside card -->
+                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <h4><i class="fas fa-receipt text-danger"></i> Expense Register (October 2026)</h4>
+                        <div style="display: flex; gap: 8px;">
+                            <select id="filterCategory" onchange="filterExpenses()" style="padding: 6px 10px; font-size: 12px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
+                                <option value="All">All Categories</option>
+                                <option value="Electricity / Utility Bills">Utility Bills</option>
+                                <option value="Stationery & Exam Sheets">Stationery</option>
+                                <option value="Staff Tea & Refreshment">Tea & Refreshment</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="expensesTable">
+                            <thead>
+                                <tr>
+                                    <th width="4%">#</th>
+                                    <th width="14%">DATE</th>
+                                    <th width="26%">TITLE & DESCRIPTION</th>
+                                    <th width="20%">CATEGORY</th>
+                                    <th width="14%">AMOUNT</th>
+                                    <th width="14%">PAID VIA</th>
+                                    <th width="8%">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Expense 1 -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>31-Oct-2026</td>
+                                    <td>
+                                        <strong>Electricity Bill (LESCO)</strong><br>
+                                        <small style="color:#64748b;">Bill # 0918231293</small>
+                                    </td>
+                                    <td><span class="category-badge">Electricity / Utility Bills</span></td>
+                                    <td class="text-danger fw-bold">Rs. 28,500</td>
+                                    <td><span class="payment-mode-pill mode-bank"><i class="fas fa-university"></i> Bank Transfer</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- Expense 2 -->
+                                <tr>
+                                    <td>2</td>
+                                    <td>30-Oct-2026</td>
+                                    <td>
+                                        <strong>Mid Term Exam Answer Sheets</strong><br>
+                                        <small style="color:#64748b;">Paper Mart Invoice # 412</small>
+                                    </td>
+                                    <td><span class="category-badge">Stationery & Exam Sheets</span></td>
+                                    <td class="text-danger fw-bold">Rs. 12,000</td>
+                                    <td><span class="payment-mode-pill mode-easypaisa"><i class="fas fa-mobile-alt"></i> Easypaisa</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- Expense 3 -->
+                                <tr>
+                                    <td>3</td>
+                                    <td>29-Oct-2026</td>
+                                    <td>
+                                        <strong>Generator Diesel (25 Liters)</strong><br>
+                                        <small style="color:#64748b;">Fuel station receipt</small>
+                                    </td>
+                                    <td><span class="category-badge">Generator Fuel & Maintenance</span></td>
+                                    <td class="text-danger fw-bold">Rs. 6,800</td>
+                                    <td><span class="payment-mode-pill mode-jazzcash"><i class="fas fa-mobile-alt"></i> JazzCash</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- Expense 4 -->
+                                <tr>
+                                    <td>4</td>
+                                    <td>28-Oct-2026</td>
+                                    <td>
+                                        <strong>Staff Weekly Tea & Biscuits</strong><br>
+                                        <small style="color:#64748b;">Local store petty cash</small>
+                                    </td>
+                                    <td><span class="category-badge">Staff Tea & Refreshment</span></td>
+                                    <td class="text-danger fw-bold">Rs. 1,200</td>
+                                    <td><span class="payment-mode-pill mode-cash"><i class="fas fa-money-bill-wave"></i> Cash</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-footer">
+                        <div>Monthly Net Expenditure: <strong class="text-danger">Rs. 48,500</strong></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Expense Handling Script -->
+    <script>
+        document.getElementById('recordExpenseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('expTitle').value;
+            const amount = document.getElementById('expAmount').value;
+            const method = document.getElementById('expMethod').value;
+            const cat = document.getElementById('expCategory').value;
+
+            alert(`Expense of Rs. ${amount} recorded under "${cat}" via ${method} successfully!`);
+            this.reset();
+        });
+
+        function filterExpenses() {
+            let cat = document.getElementById('filterCategory').value.toUpperCase();
+            let table = document.getElementById('expensesTable');
+            let tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[3];
+                if (td) {
+                    let txt = td.textContent || td.innerText;
+                    if (cat === "ALL" || txt.toUpperCase().indexOf(cat) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
