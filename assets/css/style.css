@@ -235,3 +235,9 @@ table td { padding: 12px 10px; font-size: 13px; border-bottom: 1px solid var(--b
         width: 100%;
     }
 }
+
+/* Sidebar Custom Scrollbar */
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-track { background: var(--primary-dark); }
+.sidebar::-webkit-scrollbar-thumb { background: #2c3154; border-radius: 10px; }
+.sidebar:hover::-webkit-scrollbar-thumb { background: var(--accent-purple); }
