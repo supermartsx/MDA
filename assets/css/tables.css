@@ -1,0 +1,199 @@
+/* ================= FILTER SECTION ================= */
+.filter-section {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    margin-bottom: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+.filter-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 150px;
+}
+
+.filter-search-group {
+    flex: 2;
+    min-width: 200px;
+}
+
+.button-group {
+    flex: 0.5;
+    flex-direction: row;
+    gap: 10px;
+    min-width: max-content;
+}
+
+.filter-group label {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.filter-group select,
+.filter-group input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    color: #333;
+    background: #fdfdfd;
+}
+
+.filter-group input:focus, 
+.filter-group select:focus {
+    border-color: var(--accent-purple);
+}
+
+.btn-search {
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 40px;
+}
+
+.btn-search:hover { background: #56167d; }
+
+.btn-clear {
+    background: #f1f3f5;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 40px;
+}
+
+.btn-export {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ================= DATA TABLE STYLES ================= */
+.mt-20 { margin-top: 20px; }
+
+.badge {
+    background: #e0f2fe;
+    color: #0284c7;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Mobile smooth scroll */
+}
+
+#studentsTable {
+    width: 100%;
+    min-width: 700px; /* Force scroll on small devices */
+    border-collapse: collapse;
+}
+
+#studentsTable th {
+    background: #f8f9fa;
+    color: #555;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #eaedf1;
+}
+
+#studentsTable td {
+    padding: 12px 15px;
+    font-size: 13px;
+    color: #333;
+    border-bottom: 1px solid #eaedf1;
+    vertical-align: middle;
+}
+
+#studentsTable tbody tr:hover { background-color: #fdfdfe; }
+
+.adm-badge {
+    background: #f1f3f5;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.class-badge {
+    background: #e0f6f9;
+    color: #0c7b93;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Action Buttons (View, Edit, Delete) */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-buttons button, .action-buttons a {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.btn-view { background: #e0f2fe; color: #0284c7; }
+.btn-view:hover { background: #bae6fd; }
+
+.btn-edit { background: #fef08a; color: #a16207; }
+.btn-edit:hover { background: #fde047; }
+
+/* Pagination Footer */
+.pagination-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-top: 1px solid #eaedf1;
+    font-size: 12px;
+    color: #555;
+}
+
+.rows-per-page select {
+    padding: 3px 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
