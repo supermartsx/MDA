@@ -1,0 +1,294 @@
+/* ================= GENERAL SETUP ================= */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+body { 
+    background-color: #5c6270; /* Preview background color */
+}
+
+/* ================= TOP CONTROL BAR (UI) ================= */
+/* Ye section print ke waqt hide ho jayega */
+.top-control-bar {
+    background: #fff; 
+    padding: 15px 40px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    margin-bottom: 20px; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100;
+}
+
+.controls-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.btn-back { 
+    background: #f1f3f5; 
+    color: #333; 
+    padding: 10px 20px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-size: 14px; 
+    font-weight: 500; 
+    transition: 0.3s;
+}
+
+.btn-back:hover { background: #e2e6ea; }
+
+.btn-print { 
+    background: #1d4ed8; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 25px; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.btn-print:hover { background: #1e40af; }
+
+/* ================= A4 PAPER & FRAME ================= */
+.a4-sheet {
+    width: 210mm; 
+    min-height: 297mm; 
+    background: #fff; 
+    /* Subtle texture background */
+    background-image: radial-gradient(#fdfdfd 1px, transparent 1px);
+    background-size: 20px 20px; 
+    margin: 0 auto 50px auto; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    padding: 12mm; 
+    position: relative;
+}
+
+.certificate-frame {
+    border: 8px solid #f9f0d1; /* Outer thick light gold */
+    outline: 1px solid #c8a951; /* Outline thin dark gold */
+    outline-offset: -2px;
+    padding: 2px;
+    height: 100%;
+    position: relative;
+}
+
+/* Inner dark border frame */
+.certificate-frame::before {
+    content: ''; 
+    display: block; 
+    border: 2px solid #222; 
+    height: calc(100% - 4px); 
+    padding: 30px;
+}
+
+/* ================= CERTIFICATE CONTENT ================= */
+
+/* Header */
+.cert-header { 
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+.cert-header h1 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 32px; 
+    color: #1a1a1a; 
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+.cert-header p { 
+    font-size: 14px; 
+    color: #555; 
+    margin: 2px 0;
+}
+
+/* Title */
+.cert-title { 
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+.cert-title h2 { 
+    font-size: 24px; 
+    color: #800020; /* Maroon */
+    font-weight: 700; 
+    letter-spacing: 3px; 
+    margin-bottom: 5px;
+}
+.title-line {
+    width: 150px;
+    height: 3px;
+    background: #c8a951; /* Gold */
+    margin: 0 auto;
+}
+
+/* Meta-info Row (TC No, Date, etc) */
+.meta-row { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+.meta-col { 
+    display: flex; 
+    flex-direction: column; 
+}
+.meta-label { 
+    font-size: 10px; 
+    color: #777; 
+    font-weight: 600; 
+    margin-bottom: 2px;
+}
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Section Labels */
+.section-label { 
+    background: #f4f4f4; 
+    padding: 5px 12px; 
+    font-size: 12px; 
+    font-weight: 600; 
+    color: #333; 
+    border-left: 4px solid #800020; 
+    margin: 20px 0 15px 0;
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+}
+
+/* Information Table */
+.info-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.info-table td { 
+    padding: 8px 0; 
+    border-bottom: 1px solid #eee; 
+    color: #444;
+}
+.fw-bold { font-weight: 600; color: #000; }
+
+/* Attendance Grid */
+.attendance-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px; 
+    margin-bottom: 20px;
+}
+.att-box { 
+    text-align: center; 
+    padding: 15px; 
+    border-radius: 8px; 
+    border: 1px solid; 
+}
+.att-box h3 { font-size: 22px; margin-bottom: 5px; }
+.att-box p { font-size: 10px; font-weight: 600; color: #666; }
+
+/* Fee Clearance Box */
+.fee-clearance-box { 
+    padding: 12px; 
+    border-radius: 6px; 
+    font-size: 13px; 
+    font-weight: 500; 
+    margin-bottom: 20px;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+.text-danger { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+
+/* Certificate Paragraph */
+.cert-paragraph { 
+    font-size: 15px; 
+    line-height: 1.8; 
+    text-align: justify; 
+    color: #333; 
+    margin-bottom: 40px;
+}
+
+/* Signatures */
+.signatures-section { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 60px;
+    padding: 0 20px;
+}
+.sign-block { 
+    text-align: center; 
+    width: 180px; 
+}
+.sign-line { 
+    border-top: 1px solid #333; 
+    margin-bottom: 8px; 
+}
+.sign-block p { 
+    font-size: 11px; 
+    font-weight: 600; 
+    color: #555; 
+    text-transform: uppercase;
+}
+
+/* Footer */
+.pen-number-box {
+    margin-top: 40px;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+}
+.pen-label { 
+    font-size: 12px; 
+    font-weight: 600; 
+    color: #444; 
+}
+.pen-label span { color: #aaa; }
+
+.cert-footer-text { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 10px; 
+    color: #999; 
+    margin-top: 20px;
+    border-top: 1px solid #eee; 
+    padding-top: 10px; 
+}
+
+/* ================= PRINT SETTINGS ================= */
+@media print {
+    @page { 
+        size: A4 portrait; 
+        margin: 0; 
+    }
+    body { 
+        background: #fff; 
+        margin: 0; 
+        padding: 0; 
+    }
+    .no-print { 
+        display: none !important; 
+    }
+    .a4-sheet {
+        margin: 0; 
+        box-shadow: none; 
+        width: 210mm; 
+        height: 297mm; 
+        padding: 10mm; 
+    }
+    /* Force background colors to print in Chrome/Safari */
+    * { 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+    }
+}
