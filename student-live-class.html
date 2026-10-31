@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Classroom - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 50px;
+        }
+
+        /* Top Bar */
+        .app-top-header {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .btn-back-home {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .portal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 18px;
+        }
+
+        /* Ongoing Live Class Card */
+        .active-live-card {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+        .live-tag-badge {
+            background: rgba(0,0,0,0.25);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        .blinking-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
+            animation: pulseDot 1.5s infinite;
+        }
+        @keyframes pulseDot {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.8; }
+        }
+
+        .live-subject-info h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+        }
+        .live-subject-info p {
+            font-size: 13px;
+            opacity: 0.95;
+            margin: 0 0 20px 0;
+        }
+
+        .btn-meet-join {
+            background: #ffffff;
+            color: #065f46;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: 0.2s;
+        }
+        .btn-meet-join:hover {
+            background: #ecfdf5;
+            transform: translateY(-2px);
+        }
+
+        /* Schedule Timeline List */
+        .content-card-box {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .card-heading {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .schedule-row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .schedule-row-item:last-child { border-bottom: none; }
+
+        .class-left-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .class-icon-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-size: 16px;
+        }
+
+        .status-pill {
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .status-live { background: #dcfce7; color: #15803d; }
+        .status-upcoming { background: #e0f2fe; color: #0369a1; }
+        .status-done { background: #f1f5f9; color: #64748b; }
+
+        /* Etiquettes Box */
+        .rules-card-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 18px;
+        }
+        .rules-card-box h5 {
+            color: #1e40af;
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .rules-card-box ul {
+            font-size: 12px;
+            color: #1e3a8a;
+            padding-left: 20px;
+            line-height: 1.8;
+            list-style: disc;
+        }
+
+        @media (max-width: 550px) {
+            .active-live-card { padding: 18px; }
+            .btn-meet-join { width: 100%; justify-content: center; }
+            .schedule-row-item { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- APP TOP BAR -->
+    <header class="app-top-header">
+        <a href="student-dashboard.html" class="btn-back-home"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <div style="font-size:12px; color:#64748b; font-weight:600;">
+            <i class="fas fa-calendar-day"></i> Today's Live Sessions
+        </div>
+    </header>
+
+    <div class="portal-container">
+
+        <!-- ACTIVE LIVE GOOGLE MEET CLASS CARD -->
+        <div class="active-live-card">
+            <div class="live-tag-badge">
+                <span class="blinking-dot"></span> LIVE CLASS HAPPENING NOW
+            </div>
+
+            <div class="live-subject-info">
+                <h2>Computer Science (Class 10)</h2>
+                <p>
+                    <i class="fas fa-chalkboard-teacher"></i> Instructor: <strong>Sir Bilal Ahmad</strong> &nbsp;|&nbsp; 
+                    <i class="far fa-clock"></i> 09:15 AM - 10:00 AM &nbsp;|&nbsp; 
+                    <i class="fas fa-book"></i> Topic: Chapter 2 Algorithms
+                </p>
+            </div>
+
+            <!-- TEACHER KA GOOGLE MEET LINK -->
+            <a href="https://meet.google.com/new" target="_blank" class="btn-meet-join">
+                <i class="fas fa-video text-success" style="font-size: 18px;"></i> Click Here to Join Google Meet Class
+            </a>
+        </div>
+
+        <!-- TODAY'S FULL ONLINE CLASSES SCHEDULE -->
+        <div class="content-card-box">
+            <h4 class="card-heading"><i class="fas fa-calendar-alt text-primary"></i> Today's Full Schedule (Monday)</h4>
+
+            <!-- Lecture 1 -->
+            <div class="schedule-row-item">
+                <div class="class-left-details">
+                    <div class="class-icon-circle"><i class="fas fa-book"></i></div>
+                    <div>
+                        <strong style="font-size:13px; color:#0f172a;">1. English Compulsory</strong>
+                        <p style="font-size:11px; color:#64748b; margin:2px 0 0;">Madam Ayesha Tariq • 08:30 AM - 09:15 AM</p>
+                    </div>
+                </div>
+                <span class="status-pill status-done"><i class="fas fa-check"></i> Completed</span>
+            </div>
+
+            <!-- Lecture 2 (Live) -->
+            <div class="schedule-row-item" style="background:#f0fdf4; padding: 12px; border-radius: 8px;">
+                <div class="class-left-details">
+                    <div class="class-icon-circle" style="background:#dcfce7; color:#16a34a;"><i class="fas fa-laptop-code"></i></div>
+                    <div>
+                        <strong style="font-size:13px; color:#15803d;">2. Computer Science (Live Meet)</strong>
+                        <p style="font-size:11px; color:#166534; margin:2px 0 0;">Sir Bilal Ahmad • 09:15 AM - 10:00 AM</p>
+                    </div>
+                </div>
+                <span class="status-pill status-live"><i class="fas fa-broadcast-tower"></i> Live Now</span>
+            </div>
+
+            <!-- Lecture 3 -->
+            <div class="schedule-row-item">
+                <div class="class-left-details">
+                    <div class="class-icon-circle"><i class="fas fa-square-root-alt"></i></div>
+                    <div>
+                        <strong style="font-size:13px; color:#0f172a;">3. Mathematics (Science)</strong>
+                        <p style="font-size:11px; color:#64748b; margin:2px 0 0;">Sir Usman Ghani • 10:15 AM - 11:00 AM</p>
+                    </div>
+                </div>
+                <span class="status-pill status-upcoming"><i class="far fa-clock"></i> Upcoming</span>
+            </div>
+
+            <!-- Lecture 4 -->
+            <div class="schedule-row-item">
+                <div class="class-left-details">
+                    <div class="class-icon-circle"><i class="fas fa-atom"></i></div>
+                    <div>
+                        <strong style="font-size:13px; color:#0f172a;">4. Physics (Theory)</strong>
+                        <p style="font-size:11px; color:#64748b; margin:2px 0 0;">Sir Hamza Farooq • 11:00 AM - 11:45 AM</p>
+                    </div>
+                </div>
+                <span class="status-pill status-upcoming"><i class="far fa-clock"></i> Upcoming</span>
+            </div>
+        </div>
+
+        <!-- MEETING RULES & HELP -->
+        <div class="rules-card-box">
+            <h5><i class="fas fa-info-circle"></i> Instructions for Online Google Meet Classes</h5>
+            <ul>
+                <li>Class shuru hone se 5 minute pehle link par click karke join karein.</li>
+                <li>Dakhil hote hi apna microphone mute rakhein taake class mein shor na ho.</li>
+                <li>Sawal poochne ke liye Google Meet mein <strong>"Raise Hand"</strong> ka button dabayein.</li>
+                <li>Proper school uniform ya ba-waqar libas mein online class attend karein.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
