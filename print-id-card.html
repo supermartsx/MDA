@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print ID Card - MDA Mustafa Digital Ai School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ID Card Specific CSS -->
+    <link rel="stylesheet" href="assets/css/id-card.css">
+</head>
+<body>
+
+    <!-- TOP CONTROL BAR (Ye print me show nahi hoga) -->
+    <div class="top-control-bar no-print">
+        <div class="controls-left">
+            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Profile</a>
+        </div>
+        
+        <!-- Theme Colors (Just for display as per Image 18) -->
+        <div class="color-switcher">
+            <span>Theme:</span>
+            <div class="color-dot active" style="background: #800020;"></div> <!-- Maroon -->
+            <div class="color-dot" style="background: #003366;"></div> <!-- Navy Blue -->
+            <div class="color-dot" style="background: #004d00;"></div> <!-- Green -->
+            <div class="color-dot" style="background: #4b0082;"></div> <!-- Purple -->
+        </div>
+
+        <div class="controls-right">
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print ID Card</button>
+        </div>
+    </div>
+
+    <!-- ID CARD PREVIEW AREA -->
+    <div class="id-card-wrapper">
+        
+        <!-- FRONT SIDE -->
+        <div class="id-card front-card">
+            <!-- Maroon Striped Background -->
+            <div class="card-bg-stripes"></div>
+            
+            <!-- Curved Header -->
+            <div class="card-header">
+                <div class="school-logo-circle">D</div>
+                <div class="school-header-text">
+                    <h2>DATA CLICK IT HUB</h2>
+                    <p>Bharwari Kaushambi</p>
+                </div>
+            </div>
+            
+            <!-- Yellow Curve Border -->
+            <div class="yellow-curve"></div>
+
+            <!-- Student Photo -->
+            <div class="student-photo-box">
+                <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=200" alt="Student Photo">
+            </div>
+
+            <!-- Student Name & Class -->
+            <h1 class="student-name">RAJ KUMAR</h1>
+            <div class="class-badge">Class 10 • Science</div>
+
+            <!-- Student Details -->
+            <div class="student-details">
+                <table class="details-table">
+                    <tr><td>ADM NO</td><td>: ADM002</td></tr>
+                    <tr><td>FATHER</td><td>: RAM SHARMA</td></tr>
+                    <tr><td>D.O.B.</td><td>: 22-01-2010</td></tr>
+                    <tr><td>MOBILE</td><td>: 7310095239</td></tr>
+                    <tr><td>ADDRESS</td><td>: XXXXXXXX</td></tr>
+                </table>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer">
+                <div class="session-box">
+                    <span>SESSION</span>
+                    <strong>2026-27</strong>
+                </div>
+                <div class="sign-box">
+                    <div class="sign-line"></div>
+                    <p>Principal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK SIDE -->
+        <div class="id-card back-card">
+            <div class="card-bg-stripes-top"></div>
+            
+            <div class="back-header">
+                <h2>DATA CLICK IT HUB</h2>
+                <p>STUDENT IDENTITY CARD</p>
+            </div>
+
+            <div class="back-details">
+                <table class="details-table-back">
+                    <tr><td>MOTHER</td><td>RADHA SHARMA</td></tr>
+                    <tr><td>ADDRESS</td><td>XXXXXXXX - 000000</td></tr>
+                </table>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="emergency-box">
+                <span class="em-title">EMERGENCY CONTACT</span>
+                <strong>RAM SHARMA - 7310095239</strong>
+            </div>
+
+            <!-- QR Code Box -->
+            <div class="qr-code-section">
+                <div class="qr-img">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=ADM002-Raj-Kumar" alt="QR Code">
+                </div>
+                <div class="qr-text">
+                    <strong>SCAN TO VERIFY</strong>
+                    <p>ADM002</p>
+                    <small>Valid for session<br>2026-27</small>
+                </div>
+            </div>
+
+            <!-- Return Text -->
+            <div class="return-box">
+                <strong>IF FOUND, PLEASE RETURN TO</strong>
+                <p>Data Click IT Hub<br>Bharwari Kaushambi<br>Ph: 7310095239<br>dataclickeducation@gmail.com</p>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer">
+                Note: This card must be carried daily and shown on demand. It is not transferable. Loss of the card must be reported to the school office at once.
+            </div>
+
+            <div class="bottom-stripe">
+                THIS CARD IS THE PROPERTY OF THE SCHOOL
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
