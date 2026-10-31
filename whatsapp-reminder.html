@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Reminder - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Table CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+
+    <style>
+        .wa-green-btn {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .wa-green-btn:hover {
+            background: #1eb855;
+            color: #fff;
+        }
+
+        .template-box-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .tag-pill {
+            background: #eef2ff;
+            color: #4f46e5;
+            border: 1px solid #c7d2fe;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .status-sent {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html" class="active"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>WhatsApp Fee Reminder</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="fab fa-whatsapp text-success"></i> WhatsApp Center</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Send instant fee reminder messages directly to parents on WhatsApp</p>
+            </div>
+
+            <!-- CUSTOMIZABLE MESSAGE TEMPLATE CARD -->
+            <div class="template-box-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h4 style="font-size: 14px; color: #1e293b; margin: 0;"><i class="fab fa-whatsapp text-success"></i> Customize WhatsApp Message Template</h4>
+                    <button class="btn-tool" onclick="alert('Message template saved!')"><i class="fas fa-save"></i> Save Template</button>
+                </div>
+
+                <div class="input-group">
+                    <textarea id="waTemplateText" rows="3" style="font-size: 13px; line-height: 1.6;">Dear {father_name}, this is a gentle reminder from MDA School that your child {student_name} (Class {class}) has pending fee dues of ₹{due_amount}. Kindly deposit the fees by {due_date}. Thank you!</textarea>
+                </div>
+                
+                <div class="tags-container">
+                    <span style="font-size: 11px; color: #64748b; line-height: 2;">Click tags to copy:</span>
+                    <span class="tag-pill" onclick="insertTag('{student_name}')">{student_name}</span>
+                    <span class="tag-pill" onclick="insertTag('{father_name}')">{father_name}</span>
+                    <span class="tag-pill" onclick="insertTag('{class}')">{class}</span>
+                    <span class="tag-pill" onclick="insertTag('{due_amount}')">{due_amount}</span>
+                    <span class="tag-pill" onclick="insertTag('{due_date}')">{due_date}</span>
+                </div>
+            </div>
+
+            <!-- DEFAULTERS LIST TABLE -->
+            <div class="data-table-card">
+                <div class="card-header" style="flex-wrap: wrap; gap: 10px;">
+                    <h4><i class="fas fa-user-clock text-danger"></i> Pending Fee Defaulters List</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="wa-green-btn" onclick="sendBulkWhatsApp()"><i class="fab fa-whatsapp"></i> Send to Selected</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="waReminderTable">
+                        <thead>
+                            <tr>
+                                <th width="4%"><input type="checkbox" id="selectAllWa" onchange="toggleWaSelectAll(this)" checked></th>
+                                <th width="12%">ADM NO</th>
+                                <th width="20%">STUDENT NAME</th>
+                                <th width="18%">FATHER NAME</th>
+                                <th width="14%">WHATSAPP NO</th>
+                                <th width="10%">CLASS</th>
+                                <th width="12%">DUE AMOUNT</th>
+                                <th width="10%">STATUS</th>
+                                <th width="10%">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Student 1 -->
+                            <tr>
+                                <td><input type="checkbox" class="wa-select" checked></td>
+                                <td><span class="adm-badge">ADM001</span></td>
+                                <td><strong>RAMESH KUMAR</strong></td>
+                                <td>SURESH KUMAR</td>
+                                <td><i class="fab fa-whatsapp text-success"></i> +923001234567</td>
+                                <td><span class="class-badge">Class 10</span></td>
+                                <td class="text-danger fw-bold">₹6,500</td>
+                                <td><span class="status-pending">Pending</span></td>
+                                <td>
+                                    <button class="wa-green-btn" onclick="sendSingleWhatsApp('+923001234567', 'RAMESH KUMAR', 'SURESH KUMAR', 'Class 10', '6,500')">
+                                        <i class="fab fa-whatsapp"></i> Send
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Student 2 -->
+                            <tr>
+                                <td><input type="checkbox" class="wa-select" checked></td>
+                                <td><span class="adm-badge">ADM002</span></td>
+                                <td><strong>SITA SHARMA</strong></td>
+                                <td>RAM SHARMA</td>
+                                <td><i class="fab fa-whatsapp text-success"></i> +923129876543</td>
+                                <td><span class="class-badge">Class 10</span></td>
+                                <td class="text-danger fw-bold">₹6,500</td>
+                                <td><span class="status-sent">Sent Today</span></td>
+                                <td>
+                                    <button class="wa-green-btn" onclick="sendSingleWhatsApp('+923129876543', 'SITA SHARMA', 'RAM SHARMA', 'Class 10', '6,500')">
+                                        <i class="fab fa-whatsapp"></i> Resend
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- WhatsApp Action Logic -->
+    <script>
+        function toggleWaSelectAll(master) {
+            const checkboxes = document.querySelectorAll('.wa-select');
+            checkboxes.forEach(cb => cb.checked = master.checked);
+        }
+
+        function insertTag(tag) {
+            const textarea = document.getElementById('waTemplateText');
+            textarea.value += ' ' + tag;
+        }
+
+        function sendSingleWhatsApp(phone, studentName, fatherName, studentClass, dueAmount) {
+            let template = document.getElementById('waTemplateText').value;
+
+            // Replace dynamic placeholders
+            let message = template
+                .replace('{father_name}', fatherName)
+                .replace('{student_name}', studentName)
+                .replace('{class}', studentClass)
+                .replace('{due_amount}', dueAmount)
+                .replace('{due_date}', '05-Nov-2026');
+
+            // Encode for URL
+            let encodedMsg = encodeURIComponent(message);
+            // Clean phone number (remove spaces/dashes)
+            let cleanPhone = phone.replace(/[^0-9]/g, '');
+
+            // Open WhatsApp Web/App
+            let waUrl = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
+            window.open(waUrl, '_blank');
+        }
+
+        function sendBulkWhatsApp() {
+            const selected = document.querySelectorAll('.wa-select:checked');
+            if (selected.length === 0) {
+                alert("Please select at least one student!");
+                return;
+            }
+            alert(`Ready to send reminders to ${selected.length} students. WhatsApp windows will open sequentially.`);
+        }
+    </script>
+</body>
+</html>
