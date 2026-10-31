@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 80px; /* Space for fixed bottom bar */
+        }
+
+        /* ================= TOP CURVED GRADIENT HEADER (Image 1 Exact) ================= */
+        .portal-hero-header {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #6366f1 100%);
+            color: #ffffff;
+            padding: 25px 20px 45px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            position: relative;
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .nav-menu-icon {
+            font-size: 20px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .header-user-side {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bell-icon-wrap {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .bell-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: #fff;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            font-size: 9.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .user-avatar-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+        .user-avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-greeting-box h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 2px 0;
+        }
+        .header-greeting-box h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0;
+            opacity: 0.95;
+        }
+        .header-greeting-box p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        /* Floating Search Bar (Image 1 Exact) */
+        .search-bar-container {
+            max-width: 500px;
+            margin: -22px auto 20px;
+            padding: 0 16px;
+            position: relative;
+            z-index: 20;
+        }
+        .search-box-pill {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        .search-box-pill i {
+            color: #6366f1;
+            font-size: 16px;
+        }
+        .search-box-pill input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 13.5px;
+            color: #1e293b;
+            background: transparent;
+        }
+        .search-box-pill input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* ================= CONTENT CONTAINER ================= */
+        .main-body-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .section-header-row h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .section-header-row a {
+            font-size: 12px;
+            color: #6366f1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* ================= QUICK ACCESS 3-COLUMNS GRID (Image 1 Exact) ================= */
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .quick-card-btn {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+            transition: all 0.25s ease;
+        }
+        .quick-card-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+            border-color: #cbd5e1;
+        }
+
+        .card-icon-round {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Pastel Colors */
+        .icon-profile { background: #ede9fe; color: #6366f1; }
+        .icon-events { background: #ffedd5; color: #f97316; }
+        .icon-staff { background: #dbeafe; color: #2563eb; }
+        .icon-attendance { background: #d1fae5; color: #059669; }
+        .icon-chatbox { background: #fce7f3; color: #db2777; }
+        .icon-gradesheet { background: #fef9c3; color: #ca8a04; }
+        .icon-gallery { background: #e0f2fe; color: #0284c7; }
+        .icon-fees { background: #ccfbf1; color: #0d9488; }
+        .icon-notices { background: #ede9fe; color: #7c3aed; }
+        .icon-assignments { background: #ffedd5; color: #ea580c; }
+        .icon-exams { background: #dcfce7; color: #16a34a; }
+        .icon-library { background: #e0f2fe; color: #3b82f6; }
+
+        .card-title-text {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        .card-desc-text {
+            font-size: 9.5px;
+            color: #64748b;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .card-arrow-icon {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .badge-new-pill {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #7c3aed;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+
+        /* ================= UPCOMING EVENTS SECTION (Image 1 Exact) ================= */
+        .events-list-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .event-item-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+        }
+
+        .event-date-box {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 6px 10px;
+            text-align: center;
+            min-width: 52px;
+            margin-right: 12px;
+        }
+        .event-month { font-size: 8.5px; font-weight: 700; color: #6366f1; text-transform: uppercase; }
+        .event-day { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1.1; }
+        .event-weekday { font-size: 8px; color: #64748b; }
+
+        .event-info-text {
+            flex: 1;
+        }
+        .event-info-text h4 {
+            font-size: 12.5px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .event-info-text p {
+            font-size: 10px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 1px 0;
+        }
+
+        .event-status-tag {
+            font-size: 10px;
+            color: #6366f1;
+            background: #eef2ff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        /* ================= FIXED BOTTOM NAV BAR (Image 1 Exact) ================= */
+        .bottom-nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-item-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 600;
+            gap: 4px;
+            transition: 0.2s;
+        }
+        .nav-item-link i { font-size: 18px; }
+        .nav-item-link.active-nav {
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CURVED GRADIENT HEADER -->
+    <header class="portal-hero-header">
+        <div class="header-top-row">
+            <i class="fas fa-bars nav-menu-icon"></i>
+            <div class="header-user-side">
+                <div class="bell-icon-wrap" onclick="alert('No new notifications!')">
+                    <i class="far fa-bell"></i>
+                    <span class="bell-badge">3</span>
+                </div>
+                <div class="user-avatar-circle" onclick="window.location.href='student-id-card.html'">
+                    <img src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=100" alt="Avatar">
+                </div>
+            </div>
+        </div>
+
+        <div class="header-greeting-box">
+            <h1>Student Portal</h1>
+            <h3>Hello, <span id="headerStudentName">Student</span> 👋</h3>
+            <p>Have a great day ahead!</p>
+        </div>
+    </header>
+
+    <!-- FLOATING SEARCH BAR -->
+    <div class="search-bar-container">
+        <div class="search-box-pill">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search anything...">
+        </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div class="main-body-container">
+        
+        <!-- QUICK ACCESS SECTION -->
+        <div class="section-header-row">
+            <h3>Quick Access</h3>
+            <a href="#">View All</a>
+        </div>
+
+        <div class="quick-access-grid">
+            
+            <!-- 1. Profile -->
+            <a href="student-id-card.html" class="quick-card-btn">
+                <div class="card-icon-round icon-profile"><i class="fas fa-user"></i></div>
+                <span class="card-title-text">Profile</span>
+                <span class="card-desc-text">View & edit profile</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 2. Events -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <div class="card-icon-round icon-events"><i class="fas fa-calendar-alt"></i></div>
+                <span class="card-title-text">Events</span>
+                <span class="card-desc-text">School events</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 3. Staffs -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <div class="card-icon-round icon-staff"><i class="fas fa-user-friends"></i></div>
+                <span class="card-title-text">Staffs</span>
+                <span class="card-desc-text">Faculty directory</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 4. Attendance -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <div class="card-icon-round icon-attendance"><i class="fas fa-clipboard-check"></i></div>
+                <span class="card-title-text">Attendance</span>
+                <span class="card-desc-text">Check attendance</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 5. Chatbox -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <div class="card-icon-round icon-chatbox"><i class="fas fa-comment-dots"></i></div>
+                <span class="card-title-text">Chatbox</span>
+                <span class="card-desc-text">Message & support</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 6. GradeSheet (Report Card) -->
+            <a href="print-report-card.html" class="quick-card-btn">
+                <div class="card-icon-round icon-gradesheet"><i class="fas fa-chart-bar"></i></div>
+                <span class="card-title-text">GradeSheet</span>
+                <span class="card-desc-text">View your grades</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 7. Gallery -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <div class="card-icon-round icon-gallery"><i class="fas fa-image"></i></div>
+                <span class="card-title-text">Gallery</span>
+                <span class="card-desc-text">Photos & albums</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 8. Fees Details (Challan Voucher) -->
+            <a href="print-fee-voucher.html" class="quick-card-btn">
+                <div class="card-icon-round icon-fees"><i class="fas fa-file-invoice-dollar"></i></div>
+                <span class="card-title-text">Fees Details</span>
+                <span class="card-desc-text">Payments & history</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 9. Notices -->
+            <a href="javascript:void(0)" class="quick-card-btn">
+                <span class="badge-new-pill">NEW</span>
+                <div class="card-icon-round icon-notices"><i class="fas fa-file-alt"></i></div>
+                <span class="card-title-text">Notices</span>
+                <span class="card-desc-text">Latest updates</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 10. Assignments -->
+            <a href="student-diary.html" class="quick-card-btn">
+                <div class="card-icon-round icon-assignments"><i class="fas fa-book-open"></i></div>
+                <span class="card-title-text">Assignments</span>
+                <span class="card-desc-text">Tasks & submissions</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 11. Exams (Live / Timetable) -->
+            <a href="student-live-class.html" class="quick-card-btn">
+                <div class="card-icon-round icon-exams"><i class="fas fa-video"></i></div>
+                <span class="card-title-text">Exams</span>
+                <span class="card-desc-text">Schedule & results</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+            <!-- 12. Library -->
+            <a href="student-e-library.html" class="quick-card-btn">
+                <div class="card-icon-round icon-library"><i class="fas fa-book"></i></div>
+                <span class="card-title-text">Library</span>
+                <span class="card-desc-text">Books & resources</span>
+                <i class="fas fa-chevron-right card-arrow-icon"></i>
+            </a>
+
+        </div>
+
+        <!-- UPCOMING EVENTS SECTION -->
+        <div class="section-header-row">
+            <h3>Upcoming Events</h3>
+            <a href="#">View Calendar</a>
+        </div>
+
+        <div class="events-list-wrapper">
+            <div class="event-item-card">
+                <div style="display:flex; align-items:center;">
+                    <div class="event-date-box">
+                        <div class="event-month">MAY</div>
+                        <div class="event-day">24</div>
+                        <div class="event-weekday">Fri</div>
+                    </div>
+                    <div class="event-info-text">
+                        <h4>Science Exhibition</h4>
+                        <p><i class="far fa-clock"></i> 10:00 AM - 01:00 PM</p>
+                        <p><i class="fas fa-map-marker-alt"></i> School Auditorium</p>
+                    </div>
+                </div>
+                <span class="event-status-tag">Upcoming</span>
+            </div>
+
+            <div class="event-item-card">
+                <div style="display:flex; align-items:center;">
+                    <div class="event-date-box">
+                        <div class="event-month">MAY</div>
+                        <div class="event-day">28</div>
+                        <div class="event-weekday">Tue</div>
+                    </div>
+                    <div class="event-info-text">
+                        <h4>PTM Meeting</h4>
+                        <p><i class="far fa-clock"></i> 02:00 PM - 04:00 PM</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Room 204</p>
+                    </div>
+                </div>
+                <span class="event-status-tag">Upcoming</span>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:15px;">
+            <a href="#" style="font-size:12px; color:#4f46e5; font-weight:700; text-decoration:none;">View All Events</a>
+        </div>
+
+    </div>
+
+    <!-- FIXED BOTTOM NAVIGATION BAR -->
+    <nav class="bottom-nav-bar">
+        <a href="student-home.html" class="nav-item-link active-nav">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item-link">
+            <i class="far fa-calendar-alt"></i>
+            <span>Calendar</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item-link">
+            <i class="far fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item-link" onclick="window.location.href='student-login.html'">
+            <i class="fas fa-th-large"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
+    <!-- Dynamic Session Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loggedStudent = sessionStorage.getItem('mda_logged_student_adm');
+            if (loggedStudent) {
+                document.getElementById('headerStudentName').innerText = loggedStudent;
+            }
+        });
+    </script>
+</body>
+</html>
