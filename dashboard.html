@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MDA Mustafa Digital Ai School</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4>MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Dashboard</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
+                <div class="profile-icon">S</div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD DATA -->
+        <div class="dashboard-content">
+            
+            <!-- Stats Cards (Image 2) -->
+            <div class="stats-grid">
+                <div class="stat-card" style="border-top: 4px solid #17a2b8;">
+                    <div class="stat-icon" style="color: #17a2b8; background: #e0f6f9;"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-info">
+                        <h3>10</h3>
+                        <p>Active Students</p>
+                        <small class="text-success">+10 this month</small>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="border-top: 4px solid #28a745;">
+                    <div class="stat-icon" style="color: #28a745; background: #e6f6eb;"><i class="fas fa-rupee-sign"></i></div>
+                    <div class="stat-info">
+                        <h3>₹200</h3>
+                        <p>Total Collected</p>
+                        <small>Today: ₹0</small>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="border-top: 4px solid #dc3545;">
+                    <div class="stat-icon" style="color: #dc3545; background: #fbe6e8;"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="stat-info">
+                        <h3>₹13,300</h3>
+                        <p>Pending Fees</p>
+                        <small class="text-danger">Needs collection</small>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="border-top: 4px solid #fd7e14;">
+                    <div class="stat-icon" style="color: #fd7e14; background: #fef0e4;"><i class="fas fa-receipt"></i></div>
+                    <div class="stat-info">
+                        <h3>₹9,500</h3>
+                        <p>Total Expenses</p>
+                        <small>All time</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h4 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h4>
+            <div class="quick-actions-grid">
+                <a href="new-admission.html" class="action-btn"><i class="fas fa-user-plus text-primary"></i> New Admission</a>
+                <a href="fee-collection.html" class="action-btn"><i class="fas fa-bolt text-success"></i> Quick Collect</a>
+                <a href="attendance.html" class="action-btn"><i class="fas fa-calendar-check text-info"></i> Attendance</a>
+                <a href="all-reports.html" class="action-btn"><i class="fas fa-chart-bar text-purple"></i> Reports</a>
+            </div>
+
+            <!-- Tables Section -->
+            <div class="tables-grid">
+                <!-- Defaulters Table -->
+                <div class="data-table-card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-exclamation-circle text-danger"></i> Top Fee Defaulters</h4>
+                        <a href="#">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>STUDENT</th>
+                                    <th>CLASS</th>
+                                    <th>DUE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>RAMESH KUMAR</strong></td>
+                                    <td>Class 10</td>
+                                    <td class="text-danger font-weight-bold">₹6,500</td>
+                                    <td><button class="btn-collect"><i class="fas fa-bolt"></i> Collect</button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SITA SHARMA</strong></td>
+                                    <td>Class 10</td>
+                                    <td class="text-danger font-weight-bold">₹6,500</td>
+                                    <td><button class="btn-collect"><i class="fas fa-bolt"></i> Collect</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Payments Table -->
+                <div class="data-table-card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-history text-success"></i> Recent Payments</h4>
+                        <a href="#">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>RECEIPT</th>
+                                    <th>STUDENT</th>
+                                    <th>AMOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RCP-2610-01</td>
+                                    <td><strong>RAHUL KUMAR</strong></td>
+                                    <td class="text-success font-weight-bold">₹50</td>
+                                </tr>
+                                <tr>
+                                    <td>RCP-2609-02</td>
+                                    <td><strong>RAHUL KUMAR</strong></td>
+                                    <td class="text-success font-weight-bold">₹100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
