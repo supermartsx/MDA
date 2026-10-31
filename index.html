@@ -2,38 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Ye line Mobile aur Tablet par responsive karne ke liye zaroori hai -->
+    <!-- Ye line website ko har screen par responsive banati hai -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDA Mustafa Digital Ai School - Admin Login</title>
-    <!-- CSS File Link -->
+    <title>Admin Login - MDA Mustafa Digital Ai School</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS Link -->
     <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
 
     <div class="login-container">
-        <!-- Left Side: Branding -->
-        <div class="login-branding">
-            <div class="branding-content">
-                <h1>MDA Mustafa Digital Ai School</h1>
-                <p>Welcome to the ultimate School Management System. Please login to access your admin dashboard.</p>
+        <div class="login-card">
+            <!-- Left Side Branding -->
+            <div class="login-branding">
+                <img src="assets/images/logo.png" alt="MDA School Logo" class="logo">
+                <h2>MDA Mustafa Digital Ai School</h2>
+                <p>Admin Control Panel</p>
             </div>
-        </div>
-
-        <!-- Right Side: Login Form -->
-        <div class="login-form-section">
-            <div class="form-wrapper">
-                <h2>Admin Login</h2>
-                <p class="subtitle">Enter your password to continue</p>
+            
+            <!-- Right Side Form -->
+            <div class="login-form-section">
+                <h3>Welcome Back</h3>
+                <p class="subtitle">Enter your admin password to continue</p>
                 
                 <form id="loginForm">
                     <div class="input-group">
-                        <label for="password">Security Password</label>
-                        <!-- type="password" ki wajah se password show nahi hoga -->
-                        <input type="password" id="password" placeholder="Enter Password" required>
+                        <label for="adminPassword">Password *</label>
+                        <!-- type="password" password ko hide rakhega (dots show honge) -->
+                        <input type="password" id="adminPassword" placeholder="Enter Password" required>
                     </div>
                     
-                    <!-- Error message dikhane ke liye -->
-                    <div id="error-message" class="error-msg" style="display: none;">
+                    <!-- Error Message Div (Hidden by default) -->
+                    <div id="errorMessage" class="error-message" style="display: none;">
                         Incorrect Password! Please try again.
                     </div>
 
@@ -43,7 +44,7 @@
         </div>
     </div>
 
-    <!-- JS File Link -->
+    <!-- JS Link -->
     <script src="assets/js/login.js"></script>
 </body>
 </html>
