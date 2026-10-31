@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ye line Mobile aur Tablet par responsive karne ke liye zaroori hai -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDA Mustafa Digital Ai School - Admin Login</title>
+    <!-- CSS File Link -->
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Left Side: Branding -->
+        <div class="login-branding">
+            <div class="branding-content">
+                <h1>MDA Mustafa Digital Ai School</h1>
+                <p>Welcome to the ultimate School Management System. Please login to access your admin dashboard.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="login-form-section">
+            <div class="form-wrapper">
+                <h2>Admin Login</h2>
+                <p class="subtitle">Enter your password to continue</p>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="password">Security Password</label>
+                        <!-- type="password" ki wajah se password show nahi hoga -->
+                        <input type="password" id="password" placeholder="Enter Password" required>
+                    </div>
+                    
+                    <!-- Error message dikhane ke liye -->
+                    <div id="error-message" class="error-msg" style="display: none;">
+                        Incorrect Password! Please try again.
+                    </div>
+
+                    <button type="submit" class="login-btn">Secure Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS File Link -->
+    <script src="assets/js/login.js"></script>
+</body>
+</html>
