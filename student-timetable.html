@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        body { background:#f8fafc; color:#1e293b; padding-bottom:60px; }
+
+        .top-nav {
+            background:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:100;
+        }
+        .btn-back { background:#f1f5f9; color:#334155; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
+
+        .container { max-width:850px; margin:20px auto; padding:0 15px; }
+
+        .table-card {
+            background:#fff; border-radius:14px; border:1px solid #e2e8f0; padding:20px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.02); overflow-x:auto;
+        }
+        .schedule-table { width:100%; border-collapse:collapse; font-size:12px; min-width:550px; }
+        .schedule-table th { background:#f1f5f9; padding:12px; text-align:left; color:#475569; font-weight:700; border-bottom:2px solid #e2e8f0; }
+        .schedule-table td { padding:12px; border-bottom:1px solid #f1f5f9; }
+        .period-badge { background:#ede9fe; color:#6d28d9; padding:3px 8px; border-radius:4px; font-weight:700; font-size:11px; }
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <a href="student-home.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <div style="font-size:12px; font-weight:600; color:#64748b;">Class Schedule</div>
+    </header>
+
+    <div class="container">
+        
+        <div style="margin-bottom:18px;">
+            <h2 style="font-size:18px; color:#0f172a; margin-bottom:2px;">Weekly Routine Timetable</h2>
+            <p style="font-size:12px; color:#64748b;">Class 10 — Science Group (Session 2026-27)</p>
+        </div>
+
+        <div class="table-card">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>PERIOD</th>
+                        <th>TIME</th>
+                        <th>SUBJECT</th>
+                        <th>TEACHER</th>
+                        <th>ROOM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="period-badge">Period 1</span></td>
+                        <td>08:30 - 09:15 AM</td>
+                        <td><strong>English Compulsory</strong></td>
+                        <td>Madam Ayesha Tariq</td>
+                        <td>Room 5</td>
+                    </tr>
+                    <tr>
+                        <td><span class="period-badge" style="background:#dcfce7; color:#15803d;">Period 2</span></td>
+                        <td>09:15 - 10:00 AM</td>
+                        <td><strong style="color:#16a34a;"><i class="fas fa-video"></i> Computer Science (Live)</strong></td>
+                        <td>Sir Bilal Ahmad</td>
+                        <td>Computer Lab 1</td>
+                    </tr>
+                    <tr>
+                        <td><span class="period-badge">Period 3</span></td>
+                        <td>10:15 - 11:00 AM</td>
+                        <td><strong>Mathematics (Science)</strong></td>
+                        <td>Sir Usman Ghani</td>
+                        <td>Room 5</td>
+                    </tr>
+                    <tr>
+                        <td><span class="period-badge">Period 4</span></td>
+                        <td>11:00 - 11:45 AM</td>
+                        <td><strong>Physics (Theory)</strong></td>
+                        <td>Sir Hamza Farooq</td>
+                        <td>Physics Lab</td>
+                    </tr>
+                    <tr>
+                        <td><span class="period-badge">Period 5</span></td>
+                        <td>12:00 - 12:45 PM</td>
+                        <td><strong>Islamiyat / Ethics</strong></td>
+                        <td>Qari Abdul Rehman</td>
+                        <td>Room 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>
