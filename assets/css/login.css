@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f4f6fa; /* Light grey/blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 900px;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden;
+}
+
+/* Left Side - Dark Blue/Purple Gradient */
+.login-branding {
+    flex: 1;
+    background: linear-gradient(135deg, #1e1e2d, #7239ea);
+    color: #ffffff;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    max-width: 120px;
+    margin-bottom: 20px;
+    background: #fff; /* Agar logo transparent hai to white background de diya */
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.login-branding h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.login-branding p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Right Side - Form */
+.login-form-section {
+    flex: 1;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-section h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #7239ea;
+    box-shadow: 0 0 0 3px rgba(114, 57, 234, 0.1);
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #7239ea; /* Purple Action Color */
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #5d2bcf;
+}
+
+.error-message {
+    color: #d9534f;
+    background: #fdf7f7;
+    border: 1px solid #d9534f;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* 📱 Responsive Design for Mobile & Tablets */
+@media (max-width: 768px) {
+    .login-card {
+        flex-direction: column;
+    }
+    
+    .login-branding {
+        padding: 40px 20px;
+    }
+
+    .login-form-section {
+        padding: 40px 20px;
+    }
+}
