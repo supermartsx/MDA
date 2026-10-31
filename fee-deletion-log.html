@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Deletion Log - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Table CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+
+    <style>
+        .audit-alert-box {
+            background: #fff5f5;
+            border-left: 4px solid #ef4444;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .audit-alert-box i {
+            font-size: 24px;
+            color: #ef4444;
+        }
+        .audit-alert-box p {
+            font-size: 13px;
+            color: #7f1d1d;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .badge-reason {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+            display: inline-block;
+        }
+
+        .badge-admin {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html" class="active"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Fee Deletion Log</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn-export" style="background:#dc2626;"><i class="fas fa-file-pdf"></i> Export Audit Log</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Audit trail of all cancelled receipts and deleted fee transactions</p>
+            </div>
+
+            <!-- SECURITY / AUDIT WARNING BOX -->
+            <div class="audit-alert-box">
+                <i class="fas fa-shield-alt"></i>
+                <p><strong>System Audit Notice:</strong> Every fee deletion is permanently locked into this log with date, time, and admin identity. Deleted transactions cannot be purged from this register to maintain institutional financial integrity.</p>
+            </div>
+
+            <!-- AUDIT STATS -->
+            <div class="enquiry-stats-grid">
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash-alt"></i></div>
+                    <div>
+                        <h3>3</h3>
+                        <p>Total Deleted Receipts</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fef3c7; color:#d97706;"><i class="fas fa-rupee-sign"></i></div>
+                    <div>
+                        <h3>₹3,550</h3>
+                        <p>Total Voided Amount</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-purple"><i class="fas fa-user-shield"></i></div>
+                    <div>
+                        <h3>Super Admin</h3>
+                        <p>Authorizing Authority</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEARCH FILTER -->
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="filter-group filter-search-group">
+                        <label>SEARCH BY RECEIPT NO OR STUDENT</label>
+                        <input type="text" id="logSearchInput" placeholder="Receipt No, Student Name...">
+                    </div>
+                    <div class="filter-group">
+                        <label>FILTER BY USER</label>
+                        <select id="userFilter">
+                            <option value="All">All Users</option>
+                            <option value="Super Admin">Super Admin</option>
+                            <option value="Accountant">Accountant</option>
+                        </select>
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="filterLog()"><i class="fas fa-search"></i> Filter</button>
+                        <button class="btn-clear" onclick="clearLogFilter()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AUDIT TABLE -->
+            <div class="data-table-card mt-20">
+                <div class="card-header">
+                    <h4><i class="fas fa-history text-danger"></i> Deletion Audit Trail</h4>
+                    <span class="badge" id="logBadgeCount">3 logs recorded</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="deletionLogTable">
+                        <thead>
+                            <tr>
+                                <th width="4%">#</th>
+                                <th width="15%">RECEIPT NO</th>
+                                <th width="18%">STUDENT NAME</th>
+                                <th width="10%">CLASS</th>
+                                <th width="12%">DELETED AMOUNT</th>
+                                <th width="13%">DELETED BY</th>
+                                <th width="14%">DATE & TIME</th>
+                                <th width="14%">REASON FOR VOID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Log 1 -->
+                            <tr>
+                                <td>1</td>
+                                <td><span class="adm-badge" style="color:#b91c1c; border-color:#fca5a5; background:#fef2f2;">RCP-2610-00892</span></td>
+                                <td><strong>KAMRAN KHAN</strong></td>
+                                <td><span class="class-badge">Class 10</span></td>
+                                <td class="text-danger fw-bold">₹2,000</td>
+                                <td><span class="badge-admin"><i class="fas fa-user-lock"></i> Super Admin</span></td>
+                                <td style="font-size: 12px; color: #64748b;">2026-10-28 14:22</td>
+                                <td><span class="badge-reason">Wrong Student Selected</span></td>
+                            </tr>
+                            <!-- Log 2 -->
+                            <tr>
+                                <td>2</td>
+                                <td><span class="adm-badge" style="color:#b91c1c; border-color:#fca5a5; background:#fef2f2;">RCP-2610-00741</span></td>
+                                <td><strong>ZAIN ALI</strong></td>
+                                <td><span class="class-badge">Class 8</span></td>
+                                <td class="text-danger fw-bold">₹1,500</td>
+                                <td><span class="badge-admin"><i class="fas fa-user-lock"></i> Super Admin</span></td>
+                                <td style="font-size: 12px; color: #64748b;">2026-10-25 11:05</td>
+                                <td><span class="badge-reason">Duplicate Payment Entry</span></td>
+                            </tr>
+                            <!-- Log 3 -->
+                            <tr>
+                                <td>3</td>
+                                <td><span class="adm-badge" style="color:#b91c1c; border-color:#fca5a5; background:#fef2f2;">RCP-2609-00612</span></td>
+                                <td><strong>FATIMA NOOR</strong></td>
+                                <td><span class="class-badge">Class 9</span></td>
+                                <td class="text-danger fw-bold">₹50</td>
+                                <td><span class="badge-admin"><i class="fas fa-user-lock"></i> Accountant</span></td>
+                                <td style="font-size: 12px; color: #64748b;">2026-09-30 09:40</td>
+                                <td><span class="badge-reason">Test Transaction</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination-footer">
+                    <div class="rows-per-page">Showing 1-3 of 3 deleted receipts</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Filter Script -->
+    <script>
+        function filterLog() {
+            let input = document.getElementById("logSearchInput").value.toUpperCase();
+            let table = document.getElementById("deletionLogTable");
+            let tr = table.getElementsByTagName("tr");
+            let count = 0;
+
+            for (let i = 1; i < tr.length; i++) {
+                let text = tr[i].textContent || tr[i].innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    tr[i].style.display = "";
+                    count++;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+            document.getElementById("logBadgeCount").innerText = count + " logs recorded";
+        }
+
+        function clearLogFilter() {
+            document.getElementById("logSearchInput").value = "";
+            filterLog();
+        }
+    </script>
+</body>
+</html>
