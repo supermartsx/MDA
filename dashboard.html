@@ -3,161 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts -->
+    <title>Admin Dashboard - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .empty-state-td {
+            text-align: center !important;
+            padding: 30px 10px !important;
+            color: #94a3b8 !important;
+            font-size: 13px !important;
+        }
+        .empty-state-td i {
+            display: block;
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+        .refresh-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+        .refresh-btn:hover { background: #e2e8f0; color: #0f172a; }
+    </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
-<!-- COMPLETE SIDEBAR MENU -->
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
-        <div class="sidebar-title">
-            <h4 id="sidebarSchoolName">MDA School</h4>
-            <p>Management System</p>
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
         </div>
-    </div>
-    
-    <div class="user-info">
-        <div class="user-avatar">S</div>
-        <div class="user-details">
-            <h5>Super Administrator</h5>
-            <span><i class="fas fa-star"></i> Super Admin</span>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
         </div>
-    </div>
 
-    <ul class="sidebar-menu">
-        <li class="menu-label">MAIN</li>
-        <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-        
-        <li class="menu-label">STUDENTS</li>
-        <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
-        <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
-        <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
-        <li><a href="print-tc.html"><i class="fas fa-archive"></i> Transfer Certificate </a></li>
-        <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
-        <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
-        <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
-        <li><a href="print-report-card.html"><i class="fas fa-file-alt"></i> Print Student Card</a></li>
-        
-        
-        <li class="menu-label">FEES</li>
-        <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
-        <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
-        <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
-        <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
-        <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
-        
-             <li class="menu-label">ACADEMICS</li>
-        <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-        <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-        <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
-        <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-        <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
-        <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
-        <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-        <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
-        
-        <li class="menu-label">FINANCE</li>
-        <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
-        <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-        <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
-        
-        <li class="menu-label">STAFF / PAYROLL</li>
-        <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-        <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
-        <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
-        
-        <li class="menu-label">COMMUNICATION</li>
-        <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
-        
-        <li class="menu-label">ADMIN</li>
-        <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
-        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
-        
-        <li class="menu-label">ACCOUNT</li>
-        <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
-        <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
-</aside>
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <!-- TOP HEADER -->
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Dashboard</h2>
+                <h2>Real-Time Dashboard</h2>
             </div>
             <div class="header-right">
+                <button class="refresh-btn" onclick="loadRealtimeData()"><i class="fas fa-sync-alt"></i> Live Refresh</button>
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
                 <div class="profile-icon">S</div>
             </div>
         </header>
 
-        <!-- DASHBOARD DATA -->
         <div class="dashboard-content">
             
-            <!-- Stats Cards (Image 2) -->
+            <!-- REAL-TIME DYNAMIC STATS CARDS (NO DUMMY NUMBERS) -->
             <div class="stats-grid">
+                <!-- Active Students Card -->
                 <div class="stat-card" style="border-top: 4px solid #17a2b8;">
                     <div class="stat-icon" style="color: #17a2b8; background: #e0f6f9;"><i class="fas fa-user-graduate"></i></div>
                     <div class="stat-info">
-                        <h3>10</h3>
-                        <p>Active Students</p>
-                        <small class="text-success">+10 this month</small>
+                        <h3 id="statActiveStudents">0</h3>
+                        <p>Active Enrolled Students</p>
+                        <small class="text-success" id="statStudentBadge">+0 new admissions</small>
                     </div>
                 </div>
 
+                <!-- Total Collected Card -->
                 <div class="stat-card" style="border-top: 4px solid #28a745;">
-                    <div class="stat-icon" style="color: #28a745; background: #e6f6eb;"><i class="fas fa-rupee-sign"></i></div>
+                    <div class="stat-icon" style="color: #28a745; background: #e6f6eb;"><i class="fas fa-coins"></i></div>
                     <div class="stat-info">
-                        <h3>₹200</h3>
-                        <p>Total Collected</p>
-                        <small>Today: ₹0</small>
+                        <h3 id="statTotalCollected">Rs. 0</h3>
+                        <p>Total Fee Revenue</p>
+                        <small id="statTodayCollected">Today: Rs. 0</small>
                     </div>
                 </div>
 
+                <!-- Pending Fees Card -->
                 <div class="stat-card" style="border-top: 4px solid #dc3545;">
                     <div class="stat-icon" style="color: #dc3545; background: #fbe6e8;"><i class="fas fa-exclamation-triangle"></i></div>
                     <div class="stat-info">
-                        <h3>₹13,300</h3>
-                        <p>Pending Fees</p>
-                        <small class="text-danger">Needs collection</small>
+                        <h3 id="statPendingFees">Rs. 0</h3>
+                        <p>Total Outstanding Dues</p>
+                        <small class="text-danger" id="statDefaulterCount">0 defaulters</small>
                     </div>
                 </div>
 
+                <!-- Total Expenses Card -->
                 <div class="stat-card" style="border-top: 4px solid #fd7e14;">
                     <div class="stat-icon" style="color: #fd7e14; background: #fef0e4;"><i class="fas fa-receipt"></i></div>
                     <div class="stat-info">
-                        <h3>₹9,500</h3>
-                        <p>Total Expenses</p>
-                        <small>All time</small>
+                        <h3 id="statTotalExpenses">Rs. 0</h3>
+                        <p>Operational Expenses</p>
+                        <small id="statExpenseCount">0 vouchers</small>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Actions -->
+            <!-- Quick Action Shortcuts -->
             <h4 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h4>
             <div class="quick-actions-grid">
                 <a href="new-admission.html" class="action-btn"><i class="fas fa-user-plus text-primary"></i> New Admission</a>
-                <a href="fee-collection.html" class="action-btn"><i class="fas fa-bolt text-success"></i> Quick Collect</a>
-                <a href="attendance.html" class="action-btn"><i class="fas fa-calendar-check text-info"></i> Attendance</a>
-                <a href="all-reports.html" class="action-btn"><i class="fas fa-chart-bar text-purple"></i> Reports</a>
+                <a href="quick-fee.html" class="action-btn"><i class="fas fa-bolt text-success"></i> Quick Fee Collect</a>
+                <a href="attendance.html" class="action-btn"><i class="fas fa-calendar-check text-info"></i> Daily Attendance</a>
+                <a href="all-reports.html" class="action-btn"><i class="fas fa-chart-bar text-purple"></i> All Reports Hub</a>
             </div>
 
-            <!-- Tables Section -->
+            <!-- REAL-TIME TABLES SECTION -->
             <div class="tables-grid">
-                <!-- Defaulters Table -->
+                
+                <!-- TOP FEE DEFAULTERS (DYNAMIC) -->
                 <div class="data-table-card">
                     <div class="card-header">
-                        <h4><i class="fas fa-exclamation-circle text-danger"></i> Top Fee Defaulters</h4>
-                        <a href="#">View All</a>
+                        <h4><i class="fas fa-exclamation-circle text-danger"></i> Pending Fee Defaulters</h4>
+                        <a href="whatsapp-reminder.html">WhatsApp Reminders</a>
                     </div>
                     <div class="table-responsive">
                         <table>
@@ -165,64 +196,153 @@
                                 <tr>
                                     <th>STUDENT</th>
                                     <th>CLASS</th>
-                                    <th>DUE</th>
+                                    <th>DUE (RS.)</th>
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="defaultersTableBody">
+                                <!-- Populated dynamically by JS -->
                                 <tr>
-                                    <td><strong>RAMESH KUMAR</strong></td>
-                                    <td>Class 10</td>
-                                    <td class="text-danger font-weight-bold">₹6,500</td>
-                                    <td><button class="btn-collect"><i class="fas fa-bolt"></i> Collect</button></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>SITA SHARMA</strong></td>
-                                    <td>Class 10</td>
-                                    <td class="text-danger font-weight-bold">₹6,500</td>
-                                    <td><button class="btn-collect"><i class="fas fa-bolt"></i> Collect</button></td>
+                                    <td colspan="4" class="empty-state-td">
+                                        <i class="fas fa-check-circle text-success"></i>
+                                        No pending fee defaulters. All dues are cleared!
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Recent Payments Table -->
+                <!-- RECENT PAYMENTS (DYNAMIC) -->
                 <div class="data-table-card">
                     <div class="card-header">
-                        <h4><i class="fas fa-history text-success"></i> Recent Payments</h4>
-                        <a href="#">View All</a>
+                        <h4><i class="fas fa-history text-success"></i> Recent Payment Transactions</h4>
+                        <a href="fee-collection.html">Collect Fee</a>
                     </div>
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>RECEIPT</th>
+                                    <th>RECEIPT #</th>
                                     <th>STUDENT</th>
                                     <th>AMOUNT</th>
+                                    <th>MODE</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="paymentsTableBody">
+                                <!-- Populated dynamically by JS -->
                                 <tr>
-                                    <td>RCP-2610-01</td>
-                                    <td><strong>RAHUL KUMAR</strong></td>
-                                    <td class="text-success font-weight-bold">₹50</td>
-                                </tr>
-                                <tr>
-                                    <td>RCP-2609-02</td>
-                                    <td><strong>RAHUL KUMAR</strong></td>
-                                    <td class="text-success font-weight-bold">₹100</td>
+                                    <td colspan="4" class="empty-state-td">
+                                        <i class="fas fa-receipt text-muted"></i>
+                                        No payment transactions recorded yet.
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
 
         </div>
     </main>
 
-    <!-- Global JS -->
     <script src="assets/js/main.js"></script>
+
+    <!-- REAL-TIME DATA COMPUTATION SCRIPT (NO DUMMY DATA) -->
+    <script>
+        function loadRealtimeData() {
+            // 1. Fetch Students from LocalStorage
+            let students = JSON.parse(localStorage.getItem('mda_students')) || [];
+            
+            // 2. Fetch Payments from LocalStorage
+            let payments = JSON.parse(localStorage.getItem('mda_payments')) || [];
+
+            // 3. Fetch Expenses from LocalStorage
+            let expenses = JSON.parse(localStorage.getItem('mda_expenses')) || [];
+
+            // ================= COMPUTE COUNTERS =================
+            // Active Students
+            document.getElementById('statActiveStudents').innerText = students.length;
+            document.getElementById('statStudentBadge').innerText = `+${students.length} registered students`;
+
+            // Total Collected Fees
+            let totalCollected = payments.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
+            document.getElementById('statTotalCollected').innerText = `Rs. ${totalCollected.toLocaleString()}`;
+
+            // Today's Collected Fees
+            const todayStr = new Date().toISOString().slice(0, 10);
+            let todayCollected = payments
+                .filter(p => p.date === todayStr)
+                .reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
+            document.getElementById('statTodayCollected').innerText = `Today: Rs. ${todayCollected.toLocaleString()}`;
+
+            // Total Pending Fees & Defaulters
+            let defaulters = students.filter(s => parseFloat(s.pendingDue) > 0);
+            let totalPending = defaulters.reduce((acc, curr) => acc + (parseFloat(curr.pendingDue) || 0), 0);
+            document.getElementById('statPendingFees').innerText = `Rs. ${totalPending.toLocaleString()}`;
+            document.getElementById('statDefaulterCount').innerText = `${defaulters.length} students with dues`;
+
+            // Total Expenses
+            let totalExpenses = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
+            document.getElementById('statTotalExpenses').innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+            document.getElementById('statExpenseCount').innerText = `${expenses.length} expense vouchers`;
+
+            // ================= RENDER DEFAULTERS TABLE =================
+            const defBody = document.getElementById('defaultersTableBody');
+            if (defaulters.length > 0) {
+                defBody.innerHTML = '';
+                defaulters.slice(0, 5).forEach(st => {
+                    defBody.innerHTML += `
+                        <tr>
+                            <td><strong>${st.fullName || st.name}</strong><br><small style="color:#64748b;">${st.admNo}</small></td>
+                            <td><span class="class-badge">${st.class}</span></td>
+                            <td class="text-danger font-weight-bold">Rs. ${parseFloat(st.pendingDue).toLocaleString()}</td>
+                            <td>
+                                <a href="fee-collection.html" class="btn-collect" style="text-decoration:none;"><i class="fas fa-bolt"></i> Collect</a>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                defBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state-td">
+                            <i class="fas fa-check-circle text-success"></i>
+                            No pending fee defaulters. All dues are cleared!
+                        </td>
+                    </tr>
+                `;
+            }
+
+            // ================= RENDER RECENT PAYMENTS TABLE =================
+            const payBody = document.getElementById('paymentsTableBody');
+            if (payments.length > 0) {
+                payBody.innerHTML = '';
+                payments.slice(-5).reverse().forEach(pm => {
+                    payBody.innerHTML += `
+                        <tr>
+                            <td><strong>${pm.receiptNo}</strong></td>
+                            <td>${pm.studentName}</td>
+                            <td class="text-success font-weight-bold">Rs. ${parseFloat(pm.amount).toLocaleString()}</td>
+                            <td><span class="badge" style="background:#f1f5f9; color:#475569;">${pm.mode}</span></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                payBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="empty-state-td">
+                            <i class="fas fa-receipt text-muted"></i>
+                            No payment transactions recorded yet.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // On Page Load
+        document.addEventListener('DOMContentLoaded', loadRealtimeData);
+    </script>
 </body>
 </html>
