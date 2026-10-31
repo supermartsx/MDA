@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 60px;
+        }
+
+        /* ================= APP TOP BAR ================= */
+        .teacher-top-header {
+            background: #ffffff;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-title-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .school-mini-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .header-title-box h3 {
+            font-size: 15px;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .header-title-box p {
+            font-size: 11px;
+            color: #64748b;
+            margin: 0;
+        }
+        .portal-logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ================= PORTAL WRAPPER ================= */
+        .portal-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ================= TEACHER PROFILE HERO ================= */
+        .teacher-profile-hero {
+            background: linear-gradient(135deg, #1e1e2d, #3b0764);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(59, 7, 100, 0.25);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-top-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .teacher-avatar-frame {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 3px solid #a855f7;
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+        }
+        .teacher-avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .teacher-meta-text h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .teacher-meta-text p {
+            font-size: 13px;
+            color: #d8b4fe;
+            margin-top: 2px;
+        }
+        .assigned-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .tag-pill {
+            background: rgba(255,255,255,0.15);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* ================= QUICK STATS GRID ================= */
+        .teacher-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .stat-card-item {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .stat-card-item h3 { font-size: 20px; margin: 0; color: #0f172a; }
+        .stat-card-item p { font-size: 11px; margin: 0; color: #64748b; font-weight: 500; }
+
+        /* ================= TWO-COLUMN WORKSPACE ================= */
+        .teacher-workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .action-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .card-title-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-title-header h4 {
+            font-size: 14px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+        .card-body-form {
+            padding: 20px;
+        }
+
+        .form-group-item {
+            margin-bottom: 15px;
+        }
+        .form-group-item label {
+            display: block;
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .form-group-item input,
+        .form-group-item select,
+        .form-group-item textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            color: #1e293b;
+            background: #f8fafc;
+            transition: 0.2s;
+        }
+        .form-group-item input:focus,
+        .form-group-item select:focus,
+        .form-group-item textarea:focus {
+            border-color: #7c3aed;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .btn-action-submit {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-green-meet { background: #16a34a; }
+        .btn-green-meet:hover { background: #15803d; }
+
+        .btn-purple-drive { background: #7c3aed; }
+        .btn-purple-drive:hover { background: #6d28d9; }
+
+        .btn-blue-diary { background: #2563eb; }
+        .btn-blue-diary:hover { background: #1d4ed8; }
+
+        /* Quick Links Row */
+        .quick-nav-pills {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .nav-pill-btn {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+        .nav-pill-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 860px) {
+            .teacher-workspace-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="teacher-top-header">
+        <div class="header-title-box">
+            <div class="school-mini-logo">M</div>
+            <div>
+                <h3>MDA Mustafa Digital Ai School</h3>
+                <p>Teacher & Faculty Workspace</p>
+            </div>
+        </div>
+        <a href="index.html" class="portal-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </header>
+
+    <div class="portal-container">
+
+        <!-- TEACHER PROFILE HERO -->
+        <div class="teacher-profile-hero">
+            <div class="hero-top-info">
+                <div class="teacher-avatar-frame">
+                    <img src="https://ui-avatars.com/api/?name=Bilal+Ahmad&background=7c3aed&color=fff&size=150" alt="Teacher">
+                </div>
+                <div class="teacher-meta-text">
+                    <h2>Sir Bilal Ahmad</h2>
+                    <p>Senior Faculty Member • Department of Computer Science</p>
+                    <div class="assigned-tags">
+                        <span class="tag-pill"><i class="fas fa-chalkboard"></i> Class 10 (CS)</span>
+                        <span class="tag-pill"><i class="fas fa-chalkboard"></i> Class 9 (CS)</span>
+                        <span class="tag-pill"><i class="fas fa-id-badge"></i> Emp ID: EMP-101</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEACHER QUICK STATS -->
+        <div class="teacher-stats-grid">
+            <div class="stat-card-item">
+                <div class="stat-icon" style="background:#dcfce7; color:#16a34a;"><i class="fas fa-video"></i></div>
+                <div>
+                    <h3>Active</h3>
+                    <p>Live Class Status</p>
+                </div>
+            </div>
+            <div class="stat-card-item">
+                <div class="stat-icon" style="background:#ede9fe; color:#7c3aed;"><i class="fas fa-book-open"></i></div>
+                <div>
+                    <h3>6 Uploads</h3>
+                    <p>Drive Books & Notes</p>
+                </div>
+            </div>
+            <div class="stat-card-item">
+                <div class="stat-icon" style="background:#e0f2fe; color:#0369a1;"><i class="fas fa-calendar-check"></i></div>
+                <div>
+                    <h3>Marked</h3>
+                    <p>Today's Attendance</p>
+                </div>
+            </div>
+            <div class="stat-card-item">
+                <div class="stat-icon" style="background:#fef3c7; color:#d97706;"><i class="fas fa-tasks"></i></div>
+                <div>
+                    <h3>3 Tasks</h3>
+                    <p>Active Homework Assigned</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK SHORTCUT LINKS (To Existing Admin Pages) -->
+        <div style="background:#fff; padding:15px 20px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:22px;">
+            <span style="font-size:12px; font-weight:700; color:#64748b; text-transform:uppercase;">Quick Actions:</span>
+            <div class="quick-nav-pills">
+                <a href="attendance.html" class="nav-pill-btn"><i class="fas fa-user-check text-success"></i> Mark Daily Attendance</a>
+                <a href="marks-entry.html" class="nav-pill-btn"><i class="fas fa-pen-alt text-purple"></i> Enter Exam Marks</a>
+                <a href="exam-schedule.html" class="nav-pill-btn"><i class="fas fa-calendar-alt text-primary"></i> View Date Sheet</a>
+                <a href="student-portal.html" target="_blank" class="nav-pill-btn" style="background:#dbeafe; color:#1e40af;"><i class="fas fa-external-link-alt"></i> View Student Portal View</a>
+            </div>
+        </div>
+
+        <!-- TWO COLUMN WORKSPACE -->
+        <div class="teacher-workspace-grid">
+            
+            <!-- CARD 1: BROADCAST LIVE GOOGLE MEET CLASS -->
+            <div class="action-card">
+                <div class="card-title-header">
+                    <h4><i class="fas fa-video text-success"></i> Start Live Google Meet Class</h4>
+                    <span style="font-size:11px; color:#16a34a; font-weight:600;"><i class="fas fa-circle"></i> Live Sync</span>
+                </div>
+                <div class="card-body-form">
+                    <form id="liveMeetForm">
+                        <div class="form-group-item">
+                            <label>SELECT CLASS *</label>
+                            <select required>
+                                <option value="Class 10 - Science">Class 10 — Science (Computer Science)</option>
+                                <option value="Class 9 - Science">Class 9 — Science (Computer Science)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>GOOGLE MEET LINK *</label>
+                            <input type="url" id="meetLinkInput" placeholder="https://meet.google.com/xyz-abcd-efg" value="https://meet.google.com/new" required>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>LECTURE TOPIC</label>
+                            <input type="text" placeholder="e.g. Chapter 2: Algorithms & Flowcharts" required>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" class="form-group-item">
+                            <div>
+                                <label>START TIME</label>
+                                <input type="time" value="09:00" required>
+                            </div>
+                            <div>
+                                <label>END TIME</label>
+                                <input type="time" value="10:00" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-action-submit btn-green-meet">
+                            <i class="fas fa-broadcast-tower"></i> Broadcast Live Link to Students
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- CARD 2: UPLOAD GOOGLE DRIVE NOTES & VIDEOS -->
+            <div class="action-card">
+                <div class="card-title-header">
+                    <h4><i class="fab fa-google-drive text-primary"></i> Share Drive Notes & Videos</h4>
+                    <span style="font-size:11px; color:#64748b;">Cloud Learning</span>
+                </div>
+                <div class="card-body-form">
+                    <form id="driveContentForm">
+                        <div class="form-group-item">
+                            <label>CONTENT TYPE *</label>
+                            <select id="contentTypeSelect" required>
+                                <option value="PDF Notes / E-Book">PDF Notes / Book Handout</option>
+                                <option value="Recorded Video Lecture">Recorded Video Lecture</option>
+                                <option value="Past Papers & Guesses">Past Papers & Guess Paper</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>ASSIGN TO CLASS *</label>
+                            <select required>
+                                <option value="Class 10">Class 10 — Computer Science</option>
+                                <option value="Class 9">Class 9 — Computer Science</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>TITLE / DESCRIPTION *</label>
+                            <input type="text" placeholder="e.g. Chapter 1 Complete Solved Notes" required>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>GOOGLE DRIVE SHAREABLE LINK *</label>
+                            <input type="url" placeholder="https://drive.google.com/file/d/..." required>
+                            <small style="color:#64748b; font-size:10.5px; display:block; margin-top:3px;">
+                                * Drive mein file ki access <strong>"Anyone with the link"</strong> rakhein taake student dekh sakein.
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn-action-submit btn-purple-drive">
+                            <i class="fas fa-cloud-upload-alt"></i> Publish Material to Student Portal
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- CARD 3: ASSIGN DAILY HOMEWORK / DIARY -->
+            <div class="action-card" style="grid-column: span 2;">
+                <div class="card-title-header">
+                    <h4><i class="fas fa-pencil-alt text-warning"></i> Assign Daily Homework / Diary</h4>
+                    <span style="font-size:11px; color:#64748b;">Daily Diary</span>
+                </div>
+                <div class="card-body-form">
+                    <form id="homeworkForm">
+                        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:15px;">
+                            <div>
+                                <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:5px;">SELECT CLASS *</label>
+                                <select required style="width:100%; padding:9px; border-radius:6px; border:1px solid #cbd5e1; outline:none;">
+                                    <option value="Class 10">Class 10</option>
+                                    <option value="Class 9">Class 9</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:5px;">SUBJECT *</label>
+                                <input type="text" value="Computer Science" readonly style="width:100%; padding:9px; border-radius:6px; border:1px solid #cbd5e1; background:#f1f5f9;">
+                            </div>
+                            <div>
+                                <label style="font-size:12px; font-weight:600; color:#475569; display:block; margin-bottom:5px;">DUE SUBMISSION DATE *</label>
+                                <input type="date" value="2026-11-02" required style="width:100%; padding:9px; border-radius:6px; border:1px solid #cbd5e1;">
+                            </div>
+                        </div>
+
+                        <div class="form-group-item">
+                            <label>HOMEWORK TASK DETAILS *</label>
+                            <textarea rows="3" placeholder="e.g. Draw flowchart of Page 45 on homework copies and write 5 advantages of Algorithms." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-action-submit btn-blue-diary" style="width:max-content; padding:12px 25px;">
+                            <i class="fas fa-save"></i> Post Homework to Student Dairy
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.getElementById('liveMeetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const link = document.getElementById('meetLinkInput').value;
+            alert(`Live Google Meet broadcasted successfully to Student Portal!\nLink: ${link}`);
+        });
+
+        document.getElementById('driveContentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Google Drive material published successfully! Students can now read/watch on their portal.');
+            this.reset();
+        });
+
+        document.getElementById('homeworkForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Daily Homework posted successfully to Student Diary!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
