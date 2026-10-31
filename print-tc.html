@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Certificate - MDA Mustafa Digital Ai School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Certificates CSS -->
+    <link rel="stylesheet" href="assets/css/certificate.css">
+</head>
+<body>
+
+    <!-- TOP CONTROL BAR (Print mein hide ho jayega) -->
+    <div class="top-control-bar no-print">
+        <div class="controls-left">
+            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Student Profile</a>
+            <a href="all-students.html" class="btn-back" style="margin-left: 10px;"><i class="fas fa-users"></i> All Students</a>
+        </div>
+        
+        <div class="controls-right">
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Transfer Certificate</button>
+        </div>
+    </div>
+
+    <!-- A4 PAPER SHEET -->
+    <div class="a4-sheet">
+        <!-- Elegant Border Frame -->
+        <div class="certificate-frame">
+            
+            <!-- HEADER -->
+            <div class="cert-header">
+                <h1>MDA Mustafa Digital Ai School</h1>
+                <p>Bharwari Kaushambi</p>
+                <p>Phone: 7310095239 | Email: dataclickeducation@gmail.com</p>
+            </div>
+
+            <!-- TITLE -->
+            <div class="cert-title">
+                <h2>TRANSFER CERTIFICATE</h2>
+                <div class="title-line"></div>
+            </div>
+
+            <!-- META INFO (TC No, Year, Date) -->
+            <div class="meta-row">
+                <div class="meta-col">
+                    <span class="meta-label">TC NUMBER</span>
+                    <strong>TC-26-0001</strong>
+                </div>
+                <div class="meta-col text-center">
+                    <span class="meta-label">ACADEMIC YEAR</span>
+                    <strong>2026-27</strong>
+                </div>
+                <div class="meta-col text-right">
+                    <span class="meta-label">DATE OF ISSUE</span>
+                    <strong>31-10-2026</strong>
+                </div>
+            </div>
+
+            <!-- SECTION LABEL -->
+            <div class="section-label"><i class="fas fa-user"></i> STUDENT INFORMATION</div>
+
+            <!-- STUDENT INFO TABLE -->
+            <table class="info-table">
+                <tr><td width="35%">Student Name</td><td class="fw-bold">SITA SHARMA</td></tr>
+                <tr><td>Father's Name</td><td class="fw-bold">RAM SHARMA</td></tr>
+                <tr><td>Mother's Name</td><td class="fw-bold">RADHA SHARMA</td></tr>
+                <tr><td>Date of Birth</td><td class="fw-bold">2010-01-22</td></tr>
+                <tr><td>Gender</td><td class="fw-bold">Female</td></tr>
+                <tr><td>Admission Number</td><td class="fw-bold">ADM002</td></tr>
+                <tr><td>Class (Last Attended)</td><td class="fw-bold">Class 10</td></tr>
+                <tr><td>Date of Admission</td><td class="fw-bold">2026-09-26</td></tr>
+                <tr><td>Category</td><td class="fw-bold">General</td></tr>
+                <tr><td>Nationality</td><td class="fw-bold">Indian</td></tr>
+                <tr><td>Address</td><td class="fw-bold">XXXXXXXX</td></tr>
+            </table>
+
+            <!-- ATTENDANCE SUMMARY -->
+            <div class="section-label"><i class="fas fa-calendar-alt"></i> ATTENDANCE SUMMARY</div>
+            <div class="attendance-grid">
+                <div class="att-box" style="color: #0284c7; background: #f0f9ff; border-color: #bae6fd;">
+                    <h3>120</h3><p>TOTAL WORKING DAYS</p>
+                </div>
+                <div class="att-box" style="color: #16a34a; background: #f0fdf4; border-color: #bbf7d0;">
+                    <h3>115</h3><p>DAYS PRESENT</p>
+                </div>
+                <div class="att-box" style="color: #dc2626; background: #fef2f2; border-color: #fecaca;">
+                    <h3>5</h3><p>DAYS ABSENT</p>
+                </div>
+            </div>
+
+            <!-- FEE CLEARANCE -->
+            <div class="section-label"><i class="fas fa-rupee-sign"></i> FEE CLEARANCE</div>
+            <div class="fee-clearance-box text-danger">
+                <i class="fas fa-exclamation-triangle"></i> Outstanding fee dues: ₹6,500.00
+            </div>
+
+            <!-- CERTIFICATE TEXT -->
+            <div class="section-label"><i class="fas fa-scroll"></i> CERTIFICATE</div>
+            <div class="cert-paragraph">
+                This is to certify that <strong>SITA SHARMA</strong>, Son/Daughter of <strong>RAM SHARMA</strong>, was a bonafide student of this institution. The student was admitted on <strong>2026-09-26</strong> and was studying in <strong>Class 10</strong>. The student's conduct and character during the entire period of study was found to be <em>Good</em>. This Transfer Certificate is issued on the request of the parent/guardian for the purpose of admission to another institution. The student is not a recipient of any scholarship from this school.
+            </div>
+
+            <!-- SIGNATURES -->
+            <div class="signatures-section">
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>CLASS TEACHER</p>
+                </div>
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>OFFICE SUPERINTENDENT</p>
+                </div>
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>PRINCIPAL / HEAD</p>
+                </div>
+            </div>
+
+            <!-- PEN NUMBER (Footer area inside frame) -->
+            <div class="pen-number-box">
+                <div class="pen-label">PEN NO. (PERMANENT EDUCATION NUMBER): <span>_______________________________________________</span></div>
+                <small>(Yadi PEN No. uplabdh na ho to haath se likhein / Fill manually if not available)</small>
+            </div>
+
+            <!-- FOOTER TEXT -->
+            <div class="cert-footer-text">
+                TC No: TC-26-0001 • Issued: 31-10-2026 • Prepared by: superadmin • MDA School • This is a computer generated certificate
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
