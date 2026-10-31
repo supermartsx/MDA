@@ -3,253 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard - MDA Mustafa Digital Ai School</title>
+    <title>Digital Student Card - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        body { background-color:#52565e; color:#1e293b; min-height:100vh; padding-bottom:50px; }
+
+        .top-control-bar {
+            background:#ffffff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000;
+        }
+        .btn-back { background:#f1f5f9; color:#334155; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
+        .btn-print { background:#2563eb; color:#ffffff; border:none; padding:9px 22px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; }
+
+        .cards-preview-container { display:flex; justify-content:center; align-items:center; gap:30px; padding:30px 15px; flex-wrap:wrap; }
+
+        .id-card-frame {
+            width:320px; height:500px; background:#ffffff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.3);
+            overflow:hidden; position:relative; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,0.2);
         }
 
-        body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            padding-bottom: 60px;
-        }
+        /* Front Card */
+        .front-top-header { background:linear-gradient(135deg, #1e1e2d, #4338ca); color:#fff; padding:20px 15px 35px; text-align:center; }
+        .front-top-header h3 { font-size:13.5px; font-weight:700; text-transform:uppercase; }
+        .front-top-header p { font-size:10px; color:#c7d2fe; margin-top:2px; }
 
-        .app-top-header {
-            background: #ffffff;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .student-photo-wrapper {
+            width:95px; height:95px; border-radius:50%; border:4px solid #fff; margin:-48px auto 8px;
+            overflow:hidden; background:#fff; position:relative; z-index:5; box-shadow:0 4px 10px rgba(0,0,0,0.15);
         }
-        .header-title-box { display: flex; align-items: center; gap: 12px; }
-        .school-mini-logo {
-            width: 38px; height: 38px;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: #fff; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 18px;
-        }
+        .student-photo-wrapper img { width:100%; height:100%; object-fit:cover; }
 
-        .portal-container {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 18px;
-        }
+        .front-body { text-align:center; padding:0 20px 15px; flex:1; }
+        .front-body h2 { font-size:18px; color:#0f172a; margin-bottom:2px; }
+        .class-badge-pill { background:#e0e7ff; color:#4338ca; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:600; display:inline-block; margin-bottom:15px; }
 
-        /* Hero Card */
-        .student-profile-hero {
-            background: linear-gradient(135deg, #2563eb, #4f46e5);
-            color: #ffffff;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
-            margin-bottom: 22px;
-        }
-        .hero-top-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-        .student-avatar-frame {
-            width: 70px; height: 70px;
-            border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.8);
-            overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
-        }
-        .student-avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .student-info-table { width:100%; font-size:11px; text-align:left; border-collapse:collapse; }
+        .student-info-table td { padding:4px 0; border-bottom:1px dashed #f1f5f9; }
+        .student-info-table td:first-child { color:#64748b; font-weight:600; width:95px; }
+        .student-info-table td:last-child { color:#1e293b; font-weight:600; }
 
-        .hero-progress-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 15px;
-        }
-        .progress-track {
-            background: rgba(255,255,255,0.25);
-            height: 7px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-        .progress-fill { height: 100%; border-radius: 10px; }
+        .card-footer-sign { display:flex; justify-content:space-between; align-items:flex-end; padding:10px 20px 15px; border-top:1px solid #f1f5f9; background:#fafafa; }
+        .sign-box-area { text-align:center; }
+        .sign-line-draw { width:80px; border-bottom:1px solid #333; margin-bottom:3px; }
 
-        /* Menu Grid (Image 1 Mobile App Style) */
-        .section-headline {
-            font-size: 13px;
-            font-weight: 700;
-            color: #475569;
-            margin: 22px 0 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        /* Back Card */
+        .back-top-strip { background:#1e1e2d; color:#fff; padding:12px 15px; text-align:center; font-size:12px; font-weight:700; }
+        .back-body-content { padding:15px 20px; flex:1; font-size:11px; text-align:center; }
+        .qr-section img { width:95px; height:95px; border:1px solid #e2e8f0; padding:3px; border-radius:6px; margin:5px 0; }
+        .rules-list { font-size:9px; color:#64748b; line-height:1.5; padding-left:15px; margin:10px 0; text-align:left; }
+        .emergency-contact-box { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:8px; border-radius:6px; font-size:10px; }
+        .card-bottom-strip { background:#4338ca; color:#ffffff; text-align:center; padding:8px 10px; font-size:9.5px; font-weight:600; }
 
-        .app-action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 14px;
-            margin-bottom: 25px;
-        }
-        .app-menu-btn {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 18px 10px;
-            text-align: center;
-            text-decoration: none;
-            color: #334155;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            transition: 0.2s;
-        }
-        .app-menu-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
-            border-color: #cbd5e1;
-        }
-        .app-icon-box {
-            width: 48px; height: 48px;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-        }
-        .app-menu-btn span { font-size: 12px; font-weight: 600; }
-
-        .icon-card { background: #fef3c7; color: #d97706; }
-        .icon-meet { background: #dcfce7; color: #16a34a; }
-        .icon-books { background: #e0e7ff; color: #4338ca; }
-        .icon-video { background: #fee2e2; color: #dc2626; }
-        .icon-hw { background: #fef9c3; color: #ca8a04; }
-        .icon-result { background: #ede9fe; color: #7c3aed; }
-        .icon-fee { background: #dbeafe; color: #2563eb; }
-        .icon-time { background: #f1f5f9; color: #475569; }
-
-        @media (max-width: 480px) {
-            .app-action-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-top-info { flex-direction: column; text-align: center; }
-            .hero-progress-grid { grid-template-columns: 1fr; }
+        @media print {
+            body { background:#ffffff !important; margin:0 !important; padding:0 !important; }
+            .no-print { display:none !important; }
+            .cards-preview-container { padding:10mm 0 !important; gap:15mm !important; }
+            .id-card-frame { box-shadow:none !important; border:1px solid #cbd5e1 !important; page-break-inside:avoid; }
         }
     </style>
 </head>
 <body>
 
-    <header class="app-top-header">
-        <div class="header-title-box">
-            <div class="school-mini-logo">M</div>
-            <div>
-                <h3 style="font-size:14px; margin:0;">MDA Mustafa Digital Ai School</h3>
-                <p style="font-size:11px; color:#64748b; margin:0;">Student & Parent Portal</p>
-            </div>
-        </div>
-        <a href="index.html" style="font-size:12px; color:#dc2626; text-decoration:none; font-weight:600;"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    </header>
-
-    <div class="portal-container">
-
-        <!-- STUDENT PROFILE HERO -->
-        <div class="student-profile-hero">
-            <div class="hero-top-info">
-                <div class="student-avatar-frame">
-                    <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=150" alt="Student Photo">
-                </div>
-                <div>
-                    <h2 style="font-size:20px;">Raj Kumar</h2>
-                    <p style="font-size:12px; opacity:0.9;">Class 10 — Science Group • Roll No: 1002</p>
-                    <span style="background:rgba(255,255,255,0.2); padding:2px 10px; border-radius:20px; font-size:10px; display:inline-block; margin-top:4px;">ID: ADM002</span>
-                </div>
-            </div>
-
-            <div class="hero-progress-grid">
-                <div>
-                    <div style="display:flex; justify-content:space-between; font-size:11px;">
-                        <span>Attendance Overview</span>
-                        <strong>95.8% (Present)</strong>
-                    </div>
-                    <div class="progress-track"><div class="progress-fill" style="width:95.8%; background:#4ade80;"></div></div>
-                </div>
-                <div>
-                    <div style="display:flex; justify-content:space-between; font-size:11px;">
-                        <span>Fee Clearance</span>
-                        <strong>100% Cleared (Rs. 0 Due)</strong>
-                    </div>
-                    <div class="progress-track"><div class="progress-fill" style="width:100%; background:#facc15;"></div></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SEPARATE PAGES NAVIGATION (Touch App Grid) -->
-        <div class="section-headline"><i class="fas fa-id-card text-primary"></i> Identity & Documents</div>
-        <div class="app-action-grid">
-            <!-- 1. DIGITAL ID CARD (SEPARATE HTML) -->
-            <a href="student-id-card.html" class="app-menu-btn">
-                <div class="app-icon-box icon-card"><i class="fas fa-id-badge"></i></div>
-                <span>Student ID Card</span>
-            </a>
-            <!-- 2. REPORT CARD (SEPARATE HTML) -->
-            <a href="print-report-card.html" class="app-menu-btn">
-                <div class="app-icon-box icon-result"><i class="fas fa-award"></i></div>
-                <span>Report Card</span>
-            </a>
-        </div>
-
-        <div class="section-headline"><i class="fas fa-laptop-code text-purple"></i> Digital E-Learning Hub</div>
-        <div class="app-action-grid">
-            <!-- 3. LIVE MEET (SEPARATE HTML) -->
-            <a href="student-live-class.html" class="app-menu-btn">
-                <div class="app-icon-box icon-meet"><i class="fas fa-video"></i></div>
-                <span>Live Google Meet</span>
-            </a>
-            <!-- 4. PDF BOOKS (SEPARATE HTML) -->
-            <a href="student-e-library.html" class="app-menu-btn">
-                <div class="app-icon-box icon-books"><i class="fas fa-book-reader"></i></div>
-                <span>PDF E-Books</span>
-            </a>
-            <!-- 5. VIDEO LECTURES (SEPARATE HTML) -->
-            <a href="student-lectures.html" class="app-menu-btn">
-                <div class="app-icon-box icon-video"><i class="fab fa-youtube"></i></div>
-                <span>Video Lectures</span>
-            </a>
-        </div>
-
-        <div class="section-headline"><i class="fas fa-user-check text-success"></i> Academics & Finance</div>
-        <div class="app-action-grid">
-            <!-- 6. DIARY & HOMEWORK (SEPARATE HTML) -->
-            <a href="student-diary.html" class="app-menu-btn">
-                <div class="app-icon-box icon-hw"><i class="fas fa-pencil-alt"></i></div>
-                <span>Daily Diary</span>
-            </a>
-            <!-- 7. TIMETABLE (SEPARATE HTML) -->
-            <a href="student-timetable.html" class="app-menu-btn">
-                <div class="app-icon-box icon-time"><i class="fas fa-clock"></i></div>
-                <span>Class Timetable</span>
-            </a>
-            <!-- 8. FEES (SEPARATE HTML) -->
-            <a href="student-fees.html" class="app-menu-btn">
-                <div class="app-icon-box icon-fee"><i class="fas fa-wallet"></i></div>
-                <span>Fee Ledger (PKR)</span>
-            </a>
-        </div>
-
+    <div class="top-control-bar no-print">
+        <a href="student-home.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print ID Card</button>
     </div>
 
+    <div class="cards-preview-container">
+        <!-- FRONT CARD (DYNAMIC DATA) -->
+        <div class="id-card-frame">
+            <div class="front-top-header">
+                <h3>MDA Mustafa Digital Ai School</h3>
+                <p>Digital Student Identity Card</p>
+            </div>
+
+            <div class="student-photo-wrapper">
+                <img id="cardStudentImg" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Student">
+            </div>
+
+            <div class="front-body">
+                <h2 id="cardStudentName">Student Name</h2>
+                <span class="class-badge-pill" id="cardStudentClass">Class 10 — Science</span>
+
+                <table class="student-info-table">
+                    <tr><td>ADMISSION NO:</td><td><strong id="cardAdmNo">MDA-26-0000</strong></td></tr>
+                    <tr><td>FATHER'S NAME:</td><td id="cardFatherName">Father Name</td></tr>
+                    <tr><td>D.O.B:</td><td id="cardDob">2010-01-01</td></tr>
+                    <tr><td>B-FORM / CNIC:</td><td id="cardCnic">35201-XXXXXXX-X</td></tr>
+                    <tr><td>BLOOD GROUP:</td><td id="cardBlood">B+ Positive</td></tr>
+                </table>
+            </div>
+
+            <div class="card-footer-sign">
+                <span style="font-size:10px; font-weight:600; color:#475569;">SESSION: 2026-27</span>
+                <div class="sign-box-area">
+                    <div class="sign-line-draw"></div>
+                    <small style="font-size:9px; font-weight:700;">PRINCIPAL</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK CARD (DYNAMIC VERIFICATION QR) -->
+        <div class="id-card-frame">
+            <div class="back-top-strip">CARD VERIFICATION & RULES</div>
+            <div class="back-body-content">
+                <div class="qr-section">
+                    <img id="cardQrCode" src="" alt="Verification QR Code">
+                    <p style="font-size:9px; color:#64748b;">Scan QR to verify student identity</p>
+                </div>
+
+                <ul class="rules-list">
+                    <li>This card is institutional property and must be displayed daily.</li>
+                    <li>If found, please return to the school administration office.</li>
+                    <li>Duplicate card fee will apply in case of damage or loss.</li>
+                </ul>
+
+                <div class="emergency-contact-box">
+                    <strong>EMERGENCY CONTACT (CAMPUS)</strong><br>
+                    <span>+92 310 5784772 | info@mdaschool.edu.pk</span>
+                </div>
+            </div>
+            <div class="card-bottom-strip">MDA MUSTAFA DIGITAL AI SCHOOL</div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC DATA INJECTION SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Read active student from sessionStorage
+            let activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
+
+            // Agar direct page khola ho toh default fallback uthao
+            if (!activeStudent) {
+                activeStudent = {
+                    name: "Ali Raza",
+                    fatherName: "Tariq Mehmood",
+                    admNo: "MDA-26-1002",
+                    class: "Class 10 (Science)",
+                    dob: "2010-05-14",
+                    cnic: "35201-1234567-1",
+                    bloodGroup: "B+"
+                };
+            }
+
+            // Fill card dynamically
+            document.getElementById('cardStudentName').innerText = activeStudent.name || activeStudent.fullName;
+            document.getElementById('cardStudentClass').innerText = activeStudent.class || "Class 10";
+            document.getElementById('cardAdmNo').innerText = activeStudent.admNo || activeStudent.admissionNo;
+            document.getElementById('cardFatherName').innerText = activeStudent.fatherName || "Father Name";
+            document.getElementById('cardDob').innerText = activeStudent.dob || "2010-01-01";
+            document.getElementById('cardCnic').innerText = activeStudent.cnic || "35201-XXXXXXX-X";
+            document.getElementById('cardBlood').innerText = activeStudent.bloodGroup || "B+ Positive";
+
+            // Update photo avatar
+            document.getElementById('cardStudentImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeStudent.name || 'Student')}&background=4338ca&color=fff&size=150`;
+
+            // Generate Dynamic QR Code
+            const qrData = `MDA School Verified Student\nName: ${activeStudent.name}\nAdmNo: ${activeStudent.admNo}\nClass: ${activeStudent.class}`;
+            document.getElementById('cardQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
+        });
+    </script>
 </body>
 </html>
