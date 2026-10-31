@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Attendance - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+    <!-- Attendance Specific CSS -->
+    <link rel="stylesheet" href="assets/css/attendance.css">
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="#"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="#"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="#"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html" class="active"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Daily Attendance</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Mark class attendance</p>
+            </div>
+
+            <!-- TOP FILTER BAR (Class & Date) -->
+            <div class="filter-section">
+                <div class="att-filter-grid">
+                    <div class="filter-group">
+                        <label>CLASS</label>
+                        <select id="attClass">
+                            <option value="CLASS 9">CLASS 9</option>
+                            <option value="CLASS 10">CLASS 10</option>
+                            <option value="CLASS 8">CLASS 8</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>DATE</label>
+                        <input type="date" id="attDate" value="2026-10-10">
+                    </div>
+                    <div class="filter-group filter-actions-group">
+                        <button class="btn-load" onclick="loadAttendanceList()"><i class="fas fa-filter"></i> Load Students</button>
+                        <button class="btn-report"><i class="fas fa-list-alt"></i> Report</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ATTENDANCE CARD -->
+            <div class="data-table-card mt-20">
+                <!-- Bar with Quick Actions (All Present / All Absent) -->
+                <div class="att-action-bar">
+                    <div class="att-class-title">
+                        <i class="fas fa-calendar-day text-success"></i> 
+                        <strong id="displayClassInfo">CLASS 9 — 2026-10-10</strong>
+                        <span class="badge" id="studentCount">2 students</span>
+                    </div>
+                    <div class="att-bulk-buttons">
+                        <button type="button" class="btn-bulk btn-all-present" onclick="markAll('present')"><i class="fas fa-check"></i> All Present</button>
+                        <button type="button" class="btn-bulk btn-all-absent" onclick="markAll('absent')"><i class="fas fa-times"></i> All Absent</button>
+                    </div>
+                </div>
+
+                <!-- ATTENDANCE TABLE -->
+                <div class="table-responsive">
+                    <table class="att-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="15%">ADM NO</th>
+                                <th width="35%">NAME</th>
+                                <th width="15%" class="text-center">PRESENT</th>
+                                <th width="15%" class="text-center">ABSENT</th>
+                                <th width="15%" class="text-center">LEAVE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attTableBody">
+                            <!-- Student 1 -->
+                            <tr>
+                                <td>1</td>
+                                <td><span class="adm-badge">ADM006</span></td>
+                                <td><strong>HIMANSHU KUMAR</strong></td>
+                                <td class="text-center">
+                                    <label class="radio-container green-radio">
+                                        <input type="radio" name="att_ADM006" value="present" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="radio-container red-radio">
+                                        <input type="radio" name="att_ADM006" value="absent">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="radio-container orange-radio">
+                                        <input type="radio" name="att_ADM006" value="leave">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <!-- Student 2 -->
+                            <tr>
+                                <td>2</td>
+                                <td><span class="adm-badge">ADM005</span></td>
+                                <td><strong>KARAN GAUTAM</strong></td>
+                                <td class="text-center">
+                                    <label class="radio-container green-radio">
+                                        <input type="radio" name="att_ADM005" value="present" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="radio-container red-radio">
+                                        <input type="radio" name="att_ADM005" value="absent">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td class="text-center">
+                                    <label class="radio-container orange-radio">
+                                        <input type="radio" name="att_ADM005" value="leave">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SAVE BUTTON -->
+                <div class="att-footer">
+                    <button type="button" class="btn-save-att" onclick="saveAttendance()"><i class="fas fa-save"></i> Save Attendance</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    
+    <!-- ATTENDANCE LOGIC -->
+    <script>
+        // 1. One-click "All Present" / "All Absent" Logic
+        function markAll(status) {
+            const radioButtons = document.querySelectorAll(`input[type="radio"][value="${status}"]`);
+            radioButtons.forEach(radio => {
+                radio.checked = true;
+            });
+        }
+
+        // 2. Load Attendance list
+        function loadAttendanceList() {
+            const selectedClass = document.getElementById('attClass').value;
+            const selectedDate = document.getElementById('attDate').value;
+            document.getElementById('displayClassInfo').innerText = `${selectedClass} — ${selectedDate}`;
+            alert(`Loaded students for ${selectedClass} on ${selectedDate}`);
+        }
+
+        // 3. Save Attendance (LocalStorage or Google Sheets)
+        function saveAttendance() {
+            const tableRows = document.querySelectorAll('#attTableBody tr');
+            let attendanceRecords = [];
+
+            tableRows.forEach(row => {
+                const admNo = row.querySelector('.adm-badge').innerText;
+                const studentName = row.querySelector('strong').innerText;
+                const status = row.querySelector('input[type="radio"]:checked').value;
+
+                attendanceRecords.push({ admNo, studentName, status });
+            });
+
+            console.log('Saved Attendance Data:', attendanceRecords);
+            alert('Attendance saved successfully!');
+        }
+    </script>
+</body>
+</html>
