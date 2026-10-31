@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Admission - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Global CSS (For Sidebar & Header) -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Form CSS (For this specific page) -->
     <link rel="stylesheet" href="assets/css/forms.css">
 </head>
 <body>
 
-    <!-- SIDEBAR (Same as Dashboard) -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
+        <!-- Sidebar content same as before -->
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
             <div class="sidebar-title">
@@ -24,16 +21,13 @@
                 <p>Management System</p>
             </div>
         </div>
-
         <ul class="sidebar-menu">
             <li class="menu-label">MAIN</li>
             <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            
             <li class="menu-label">STUDENTS</li>
             <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
             <li><a href="new-admission.html" class="active"><i class="fas fa-user-plus"></i> New Admission</a></li>
             <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
-            
             <li class="menu-label">ACCOUNT</li>
             <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
@@ -41,7 +35,6 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- TOP HEADER -->
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
@@ -49,44 +42,42 @@
             </div>
         </header>
 
-        <!-- FORM CONTENT -->
         <div class="dashboard-content">
-            
-            <!-- Breadcrumb and Top Buttons -->
             <div class="page-top-bar">
                 <p class="breadcrumb">Register a new student for Session 2026-27</p>
                 <a href="all-students.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Students</a>
             </div>
 
+            <!-- NAME ATTRIBUTES ADD KIYE GAYE HAIN -->
             <form id="admissionForm" class="admission-form">
                 
-                <!-- Section 1: Basic Information -->
+                <!-- Section 1 -->
                 <div class="form-section">
                     <h4 class="section-heading"><i class="fas fa-address-card"></i> Basic Information</h4>
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Admission No *</label>
-                            <input type="text" value="ADM-26-1052" readonly>
+                            <input type="text" name="admissionNo" value="ADM-26-1052" readonly>
                         </div>
                         <div class="input-group">
                             <label>Full Name *</label>
-                            <input type="text" placeholder="Student full name" required>
+                            <input type="text" name="fullName" placeholder="Student full name" required>
                         </div>
                         <div class="input-group">
                             <label>Father's Name *</label>
-                            <input type="text" placeholder="Father's name" required>
+                            <input type="text" name="fatherName" placeholder="Father's name" required>
                         </div>
                         <div class="input-group">
                             <label>Mother's Name *</label>
-                            <input type="text" placeholder="Mother's name" required>
+                            <input type="text" name="motherName" placeholder="Mother's name" required>
                         </div>
                         <div class="input-group">
                             <label>Date of Birth *</label>
-                            <input type="date" required>
+                            <input type="date" name="dob" required>
                         </div>
                         <div class="input-group">
                             <label>Gender *</label>
-                            <select required>
+                            <select name="gender" required>
                                 <option value="">Select</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -95,76 +86,61 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Class & Admission -->
+                <!-- Section 2 -->
                 <div class="form-section">
                     <h4 class="section-heading"><i class="fas fa-graduation-cap"></i> Class & Admission</h4>
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Class *</label>
-                            <select required>
+                            <select name="class" required>
                                 <option value="">Select Class</option>
                                 <option value="Nursery">Nursery</option>
                                 <option value="LKG">LKG</option>
                                 <option value="UKG">UKG</option>
-                                <option value="1">Class 1</option>
-                                <option value="10">Class 10</option>
+                                <option value="Class 1">Class 1</option>
+                                <option value="Class 10">Class 10</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <label>Section</label>
-                            <select>
+                            <select name="section">
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <label>Admission Date *</label>
-                            <input type="date" required>
+                            <input type="date" name="admissionDate" required>
                         </div>
                         <div class="input-group">
                             <label>Religion</label>
-                            <input type="text" placeholder="e.g. Islam">
+                            <input type="text" name="religion" placeholder="e.g. Islam">
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 3: Contact Details -->
+                <!-- Section 3 -->
                 <div class="form-section">
                     <h4 class="section-heading"><i class="fas fa-phone-alt"></i> Contact Details</h4>
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Mobile No *</label>
-                            <input type="text" placeholder="+92 XXXXX XXXXX" required>
+                            <input type="text" name="mobileNo" placeholder="+92 XXXXX XXXXX" required>
                         </div>
                         <div class="input-group">
                             <label>WhatsApp No</label>
-                            <input type="text" placeholder="Optional">
+                            <input type="text" name="whatsappNo" placeholder="Optional">
                         </div>
                         <div class="input-group full-width">
                             <label>Full Residential Address *</label>
-                            <textarea rows="3" placeholder="Enter complete address" required></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section 4: Document Uploads -->
-                <div class="form-section">
-                    <h4 class="section-heading"><i class="fas fa-file-upload"></i> Upload Documents</h4>
-                    <div class="form-grid">
-                        <div class="input-group">
-                            <label>Student Photo</label>
-                            <input type="file" accept="image/*">
-                        </div>
-                        <div class="input-group">
-                            <label>B-Form / Birth Certificate</label>
-                            <input type="file" accept="application/pdf, image/*">
+                            <textarea name="address" rows="3" placeholder="Enter complete address" required></textarea>
                         </div>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="form-actions">
-                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Save Admission</button>
+                    <button type="submit" id="submitBtn" class="btn-submit"><i class="fas fa-save"></i> Save Admission</button>
                     <button type="reset" class="btn-reset">Reset</button>
                 </div>
 
@@ -172,15 +148,43 @@
         </div>
     </main>
 
-    <!-- Global JS (For Sidebar Toggle & Security) -->
     <script src="assets/js/main.js"></script>
+    
+    <!-- GOOGLE SHEETS JAVASCRIPT LOGIC -->
     <script>
-        // Form submit hone par kya karna hai
-        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+        // Yahan aapko apni Google Apps Script ki URL dalni hai (Step 2 mein bataya hai)
+        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+        
+        const form = document.getElementById('admissionForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', e => {
             e.preventDefault();
-            alert("Student Admission saved successfully! (Frontend Data only)");
-            // Yahan future mein hum LocalStorage ya Firebase ka code add kar sakte hain data save karne ke liye.
-            this.reset(); // Form clear karna
+            
+            // Button ko loading state mein change karna
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to Google Sheets...';
+            submitBtn.disabled = true;
+
+            // Form ka saara data collect karna
+            let requestBody = new FormData(form);
+
+            // Google Sheet par data bhejna
+            fetch(scriptURL, { method: 'POST', body: requestBody })
+                .then(response => {
+                    alert('Success! Student Admission saved to Google Sheets successfully.');
+                    form.reset(); // Form clear karna
+                    
+                    // Button ko normal state mein wapis lana
+                    submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Admission';
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('Error saving data! Please check your connection.');
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Admission';
+                    submitBtn.disabled = false;
+                });
         });
     </script>
 </body>
