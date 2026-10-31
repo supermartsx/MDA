@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital E-Library - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 60px;
+        }
+
+        /* Top Bar */
+        .app-top-header {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .btn-back-home {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .portal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        /* Class Filter Tabs (Books mixed nahi hongi) */
+        .class-filter-bar {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .class-tab-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+        .class-tab-btn:hover { background: #f1f5f9; }
+        .class-tab-btn.active {
+            background: #7c3aed;
+            color: #ffffff;
+            border-color: #7c3aed;
+            box-shadow: 0 4px 12px rgba(124,58,237,0.25);
+        }
+
+        /* Books Visual Grid (Cover Pictures Gallery) */
+        .books-visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: #a855f7;
+        }
+
+        /* Clickable Cover Image */
+        .book-cover-wrap {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #f1f5f9;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .book-cover-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .book-card:hover .book-cover-wrap img {
+            transform: scale(1.05);
+        }
+
+        .hover-read-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(124, 58, 237, 0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            opacity: 0;
+            transition: 0.3s;
+            gap: 6px;
+        }
+        .book-cover-wrap:hover .hover-read-overlay {
+            opacity: 1;
+        }
+
+        .book-details-box {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .book-subject-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: #7c3aed;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        .book-title-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .btn-open-pdf {
+            background: #7c3aed;
+            color: #ffffff;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+        .btn-open-pdf:hover { background: #6d28d9; }
+
+        /* PDF Viewer Modal */
+        .pdf-viewer-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            flex-direction: column;
+        }
+        .modal-header-bar {
+            background: #1e1e2d;
+            color: #fff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-iframe-box {
+            flex: 1;
+            width: 100%;
+            background: #52565e;
+        }
+        .modal-iframe-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAV -->
+    <header class="app-top-header">
+        <a href="student-dashboard.html" class="btn-back-home"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <div style="font-size:12px; font-weight:600; color:#64748b;">
+            <i class="fas fa-book-reader text-purple"></i> MDA Digital Library
+        </div>
+    </header>
+
+    <div class="portal-container">
+        
+        <div style="margin-bottom: 15px;">
+            <h2 style="font-size: 20px; color:#0f172a; margin-bottom: 2px;">Visual Book Library</h2>
+            <p style="font-size: 12px; color:#64748b;">Click on any book picture to open and read Google Drive PDF.</p>
+        </div>
+
+        <!-- CLASS FILTER BAR (SEPARATION - MIXED NAHI HONGI) -->
+        <div class="class-filter-bar">
+            <button class="class-tab-btn active" onclick="filterByClass('Class 10', this)">Class 10 Books</button>
+            <button class="class-tab-btn" onclick="filterByClass('Class 9', this)">Class 9 Books</button>
+            <button class="class-tab-btn" onclick="filterByClass('Class 8', this)">Class 8 Books</button>
+            <button class="class-tab-btn" onclick="filterByClass('All', this)">All Classes</button>
+        </div>
+
+        <!-- BOOKS VISUAL GALLERY -->
+        <div class="books-visual-grid" id="booksGallery">
+            
+            <!-- BOOK 1: CLASS 10 (COMPUTER SCIENCE) -->
+            <div class="book-card" data-class="Class 10">
+                <!-- Clickable Picture -->
+                <div class="book-cover-wrap" onclick="openDriveBook('Computer Science Class 10', 'https://drive.google.com')">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80" alt="Computer Book">
+                    <div class="hover-read-overlay">
+                        <i class="fas fa-book-open" style="font-size: 24px;"></i>
+                        <span style="font-size: 12px; font-weight: 700;">Click to Read</span>
+                    </div>
+                </div>
+                <div class="book-details-box">
+                    <span class="book-subject-tag">Class 10 • Computer</span>
+                    <h4 class="book-title-text">Computer Science Complete Textbook</h4>
+                    <button class="btn-open-pdf" onclick="openDriveBook('Computer Science Class 10', 'https://drive.google.com')">
+                        <i class="fas fa-file-pdf"></i> Open PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- BOOK 2: CLASS 10 (PHYSICS) -->
+            <div class="book-card" data-class="Class 10">
+                <div class="book-cover-wrap" onclick="openDriveBook('Physics Class 10 Handouts', 'https://drive.google.com')">
+                    <img src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=500&q=80" alt="Physics Book">
+                    <div class="hover-read-overlay">
+                        <i class="fas fa-book-open" style="font-size: 24px;"></i>
+                        <span style="font-size: 12px; font-weight: 700;">Click to Read</span>
+                    </div>
+                </div>
+                <div class="book-details-box">
+                    <span class="book-subject-tag">Class 10 • Physics</span>
+                    <h4 class="book-title-text">Physics Theory & Numerical Notes</h4>
+                    <button class="btn-open-pdf" onclick="openDriveBook('Physics Class 10 Handouts', 'https://drive.google.com')">
+                        <i class="fas fa-file-pdf"></i> Open PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- BOOK 3: CLASS 10 (MATHEMATICS) -->
+            <div class="book-card" data-class="Class 10">
+                <div class="book-cover-wrap" onclick="openDriveBook('Mathematics Class 10', 'https://drive.google.com')">
+                    <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=500&q=80" alt="Math Book">
+                    <div class="hover-read-overlay">
+                        <i class="fas fa-book-open" style="font-size: 24px;"></i>
+                        <span style="font-size: 12px; font-weight: 700;">Click to Read</span>
+                    </div>
+                </div>
+                <div class="book-details-box">
+                    <span class="book-subject-tag">Class 10 • Mathematics</span>
+                    <h4 class="book-title-text">Mathematics Science Group Textbook</h4>
+                    <button class="btn-open-pdf" onclick="openDriveBook('Mathematics Class 10', 'https://drive.google.com')">
+                        <i class="fas fa-file-pdf"></i> Open PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- BOOK 4: CLASS 9 (BIOLOGY) -->
+            <div class="book-card" data-class="Class 9">
+                <div class="book-cover-wrap" onclick="openDriveBook('Biology Class 9 Notes', 'https://drive.google.com')">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500&q=80" alt="Biology Book">
+                    <div class="hover-read-overlay">
+                        <i class="fas fa-book-open" style="font-size: 24px;"></i>
+                        <span style="font-size: 12px; font-weight: 700;">Click to Read</span>
+                    </div>
+                </div>
+                <div class="book-details-box">
+                    <span class="book-subject-tag">Class 9 • Biology</span>
+                    <h4 class="book-title-text">Biology Diagram & Solved Notes</h4>
+                    <button class="btn-open-pdf" onclick="openDriveBook('Biology Class 9 Notes', 'https://drive.google.com')">
+                        <i class="fas fa-file-pdf"></i> Open PDF
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PDF VIEWER POPUP MODAL -->
+    <div class="pdf-viewer-modal" id="pdfModal">
+        <div class="modal-header-bar">
+            <span id="modalBookTitle" style="font-size: 13px; font-weight: 600;">Opening Book...</span>
+            <div style="display: flex; gap: 10px;">
+                <a id="btnExternalDrive" href="#" target="_blank" style="color: #60a5fa; text-decoration: none; font-size: 13px;"><i class="fas fa-external-link-alt"></i> Drive View</a>
+                <button onclick="closePdfModal()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
+            </div>
+        </div>
+        <div class="modal-iframe-box">
+            <iframe id="pdfIframe" src="" allow="autoplay"></iframe>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: CLASS FILTER & CLICK TO OPEN BOOK -->
+    <script>
+        // 1. CLASS SEPARATION FILTER (Class 10 only shows Class 10 books)
+        function filterByClass(selectedClass, btn) {
+            // Update active button
+            const buttons = document.querySelectorAll('.class-tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.book-card');
+            cards.forEach(card => {
+                const bookClass = card.getAttribute('data-class');
+                if (selectedClass === 'All' || bookClass === selectedClass) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Default: Open with Class 10 filtered
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultTab = document.querySelector('.class-tab-btn.active');
+            if (defaultTab) {
+                filterByClass('Class 10', defaultTab);
+            }
+        });
+
+        // 2. CLICK ON PICTURE TO OPEN GOOGLE DRIVE BOOK
+        function openDriveBook(title, driveUrl) {
+            document.getElementById('modalBookTitle').innerText = title;
+            document.getElementById('btnExternalDrive').href = driveUrl;
+
+            // Agar Google Drive link hai toh usay embed preview banata hai
+            let previewUrl = driveUrl;
+            if (driveUrl.includes('drive.google.com') && driveUrl.includes('/view')) {
+                previewUrl = driveUrl.replace('/view', '/preview');
+            }
+
+            document.getElementById('pdfIframe').src = previewUrl;
+            document.getElementById('pdfModal').style.display = 'flex';
+        }
+
+        function closePdfModal() {
+            document.getElementById('pdfIframe').src = '';
+            document.getElementById('pdfModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
