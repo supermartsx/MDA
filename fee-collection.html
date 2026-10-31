@@ -135,33 +135,33 @@
             
             <li class="menu-label">ACADEMICS</li>
             <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
             <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
-            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
             
             <li class="menu-label">FINANCE</li>
-            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
             <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
             
             <li class="menu-label">STAFF / PAYROLL</li>
-            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
-            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
             
             <li class="menu-label">COMMUNICATION</li>
-            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
             
             <li class="menu-label">ADMIN</li>
-            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
             <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
@@ -180,7 +180,7 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Collect student fees, manage dues, and generate payment receipts</p>
+                <p class="breadcrumb">Collect student fees, manage dues, and generate payment receipts (PKR)</p>
             </div>
 
             <!-- STUDENT SEARCH BAR -->
@@ -222,7 +222,7 @@
                     <div class="due-amount-banner">
                         <div>
                             <p>OUTSTANDING DUE</p>
-                            <h3 id="bannerDueText">₹6,500</h3>
+                            <h3 id="bannerDueText">Rs. 6,500</h3>
                         </div>
                         <i class="fas fa-exclamation-circle" style="font-size: 30px; color: #dc2626;"></i>
                     </div>
@@ -234,7 +234,7 @@
                             <input type="checkbox" class="fee-head-check" value="500" checked onchange="calculatePayTotal()"> 
                             Admission Fee
                         </label>
-                        <span class="fw-bold">₹500</span>
+                        <span class="fw-bold">Rs. 500</span>
                     </div>
 
                     <div class="fee-item-row">
@@ -242,7 +242,7 @@
                             <input type="checkbox" class="fee-head-check" value="1000" checked onchange="calculatePayTotal()"> 
                             Computer Fee
                         </label>
-                        <span class="fw-bold">₹1,000</span>
+                        <span class="fw-bold">Rs. 1,000</span>
                     </div>
 
                     <div class="fee-item-row">
@@ -250,12 +250,12 @@
                             <input type="checkbox" class="fee-head-check" value="5000" checked onchange="calculatePayTotal()"> 
                             Tuition Fee (Annual)
                         </label>
-                        <span class="fw-bold">₹5,000</span>
+                        <span class="fw-bold">Rs. 5,000</span>
                     </div>
 
                 </div>
 
-                <!-- RIGHT: Payment Entry Form -->
+                <!-- RIGHT: Payment Entry Form (Pakistani Payment Options) -->
                 <div class="receipt-card">
                     <h4 class="section-heading" style="color: #16a34a;"><i class="fas fa-receipt"></i> Collect Payment & Generate Receipt</h4>
                     
@@ -273,28 +273,31 @@
 
                         <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; margin-bottom: 15px;">
                             <div class="input-group">
-                                <label>PAYING AMOUNT (₹) *</label>
+                                <label>PAYING AMOUNT (Rs.) *</label>
                                 <input type="number" id="payAmountInput" value="6500" style="font-size: 18px; font-weight: 700; color: #16a34a;" required>
                             </div>
                             <div class="input-group">
-                                <label>DISCOUNT / WAIVER (₹)</label>
+                                <label>DISCOUNT / WAIVER (Rs.)</label>
                                 <input type="number" id="discountInput" value="0" placeholder="0">
                             </div>
                         </div>
 
+                        <!-- PAKISTANI PAYMENT METHODS -->
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                             <div class="input-group">
                                 <label>PAYMENT METHOD *</label>
                                 <select id="payMethod" required>
-                                    <option value="Cash">Cash</option>
-                                    <option value="Online / UPI">Online / UPI</option>
-                                    <option value="Bank Transfer">Bank Transfer</option>
-                                    <option value="Cheque">Cheque</option>
+                                    <option value="Cash">Cash (Naqad)</option>
+                                    <option value="Easypaisa">Easypaisa</option>
+                                    <option value="JazzCash">JazzCash</option>
+                                    <option value="Bank Transfer">Bank Transfer (All Pakistani Banks)</option>
+                                    <option value="Raast">Raast Instant Payment</option>
+                                    <option value="Cheque">Bank Cheque</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <label>TRANSACTION / REF NO</label>
-                                <input type="text" placeholder="Optional for Cash">
+                                <label>TRANSACTION ID / REF NO</label>
+                                <input type="text" placeholder="TID (e.g. JazzCash / Easypaisa TRX ID)">
                             </div>
                         </div>
 
@@ -304,7 +307,7 @@
                         </div>
 
                         <button type="submit" class="btn-pay-now">
-                            <i class="fas fa-check-circle"></i> Collect ₹<span id="btnPayAmount">6500</span> & Print Receipt
+                            <i class="fas fa-check-circle"></i> Collect Rs. <span id="btnPayAmount">6500</span> & Print Receipt
                         </button>
                     </form>
                 </div>
@@ -335,7 +338,7 @@
                                 <td><strong>RCP-2610-01003</strong></td>
                                 <td>RAHUL KUMAR</td>
                                 <td>Class 2</td>
-                                <td class="text-success fw-bold">₹50</td>
+                                <td class="text-success fw-bold">Rs. 50</td>
                                 <td>Cash</td>
                                 <td>31-10-2026</td>
                                 <td>
@@ -346,8 +349,8 @@
                                 <td><strong>RCP-2609-01002</strong></td>
                                 <td>RAHUL KUMAR</td>
                                 <td>Class 2</td>
-                                <td class="text-success fw-bold">₹100</td>
-                                <td>UPI</td>
+                                <td class="text-success fw-bold">Rs. 100</td>
+                                <td>JazzCash</td>
                                 <td>30-10-2026</td>
                                 <td>
                                     <button class="btn-view" onclick="alert('Opening Receipt...')"><i class="fas fa-print"></i></button>
@@ -379,11 +382,11 @@
             e.preventDefault();
             const amount = document.getElementById('payAmountInput').value;
             const rcp = document.getElementById('receiptNo').value;
+            const method = document.getElementById('payMethod').value;
             const student = document.getElementById('feeStudentName').innerText;
 
-            if (confirm(`Confirm payment of ₹${amount} for ${student}?`)) {
+            if (confirm(`Confirm payment of Rs. ${amount} via ${method} for ${student}?`)) {
                 alert(`Payment Successful! Receipt #${rcp} generated.`);
-                // Trigger Receipt print
                 window.print();
             }
         });
