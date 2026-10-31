@@ -67,7 +67,7 @@
 
         .preset-amount-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -76,7 +76,7 @@
             border: 1px solid #cbd5e1;
             padding: 10px;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             color: #334155;
@@ -157,33 +157,33 @@
             
             <li class="menu-label">ACADEMICS</li>
             <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
             <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
-            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
             
             <li class="menu-label">FINANCE</li>
-            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
             <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
             
             <li class="menu-label">STAFF / PAYROLL</li>
-            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
-            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
             
             <li class="menu-label">COMMUNICATION</li>
-            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
             
             <li class="menu-label">ADMIN</li>
-            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
             <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
@@ -202,7 +202,7 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Fastest way to collect counter fee payments and print receipts</p>
+                <p class="breadcrumb">Fastest way to collect counter fee payments and print receipts (PKR)</p>
             </div>
 
             <!-- QUICK COLLECTION CARD -->
@@ -225,35 +225,36 @@
                     </div>
                     <div style="text-align: right;">
                         <span style="font-size: 11px; color: #dc2626; font-weight: 600;">PENDING DUE</span>
-                        <h3 style="margin: 0; color: #dc2626; font-size: 22px;" id="qStudentDue">₹6,500</h3>
+                        <h3 style="margin: 0; color: #dc2626; font-size: 22px;" id="qStudentDue">Rs. 6,500</h3>
                     </div>
                 </div>
 
                 <!-- Form -->
                 <form id="quickPayForm">
                     
-                    <!-- Preset Amount Buttons -->
-                    <label style="font-size: 12px; color: #64748b; font-weight: 500; margin-bottom: 8px; display: block;">QUICK PRESET AMOUNTS:</label>
+                    <!-- Preset Amount Buttons (PKR) -->
+                    <label style="font-size: 12px; color: #64748b; font-weight: 500; margin-bottom: 8px; display: block;">QUICK PRESET AMOUNTS (PKR):</label>
                     <div class="preset-amount-buttons">
-                        <button type="button" class="btn-preset" onclick="setQuickAmount(500)">₹500</button>
-                        <button type="button" class="btn-preset" onclick="setQuickAmount(1000)">₹1,000</button>
-                        <button type="button" class="btn-preset" onclick="setQuickAmount(2000)">₹2,000</button>
-                        <button type="button" class="btn-preset" onclick="setQuickAmount(5000)">₹5,000</button>
-                        <button type="button" class="btn-preset active" onclick="setQuickAmount(6500)">Full Due (₹6,500)</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(500)">Rs. 500</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(1000)">Rs. 1,000</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(2000)">Rs. 2,000</button>
+                        <button type="button" class="btn-preset" onclick="setQuickAmount(5000)">Rs. 5,000</button>
+                        <button type="button" class="btn-preset active" onclick="setQuickAmount(6500)">Full (Rs. 6,500)</button>
                     </div>
 
-                    <!-- Custom Amount & Mode -->
+                    <!-- Custom Amount & Pakistani Payment Mode -->
                     <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; margin-bottom: 25px;">
                         <div class="input-group">
-                            <label>COLLECTING AMOUNT (₹) *</label>
+                            <label>COLLECTING AMOUNT (Rs.) *</label>
                             <input type="number" id="quickPayAmount" value="6500" style="font-size: 20px; font-weight: 700; color: #16a34a; padding: 12px;" required>
                         </div>
                         <div class="input-group">
                             <label>PAYMENT MODE *</label>
                             <select id="quickPayMode" style="padding: 14px;" required>
-                                <option value="Cash">Cash</option>
-                                <option value="UPI / QR">UPI / QR</option>
-                                <option value="Bank">Bank</option>
+                                <option value="Cash">Cash (Naqad)</option>
+                                <option value="Easypaisa">Easypaisa</option>
+                                <option value="JazzCash">JazzCash</option>
+                                <option value="Bank Transfer">Bank Transfer / Raast</option>
                             </select>
                         </div>
                     </div>
@@ -287,15 +288,15 @@
                             <tr>
                                 <td>RCP-2610-01005</td>
                                 <td><strong>ALI RAZA</strong></td>
-                                <td class="text-success fw-bold">₹1,000</td>
-                                <td>Cash</td>
+                                <td class="text-success fw-bold">Rs. 1,000</td>
+                                <td>Easypaisa</td>
                                 <td>10:45 AM</td>
                             </tr>
                             <tr>
                                 <td>RCP-2610-01004</td>
                                 <td><strong>FATIMA ZAHRA</strong></td>
-                                <td class="text-success fw-bold">₹500</td>
-                                <td>UPI</td>
+                                <td class="text-success fw-bold">Rs. 500</td>
+                                <td>JazzCash</td>
                                 <td>10:12 AM</td>
                             </tr>
                         </tbody>
@@ -312,7 +313,6 @@
     <script>
         function setQuickAmount(amt) {
             document.getElementById('quickPayAmount').value = amt;
-            // Active class toggle
             const buttons = document.querySelectorAll('.btn-preset');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -324,7 +324,7 @@
             const mode = document.getElementById('quickPayMode').value;
             const student = document.getElementById('qStudentName').innerText;
 
-            alert(`⚡ Quick Payment of ₹${amount} received via ${mode} for ${student}!\nOpening receipt print...`);
+            alert(`⚡ Quick Payment of Rs. ${amount} received via ${mode} for ${student}!\nOpening receipt print...`);
             window.print();
         });
     </script>
