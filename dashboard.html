@@ -14,41 +14,75 @@
 <body>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
-            <div class="sidebar-title">
-                <h4>MDA School</h4>
-                <p>Management System</p>
-            </div>
+<!-- COMPLETE SIDEBAR MENU -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+        <div class="sidebar-title">
+            <h4 id="sidebarSchoolName">MDA School</h4>
+            <p>Management System</p>
         </div>
-
-        <div class="user-info">
-            <div class="user-avatar">S</div>
-            <div class="user-details">
-                <h5>Super Administrator</h5>
-                <span><i class="fas fa-star"></i> Super Admin</span>
-            </div>
+    </div>
+    
+    <div class="user-info">
+        <div class="user-avatar">S</div>
+        <div class="user-details">
+            <h5>Super Administrator</h5>
+            <span><i class="fas fa-star"></i> Super Admin</span>
         </div>
+    </div>
 
-        <ul class="sidebar-menu">
-            <li class="menu-label">MAIN</li>
-            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            
-            <li class="menu-label">STUDENTS</li>
-            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
-            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
-            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
-            
-            <li class="menu-label">FEES</li>
-            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
-            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
-            
-            <li class="menu-label">ACCOUNT</li>
-            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </aside>
-
+    <ul class="sidebar-menu">
+        <li class="menu-label">MAIN</li>
+        <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        
+        <li class="menu-label">STUDENTS</li>
+        <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+        <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+        <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+        <li><a href="#"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+        <li><a href="#"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+        <li><a href="#"><i class="fas fa-file-alt"></i> Session Report</a></li>
+        
+        <li class="menu-label">FEES</li>
+        <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+        <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+        <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+        <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+        <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+        
+        <li class="menu-label">ACADEMICS</li>
+        <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+        <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+        <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+        <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+        <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
+        <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
+        <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+        <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+        
+        <li class="menu-label">FINANCE</li>
+        <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+        <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+        <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+        
+        <li class="menu-label">STAFF / PAYROLL</li>
+        <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+        <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
+        <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+        
+        <li class="menu-label">COMMUNICATION</li>
+        <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+        
+        <li class="menu-label">ADMIN</li>
+        <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+        
+        <li class="menu-label">ACCOUNT</li>
+        <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+        <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</aside>
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <!-- TOP HEADER -->
