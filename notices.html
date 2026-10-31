@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Notices - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        .notice-workspace-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .notice-feed-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notice-card-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            transition: 0.3s;
+            position: relative;
+        }
+        .notice-card-item:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+            border-color: #cbd5e1;
+        }
+
+        .notice-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .notice-card-item h4 {
+            font-size: 16px;
+            color: #1e293b;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notice-card-item p {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .notice-meta-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px dashed #f1f5f9;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .target-badge-all {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .target-badge-students {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .target-badge-staff {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .notice-workspace-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html" class="active"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Notice Board & Circulars</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="fas fa-bullhorn text-warning"></i> Announcements</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Post school announcements, holiday circulars, and student/faculty alerts</p>
+            </div>
+
+            <!-- TWO COLUMN WORKSPACE -->
+            <div class="notice-workspace-grid">
+                
+                <!-- LEFT: POST NEW NOTICE FORM -->
+                <div class="form-section" style="margin-bottom: 0;">
+                    <h4 class="section-heading"><i class="fas fa-pen text-primary"></i> Post New Announcement</h4>
+                    
+                    <form id="postNoticeForm">
+                        <div class="input-group mb-15">
+                            <label>NOTICE TITLE *</label>
+                            <input type="text" id="notTitle" placeholder="e.g. Iqbal Day Holiday Announcement" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div class="input-group">
+                                <label>TARGET AUDIENCE *</label>
+                                <select id="notTarget" required>
+                                    <option value="All">All School (Staff & Students)</option>
+                                    <option value="Students Only">Students Only</option>
+                                    <option value="Staff Only">Faculty & Staff Only</option>
+                                    <option value="Parents Only">Parents Only</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>DATE OF NOTICE *</label>
+                                <input type="date" id="notDate" value="2026-10-31" required>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-20">
+                            <label>NOTICE CONTENT / MESSAGE *</label>
+                            <textarea id="notContent" rows="5" placeholder="Write complete notice description..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;">
+                            <i class="fas fa-paper-plane"></i> Publish to Notice Board
+                        </button>
+                    </form>
+                </div>
+
+                <!-- RIGHT: ACTIVE NOTICE FEED -->
+                <div class="data-table-card">
+                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <h4><i class="fas fa-clipboard-list text-primary"></i> Published School Notices</h4>
+                        <span class="badge" style="background:#e0f2fe; color:#0369a1;">3 Active Circulars</span>
+                    </div>
+
+                    <div style="padding: 20px;">
+                        <div class="notice-feed-list" id="noticeListContainer">
+                            
+                            <!-- Notice 1 -->
+                            <div class="notice-card-item">
+                                <div class="notice-header-row">
+                                    <h4><i class="fas fa-star text-warning"></i> Iqbal Day Official Holiday</h4>
+                                    <span class="target-badge-all">All School</span>
+                                </div>
+                                <p>
+                                    This is to inform all students, faculty members, and administrative staff that the school will remain closed on <strong>Monday, 9th November 2026</strong> on account of Iqbal Day. Regular classes will resume on Tuesday as per normal timetable.
+                                </p>
+                                <div class="notice-meta-footer">
+                                    <span><i class="far fa-calendar-alt"></i> Posted: 31-Oct-2026 | By: Principal Office</span>
+                                    <div>
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" onclick="this.closest('.notice-card-item').remove()" title="Delete Notice"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notice 2 -->
+                            <div class="notice-card-item">
+                                <div class="notice-header-row">
+                                    <h4><i class="fas fa-users text-primary"></i> Parent-Teacher Meeting (PTM)</h4>
+                                    <span class="target-badge-students">Students Only</span>
+                                </div>
+                                <p>
+                                    The Parent-Teacher Meeting for Class 9 and Class 10 regarding Mid Term preparation and monthly progress will be held on <strong>Saturday, 7th November 2026</strong> from 09:00 AM to 12:30 PM. Parents are requested to attend.
+                                </p>
+                                <div class="notice-meta-footer">
+                                    <span><i class="far fa-calendar-alt"></i> Posted: 28-Oct-2026 | By: Academic Coordinator</span>
+                                    <div>
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" onclick="this.closest('.notice-card-item').remove()" title="Delete Notice"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notice 3 -->
+                            <div class="notice-card-item">
+                                <div class="notice-header-row">
+                                    <h4><i class="fas fa-tshirt text-success"></i> Winter Uniform Enforcement Notice</h4>
+                                    <span class="target-badge-all">All School</span>
+                                </div>
+                                <p>
+                                    With the onset of cold weather, all students are instructed to wear official school winter uniform (Navy blue blazers / official sweaters) starting from <strong>Monday, 2nd November 2026</strong>. Non-uniform jackets will not be allowed.
+                                </p>
+                                <div class="notice-meta-footer">
+                                    <span><i class="far fa-calendar-alt"></i> Posted: 25-Oct-2026 | By: Admin Officer</span>
+                                    <div>
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" onclick="this.closest('.notice-card-item').remove()" title="Delete Notice"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Notice Script -->
+    <script>
+        document.getElementById('postNoticeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('notTitle').value;
+            const target = document.getElementById('notTarget').value;
+            const content = document.getElementById('notContent').value;
+            const date = document.getElementById('notDate').value;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'notice-card-item';
+            newCard.innerHTML = `
+                <div class="notice-header-row">
+                    <h4><i class="fas fa-bell text-primary"></i> ${title}</h4>
+                    <span class="target-badge-all">${target}</span>
+                </div>
+                <p>${content}</p>
+                <div class="notice-meta-footer">
+                    <span><i class="far fa-calendar-alt"></i> Posted: ${date} | By: Super Administrator</span>
+                    <div>
+                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" onclick="this.closest('.notice-card-item').remove()"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('noticeListContainer').prepend(newCard);
+            alert(`Notice "${title}" published successfully to notice board!`);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
