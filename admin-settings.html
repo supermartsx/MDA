@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings & Permissions - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        .admin-workspace-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .permission-checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .permission-checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #334155;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .badge-role-super {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-role-acc {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-role-exam {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .admin-workspace-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html" class="active"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Admin Settings & Roles</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="fas fa-user-shield text-primary"></i> Access Control</span>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar">
+                <p class="breadcrumb">Manage admin portal users, role-based access permissions, and system security</p>
+            </div>
+
+            <!-- SECURITY KPI STATS -->
+            <div class="enquiry-stats-grid">
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-purple"><i class="fas fa-users-cog"></i></div>
+                    <div>
+                        <h3>4</h3>
+                        <p>Authorized Admin Users</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-blue"><i class="fas fa-user-shield"></i></div>
+                    <div>
+                        <h3>Super Admin</h3>
+                        <p>Primary Control Role</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-green"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <h3>Active</h3>
+                        <p>Role-Based Firewall</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-orange"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h3>30 Minutes</h3>
+                        <p>Session Timeout</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN WORKSPACE -->
+            <div class="admin-workspace-grid">
+                
+                <!-- LEFT: CREATE NEW ADMIN USER FORM -->
+                <div class="form-section" style="margin-bottom: 0;">
+                    <h4 class="section-heading"><i class="fas fa-user-plus text-primary"></i> Create System User</h4>
+                    
+                    <form id="createAdminForm">
+                        <div class="input-group mb-15">
+                            <label>FULL NAME *</label>
+                            <input type="text" id="usrFullName" placeholder="e.g. Tariq Mehmood" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                            <div class="input-group">
+                                <label>LOGIN USERNAME *</label>
+                                <input type="text" id="usrLogin" placeholder="e.g. accountant1" required>
+                            </div>
+                            <div class="input-group">
+                                <label>ASSIGN ROLE *</label>
+                                <select id="usrRole" required>
+                                    <option value="Accountant">Accountant</option>
+                                    <option value="Exam Controller">Exam Controller</option>
+                                    <option value="Receptionist">Receptionist / Clerk</option>
+                                    <option value="Vice Principal">Vice Principal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-15">
+                            <label>LOGIN PASSWORD *</label>
+                            <input type="password" id="usrPassword" placeholder="Set secure password" required>
+                        </div>
+
+                        <!-- MODULE PERMISSION CHECKBOXES -->
+                        <label style="font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 8px; display: block;">
+                            ALLOWED PORTAL PERMISSIONS:
+                        </label>
+                        <div class="permission-checkbox-group">
+                            <label><input type="checkbox" checked> Students Module</label>
+                            <label><input type="checkbox" checked> Fees Collection</label>
+                            <label><input type="checkbox"> Academics & Exams</label>
+                            <label><input type="checkbox"> Finance & Expenses</label>
+                            <label><input type="checkbox"> Staff Management</label>
+                            <label><input type="checkbox"> School Settings</label>
+                        </div>
+
+                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;">
+                            <i class="fas fa-check-circle"></i> Create Authorized User
+                        </button>
+                    </form>
+                </div>
+
+                <!-- RIGHT: AUTHORIZED USERS DIRECTORY TABLE -->
+                <div class="data-table-card">
+                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <h4><i class="fas fa-id-card-alt text-primary"></i> System Access Directory</h4>
+                        <span class="badge" style="background:#dcfce7; color:#15803d;">4 Users Configured</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>USERNAME</th>
+                                    <th>FULL NAME</th>
+                                    <th>ROLE</th>
+                                    <th>PERMISSIONS</th>
+                                    <th>STATUS</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- User 1: Super Admin -->
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>superadmin</strong></td>
+                                    <td>Muhammad Mustafa</td>
+                                    <td><span class="badge-role-super"><i class="fas fa-crown"></i> Super Admin</span></td>
+                                    <td><small class="text-success fw-bold">Full Unrestricted Access</small></td>
+                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Active</span></td>
+                                    <td><i class="fas fa-lock text-muted" title="Permanent Master Account"></i></td>
+                                </tr>
+
+                                <!-- User 2: Accountant -->
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>accountant1</strong></td>
+                                    <td>Muhammad Asif</td>
+                                    <td><span class="badge-role-acc">Accountant</span></td>
+                                    <td><small>Fees, Expenses, Reports</small></td>
+                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Active</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Revoke Access"><i class="fas fa-user-slash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- User 3: Exam Incharge -->
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>exam_incharge</strong></td>
+                                    <td>Sir Bilal Ahmad</td>
+                                    <td><span class="badge-role-exam">Exam Controller</span></td>
+                                    <td><small>Exams, Marks, Gazette</small></td>
+                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Active</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Revoke Access"><i class="fas fa-user-slash"></i></button>
+                                    </td>
+                                </tr>
+
+                                <!-- User 4: Receptionist -->
+                                <tr>
+                                    <td>4</td>
+                                    <td><strong>frontdesk</strong></td>
+                                    <td>Zubair Khan</td>
+                                    <td><span class="badge-role-exam" style="background:#fef3c7; color:#b45309;">Receptionist</span></td>
+                                    <td><small>Enquiry, New Admission</small></td>
+                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Active</span></td>
+                                    <td class="action-buttons">
+                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Revoke Access"><i class="fas fa-user-slash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Admin User Script -->
+    <script>
+        document.getElementById('createAdminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('usrFullName').value;
+            const login = document.getElementById('usrLogin').value;
+            const role = document.getElementById('usrRole').value;
+
+            alert(`Authorized user "${name}" (@${login}) created successfully with role: ${role}!`);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
