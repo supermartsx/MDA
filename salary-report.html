@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Report & Payroll Register - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Modules CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        @media print {
+            .sidebar, .top-header, .filter-section, .no-print, .enquiry-stats-grid {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            .dashboard-content {
+                padding: 0 !important;
+            }
+            .data-table-card {
+                box-shadow: none !important;
+                border: 1px solid #000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html" class="active"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header no-print">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Salary Register & Report</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn-export" style="background:#16a34a;" onclick="alert('Exporting Payroll Register to Excel...')"><i class="fas fa-file-excel"></i> Export Excel</button>
+                <button class="btn-export" style="background:#475569; margin-left: 10px;" onclick="window.print()"><i class="fas fa-print"></i> Print Bank Advice</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar no-print">
+                <p class="breadcrumb">Monthly staff salary register, deductions, allowances, and bank payment advice</p>
+            </div>
+
+            <!-- AUDIT SUMMARY STATS -->
+            <div class="enquiry-stats-grid no-print">
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-purple"><i class="fas fa-money-bill-wave"></i></div>
+                    <div>
+                        <h3>Rs. 515,000</h3>
+                        <p>Total Basic Salary</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-green"><i class="fas fa-plus"></i></div>
+                    <div>
+                        <h3>+ Rs. 25,000</h3>
+                        <p>Total Allowances Paid</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-minus"></i></div>
+                    <div>
+                        <h3>- Rs. 10,000</h3>
+                        <p>Total Deductions (Leaves)</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-blue"><i class="fas fa-university"></i></div>
+                    <div>
+                        <h3 style="color:#2563eb;">Rs. 530,000</h3>
+                        <p>Net Bank Disbursal</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTER SECTION -->
+            <div class="filter-section no-print">
+                <div class="filter-grid" style="align-items: flex-end;">
+                    <div class="filter-group">
+                        <label>SELECT SALARY MONTH</label>
+                        <select id="salRepMonth">
+                            <option value="October 2026">October 2026</option>
+                            <option value="September 2026">September 2026</option>
+                            <option value="August 2026">August 2026</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>FILTER BY DEPARTMENT</label>
+                        <select id="salRepDept">
+                            <option value="All">All Departments</option>
+                            <option value="Science & IT">Science & IT</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Administration">Administration</option>
+                        </select>
+                    </div>
+                    <div class="filter-group filter-search-group">
+                        <label>SEARCH STAFF</label>
+                        <input type="text" id="salRepSearch" placeholder="Name or Employee ID...">
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="filterSalaryReport()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONSOLIDATED PAYROLL SHEET TABLE -->
+            <div class="data-table-card mt-20">
+                <!-- Printable Header -->
+                <div style="padding: 20px 20px 10px; border-bottom: 1px solid #eaedf1; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <h3 style="margin: 0; font-size: 16px; color: #1e1e2d;">MDA Mustafa Digital Ai School — Monthly Payroll Register</h3>
+                        <p style="margin: 3px 0 0; font-size: 12px; color: #64748b;">Month: <strong>October 2026</strong> | Disbursal Bank: <strong>Meezan Bank Ltd</strong></p>
+                    </div>
+                    <span class="badge" style="background:#dcfce7; color:#15803d;">Disbursed: 100%</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="salReportTable">
+                        <thead>
+                            <tr style="background:#faf5ff;">
+                                <th>#</th>
+                                <th>EMP ID</th>
+                                <th>STAFF MEMBER</th>
+                                <th>DESIGNATION</th>
+                                <th>BANK ACCOUNT / IBAN</th>
+                                <th>BASIC</th>
+                                <th>ALLOWANCE</th>
+                                <th>DEDUCT</th>
+                                <th>NET SALARY</th>
+                                <th>PAID VIA</th>
+                                <th>DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Staff 1 -->
+                            <tr>
+                                <td>1</td>
+                                <td><span class="adm-badge">EMP-101</span></td>
+                                <td><strong>Sir Bilal Ahmad</strong></td>
+                                <td>Senior Teacher</td>
+                                <td style="font-family:monospace; font-size:11px;">PK89MEZN0001234567</td>
+                                <td>Rs. 55,000</td>
+                                <td class="text-success">+ Rs. 3,000</td>
+                                <td class="text-danger">- Rs. 1,000</td>
+                                <td class="fw-bold" style="color:#16a34a;">Rs. 57,000</td>
+                                <td>Bank Transfer</td>
+                                <td>31-Oct-2026</td>
+                            </tr>
+
+                            <!-- Staff 2 -->
+                            <tr>
+                                <td>2</td>
+                                <td><span class="adm-badge">EMP-102</span></td>
+                                <td><strong>Madam Ayesha Tariq</strong></td>
+                                <td>Senior Teacher</td>
+                                <td style="font-family:monospace; font-size:11px;">PK45HABB0009876543</td>
+                                <td>Rs. 50,000</td>
+                                <td class="text-success">+ Rs. 2,000</td>
+                                <td class="text-danger">- Rs. 0</td>
+                                <td class="fw-bold" style="color:#16a34a;">Rs. 52,000</td>
+                                <td>Bank Transfer</td>
+                                <td>31-Oct-2026</td>
+                            </tr>
+
+                            <!-- Staff 3 -->
+                            <tr>
+                                <td>3</td>
+                                <td><span class="adm-badge">EMP-103</span></td>
+                                <td><strong>Sir Usman Ghani</strong></td>
+                                <td>Senior Teacher</td>
+                                <td style="font-family:monospace; font-size:11px;">PK12ALFH0003456789</td>
+                                <td>Rs. 48,000</td>
+                                <td class="text-success">+ Rs. 1,500</td>
+                                <td class="text-danger">- Rs. 500</td>
+                                <td class="fw-bold" style="color:#16a34a;">Rs. 49,000</td>
+                                <td>Raast / Bank</td>
+                                <td>31-Oct-2026</td>
+                            </tr>
+
+                            <!-- Staff 4 -->
+                            <tr>
+                                <td>4</td>
+                                <td><span class="adm-badge">EMP-108</span></td>
+                                <td><strong>Muhammad Asif</strong></td>
+                                <td>Accountant</td>
+                                <td style="font-family:monospace; font-size:11px;">PK09UBL0008899776</td>
+                                <td>Rs. 40,000</td>
+                                <td class="text-success">+ Rs. 0</td>
+                                <td class="text-danger">- Rs. 1,500</td>
+                                <td class="fw-bold" style="color:#16a34a;">Rs. 38,500</td>
+                                <td>Easypaisa</td>
+                                <td>31-Oct-2026</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="background:#f8fafc; font-weight:700;">
+                                <td colspan="5" style="text-align:right; padding-right:15px;">Total Payroll Disbursed:</td>
+                                <td>Rs. 193,000</td>
+                                <td class="text-success">+ Rs. 6,500</td>
+                                <td class="text-danger">- Rs. 3,000</td>
+                                <td style="color:#2563eb;">Rs. 196,500</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Signatures for Bank Advice (Visible in Print) -->
+                <div style="display: flex; justify-content: space-between; padding: 40px 30px 20px; text-align: center;">
+                    <div>
+                        <div style="border-top: 1px solid #333; width: 140px; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 600;">Prepared By (Accountant)</small>
+                    </div>
+                    <div>
+                        <div style="border-top: 1px solid #333; width: 140px; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 600;">Audited By</small>
+                    </div>
+                    <div>
+                        <div style="border-top: 1px solid #333; width: 140px; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 600;">Authorized Signatory (Principal)</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Search Script -->
+    <script>
+        function filterSalaryReport() {
+            let input = document.getElementById("salRepSearch").value.toUpperCase();
+            let table = document.getElementById("salReportTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length - 1; i++) {
+                let text = tr[i].textContent || tr[i].innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
