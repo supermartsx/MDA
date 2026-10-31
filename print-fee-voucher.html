@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Fee Challan Voucher - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background-color: #52565e;
+            color: #000;
+            min-height: 100vh;
+        }
+
+        /* ================= TOP BAR (SCREEN ONLY) ================= */
+        .top-control-bar {
+            background: #ffffff;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .btn-back {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-print {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ================= VOUCHER PREVIEW CONTAINER ================= */
+        .voucher-screen-wrapper {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        /* Standard A4 Landscape Paper Layout (297mm width) */
+        .a4-landscape-sheet {
+            width: 100%;
+            max-width: 1100px;
+            background: #ffffff;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            border-radius: 4px;
+        }
+
+        /* Individual Vertical Slip (Matching Image 100%) */
+        .challan-slip {
+            border: 1.5px solid #000;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            position: relative;
+        }
+
+        /* Scissor Cut Line indicator */
+        .challan-slip:not(:last-child)::after {
+            content: "✂ -------------------------";
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: rotate(90deg);
+            font-size: 8px;
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        /* Header */
+        .slip-header {
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 4px;
+        }
+        .slip-header h4 {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .slip-sub-title {
+            font-size: 9.5px;
+            font-weight: 700;
+            margin-top: 2px;
+            text-decoration: underline;
+        }
+
+        /* Bank Details Box */
+        .bank-info-box {
+            font-size: 8.5px;
+            line-height: 1.25;
+            text-align: center;
+            margin: 4px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #000;
+        }
+        .bank-info-box strong { font-weight: 700; }
+        .acc-number-underline {
+            font-size: 9px;
+            font-weight: 700;
+            border-bottom: 1.5px solid #000;
+            display: inline-block;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Student Metadata Table */
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5px;
+            margin-bottom: 4px;
+        }
+        .meta-table td {
+            padding: 2.5px 1px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        .meta-table td.label-td {
+            font-weight: 600;
+            color: #333;
+            width: 38%;
+        }
+        .meta-table td.val-td {
+            font-weight: 700;
+            color: #000;
+            width: 62%;
+        }
+
+        /* Fee Heads Table */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5px;
+            margin: 4px 0;
+            border: 1px solid #000;
+        }
+        .fee-table th {
+            background: #f1f5f9;
+            border: 1px solid #000;
+            padding: 3px 2px;
+            font-size: 8px;
+            font-weight: 700;
+            text-align: left;
+        }
+        .fee-table td {
+            border: 1px solid #000;
+            padding: 3px 2px;
+            font-size: 8.5px;
+        }
+        .fee-table .total-row td {
+            font-weight: 700;
+            background: #f8fafc;
+            border-top: 1.5px solid #000;
+        }
+
+        /* Digital Account Box (Easypaisa / JazzCash) */
+        .digital-acc-box {
+            background: #f8fafc;
+            border: 1px dashed #000;
+            padding: 3px;
+            font-size: 7.5px;
+            line-height: 1.2;
+            margin: 3px 0;
+            text-align: center;
+        }
+
+        /* Signatures Section */
+        .sign-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 15px;
+            padding-top: 10px;
+            font-size: 7.5px;
+            font-weight: 600;
+        }
+        .sign-cell {
+            text-align: center;
+            width: 32%;
+            border-top: 1px solid #000;
+            padding-top: 2px;
+        }
+
+        /* Bottom Copy Identifier */
+        .copy-type-banner {
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+            margin-top: 8px;
+            padding-top: 4px;
+            border-top: 1px solid #000;
+            text-transform: uppercase;
+        }
+
+        /* ================= PRINT RULES (A4 LANDSCAPE) ================= */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 4mm;
+            }
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .voucher-screen-wrapper {
+                padding: 0 !important;
+            }
+            .a4-landscape-sheet {
+                box-shadow: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+                gap: 5px !important;
+            }
+            .challan-slip {
+                border-width: 1px !important;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Responsive on Mobile Screens */
+        @media (max-width: 768px) {
+            .a4-landscape-sheet {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .challan-slip::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN CONTROLS BAR (PRINT ME HIDE HOGA) -->
+    <div class="top-control-bar no-print">
+        <a href="student-dashboard.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <div style="font-size:12px; color:#475569; font-weight:600;">
+            <i class="fas fa-file-invoice-dollar text-success"></i> 4-Copy Official Fee Challan
+        </div>
+        <div>
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print 4-Copy Voucher</button>
+        </div>
+    </div>
+
+    <!-- VOUCHER PREVIEW CANVAS -->
+    <div class="voucher-screen-wrapper">
+        <div class="a4-landscape-sheet" id="challanContainer">
+            <!-- 4 SLIPS WILL BE GENERATED HERE AUTOMATICALLY VIA JS -->
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: GOOGLE SHEET SYNC & 4-COPY GENERATION -->
+    <script>
+        // ================= YOUR GOOGLE SHEET APPS SCRIPT URL =================
+        // Agar aap Google Sheet se dynamic data load karna chahein toh yahan URL paste karein:
+        const GOOGLE_SHEET_VOUCHER_URL = ""; 
+
+        // Default Data (Aapki di hui details ke mutabiq)
+        let voucherData = {
+            schoolName: "MDA Mustafa Digital Ai School",
+            bankName: "United Bank Limited (UBL)",
+            accTitle: "Nazim Mustafa",
+            accIban: "PK79UNIL0109000409349746",
+            easypaisaJazzCash: "03105784772 (Nazim Mustafa)",
+            voucherNo: "MDA-26-1002",
+            issueDate: "31-Oct-2026",
+            dueDate: "10-Nov-2026",
+            studentName: "Raj Kumar",
+            cnicBform: "35201-1234567-1",
+            fatherName: "Ram Sharma",
+            className: "Class 10 (Science)",
+            session: "2026-2027",
+            tuitionFee: 4500,
+            examFee: 500,
+            lateFeeFine: 200
+        };
+
+        // 4 Slips types
+        const slipTypes = [
+            "Bank Copy",
+            "Account Office Copy",
+            "School / Admin Copy",
+            "Student's Copy"
+        ];
+
+        // Function to Render all 4 slips
+        function renderChallan() {
+            const container = document.getElementById('challanContainer');
+            container.innerHTML = '';
+
+            const totalNormal = voucherData.tuitionFee + voucherData.examFee;
+            const totalLate = totalNormal + voucherData.lateFeeFine;
+
+            slipTypes.forEach((copyName) => {
+                const slipHtml = `
+                    <div class="challan-slip">
+                        <!-- Header -->
+                        <div class="slip-header">
+                            <h4>${voucherData.schoolName}</h4>
+                            <div class="slip-sub-title">BANK CREDIT VOUCHER</div>
+                        </div>
+
+                        <!-- Bank & Account Information -->
+                        <div class="bank-info-box">
+                            <div>Bank: <strong>${voucherData.bankName}</strong></div>
+                            <div>Account Title: <strong>${voucherData.accTitle}</strong></div>
+                            <div>A/C IBAN: <span class="acc-number-underline">${voucherData.accIban}</span></div>
+                        </div>
+
+                        <!-- Metadata Table -->
+                        <table class="meta-table">
+                            <tr>
+                                <td class="label-td">Voucher #:</td>
+                                <td class="val-td">${voucherData.voucherNo}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">Issue Date:</td>
+                                <td class="val-td">${voucherData.issueDate}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">Due Date:</td>
+                                <td class="val-td" style="color:#b91c1c;">${voucherData.dueDate}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">Name:</td>
+                                <td class="val-td">${voucherData.studentName}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">CNIC/B-Form:</td>
+                                <td class="val-td">${voucherData.cnicBform}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">F-Name:</td>
+                                <td class="val-td">${voucherData.fatherName}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">Class:</td>
+                                <td class="val-td">${voucherData.className}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-td">Session:</td>
+                                <td class="val-td">${voucherData.session}</td>
+                            </tr>
+                        </table>
+
+                        <!-- Fee Breakdown Table -->
+                        <table class="fee-table">
+                            <thead>
+                                <tr>
+                                    <th>Fee Particulars</th>
+                                    <th style="text-align:right;">Amount (Rs.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Monthly Tuition Fee</td>
+                                    <td style="text-align:right;">${voucherData.tuitionFee}/-</td>
+                                </tr>
+                                <tr>
+                                    <td>Exam & Lab Charges</td>
+                                    <td style="text-align:right;">${voucherData.examFee}/-</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td>Total (Within Due Date):</td>
+                                    <td style="text-align:right;">Rs. ${totalNormal}/-</td>
+                                </tr>
+                                <tr style="font-size:8px; color:#b91c1c;">
+                                    <td>Total (After Due Date):</td>
+                                    <td style="text-align:right;">Rs. ${totalLate}/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Digital Payment Options -->
+                        <div class="digital-acc-box">
+                            <strong>Easypaisa / JazzCash:</strong> ${voucherData.easypaisaJazzCash}
+                        </div>
+
+                        <!-- Signatures -->
+                        <div class="sign-row">
+                            <div class="sign-cell">Issued by</div>
+                            <div class="sign-cell">Checked by</div>
+                            <div class="sign-cell">Bank / Cashier</div>
+                        </div>
+
+                        <!-- Copy Label -->
+                        <div class="copy-type-banner">${copyName}</div>
+                    </div>
+                `;
+                container.innerHTML += slipHtml;
+            });
+        }
+
+        // Load data from Google Sheet if URL exists
+        function fetchVoucherFromGoogleSheet() {
+            if (!GOOGLE_SHEET_VOUCHER_URL) {
+                renderChallan();
+                return;
+            }
+
+            fetch(GOOGLE_SHEET_VOUCHER_URL)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.voucherNo) {
+                        voucherData = Object.assign(voucherData, data);
+                    }
+                    renderChallan();
+                })
+                .catch(err => {
+                    console.log("Loading offline default voucher:", err);
+                    renderChallan();
+                });
+        }
+
+        // On Load Render
+        document.addEventListener('DOMContentLoaded', fetchVoucherFromGoogleSheet);
+    </script>
+</body>
+</html>
