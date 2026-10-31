@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Report - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global & Table CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tables.css">
+
+    <style>
+        .report-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #eaedf1;
+        }
+
+        .report-title-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .report-status-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .live-badge {
+            color: #16a34a;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #16a34a;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-tool {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #334155;
+            transition: 0.2s;
+        }
+        .btn-tool:hover {
+            background: #e2e8f0;
+        }
+        .btn-tool.excel-green {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #065f46;
+        }
+        .btn-tool.excel-green:hover {
+            background: #d1fae5;
+        }
+
+        @media print {
+            .sidebar, .top-header, .filter-section, .no-print, .pagination-footer {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            .dashboard-content {
+                padding: 0 !important;
+            }
+            .data-table-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPLETE SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+            <div class="sidebar-title">
+                <h4 id="sidebarSchoolName">MDA School</h4>
+                <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-label">MAIN</li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
+            <li class="menu-label">STUDENTS</li>
+            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
+            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
+            <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html" class="active"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
+            <li class="menu-label">ACCOUNT</li>
+            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-header no-print">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <h2>Session Report</h2>
+            </div>
+            <div class="header-right">
+                <a href="promotion.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Promotion</a>
+                <button class="btn-export" style="background:#16a34a;"><i class="fas fa-file-excel"></i> Export Excel (Class 10)</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-top-bar no-print">
+                <p class="breadcrumb">View the complete record of the current or a past session, class-wise</p>
+            </div>
+
+            <!-- SESSION FILTER (Matches Image 7) -->
+            <div class="filter-section no-print">
+                <h4 style="font-size: 13px; color: #475569; margin-bottom: 12px;"><i class="fas fa-filter text-orange"></i> Session Filter</h4>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>SELECT SESSION</label>
+                        <select id="sessionSelect">
+                            <option value="2026-27">2026-27 (Current)</option>
+                            <option value="2025-26">2025-26</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>SELECT CLASS</label>
+                        <select id="classSelect">
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 9">Class 9</option>
+                            <option value="Class 8">Class 8</option>
+                        </select>
+                    </div>
+                    <div class="filter-group filter-search-group">
+                        <label>SEARCH</label>
+                        <input type="text" id="reportSearch" placeholder="Name / Adm No">
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="filterReport()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn-clear" onclick="clearReportSearch()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SESSION REPORT TABLE CARD -->
+            <div class="data-table-card mt-20">
+                
+                <!-- Action Bar Inside Table Card (Matches Image 7) -->
+                <div class="report-header-bar">
+                    <div class="report-title-area">
+                        <i class="fas fa-users" style="color: #3b82f6;"></i>
+                        <strong>Class 10 — Session 2026-27</strong>
+                        <span class="badge" id="reportTotalBadge">2 students</span>
+                    </div>
+
+                    <div class="report-status-actions no-print">
+                        <span class="live-badge"><span class="live-dot"></span> Live — current session</span>
+                        <button class="btn-tool excel-green" onclick="alert('Exporting Class 10 to Excel...')"><i class="fas fa-file-excel"></i> Excel</button>
+                        <button class="btn-tool" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="sessionReportTable">
+                        <thead>
+                            <tr>
+                                <th width="4%">#</th>
+                                <th width="12%">ADM NO</th>
+                                <th width="18%">STUDENT NAME</th>
+                                <th width="15%">FATHER</th>
+                                <th width="15%">MOTHER</th>
+                                <th width="12%">DOB</th>
+                                <th width="8%">GENDER</th>
+                                <th width="10%">CLASS</th>
+                                <th width="6%">SECTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Student Record 1 (From Image 7) -->
+                            <tr>
+                                <td>1</td>
+                                <td><span class="adm-badge">ADM002</span></td>
+                                <td><strong>RAJ KUMAR</strong></td>
+                                <td>RAM SHARMA</td>
+                                <td>RADHA SHARMA</td>
+                                <td>2010-01-22</td>
+                                <td>Male</td>
+                                <td><span class="class-badge">Class 10</span></td>
+                                <td>—</td>
+                            </tr>
+                            <!-- Student Record 2 (From Image 7) -->
+                            <tr>
+                                <td>2</td>
+                                <td><span class="adm-badge">ADM001</span></td>
+                                <td><strong>RAMESH KUMAR</strong></td>
+                                <td>SURESH KUMAR</td>
+                                <td>GEETA DEVI</td>
+                                <td>2010-08-15</td>
+                                <td>Male</td>
+                                <td><span class="class-badge">Class 10</span></td>
+                                <td>A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Pagination -->
+                <div class="pagination-footer no-print">
+                    <div class="rows-per-page">
+                        Show 
+                        <select>
+                            <option>50</option>
+                            <option>100</option>
+                        </select> 
+                        per page
+                    </div>
+                    <div class="page-info">Showing 1-2 of 2</div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Search / Filter Script -->
+    <script>
+        function filterReport() {
+            let input = document.getElementById("reportSearch").value.toUpperCase();
+            let table = document.getElementById("sessionReportTable");
+            let tr = table.getElementsByTagName("tr");
+            let count = 0;
+
+            for (let i = 1; i < tr.length; i++) {
+                let text = tr[i].textContent || tr[i].innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    tr[i].style.display = "";
+                    count++;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+            document.getElementById("reportTotalBadge").innerText = count + " students";
+        }
+
+        function clearReportSearch() {
+            document.getElementById("reportSearch").value = "";
+            filterReport();
+        }
+    </script>
+</body>
+</html>
