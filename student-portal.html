@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - MDA Mustafa Digital Ai School</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            padding-bottom: 60px;
+        }
+
+        /* ================= APP TOP BAR ================= */
+        .app-top-header {
+            background: #ffffff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-title-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .school-mini-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .header-title-box h3 {
+            font-size: 15px;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .header-title-box p {
+            font-size: 11px;
+            color: #64748b;
+            margin: 0;
+        }
+        .portal-logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ================= PORTAL WRAPPER ================= */
+        .portal-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 18px;
+        }
+
+        /* ================= STUDENT HERO CARD (Image 1 & 2 Style) ================= */
+        .student-profile-hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-top-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+        .student-avatar-frame {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.8);
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+        }
+        .student-avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .student-meta-text h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .student-meta-text p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        .student-meta-text .student-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* Progress Bars Inside Hero */
+        .hero-progress-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 15px;
+        }
+        .prog-item-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .progress-track {
+            background: rgba(255,255,255,0.25);
+            height: 7px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* ================= LIVE GOOGLE MEET BANNER ================= */
+        .live-meet-card {
+            background: #ffffff;
+            border-left: 5px solid #22c55e;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .live-pulse {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+        }
+        .btn-join-meet {
+            background: #22c55e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+        }
+        .btn-join-meet:hover { background: #16a34a; }
+
+        /* ================= APP QUICK ACTION GRID (Image 1 Style) ================= */
+        .section-headline {
+            font-size: 14px;
+            font-weight: 700;
+            color: #334155;
+            margin: 20px 0 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .app-menu-btn {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 16px 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #334155;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .app-menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+            border-color: #cbd5e1;
+        }
+        .app-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .icon-meet { background: #dcfce7; color: #16a34a; }
+        .icon-books { background: #e0e7ff; color: #4338ca; }
+        .icon-video { background: #fee2e2; color: #dc2626; }
+        .icon-hw { background: #fef3c7; color: #d97706; }
+        .icon-exam { background: #fce7f3; color: #db2777; }
+        .icon-result { background: #ede9fe; color: #7c3aed; }
+        .icon-fee { background: #dbeafe; color: #2563eb; }
+        .app-menu-btn span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= WIDGETS GRID (Image 2 Tablet / Dashboard Style) ================= */
+        .portal-widgets-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .widget-card {
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .widget-header {
+            padding: 15px 18px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .widget-header h4 {
+            font-size: 14px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .widget-body {
+            padding: 16px 18px;
+        }
+
+        /* Timetable List */
+        .timetable-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 12px;
+        }
+        .timetable-item:last-child { border-bottom: none; }
+        .time-badge {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        /* Recorded Video Lecture Player Box */
+        .video-player-frame {
+            width: 100%;
+            height: 220px;
+            border-radius: 8px;
+            border: none;
+            background: #000;
+            margin-bottom: 10px;
+        }
+
+        /* PDF Books Row Item */
+        .pdf-book-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .pdf-title-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-read-pdf {
+            background: #4f46e5;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Homework Checklist Item */
+        .hw-checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 12px;
+        }
+
+        /* Pakistani Fee Account Banner */
+        .pak-fee-pay-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 10px;
+        }
+        .pak-fee-pay-box h5 {
+            color: #166534;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        .pak-fee-pay-box p {
+            font-size: 11px;
+            color: #14532d;
+            margin: 2px 0;
+        }
+
+        /* ================= MODAL POPUP FOR PDF / VIDEO ================= */
+        .portal-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .modal-inner-box {
+            background: #fff;
+            width: 100%;
+            max-width: 750px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-top-bar {
+            padding: 12px 18px;
+            background: #1e293b;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ================= RESPONSIVE MEDIA QUERIES ================= */
+        @media (max-width: 820px) {
+            .portal-widgets-grid {
+                grid-template-columns: 1fr;
+            }
+            .app-action-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .app-action-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-top-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-progress-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="app-top-header">
+        <div class="header-title-box">
+            <div class="school-mini-logo">M</div>
+            <div>
+                <h3>MDA Mustafa Digital Ai School</h3>
+                <p>Official Student & Parent Portal</p>
+            </div>
+        </div>
+        <a href="index.html" class="portal-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </header>
+
+    <div class="portal-container">
+
+        <!-- STUDENT PROFILE HERO (Image 1 & 2 Concept) -->
+        <div class="student-profile-hero">
+            <div class="hero-top-info">
+                <div class="student-avatar-frame">
+                    <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=150" alt="Student Photo">
+                </div>
+                <div class="student-meta-text">
+                    <h2>Raj Kumar</h2>
+                    <p>Class 10 — Science Group (Session 2026-27)</p>
+                    <span class="student-badge">Roll No: 1002 • ID: ADM002</span>
+                </div>
+            </div>
+
+            <!-- Attendance & Fee Progress Bars -->
+            <div class="hero-progress-grid">
+                <div>
+                    <div class="prog-item-label">
+                        <span>Attendance Overview</span>
+                        <strong>95.8% (Present)</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 95.8%; background: #4ade80;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="prog-item-label">
+                        <span>Term Fee Clearance</span>
+                        <strong>100% Cleared (Rs. 0 Due)</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 100%; background: #facc15;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIVE GOOGLE MEET CLASS ALERT -->
+        <div class="live-meet-card">
+            <div>
+                <span class="live-pulse"></span>
+                <strong style="color:#15803d; font-size:14px;">LIVE CLASS SCHEDULED NOW</strong>
+                <p style="font-size:12px; color:#475569; margin:3px 0 0;">
+                    Subject: <strong>Computer Science with Sir Bilal Ahmad</strong> (09:00 AM - 10:00 AM)
+                </p>
+            </div>
+            <!-- Google Meet Link (Teacher apna link yahan paste karega) -->
+            <a href="https://meet.google.com/new" target="_blank" class="btn-join-meet">
+                <i class="fas fa-video"></i> Join Live Google Meet
+            </a>
+        </div>
+
+        <!-- QUICK ACTION GRID (Mobile App Grid Style - Image 1) -->
+        <div class="section-headline"><i class="fas fa-th-large text-primary"></i> Learning & Academics Menu</div>
+        <div class="app-action-grid">
+            <div class="app-menu-btn" onclick="scrollToWidget('sec-videos')">
+                <div class="app-icon-box icon-video"><i class="fab fa-google-drive"></i></div>
+                <span>Video Lectures</span>
+            </div>
+            <div class="app-menu-btn" onclick="scrollToWidget('sec-books')">
+                <div class="app-icon-box icon-books"><i class="fas fa-book-reader"></i></div>
+                <span>PDF E-Books</span>
+            </div>
+            <div class="app-menu-btn" onclick="scrollToWidget('sec-homework')">
+                <div class="app-icon-box icon-hw"><i class="fas fa-pencil-alt"></i></div>
+                <span>Daily Diary</span>
+            </div>
+            <div class="app-menu-btn" onclick="scrollToWidget('sec-timetable')">
+                <div class="app-icon-box icon-meet"><i class="fas fa-calendar-alt"></i></div>
+                <span>Timetable</span>
+            </div>
+            <!-- DIRECT LINK TO OUR PRINT REPORT CARD -->
+            <a href="print-report-card.html" class="app-menu-btn">
+                <div class="app-icon-box icon-result"><i class="fas fa-award"></i></div>
+                <span>Report Card</span>
+            </a>
+            <div class="app-menu-btn" onclick="scrollToWidget('sec-fees')">
+                <div class="app-icon-box icon-fee"><i class="fas fa-wallet"></i></div>
+                <span>Fee Ledger</span>
+            </div>
+        </div>
+
+        <!-- WIDGETS DASHBOARD (Tablet / iPad Widgets - Image 2) -->
+        <div class="portal-widgets-grid">
+            
+            <!-- WIDGET 1: RECORDED LECTURES (Google Drive Video Preview) -->
+            <div class="widget-card" id="sec-videos">
+                <div class="widget-header">
+                    <h4><i class="fab fa-youtube text-danger"></i> Recorded Lectures (Google Drive)</h4>
+                    <span style="font-size:11px; color:#64748b;">Class 10 Archive</span>
+                </div>
+                <div class="widget-body">
+                    <!-- Embedded Google Drive Video Player Simulation -->
+                    <iframe class="video-player-frame" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    
+                    <h5 style="font-size:13px; color:#1e293b; margin-bottom: 4px;">Physics - Chapter 1: Simple Harmonic Motion</h5>
+                    <p style="font-size:11px; color:#64748b; margin-bottom: 12px;">Delivered by Sir Hamza Farooq • Duration: 35 mins</p>
+                    
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-read-pdf" style="background:#2563eb;" onclick="openDriveLecture('https://drive.google.com')">
+                            <i class="fab fa-google-drive"></i> Open in Google Drive
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET 2: PDF E-BOOKS & SYLLABUS (Google Drive PDF Preview) -->
+            <div class="widget-card" id="sec-books">
+                <div class="widget-header">
+                    <h4><i class="fas fa-file-pdf text-danger"></i> Digital Books & Notes (Google Drive)</h4>
+                    <span style="font-size:11px; color:#64748b;">PDF Library</span>
+                </div>
+                <div class="widget-body">
+                    <!-- Book 1 -->
+                    <div class="pdf-book-row">
+                        <div class="pdf-title-info">
+                            <i class="fas fa-file-pdf text-danger" style="font-size:20px;"></i>
+                            <div>
+                                <strong>Computer Science Class 10 Textbook</strong>
+                                <p style="font-size:10px; color:#64748b; margin:0;">PTBB Official • 14.2 MB</p>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" onclick="openPdfModal('Computer Science Textbook')" class="btn-read-pdf">Read PDF</a>
+                    </div>
+
+                    <!-- Book 2 -->
+                    <div class="pdf-book-row">
+                        <div class="pdf-title-info">
+                            <i class="fas fa-file-pdf text-danger" style="font-size:20px;"></i>
+                            <div>
+                                <strong>Physics Class 10 Theory Notes</strong>
+                                <p style="font-size:10px; color:#64748b; margin:0;">Sir Hamza Handouts • 4.8 MB</p>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" onclick="openPdfModal('Physics Handouts')" class="btn-read-pdf">Read PDF</a>
+                    </div>
+
+                    <!-- Book 3 -->
+                    <div class="pdf-book-row">
+                        <div class="pdf-title-info">
+                            <i class="fas fa-file-pdf text-danger" style="font-size:20px;"></i>
+                            <div>
+                                <strong>Mathematics Formula Sheet & Guess</strong>
+                                <p style="font-size:10px; color:#64748b; margin:0;">Sir Usman Ghani • 2.1 MB</p>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0)" onclick="openPdfModal('Mathematics Formula Sheet')" class="btn-read-pdf">Read PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET 3: TODAY'S CLASS TIMETABLE -->
+            <div class="widget-card" id="sec-timetable">
+                <div class="widget-header">
+                    <h4><i class="fas fa-clock text-primary"></i> Today's Schedule (Monday)</h4>
+                    <span style="font-size:11px; color:#64748b;">4 Lectures</span>
+                </div>
+                <div class="widget-body">
+                    <div class="timetable-item">
+                        <div>
+                            <strong>1. English Compulsory</strong>
+                            <p style="font-size:10px; color:#64748b; margin:0;">Madam Ayesha Tariq • Room 5</p>
+                        </div>
+                        <span class="time-badge">08:30 - 09:15 AM</span>
+                    </div>
+
+                    <div class="timetable-item">
+                        <div>
+                            <strong>2. Computer Science (Live Meet)</strong>
+                            <p style="font-size:10px; color:#16a34a; margin:0;"><i class="fas fa-video"></i> Sir Bilal • Online</p>
+                        </div>
+                        <span class="time-badge" style="background:#dcfce7; color:#166534;">09:15 - 10:00 AM</span>
+                    </div>
+
+                    <div class="timetable-item">
+                        <div>
+                            <strong>3. Mathematics (Science)</strong>
+                            <p style="font-size:10px; color:#64748b; margin:0;">Sir Usman Ghani • Room 5</p>
+                        </div>
+                        <span class="time-badge">10:15 - 11:00 AM</span>
+                    </div>
+
+                    <div class="timetable-item">
+                        <div>
+                            <strong>4. Physics Lab</strong>
+                            <p style="font-size:10px; color:#64748b; margin:0;">Sir Hamza Farooq • Science Lab 1</p>
+                        </div>
+                        <span class="time-badge">11:00 - 11:45 AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET 4: DAILY HOMEWORK & DIARY -->
+            <div class="widget-card" id="sec-homework">
+                <div class="widget-header">
+                    <h4><i class="fas fa-tasks text-warning"></i> Homework & Assignments</h4>
+                    <span style="font-size:11px; color:#64748b;">Due This Week</span>
+                </div>
+                <div class="widget-body">
+                    <div class="hw-checklist-item">
+                        <input type="checkbox" checked style="margin-top:2px; transform: scale(1.2);">
+                        <div>
+                            <strong>Math Exercise 3.2 (Q 1 to 5)</strong>
+                            <p style="font-size:11px; color:#64748b; margin:2px 0;">Solve on homework notebook. Due: Tomorrow</p>
+                        </div>
+                    </div>
+
+                    <div class="hw-checklist-item">
+                        <input type="checkbox" style="margin-top:2px; transform: scale(1.2);">
+                        <div>
+                            <strong>Computer Science Flowchart Assignment</strong>
+                            <p style="font-size:11px; color:#64748b; margin:2px 0;">Draw flowcharts of Chapter 1. Due: Friday</p>
+                        </div>
+                    </div>
+
+                    <div class="hw-checklist-item">
+                        <input type="checkbox" style="margin-top:2px; transform: scale(1.2);">
+                        <div>
+                            <strong>English Essay: "My Aim in Life"</strong>
+                            <p style="font-size:11px; color:#64748b; margin:2px 0;">Write 200 words. Due: Monday</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET 5: FEE LEDGER & PAKISTANI PAYMENT DETAILS -->
+            <div class="widget-card" id="sec-fees">
+                <div class="widget-header">
+                    <h4><i class="fas fa-receipt text-success"></i> Fee Ledger & Online Payment</h4>
+                    <span class="badge" style="background:#dcfce7; color:#15803d; font-size:10px;">Status: Cleared</span>
+                </div>
+                <div class="widget-body">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12px;">
+                        <span>Current Month Fee:</span> <strong>Rs. 5,000</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12px;">
+                        <span>Paid Date:</span> <strong style="color:#16a34a;">25-Oct-2026 (Receipt # RCP-2610-01004)</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-size:12px;">
+                        <span>Remaining Balance:</span> <strong style="color:#16a34a;">Rs. 0</strong>
+                    </div>
+
+                    <!-- Pakistani Account Details for Parents -->
+                    <div class="pak-fee-pay-box">
+                        <h5><i class="fas fa-university"></i> Pay Dues via Pakistani Payment Options:</h5>
+                        <p><strong>Easypaisa / JazzCash:</strong> 0300-1234567 (Title: MDA School)</p>
+                        <p><strong>Bank Account:</strong> Meezan Bank - PK89MEZN0001234567</p>
+                        <small style="color:#166534; font-size:10px;">* Fees ada karne ke baad receipt screenshot school WhatsApp par send karein.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WIDGET 6: SCHOOL ANNOUNCEMENTS (NOTICES) -->
+            <div class="widget-card">
+                <div class="widget-header">
+                    <h4><i class="fas fa-bullhorn text-warning"></i> Latest Announcements</h4>
+                    <span style="font-size:11px; color:#64748b;">Notice Board</span>
+                </div>
+                <div class="widget-body">
+                    <div style="margin-bottom:12px; border-bottom:1px solid #f1f5f9; padding-bottom:8px;">
+                        <span style="font-size:10px; color:#dc2626; font-weight:700;"><i class="fas fa-calendar-alt"></i> 31-Oct-2026</span>
+                        <h5 style="margin:2px 0; font-size:13px; color:#0f172a;">Iqbal Day Official Holiday</h5>
+                        <p style="font-size:11px; color:#64748b; margin:0;">School will remain closed on Monday, 9th November on account of Iqbal Day.</p>
+                    </div>
+                    <div>
+                        <span style="font-size:10px; color:#2563eb; font-weight:700;"><i class="fas fa-calendar-alt"></i> 28-Oct-2026</span>
+                        <h5 style="margin:2px 0; font-size:13px; color:#0f172a;">Parent-Teacher Meeting (PTM)</h5>
+                        <p style="font-size:11px; color:#64748b; margin:0;">PTM for Class 9 & 10 will be held on Saturday from 09:00 AM to 12:30 PM.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- POPUP MODAL FOR PDF BOOKS (Drive Preview) -->
+    <div class="portal-modal" id="pdfPreviewModal">
+        <div class="modal-inner-box">
+            <div class="modal-top-bar">
+                <span id="pdfModalTitle">Reading PDF Book</span>
+                <button class="btn-close-modal" onclick="closePdfModal()">&times;</button>
+            </div>
+            <!-- Google Drive PDF Iframe Viewer -->
+            <div style="height: 480px; background:#f8fafc; display:flex; align-items:center; justify-content:center; flex-direction:column; padding:20px; text-align:center;">
+                <i class="fas fa-file-pdf text-danger" style="font-size:50px; margin-bottom:15px;"></i>
+                <h4 id="pdfBookHeading">Sample Book Name</h4>
+                <p style="font-size:12px; color:#64748b; max-width:400px; margin-bottom:20px;">
+                    Teacher ne jo Google Drive link diya hai wo yahan screen ke andar open ho jayega.
+                </p>
+                <div style="display:flex; gap:10px;">
+                    <a href="https://drive.google.com" target="_blank" class="btn-read-pdf" style="padding:10px 18px; font-size:13px;">
+                        <i class="fab fa-google-drive"></i> Open Google Drive Viewer
+                    </a>
+                    <button class="btn-read-pdf" style="background:#475569; padding:10px 18px; font-size:13px;" onclick="closePdfModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FUNCTIONS -->
+    <script>
+        // Smooth scroll to section when tapping top app icons
+        function scrollToWidget(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Open PDF Modal
+        function openPdfModal(bookName) {
+            document.getElementById('pdfModalTitle').innerText = bookName;
+            document.getElementById('pdfBookHeading').innerText = bookName;
+            document.getElementById('pdfPreviewModal').style.display = 'flex';
+        }
+
+        // Close PDF Modal
+        function closePdfModal() {
+            document.getElementById('pdfPreviewModal').style.display = 'none';
+        }
+
+        // Open Recorded Lecture Link
+        function openDriveLecture(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
