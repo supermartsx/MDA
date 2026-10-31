@@ -1,0 +1,205 @@
+/* ================= ATTENDANCE FILTER ================= */
+.att-filter-grid {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-actions-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-load {
+    background: #7239ea; /* Purple */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.btn-load:hover { background: #5d2bcf; }
+
+.btn-report {
+    background: #f1f3f5;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ================= ACTION BAR ================= */
+.att-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    background: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.att-class-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.att-bulk-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-bulk {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s;
+}
+.btn-all-present { background: #28a745; color: white; }
+.btn-all-present:hover { background: #218838; }
+
+.btn-all-absent { background: #dc3545; color: white; }
+.btn-all-absent:hover { background: #c82333; }
+
+/* ================= ATTENDANCE TABLE & RADIOS ================= */
+.att-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.att-table th {
+    background: #fdfdfd;
+    padding: 14px 20px;
+    font-size: 12px;
+    color: #777;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.att-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.text-center { text-align: center; }
+
+/* Custom Radio Styling (Big circular touch targets) */
+.radio-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    user-select: none;
+}
+
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+/* Green (Present) */
+.green-radio input:checked ~ .checkmark {
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+}
+
+/* Red (Absent) */
+.red-radio input:checked ~ .checkmark {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+/* Orange (Leave) */
+.orange-radio input:checked ~ .checkmark {
+    background-color: #fd7e14;
+    border-color: #fd7e14;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.2);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* ================= FOOTER SAVE BUTTON ================= */
+.att-footer {
+    padding: 20px 25px;
+    background: #fff;
+}
+
+.btn-save-att {
+    background: #e91e63; /* Pink/Purple accent as per Image 11 */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+.btn-save-att:hover { background: #d81b60; }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .att-action-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .att-bulk-buttons { width: 100%; }
+    .btn-bulk { flex: 1; justify-content: center; }
+}
