@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Report Card - MDA Mustafa Digital Ai School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Report Card Specific CSS -->
+    <link rel="stylesheet" href="assets/css/report-card.css">
+</head>
+<body>
+
+    <!-- TOP CONTROL BAR (Print mein hide ho jayega) -->
+    <div class="top-control-bar no-print">
+        <div class="controls-left">
+            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Student Profile</a>
+            <select class="exam-selector">
+                <option>Half Yearly Exam</option>
+                <option>Annual Exam</option>
+                <option>Unit Test 1</option>
+            </select>
+        </div>
+        
+        <div class="controls-right">
+            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Report Card</button>
+        </div>
+    </div>
+
+    <!-- A4 PAPER SHEET -->
+    <div class="a4-sheet">
+        <!-- Elegant Border Frame -->
+        <div class="report-frame">
+            
+            <!-- HEADER -->
+            <div class="rc-header">
+                <div class="school-logo">M</div>
+                <div class="school-info">
+                    <h1>MDA Mustafa Digital Ai School</h1>
+                    <p>Bharwari Kaushambi</p>
+                    <p>Phone: 7310095239 | Email: dataclickeducation@gmail.com</p>
+                </div>
+            </div>
+
+            <!-- TITLE -->
+            <div class="rc-title-bar">
+                <h2>REPORT CARD</h2>
+                <p>Half Yearly Exam • Session 2026-27</p>
+            </div>
+
+            <!-- STUDENT INFO SECTION -->
+            <div class="student-info-section">
+                <div class="info-grid">
+                    <div class="info-row"><span class="label">Student Name</span> <span class="value uppercase fw-bold">Raj Kumar</span></div>
+                    <div class="info-row"><span class="label">Admission No</span> <span class="value">ADM002</span></div>
+                    <div class="info-row"><span class="label">Class</span> <span class="value fw-bold">Class 10 — Science</span></div>
+                    <div class="info-row"><span class="label">Father's Name</span> <span class="value uppercase">Ram Sharma</span></div>
+                    <div class="info-row"><span class="label">Mother's Name</span> <span class="value uppercase">Radha Sharma</span></div>
+                    <div class="info-row"><span class="label">Date of Birth</span> <span class="value">22-01-2010</span></div>
+                    <div class="info-row"><span class="label">Session</span> <span class="value">2026-27</span></div>
+                </div>
+                <div class="student-photo">
+                    <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=150" alt="Student Photo">
+                </div>
+            </div>
+
+            <!-- MARKS TABLE -->
+            <div class="marks-section">
+                <div class="section-heading">STATEMENT OF MARKS</div>
+                <table class="marks-table">
+                    <thead>
+                        <tr>
+                            <th width="5%">#</th>
+                            <th width="35%">SUBJECT</th>
+                            <th width="15%">THEORY</th>
+                            <th width="15%">PRACTICAL</th>
+                            <th width="10%">MAX</th>
+                            <th width="10%">TOTAL</th>
+                            <th width="10%">GRADE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td class="text-left fw-bold">Computer</td><td>75 <span class="max-mark">/ 100</span></td><td>45 <span class="max-mark">/ 50</span></td><td>150</td><td class="fw-bold">120</td><td class="fw-bold">A</td></tr>
+                        <tr><td>2</td><td class="text-left fw-bold">English</td><td>85 <span class="max-mark">/ 100</span></td><td>-</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
+                        <tr><td>3</td><td class="text-left fw-bold">Hindi</td><td>75 <span class="max-mark">/ 100</span></td><td>-</td><td>100</td><td class="fw-bold">75</td><td class="fw-bold">B+</td></tr>
+                        <tr><td>4</td><td class="text-left fw-bold">Mathematics</td><td>85 <span class="max-mark">/ 100</span></td><td>-</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
+                        <tr><td>5</td><td class="text-left fw-bold">Science</td><td>90 <span class="max-mark">/ 100</span></td><td>45 <span class="max-mark">/ 50</span></td><td>150</td><td class="fw-bold">135</td><td class="fw-bold">A+</td></tr>
+                        <tr><td>6</td><td class="text-left fw-bold">Social Science</td><td>85 <span class="max-mark">/ 100</span></td><td>-</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-right fw-bold">Grand Total</td>
+                            <td class="fw-bold">700</td>
+                            <td class="fw-bold">585</td>
+                            <td class="fw-bold">A</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- PERFORMANCE HIGHLIGHTS -->
+            <div class="performance-boxes">
+                <div class="perf-box">
+                    <h3>585 <span class="small-text">/ 700</span></h3>
+                    <p>TOTAL MARKS</p>
+                </div>
+                <div class="perf-box">
+                    <h3>83.5%</h3>
+                    <p>PERCENTAGE</p>
+                </div>
+                <div class="perf-box">
+                    <h3>A</h3>
+                    <p>OVERALL GRADE</p>
+                </div>
+                <div class="perf-box">
+                    <h3>#1</h3>
+                    <p>CLASS RANK</p>
+                </div>
+                <div class="perf-box highlight-pass">
+                    <h3>PASS</h3>
+                    <p>FIRST DIVISION</p>
+                </div>
+            </div>
+
+            <!-- BOTTOM DETAILS -->
+            <div class="bottom-grids">
+                <!-- Attendance -->
+                <div class="grid-box">
+                    <div class="box-title">ATTENDANCE</div>
+                    <div class="att-row">
+                        <div>Total Days: <strong>120</strong></div>
+                        <div>Present: <strong>115</strong></div>
+                    </div>
+                    <div class="att-row">
+                        <div>Absent: <strong>5</strong></div>
+                        <div>Attendance: <strong>95.8%</strong></div>
+                    </div>
+                </div>
+
+                <!-- Grading Scale -->
+                <div class="grid-box">
+                    <div class="box-title">GRADE SCALE</div>
+                    <div class="grade-scale">
+                        <span>A+ (90-100)</span>
+                        <span>A (80-89)</span>
+                        <span>B+ (70-79)</span>
+                        <span>B (60-69)</span>
+                        <span>C+ (50-59)</span>
+                        <span>C (40-49)</span>
+                        <span>D (33-39)</span>
+                        <span class="fail">F (Below 33)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REMARKS -->
+            <div class="remarks-section">
+                <span class="box-title">CLASS TEACHER'S REMARKS</span>
+                <div class="remarks-line">Excellent performance. Keep it up!</div>
+            </div>
+
+            <!-- SIGNATURES -->
+            <div class="signatures-section">
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>CLASS TEACHER</p>
+                </div>
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>EXAM CONTROLLER</p>
+                </div>
+                <div class="sign-block">
+                    <div class="sign-line"></div>
+                    <p>PRINCIPAL</p>
+                </div>
+            </div>
+
+            <!-- FOOTER TEXT -->
+            <div class="rc-footer-text">
+                <span>MDA School | 2026-27 | This is a computer generated report card</span>
+                <span>Date of issue: 31-10-2026</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
