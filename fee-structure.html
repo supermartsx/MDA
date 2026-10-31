@@ -3,174 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fee Structure - MDA Mustafa Digital Ai School</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Bank Fee Challan Voucher - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/forms.css">
-    <link rel="stylesheet" href="assets/css/tables.css">
-    
+
     <style>
-        .fee-grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
-        @media(max-width: 992px) { .fee-grid-layout { grid-template-columns: 1fr; } }
-        
-        .copy-structure-box { display: flex; align-items: flex-end; gap: 15px; }
-        .arrow-icon { padding-bottom: 10px; color: #888; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        body { background-color:#52565e; color:#000; min-height:100vh; }
+
+        .top-control-bar {
+            background:#ffffff; padding:12px 25px; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 4px 15px rgba(0,0,0,0.15); position:sticky; top:0; z-index:1000;
+        }
+        .btn-back { background:#f1f5f9; color:#334155; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
+        .btn-print { background:#16a34a; color:#ffffff; border:none; padding:9px 22px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; }
+
+        .voucher-screen-wrapper { padding:20px 10px; display:flex; justify-content:center; overflow-x:auto; }
+
+        /* A4 Landscape Sheet (4 Slips side-by-side) */
+        .a4-landscape-sheet {
+            width:100%; max-width:1100px; background:#ffffff; box-shadow:0 10px 35px rgba(0,0,0,0.3);
+            padding:10px; display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; border-radius:4px;
+        }
+
+        .challan-slip { border:1.5px solid #000; padding:8px; display:flex; flex-direction:column; justify-content:space-between; background:#fff; position:relative; }
+        .challan-slip:not(:last-child)::after {
+            content:"✂ -------------------------"; position:absolute; right:-18px; top:50%; transform:rotate(90deg); font-size:8px; color:#94a3b8;
+        }
+
+        .slip-header { text-align:center; border-bottom:1px solid #000; padding-bottom:4px; margin-bottom:4px; }
+        .slip-header h4 { font-size:10.5px; font-weight:700; text-transform:uppercase; margin:0; line-height:1.2; }
+        .slip-sub-title { font-size:9px; font-weight:700; margin-top:2px; text-decoration:underline; }
+
+        /* Fixed Payment Account Information (Nazim Mustafa UBL & JazzCash) */
+        .bank-info-box { font-size:8.5px; line-height:1.25; text-align:center; margin:3px 0; padding-bottom:3px; border-bottom:1px solid #000; }
+        .acc-number-underline { font-size:8.5px; font-weight:700; border-bottom:1.5px solid #000; display:inline-block; font-family:monospace; }
+
+        .meta-table { width:100%; border-collapse:collapse; font-size:8.5px; margin-bottom:4px; }
+        .meta-table td { padding:2.5px 1px; border-bottom:1px solid #eee; }
+        .meta-table td.label-td { font-weight:600; color:#333; width:38%; }
+        .meta-table td.val-td { font-weight:700; color:#000; width:62%; }
+
+        .fee-table { width:100%; border-collapse:collapse; font-size:8.5px; margin:4px 0; border:1px solid #000; }
+        .fee-table th { background:#f1f5f9; border:1px solid #000; padding:2px; font-size:8px; font-weight:700; text-align:left; }
+        .fee-table td { border:1px solid #000; padding:2.5px; font-size:8.5px; }
+
+        .digital-acc-box { background:#f8fafc; border:1px dashed #000; padding:3px; font-size:7.5px; line-height:1.2; margin:3px 0; text-align:center; }
+
+        .sign-row { display:flex; justify-content:space-between; align-items:flex-end; margin-top:12px; padding-top:6px; font-size:7.5px; font-weight:600; }
+        .sign-cell { text-align:center; width:32%; border-top:1px solid #000; padding-top:2px; }
+        .copy-type-banner { text-align:center; font-size:9px; font-weight:700; margin-top:6px; padding-top:3px; border-top:1px solid #000; text-transform:uppercase; }
+
+        @media print {
+            @page { size:A4 landscape; margin:4mm; }
+            body { background:#ffffff !important; margin:0 !important; }
+            .no-print { display:none !important; }
+            .voucher-screen-wrapper { padding:0 !important; }
+            .a4-landscape-sheet { box-shadow:none !important; max-width:100% !important; width:100% !important; padding:0 !important; gap:5px !important; }
+            .challan-slip { border-width:1px !important; page-break-inside:avoid; }
+        }
+        @media (max-width:768px) {
+            .a4-landscape-sheet { grid-template-columns:1fr; gap:20px; }
+            .challan-slip::after { display:none; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Yahan wo Mukammal Sidebar aayega jo upar diya gaya hai -->
-    <!-- ... Pura Sidebar Paste Karein ... -->
-
-    <main class="main-content">
-        <header class="top-header">
-            <div class="header-left">
-                <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Fee Structure</h2>
-            </div>
-        </header>
-
-        <div class="dashboard-content">
-            <div class="page-top-bar">
-                <p class="breadcrumb">Manage fee heads and assign to students</p>
-            </div>
-
-            <!-- TOP SECTION (Two Columns) -->
-            <div class="fee-grid-layout">
-                
-                <!-- Left: Add Fee Type -->
-                <div class="form-section" style="margin-bottom: 0;">
-                    <h4 class="section-heading"><i class="fas fa-plus-circle text-success"></i> Add Fee Type</h4>
-                    <div class="form-grid" style="grid-template-columns: 1fr;">
-                        <div class="input-group">
-                            <label>CLASS *</label>
-                            <select><option>Select Class</option><option>Class 10</option><option>Class 9</option></select>
-                        </div>
-                        <div class="input-group">
-                            <label>FEE TYPE *</label>
-                            <input type="text" placeholder="e.g. Tuition Fee">
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div class="input-group">
-                                <label>AMOUNT (₹) *</label>
-                                <input type="number" placeholder="0.00">
-                            </div>
-                            <div class="input-group">
-                                <label>ACADEMIC YEAR</label>
-                                <input type="text" value="2026-27" readonly style="background:#f1f3f5;">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label>FREQUENCY</label>
-                            <select><option>Monthly</option><option>One-Time</option><option>Yearly</option></select>
-                        </div>
-                        <button class="btn-submit" style="background: #9c27b0; width: fit-content;"><i class="fas fa-plus"></i> Add Fee Type</button>
-                    </div>
-                </div>
-
-                <!-- Right: Assign & Copy Structure -->
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-                    
-                    <!-- Assign Fees -->
-                    <div class="form-section" style="margin-bottom: 0;">
-                        <h4 class="section-heading"><i class="fas fa-users-cog text-info"></i> Assign Fees to Students</h4>
-                        <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Assign fee structure to all active students of a class. Already-assigned fees won't be duplicated.</p>
-                        <div class="input-group" style="margin-bottom: 15px;">
-                            <label>SELECT CLASS</label>
-                            <select><option>-- Select Class --</option><option>Class 10</option></select>
-                        </div>
-                        <div class="input-group" style="margin-bottom: 15px;">
-                            <label>ACADEMIC YEAR</label>
-                            <input type="text" value="2026-27" readonly style="background:#f1f3f5;">
-                        </div>
-                        <button class="btn-submit" style="background: #e67e22;"><i class="fas fa-bolt"></i> Assign to All Students</button>
-                    </div>
-
-                    <!-- Copy to Next Year -->
-                    <div class="form-section" style="margin-bottom: 0;">
-                        <h4 class="section-heading"><i class="fas fa-copy text-primary"></i> Copy to Next Year</h4>
-                        <div class="copy-structure-box">
-                            <div class="input-group" style="flex: 1;">
-                                <label>FROM YEAR</label>
-                                <select><option>Select...</option><option>2025-26</option></select>
-                            </div>
-                            <div class="arrow-icon"><i class="fas fa-arrow-right"></i></div>
-                            <div class="input-group" style="flex: 1;">
-                                <label>TO YEAR</label>
-                                <input type="text" value="2026-27" readonly>
-                            </div>
-                            <button class="btn-submit" style="background: #d63031;"><i class="fas fa-copy"></i> Copy Structure</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- BOTTOM SECTION: Current Fee Structure Table -->
-            <div class="data-table-card">
-                <div class="card-header">
-                    <h4><i class="fas fa-table"></i> Current Fee Structure</h4>
-                    <span style="font-size: 12px; color: #777;">4 entries</span>
-                </div>
-                <div class="table-responsive">
-                    <table id="studentsTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>CLASS</th>
-                                <th>FEE TYPE</th>
-                                <th>AMOUNT</th>
-                                <th>YEAR</th>
-                                <th>FREQUENCY</th>
-                                <th>ACTIONS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td>Admission Fee</td>
-                                <td class="text-success fw-bold">₹500</td>
-                                <td>2026-27</td>
-                                <td>One-Time</td>
-                                <td class="action-buttons">
-                                    <button class="btn-edit"><i class="fas fa-pen"></i></button>
-                                    <button class="btn-view" style="background:#ffebee; color:#c62828;"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td>Computer Fee</td>
-                                <td class="text-success fw-bold">₹1,000</td>
-                                <td>2026-27</td>
-                                <td>Monthly</td>
-                                <td class="action-buttons">
-                                    <button class="btn-edit"><i class="fas fa-pen"></i></button>
-                                    <button class="btn-view" style="background:#ffebee; color:#c62828;"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td>Tuition Fee</td>
-                                <td class="text-success fw-bold">₹5,000</td>
-                                <td>2026-27</td>
-                                <td>Monthly</td>
-                                <td class="action-buttons">
-                                    <button class="btn-edit"><i class="fas fa-pen"></i></button>
-                                    <button class="btn-view" style="background:#ffebee; color:#c62828;"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+    <div class="top-control-bar no-print">
+        <a href="student-home.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <div style="font-size:12px; color:#475569; font-weight:600;">
+            Personalized Fee Challan Voucher
         </div>
-    </main>
+        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print 4-Copy Voucher</button>
+    </div>
 
-    <script src="assets/js/main.js"></script>
+    <div class="voucher-screen-wrapper">
+        <div class="a4-landscape-sheet" id="challanContainer">
+            <!-- 4 SLIPS WILL RENDER HERE AUTOMATICALLY VIA DYNAMIC DATA -->
+        </div>
+    </div>
+
+    <script>
+        // 1. FIXED SCHOOL PAYMENT DETAILS (NAZIM MUSTAFA UBL & JAZZCASH)
+        const FIXED_PAYMENT_INFO = {
+            schoolName: "MDA Mustafa Digital Ai School",
+            bankName: "United Bank Limited (UBL)",
+            accTitle: "Nazim Mustafa",
+            accIban: "PK79UNIL0109000409349746",
+            easypaisaJazzCash: "03105784772 (Nazim Mustafa)"
+        };
+
+        // 2. DYNAMIC STUDENT DATA FROM LOGGED IN SESSION
+        function getActiveStudentData() {
+            let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+            if (!active) {
+                active = {
+                    name: "Ali Raza",
+                    fatherName: "Tariq Mehmood",
+                    admNo: "MDA-26-1002",
+                    class: "Class 10 (Science)",
+                    cnic: "35201-1234567-1",
+                    tuitionFee: 5000,
+                    examFee: 500
+                };
+            }
+            return {
+                ...FIXED_PAYMENT_INFO,
+                voucherNo: "VCH-" + (active.admNo || "1002"),
+                issueDate: "01-Nov-2026",
+                dueDate: "10-Nov-2026",
+                studentName: active.name || active.fullName,
+                cnicBform: active.cnic || "35201-XXXXXXX-X",
+                fatherName: active.fatherName || "Father",
+                className: active.class || "Class 10",
+                session: "2026-2027",
+                tuitionFee: parseFloat(active.tuitionFee) || 5000,
+                examFee: parseFloat(active.examFee) || 500,
+                lateFeeFine: 200
+            };
+        }
+
+        const slipTypes = [
+            "Bank Copy",
+            "Account Office Copy",
+            "School / Admin Copy",
+            "Student's Copy"
+        ];
+
+        function renderChallan() {
+            const data = getActiveStudentData();
+            const container = document.getElementById('challanContainer');
+            container.innerHTML = '';
+
+            const totalNormal = data.tuitionFee + data.examFee;
+            const totalLate = totalNormal + data.lateFeeFine;
+
+            slipTypes.forEach((copyName) => {
+                container.innerHTML += `
+                    <div class="challan-slip">
+                        <div class="slip-header">
+                            <h4>${data.schoolName}</h4>
+                            <div class="slip-sub-title">BANK CREDIT VOUCHER</div>
+                        </div>
+
+                        <!-- Fixed Bank & Account Details -->
+                        <div class="bank-info-box">
+                            <div>Bank: <strong>${data.bankName}</strong></div>
+                            <div>Account Title: <strong>${data.accTitle}</strong></div>
+                            <div>A/C IBAN: <span class="acc-number-underline">${data.accIban}</span></div>
+                        </div>
+
+                        <!-- DYNAMIC LOGGED IN STUDENT DETAILS -->
+                        <table class="meta-table">
+                            <tr><td class="label-td">Voucher #:</td><td class="val-td">${data.voucherNo}</td></tr>
+                            <tr><td class="label-td">Due Date:</td><td class="val-td" style="color:#b91c1c;">${data.dueDate}</td></tr>
+                            <tr><td class="label-td">Name:</td><td class="val-td">${data.studentName}</td></tr>
+                            <tr><td class="label-td">CNIC/B-Form:</td><td class="val-td">${data.cnicBform}</td></tr>
+                            <tr><td class="label-td">F-Name:</td><td class="val-td">${data.fatherName}</td></tr>
+                            <tr><td class="label-td">Class:</td><td class="val-td">${data.className}</td></tr>
+                            <tr><td class="label-td">Session:</td><td class="val-td">${data.session}</td></tr>
+                        </table>
+
+                        <table class="fee-table">
+                            <thead><tr><th>Fee Particulars</th><th style="text-align:right;">Amount (Rs.)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Tuition Fee</td><td style="text-align:right;">${data.tuitionFee}/-</td></tr>
+                                <tr><td>Exam / Term Fee</td><td style="text-align:right;">${data.examFee}/-</td></tr>
+                                <tr style="font-weight:700; background:#f8fafc;">
+                                    <td>Total (Within Due):</td><td style="text-align:right;">Rs. ${totalNormal}/-</td>
+                                </tr>
+                                <tr style="font-size:7.5px; color:#b91c1c;">
+                                    <td>Total (After Due):</td><td style="text-align:right;">Rs. ${totalLate}/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Fixed Digital Payment Details -->
+                        <div class="digital-acc-box">
+                            <strong>Easypaisa / JazzCash:</strong> ${data.easypaisaJazzCash}
+                        </div>
+
+                        <div class="sign-row">
+                            <div class="sign-cell">Issued by</div>
+                            <div class="sign-cell">Checked by</div>
+                            <div class="sign-cell">Bank / Cashier</div>
+                        </div>
+
+                        <div class="copy-type-banner">${copyName}</div>
+                    </div>
+                `;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderChallan);
+    </script>
 </body>
 </html>
