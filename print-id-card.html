@@ -132,39 +132,44 @@
     </div>
 
     <!-- DYNAMIC DATA INJECTION SCRIPT -->
+    
+    <!-- DYNAMIC FIREBASE DATA INJECTION SCRIPT -->
+    <script src="assets/js/realtime-db.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Read active student from sessionStorage
-            let activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
+        document.addEventListener('DOMContentLoaded', async () => {
+            // URL se admission number nikalo (e.g. ?adm=MDA-1234)
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm');
+            
+            if(!targetAdm) { alert("Error: No student selected for printing!"); return; }
 
-            // Agar direct page khola ho toh default fallback uthao
-            if (!activeStudent) {
-                activeStudent = {
-                    name: "Ali Raza",
-                    fatherName: "Tariq Mehmood",
-                    admNo: "MDA-26-1002",
-                    class: "Class 10 (Science)",
-                    dob: "2010-05-14",
-                    cnic: "35201-1234567-1",
-                    bloodGroup: "B+"
-                };
+            // Firebase se students fetch karo
+            let students = await mdaFetchData('students');
+            let activeStudent = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+
+            if(activeStudent) {
+                let sName = activeStudent.fullName || activeStudent.name || "Student Name";
+                
+                // Card details bharna
+                document.getElementById('cardStudentName').innerText = sName;
+                document.getElementById('cardStudentClass').innerText = activeStudent.class || "Class 10";
+                document.getElementById('cardAdmNo').innerText = activeStudent.admNo || activeStudent.admissionNo;
+                document.getElementById('cardFatherName').innerText = activeStudent.fatherName || "Father Name";
+                document.getElementById('cardDob').innerText = activeStudent.dob || "00-00-0000";
+                document.getElementById('cardCnic').innerText = activeStudent.cnic || "35201-XXXXXXX-X";
+                document.getElementById('cardBlood').innerText = activeStudent.bloodGroup || "B+ Positive";
+
+                // Agar student ka photo database mein hai tou wo lagao warna avatar
+                if(activeStudent.photoUrl && activeStudent.photoUrl.trim() !== '') {
+                    document.getElementById('cardStudentImg').src = activeStudent.photoUrl;
+                } else {
+                    document.getElementById('cardStudentImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=4338ca&color=fff&size=150`;
+                }
+
+                // Dynamic QR Code Generate karna
+                const qrData = `MDA School Verified\nName: ${sName}\nAdmNo: ${targetAdm}\nClass: ${activeStudent.class}`;
+                document.getElementById('cardQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
             }
-
-            // Fill card dynamically
-            document.getElementById('cardStudentName').innerText = activeStudent.name || activeStudent.fullName;
-            document.getElementById('cardStudentClass').innerText = activeStudent.class || "Class 10";
-            document.getElementById('cardAdmNo').innerText = activeStudent.admNo || activeStudent.admissionNo;
-            document.getElementById('cardFatherName').innerText = activeStudent.fatherName || "Father Name";
-            document.getElementById('cardDob').innerText = activeStudent.dob || "2010-01-01";
-            document.getElementById('cardCnic').innerText = activeStudent.cnic || "35201-XXXXXXX-X";
-            document.getElementById('cardBlood').innerText = activeStudent.bloodGroup || "B+ Positive";
-
-            // Update photo avatar
-            document.getElementById('cardStudentImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeStudent.name || 'Student')}&background=4338ca&color=fff&size=150`;
-
-            // Generate Dynamic QR Code
-            const qrData = `MDA School Verified Student\nName: ${activeStudent.name}\nAdmNo: ${activeStudent.admNo}\nClass: ${activeStudent.class}`;
-            document.getElementById('cardQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
         });
     </script>
 </body>
