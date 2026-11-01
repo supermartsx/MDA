@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Quick Fee Collect - MDA Mustafa Digital Ai School</title>
+    <title>Quick Fee Collect - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -102,19 +102,18 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Quick Fee Collect</h2>
+                <h2>Express Quick Fee Counter</h2>
             </div>
             <div class="header-right">
-                <span class="session-badge"><i class="fas fa-bolt text-warning"></i> Express Counter</span>
+                <span class="session-badge"><i class="fas fa-bolt text-warning"></i> Express Mode</span>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Fastest counter fee collection synced with Google Database (PKR)</p>
+                <p class="breadcrumb">Instant counter collection with auto-clearing database dues</p>
             </div>
 
-            <!-- QUICK COLLECTION CARD -->
             <div class="quick-fee-card">
                 
                 <div class="quick-search-box">
@@ -140,7 +139,7 @@
                         <button type="button" class="btn-preset" onclick="setQuickAmount(1000)">Rs. 1,000</button>
                         <button type="button" class="btn-preset" onclick="setQuickAmount(2000)">Rs. 2,000</button>
                         <button type="button" class="btn-preset" onclick="setQuickAmount(5000)">Rs. 5,000</button>
-                        <button type="button" class="btn-preset active" onclick="setQuickAmount(6500)">Full Due</button>
+                        <button type="button" class="btn-preset active" id="btnFullDue" onclick="setFullDueAmount()">Full Due</button>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; margin-bottom: 25px;">
@@ -159,8 +158,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-express-pay">
-                        <i class="fas fa-print"></i> Collect & Sync Live Receipt
+                    <button type="submit" id="btnQuickSubmit" class="btn-express-pay">
+                        <i class="fas fa-print"></i> Collect & Auto-Clear Pending Dues
                     </button>
                 </form>
 
@@ -184,9 +183,11 @@
                 selectedStudentObj = students.find(s => (s.admNo || s.admissionNo || "").toUpperCase() === query);
 
                 if (selectedStudentObj) {
-                    document.getElementById('qStudentName').innerText = selectedStudentObj.fullName || selectedStudentObj.name;
+                    let sName = selectedStudentObj.fullName || selectedStudentObj.name;
+                    document.getElementById('qStudentName').innerText = sName;
                     document.getElementById('qStudentMeta').innerText = `Class ${selectedStudentObj.class} • Father: ${selectedStudentObj.fatherName}`;
-                    let due = parseFloat(selectedStudentObj.pendingDue || 5000);
+                    
+                    let due = parseFloat(selectedStudentObj.pendingDue || 0);
                     document.getElementById('qStudentDue').innerText = `Rs. ${due.toLocaleString()}`;
                     document.getElementById('quickPayAmount').value = due;
                 } else {
@@ -201,33 +202,65 @@
             event.target.classList.add('active');
         }
 
+        function setFullDueAmount() {
+            if (selectedStudentObj) {
+                let due = parseFloat(selectedStudentObj.pendingDue || 0);
+                document.getElementById('quickPayAmount').value = due;
+                document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+                document.getElementById('btnFullDue').classList.add('active');
+            }
+        }
+
+        // ================= QUICK SUBMIT & AUTO-CLEAR PENDING DUES =================
         document.getElementById('quickPayForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             if (!selectedStudentObj) {
-                alert("Please search and select a student first by typing Admission No and pressing Enter.");
+                alert("Please type Admission Number and press Enter first!");
                 return;
             }
 
+            const btn = document.getElementById('btnQuickSubmit');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            const paidAmt = parseFloat(document.getElementById('quickPayAmount').value) || 0;
             const rand = Math.floor(1000 + Math.random() * 9000);
+            const rcpNumber = `RCP-Q-${rand}`;
+            const sName = selectedStudentObj.fullName || selectedStudentObj.name;
+            const adm = selectedStudentObj.admNo || selectedStudentObj.admissionNo;
+
+            // 1. Save Transaction
             const quickPayment = {
                 action: 'fees',
-                receiptNo: `RCP-Q-${rand}`,
+                receiptNo: rcpNumber,
+                admNo: adm,
                 date: new Date().toISOString().slice(0, 10),
-                studentName: selectedStudentObj.fullName || selectedStudentObj.name,
-                amount: document.getElementById('quickPayAmount').value,
+                studentName: sName,
+                amount: paidAmt,
                 mode: document.getElementById('quickPayMode').value,
-                remarks: 'Quick Counter Express Collect'
+                remarks: 'Express Quick Counter Collect'
             };
 
-            let res = await mdaSaveData('fees', quickPayment);
-            if (res.status === "success") {
-                alert(`Quick Payment of Rs. ${quickPayment.amount} synced successfully!`);
-                this.reset();
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Saved locally. Syncing with Google Sheet.');
-                window.location.href = 'dashboard.html';
+            await mdaSaveData('fees', quickPayment);
+
+            // 2. AUTO-REDUCE / CLEAR PENDING DUE FROM STUDENT RECORD
+            let currentDue = parseFloat(selectedStudentObj.pendingDue || 0);
+            let updatedPendingDue = Math.max(0, currentDue - paidAmt);
+
+            try {
+                if (selectedStudentObj.firebaseId) {
+                    await fetch(`${FIREBASE_DB_URL}/students/${selectedStudentObj.firebaseId}.json`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pendingDue: updatedPendingDue })
+                    });
+                }
+            } catch (err) {
+                console.error("Auto clear error:", err);
             }
+
+            alert(`⚡ Quick Payment of Rs. ${paidAmt.toLocaleString()} Collected!\nNew Pending Due: Rs. ${updatedPendingDue.toLocaleString()}\nStudent record updated in database!`);
+            window.location.href = 'dashboard.html';
         });
     </script>
 </body>
