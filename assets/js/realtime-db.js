@@ -1,6 +1,6 @@
 // ================= MDA SCHOOL REAL-TIME DATABASE ENGINE =================
 // Yahan apni Google Apps Script ki deploy ki hui Web App URL paste karein:
-const MDA_API_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const MDA_API_URL = "https://script.google.com/macros/s/AKfycbz2j456PcO9olVXpsDFiOZ2LuFMI1zUpfm3Q16mll3zHAeaja0hi81awGGROmCB9upkaw/exec";
 
 /**
  * 1. Fetch Real-Time Data from Google Sheet
