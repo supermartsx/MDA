@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Schedule (Date Sheet) - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Exam Schedule - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,67 +13,20 @@
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
-        .datesheet-workspace {
-            display: grid;
-            grid-template-columns: 360px 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .exam-instructions-box {
-            background: #fffbeb;
-            border: 1px solid #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-top: 20px;
-        }
-        .exam-instructions-box h5 {
-            color: #b45309;
-            font-size: 13px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .exam-instructions-box ul {
-            font-size: 12px;
-            color: #92400e;
-            padding-left: 20px;
-            line-height: 1.8;
-            list-style: disc;
-        }
-
+        .datesheet-workspace { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 25px; }
         @media print {
-            .sidebar, .top-header, .filter-section, .no-print, .form-section {
-                display: none !important;
-            }
-            .main-content {
-                margin-left: 0 !important;
-                width: 100% !important;
-            }
-            .dashboard-content {
-                padding: 0 !important;
-            }
-            .datesheet-workspace {
-                grid-template-columns: 1fr !important;
-            }
-            .data-table-card {
-                box-shadow: none !important;
-                border: 1px solid #000 !important;
-            }
+            .sidebar, .top-header, .filter-section, .no-print, .form-section { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; }
+            .dashboard-content { padding: 0 !important; }
+            .datesheet-workspace { grid-template-columns: 1fr !important; }
+            .data-table-card { box-shadow: none !important; border: 1px solid #000 !important; }
         }
-
-        @media (max-width: 992px) {
-            .datesheet-workspace {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 992px) { .datesheet-workspace { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -148,7 +101,7 @@
         <header class="top-header no-print">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Examination Date Sheet</h2>
+                <h2>Real-Time Exam Schedule</h2>
             </div>
             <div class="header-right">
                 <button class="btn-export" style="background:#7239ea;" onclick="window.print()"><i class="fas fa-print"></i> Print Date Sheet</button>
@@ -157,195 +110,65 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar no-print">
-                <p class="breadcrumb">Schedule papers, exam timings, room allocations and print class date sheets</p>
+                <p class="breadcrumb">Schedule papers live in Google Database and generate date sheets</p>
             </div>
 
-            <!-- EXAM & CLASS FILTER -->
-            <div class="filter-section no-print">
-                <div class="filter-grid" style="align-items: flex-end;">
-                    <div class="filter-group">
-                        <label>SELECT EXAM</label>
-                        <select id="scheduleExam">
-                            <option value="Mid Term Examination 2026">Mid Term Examination 2026</option>
-                            <option value="Annual Examination 2027">Annual Examination 2027</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>SELECT CLASS</label>
-                        <select id="scheduleClass">
-                            <option value="Class 10">Class 10</option>
-                            <option value="Class 9">Class 9</option>
-                        </select>
-                    </div>
-                    <div class="filter-group button-group">
-                        <button class="btn-search" onclick="alert('Date sheet loaded!')"><i class="fas fa-sync-alt"></i> View Date Sheet</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TWO COLUMN WORKSPACE -->
+            <!-- WORKSPACE -->
             <div class="datesheet-workspace">
                 
-                <!-- LEFT: SCHEDULE NEW PAPER (Hidden in print) -->
+                <!-- LEFT: FORM -->
                 <div class="form-section no-print" style="margin-bottom: 0;">
                     <h4 class="section-heading"><i class="fas fa-calendar-plus text-primary"></i> Add Paper to Schedule</h4>
                     
-                    <form id="addScheduleForm">
+                    <form id="liveScheduleForm">
                         <div class="input-group mb-15">
-                            <label>SELECT SUBJECT *</label>
-                            <select id="schedSub" required>
-                                <option value="">-- Choose Subject --</option>
-                                <option value="English Compulsory">English Compulsory</option>
-                                <option value="Mathematics Science">Mathematics Science</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Urdu Lazmi">Urdu Lazmi</option>
-                                <option value="Islamiyat">Islamiyat</option>
-                            </select>
+                            <label>SUBJECT NAME *</label>
+                            <input type="text" id="schedSub" placeholder="e.g. Computer Science" required>
                         </div>
-
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
                             <div class="input-group">
                                 <label>EXAM DATE *</label>
                                 <input type="date" id="schedDate" required>
                             </div>
                             <div class="input-group">
-                                <label>DAY</label>
+                                <label>DAY *</label>
                                 <input type="text" id="schedDay" placeholder="e.g. Monday" required>
                             </div>
                         </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
-                            <div class="input-group">
-                                <label>START TIME *</label>
-                                <input type="time" value="08:30" required>
-                            </div>
-                            <div class="input-group">
-                                <label>END TIME *</label>
-                                <input type="time" value="11:30" required>
-                            </div>
+                        <div class="input-group mb-20">
+                            <label>TIMING *</label>
+                            <input type="text" id="schedTime" value="08:30 AM - 11:30 AM" required>
                         </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-                            <div class="input-group">
-                                <label>ROOM / HALL NO</label>
-                                <input type="text" placeholder="e.g. Hall A / Room 5">
-                            </div>
-                            <div class="input-group">
-                                <label>MAX MARKS</label>
-                                <input type="number" value="100">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;">
-                            <i class="fas fa-plus-circle"></i> Add Paper to Schedule
-                        </button>
+                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;"><i class="fas fa-save"></i> Save Schedule</button>
                     </form>
                 </div>
 
-                <!-- RIGHT: OFFICIAL DATE SHEET PRINT PREVIEW -->
+                <!-- RIGHT: TABLE / PREVIEW -->
                 <div class="data-table-card">
-                    <!-- Date Sheet Official Header -->
                     <div style="text-align: center; padding: 25px 20px 15px; border-bottom: 2px solid #7239ea;">
-                        <h2 style="margin: 0; color: #1e1e2d; font-size: 20px; text-transform: uppercase;">MDA Mustafa Digital Ai School</h2>
-                        <p style="margin: 3px 0; font-size: 12px; color: #64748b;">Bharwari Kaushambi | Academic Session 2026-27</p>
-                        <h3 style="margin-top: 10px; color: #7239ea; font-size: 16px; letter-spacing: 1px;">OFFICIAL DATE SHEET: MID TERM EXAMINATION 2026</h3>
-                        <span class="badge" style="background:#f1f5f9; color:#334155; font-size:12px; margin-top:5px;">Class 10 (Science Group)</span>
+                        <h2 style="margin: 0; color: #1e1e2d; font-size: 18px; text-transform: uppercase;">MDA Mustafa Digital Ai School</h2>
+                        <p style="margin: 3px 0; font-size: 11px; color: #64748b;">Official Examination Date Sheet (Google DB)</p>
                     </div>
 
                     <div class="table-responsive">
-                        <table style="text-align: center;">
+                        <table>
                             <thead>
                                 <tr style="background:#faf5ff;">
-                                    <th width="15%">DATE</th>
-                                    <th width="12%">DAY</th>
-                                    <th width="28%" style="text-align: left;">SUBJECT</th>
-                                    <th width="20%">TIMING</th>
-                                    <th width="15%">ROOM / HALL</th>
-                                    <th width="10%" class="no-print">ACTION</th>
+                                    <th>DATE</th>
+                                    <th>DAY</th>
+                                    <th style="text-align: left;">SUBJECT</th>
+                                    <th>TIMING</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Paper 1 -->
+                            <tbody id="scheduleTableBody">
                                 <tr>
-                                    <td><strong>15-Nov-2026</strong></td>
-                                    <td>Monday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">English Compulsory</strong></td>
-                                    <td>08:30 AM - 11:30 AM</td>
-                                    <td><span class="adm-badge">Hall A</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Paper 2 -->
-                                <tr>
-                                    <td><strong>17-Nov-2026</strong></td>
-                                    <td>Wednesday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">Mathematics (Science)</strong></td>
-                                    <td>08:30 AM - 11:30 AM</td>
-                                    <td><span class="adm-badge">Hall A</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Paper 3 -->
-                                <tr>
-                                    <td><strong>19-Nov-2026</strong></td>
-                                    <td>Friday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">Physics (Theory)</strong></td>
-                                    <td>08:30 AM - 11:30 AM</td>
-                                    <td><span class="adm-badge">Room 10</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Paper 4 -->
-                                <tr>
-                                    <td><strong>21-Nov-2026</strong></td>
-                                    <td>Sunday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">Computer Science</strong></td>
-                                    <td>08:30 AM - 11:30 AM</td>
-                                    <td><span class="adm-badge">Lab 1</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Paper 5 -->
-                                <tr>
-                                    <td><strong>23-Nov-2026</strong></td>
-                                    <td>Tuesday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">Urdu Lazmi</strong></td>
-                                    <td>08:30 AM - 11:30 AM</td>
-                                    <td><span class="adm-badge">Hall A</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
-                                </tr>
-                                <!-- Paper 6 -->
-                                <tr>
-                                    <td><strong>25-Nov-2026</strong></td>
-                                    <td>Thursday</td>
-                                    <td style="text-align: left;"><strong style="color:#1e293b;">Islamiyat / Ethics</strong></td>
-                                    <td>08:30 AM - 10:30 AM</td>
-                                    <td><span class="adm-badge">Hall A</span></td>
-                                    <td class="no-print"><button class="btn-view" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-trash"></i></button></td>
+                                    <td colspan="4" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching date sheet from Google Database...
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- Exam Rules / Instructions Notice -->
-                    <div class="exam-instructions-box">
-                        <h5><i class="fas fa-exclamation-triangle"></i> Examination Rules & Instructions for Students</h5>
-                        <ul>
-                            <li>Students must be in proper school uniform and bring their official Roll Number Slip daily.</li>
-                            <li>Reporting time is 08:15 AM sharp. No student will be allowed entry 15 minutes after paper start.</li>
-                            <li>Mobile phones, smartwatches, and programmable calculators are strictly prohibited in the exam hall.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Signatures (Visible in Print) -->
-                    <div style="display: flex; justify-content: space-between; padding: 40px 30px 20px; text-align: center;">
-                        <div>
-                            <div style="border-top: 1px solid #333; width: 140px; margin-bottom: 5px;"></div>
-                            <small style="font-weight: 600;">Controller of Examinations</small>
-                        </div>
-                        <div>
-                            <div style="border-top: 1px solid #333; width: 140px; margin-bottom: 5px;"></div>
-                            <small style="font-weight: 600;">Principal / Headmaster</small>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
@@ -353,19 +176,62 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Schedule Script -->
     <script>
-        document.getElementById('addScheduleForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const sub = document.getElementById('schedSub').value;
-            const date = document.getElementById('schedDate').value;
-            const day = document.getElementById('schedDay').value;
+        async function loadScheduleData() {
+            let schedules = await mdaFetchData('schedules');
+            const tbody = document.getElementById('scheduleTableBody');
 
-            alert(`Paper "${sub}" scheduled on ${day} (${date}) successfully!`);
-            this.reset();
+            if (schedules.length > 0) {
+                tbody.innerHTML = '';
+                schedules.forEach(sc => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><strong>${sc.date}</strong></td>
+                            <td>${sc.day}</td>
+                            <td style="text-align: left;"><strong>${sc.subject}</strong></td>
+                            <td>${sc.timing}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No papers scheduled yet. Add a paper above.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        document.getElementById('liveScheduleForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const newSched = {
+                action: 'schedules',
+                subject: document.getElementById('schedSub').value.trim(),
+                date: document.getElementById('schedDate').value,
+                day: document.getElementById('schedDay').value.trim(),
+                timing: document.getElementById('schedTime').value.trim()
+            };
+
+            let res = await mdaSaveData('schedules', newSched);
+            if (res.status === "success") {
+                alert('Exam schedule saved and synced with Google Database successfully!');
+                this.reset();
+                loadScheduleData();
+            } else {
+                alert('Saved locally. Will sync with Google Sheet.');
+                this.reset();
+                loadScheduleData();
+            }
         });
+
+        document.addEventListener('DOMContentLoaded', loadScheduleData);
     </script>
 </body>
 </html>
