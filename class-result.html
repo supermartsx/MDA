@@ -3,65 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Result Gazette - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Class Result Gazette - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Global & Table CSS -->
+    <!-- Global & Modules CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tables.css">
     <link rel="stylesheet" href="assets/css/forms.css">
 
     <style>
-        .rank-badge {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-        }
-        .rank-1 { background: #fef08a; color: #854d0e; border: 1.5px solid #eab308; } /* Gold */
-        .rank-2 { background: #f1f5f9; color: #334155; border: 1.5px solid #94a3b8; } /* Silver */
-        .rank-3 { background: #ffedd5; color: #9a3412; border: 1.5px solid #f97316; } /* Bronze */
+        .rank-badge { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+        .rank-1 { background: #fef08a; color: #854d0e; border: 1.5px solid #eab308; }
+        .rank-2 { background: #f1f5f9; color: #334155; border: 1.5px solid #94a3b8; }
+        .rank-3 { background: #ffedd5; color: #9a3412; border: 1.5px solid #f97316; }
         .rank-general { background: #f8fafc; color: #64748b; border: 1px solid #cbd5e1; }
-
-        .toppers-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .topper-box {
-            background: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-
+        .toppers-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .topper-box { background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
         @media print {
-            .sidebar, .top-header, .filter-section, .no-print {
-                display: none !important;
-            }
-            .main-content {
-                margin-left: 0 !important;
-                width: 100% !important;
-            }
-            .dashboard-content {
-                padding: 0 !important;
-            }
+            .sidebar, .top-header, .filter-section, .no-print { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; }
+            .dashboard-content { padding: 0 !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -136,29 +104,21 @@
         <header class="top-header no-print">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Class Result Gazette</h2>
+                <h2>Real-Time Class Result Gazette</h2>
             </div>
             <div class="header-right">
-                <button class="btn-export" style="background:#16a34a;" onclick="alert('Exporting Gazette to Excel...')"><i class="fas fa-file-excel"></i> Export Gazette</button>
-                <button class="btn-export" style="background:#475569; margin-left: 10px;" onclick="window.print()"><i class="fas fa-print"></i> Print Gazette</button>
+                <button class="btn-export" style="background:#475569;" onclick="window.print()"><i class="fas fa-print"></i> Print Gazette</button>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar no-print">
-                <p class="breadcrumb">Class-wise consolidated merit list and examination results</p>
+                <p class="breadcrumb">Live class merit list and examination results fetched from database</p>
             </div>
 
-            <!-- EXAM & CLASS FILTER -->
+            <!-- FILTER -->
             <div class="filter-section no-print">
                 <div class="filter-grid" style="align-items: flex-end;">
-                    <div class="filter-group">
-                        <label>SELECT EXAM</label>
-                        <select id="resExam">
-                            <option value="Mid Term Exam 2026">Mid Term Exam 2026</option>
-                            <option value="First Term Assessment">First Term Assessment</option>
-                        </select>
-                    </div>
                     <div class="filter-group">
                         <label>SELECT CLASS</label>
                         <select id="resClass">
@@ -166,138 +126,88 @@
                             <option value="Class 9">Class 9</option>
                         </select>
                     </div>
-                    <div class="filter-group filter-search-group">
-                        <label>SEARCH STUDENT</label>
-                        <input type="text" id="resSearch" placeholder="Name, Roll No...">
-                    </div>
                     <div class="filter-group button-group">
-                        <button class="btn-search" onclick="filterResult()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn-search" onclick="loadLiveClassResult()"><i class="fas fa-sync-alt"></i> Generate Gazette</button>
                     </div>
                 </div>
             </div>
 
-            <!-- RESULT HIGHLIGHTS (Toppers & Stats) -->
-            <div class="toppers-card-grid no-print">
-                <!-- 1st Position -->
-                <div class="topper-box" style="border-top: 3px solid #eab308;">
-                    <div class="rank-badge rank-1"><i class="fas fa-crown"></i></div>
-                    <div>
-                        <span style="font-size: 11px; color: #854d0e; font-weight: 600;">1ST POSITION</span>
-                        <h4 style="margin: 2px 0; color: #1e293b;">ALI RAZA</h4>
-                        <small style="color: #64748b;">345 / 400 (86.2%) • A+</small>
-                    </div>
-                </div>
-
-                <!-- 2nd Position -->
-                <div class="topper-box" style="border-top: 3px solid #94a3b8;">
-                    <div class="rank-badge rank-2">2</div>
-                    <div>
-                        <span style="font-size: 11px; color: #334155; font-weight: 600;">2ND POSITION</span>
-                        <h4 style="margin: 2px 0; color: #1e293b;">FATIMA ZAHRA</h4>
-                        <small style="color: #64748b;">265 / 400 (66.2%) • B</small>
-                    </div>
-                </div>
-
-                <!-- Pass Percentage -->
-                <div class="topper-box" style="border-top: 3px solid #16a34a;">
-                    <div class="rank-badge" style="background:#dcfce7; color:#15803d; border:none;"><i class="fas fa-chart-pie"></i></div>
-                    <div>
-                        <span style="font-size: 11px; color: #15803d; font-weight: 600;">OVERALL PASS RATE</span>
-                        <h4 style="margin: 2px 0; color: #1e293b;">66.7%</h4>
-                        <small style="color: #64748b;">2 Passed • 1 Failed</small>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MERIT LIST TABLE -->
+            <!-- TABLE CARD -->
             <div class="data-table-card">
                 <div class="card-header">
-                    <h4><i class="fas fa-award text-primary"></i> Mid Term Exam 2026 — Class 10 Merit List</h4>
-                    <span class="badge" style="background:#e0f2fe; color:#0369a1;">3 Students Appeared</span>
+                    <h4><i class="fas fa-award text-primary"></i> Class Merit List Gazette</h4>
+                    <span class="badge" id="resCountBadge">0 students</span>
                 </div>
 
                 <div class="table-responsive">
                     <table id="resultTable">
                         <thead>
                             <tr>
-                                <th width="6%">RANK</th>
-                                <th width="12%">ROLL NO</th>
-                                <th width="24%">STUDENT NAME</th>
-                                <th width="16%">TOTAL OBTAINED</th>
-                                <th width="12%">PERCENTAGE</th>
-                                <th width="10%">GRADE</th>
-                                <th width="10%">STATUS</th>
-                                <th width="10%" class="no-print">ACTION</th>
+                                <th width="8%">RANK</th>
+                                <th width="15%">ADM NO</th>
+                                <th width="32%">STUDENT NAME</th>
+                                <th width="18%">TOTAL MARKS</th>
+                                <th width="12%">GRADE</th>
+                                <th width="15%">STATUS</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Rank 1 -->
+                        <tbody id="resultTableBody">
                             <tr>
-                                <td><span class="rank-badge rank-1">1</span></td>
-                                <td><span class="adm-badge">2026-0001</span></td>
-                                <td><strong>ALI RAZA</strong></td>
-                                <td class="fw-bold">345 <span style="font-size:11px; color:#64748b;">/ 400</span></td>
-                                <td class="fw-bold" style="color: #16a34a;">86.2%</td>
-                                <td><span class="grade-badge-table grade-pass">A+</span></td>
-                                <td><span class="badge" style="background:#dcfce7; color:#15803d;">PASS</span></td>
-                                <td class="no-print">
-                                    <a href="print-report-card.html" class="btn-view" title="Print Report Card"><i class="fas fa-file-alt"></i></a>
-                                </td>
-                            </tr>
-                            <!-- Rank 2 -->
-                            <tr>
-                                <td><span class="rank-badge rank-2">2</span></td>
-                                <td><span class="adm-badge">2026-0002</span></td>
-                                <td><strong>FATIMA ZAHRA</strong></td>
-                                <td class="fw-bold">265 <span style="font-size:11px; color:#64748b;">/ 400</span></td>
-                                <td class="fw-bold" style="color: #16a34a;">66.2%</td>
-                                <td><span class="grade-badge-table grade-pass">B</span></td>
-                                <td><span class="badge" style="background:#dcfce7; color:#15803d;">PASS</span></td>
-                                <td class="no-print">
-                                    <a href="print-report-card.html" class="btn-view" title="Print Report Card"><i class="fas fa-file-alt"></i></a>
-                                </td>
-                            </tr>
-                            <!-- Rank 3 (Failed) -->
-                            <tr>
-                                <td><span class="rank-badge rank-general">3</span></td>
-                                <td><span class="adm-badge">2026-0003</span></td>
-                                <td><strong>USMAN TARIQ</strong></td>
-                                <td class="fw-bold">138 <span style="font-size:11px; color:#64748b;">/ 400</span></td>
-                                <td class="fw-bold" style="color: #dc2626;">34.5%</td>
-                                <td><span class="grade-badge-table grade-fail">F</span></td>
-                                <td><span class="badge" style="background:#fee2e2; color:#b91c1c;">FAIL</span></td>
-                                <td class="no-print">
-                                    <a href="print-report-card.html" class="btn-view" title="Print Report Card"><i class="fas fa-file-alt"></i></a>
+                                <td colspan="6" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    Click "Generate Gazette" to load results from Google Database.
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="pagination-footer no-print">
-                    <div>Showing 1-3 of 3 students gazette</div>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Search Script -->
     <script>
-        function filterResult() {
-            let input = document.getElementById("resSearch").value.toUpperCase();
-            let table = document.getElementById("resultTable");
-            let tr = table.getElementsByTagName("tr");
+        async function loadLiveClassResult() {
+            const cls = document.getElementById('resClass').value;
+            let marksData = await mdaFetchData('marks');
+            
+            // Filter by class if available, else show all
+            let filtered = marksData.filter(m => (m.class || "Class 10").trim() === cls);
+            
+            // Sort by total marks descending
+            filtered.sort((a, b) => parseFloat(b.totalMarks || 0) - parseFloat(a.totalMarks || 0));
 
-            for (let i = 1; i < tr.length; i++) {
-                let text = tr[i].textContent || tr[i].innerText;
-                if (text.toUpperCase().indexOf(input) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+            const tbody = document.getElementById('resultTableBody');
+            document.getElementById('resCountBadge').innerText = `${filtered.length} students`;
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = '';
+                filtered.forEach((res, idx) => {
+                    let rankClass = idx === 0 ? 'rank-1' : (idx === 1 ? 'rank-2' : (idx === 2 ? 'rank-3' : 'rank-general'));
+                    let statusBadge = res.grade === 'F' ? '<span class="badge" style="background:#fee2e2; color:#b91c1c;">FAIL</span>' : '<span class="badge" style="background:#dcfce7; color:#15803d;">PASS</span>';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><span class="rank-badge ${rankClass}">${idx + 1}</span></td>
+                            <td><span class="adm-badge">${res.admNo}</span></td>
+                            <td><strong>${res.studentName}</strong></td>
+                            <td class="fw-bold">${res.totalMarks} <span style="font-size:11px; color:#64748b;">/ 200</span></td>
+                            <td><span class="grade-badge-table ${res.grade === 'F' ? 'grade-fail' : 'grade-pass'}">${res.grade}</span></td>
+                            <td>${statusBadge}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No examination results found for ${cls}. Please enter marks first.
+                        </td>
+                    </tr>
+                `;
             }
         }
     </script>
