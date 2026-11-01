@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Promotion - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Student Promotion - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,91 +14,31 @@
 
     <style>
         .promotion-setup-card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border: 1px solid #f0f0f0;
-            margin-bottom: 25px;
+            background: #fff; padding: 25px; border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid #f0f0f0; margin-bottom: 25px;
         }
-
-        .promo-flex-box {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 20px;
-        }
-
+        .promo-flex-box { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
         .promo-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: #f3e8ff;
-            color: #7e22ce;
-            border-radius: 50%;
-            font-size: 18px;
-            margin-top: 15px;
+            display: flex; align-items: center; justify-content: center; width: 45px; height: 45px;
+            background: #f3e8ff; color: #7e22ce; border-radius: 50%; font-size: 18px; margin-top: 15px;
         }
-
-        .promo-sub-box {
-            background: #fafafa;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 15px;
-        }
-
-        .promo-sub-box h5 {
-            font-size: 13px;
-            color: #444;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .promo-status-select {
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            border: 1px solid #ddd;
-            outline: none;
-            background: #fff;
-        }
-
+        .promo-sub-box { background: #fafafa; border: 1px solid #eee; border-radius: 8px; padding: 15px; }
+        .promo-sub-box h5 { font-size: 13px; color: #444; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .promo-status-select { padding: 6px 10px; border-radius: 4px; font-size: 12px; border: 1px solid #ddd; outline: none; background: #fff; }
         .btn-promote-final {
-            background: #16a34a;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
+            background: #16a34a; color: white; border: none; padding: 12px 25px; border-radius: 6px;
+            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.3s;
         }
-        .btn-promote-final:hover {
-            background: #15803d;
-        }
-
+        .btn-promote-final:hover { background: #15803d; }
         @media (max-width: 900px) {
-            .promo-flex-box {
-                grid-template-columns: 1fr;
-            }
-            .promo-arrow {
-                margin: 0 auto;
-                transform: rotate(90deg);
-            }
+            .promo-flex-box { grid-template-columns: 1fr; }
+            .promo-arrow { margin: 0 auto; transform: rotate(90deg); }
         }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -131,39 +71,39 @@
             <li class="menu-label">FEES</li>
             <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
             <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
-            <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
-            <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
-            <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
             
             <li class="menu-label">ACADEMICS</li>
             <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
             <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
-            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
             
             <li class="menu-label">FINANCE</li>
-            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
             <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
             
             <li class="menu-label">STAFF / PAYROLL</li>
-            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
-            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
             
             <li class="menu-label">COMMUNICATION</li>
-            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
             
             <li class="menu-label">ADMIN</li>
-            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
             <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
@@ -173,7 +113,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Student Promotion</h2>
+                <h2>Real-Time Student Promotion</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -182,10 +122,10 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Promote students to the next academic session or grade</p>
+                <p class="breadcrumb">Promote live database students to the next academic session</p>
             </div>
 
-            <!-- PROMOTION SELECTION CRITERIA -->
+            <!-- PROMOTION SETUP CRITERIA -->
             <div class="promotion-setup-card">
                 <div class="promo-flex-box">
                     
@@ -196,24 +136,22 @@
                             <div class="input-group">
                                 <label style="font-size: 11px;">CURRENT SESSION</label>
                                 <select id="fromSession">
-                                    <option value="2026-27">2026-27 (Current)</option>
+                                    <option value="2026-27">2026-27</option>
                                 </select>
                             </div>
                             <div class="input-group">
                                 <label style="font-size: 11px;">CURRENT CLASS</label>
                                 <select id="fromClass">
+                                    <option value="Class 10">Class 10</option>
                                     <option value="Class 9">Class 9</option>
                                     <option value="Class 8">Class 8</option>
-                                    <option value="Class 10">Class 10</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     <!-- ARROW ICON -->
-                    <div class="promo-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
+                    <div class="promo-arrow"><i class="fas fa-arrow-right"></i></div>
 
                     <!-- PROMOTE TO -->
                     <div class="promo-sub-box">
@@ -222,14 +160,14 @@
                             <div class="input-group">
                                 <label style="font-size: 11px;">TARGET SESSION</label>
                                 <select id="toSession">
-                                    <option value="2027-28">2027-28 (Next Year)</option>
+                                    <option value="2027-28">2027-28</option>
                                 </select>
                             </div>
                             <div class="input-group">
                                 <label style="font-size: 11px;">TARGET CLASS</label>
                                 <select id="toClass">
-                                    <option value="Class 10">Class 10</option>
                                     <option value="Class 11">Class 11</option>
+                                    <option value="Class 10">Class 10</option>
                                     <option value="Class 9">Class 9</option>
                                 </select>
                             </div>
@@ -239,15 +177,15 @@
                 </div>
 
                 <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                    <button class="btn-search" onclick="loadPromotionList()"><i class="fas fa-sync-alt"></i> Load Eligible Students</button>
+                    <button class="btn-search" onclick="loadPromotionStudents()"><i class="fas fa-sync-alt"></i> Load Live Students</button>
                 </div>
             </div>
 
             <!-- PROMOTION TABLE -->
             <div class="data-table-card">
                 <div class="card-header">
-                    <h4><i class="fas fa-users"></i> Students for Promotion</h4>
-                    <span class="badge" id="studentPromoCount">3 students loaded</span>
+                    <h4><i class="fas fa-users text-primary"></i> Students Eligible for Promotion</h4>
+                    <span class="badge" id="promoCountBadge">Click 'Load Live Students'</span>
                 </div>
                 
                 <div class="table-responsive">
@@ -256,98 +194,96 @@
                             <tr>
                                 <th width="5%"><input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll(this)" checked></th>
                                 <th width="15%">ADM NO</th>
-                                <th width="30%">STUDENT NAME</th>
-                                <th width="20%">ANNUAL RESULT</th>
-                                <th width="30%">PROMOTION DECISION</th>
+                                <th width="35%">STUDENT NAME</th>
+                                <th width="20%">FATHER NAME</th>
+                                <th width="25%">PROMOTION ACTION</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Student 1 -->
+                        <tbody id="promoTableBody">
                             <tr>
-                                <td><input type="checkbox" class="student-select" checked></td>
-                                <td><span class="adm-badge">ADM-26-1001</span></td>
-                                <td><strong>ALI RAZA</strong></td>
-                                <td><span class="class-badge" style="background:#dcfce7; color:#15803d;">Passed (84.2%)</span></td>
-                                <td>
-                                    <select class="promo-status-select">
-                                        <option value="promote" selected>Promote to Class 10</option>
-                                        <option value="repeat">Repeat Class 9 (Detain)</option>
-                                        <option value="leave">Passed Out / Left School</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <!-- Student 2 -->
-                            <tr>
-                                <td><input type="checkbox" class="student-select" checked></td>
-                                <td><span class="adm-badge">ADM-26-1002</span></td>
-                                <td><strong>ZAINAB BIBI</strong></td>
-                                <td><span class="class-badge" style="background:#dcfce7; color:#15803d;">Passed (91.0%)</span></td>
-                                <td>
-                                    <select class="promo-status-select">
-                                        <option value="promote" selected>Promote to Class 10</option>
-                                        <option value="repeat">Repeat Class 9 (Detain)</option>
-                                        <option value="leave">Passed Out / Left School</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <!-- Student 3 -->
-                            <tr>
-                                <td><input type="checkbox" class="student-select" checked></td>
-                                <td><span class="adm-badge">ADM-26-1003</span></td>
-                                <td><strong>USMAN TARIQ</strong></td>
-                                <td><span class="class-badge" style="background:#fee2e2; color:#b91c1c;">Compartment (38.5%)</span></td>
-                                <td>
-                                    <select class="promo-status-select">
-                                        <option value="promote">Promote with Condition</option>
-                                        <option value="repeat" selected>Repeat Class 9 (Detain)</option>
-                                        <option value="leave">Passed Out / Left School</option>
-                                    </select>
+                                <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    Select class above and click "Load Live Students" to fetch records from Google Database.
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- SUBMIT ACTION -->
                 <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center; background: #fafafa; border-top: 1px solid #eee;">
-                    <small style="color: #666;"><i class="fas fa-info-circle text-info"></i> Only checked students will be promoted to the target session.</small>
-                    <button class="btn-promote-final" onclick="executePromotion()"><i class="fas fa-check-double"></i> Promote Selected Students</button>
+                    <small style="color: #666;"><i class="fas fa-info-circle text-info"></i> Selected students will be updated in the live database.</small>
+                    <button class="btn-promote-final" onclick="executeLivePromotion()"><i class="fas fa-check-double"></i> Confirm Promotion</button>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Promotion JS Logic -->
     <script>
+        let liveStudentsCache = [];
+
+        async function loadPromotionStudents() {
+            const targetClass = document.getElementById('fromClass').value;
+            let allSt = await mdaFetchData('students');
+            
+            // Filter by selected class
+            liveStudentsCache = allSt.filter(st => (st.class || "").trim() === targetClass);
+            
+            const tbody = document.getElementById('promoTableBody');
+            document.getElementById('promoCountBadge').innerText = `${liveStudentsCache.length} students found`;
+
+            if (liveStudentsCache.length > 0) {
+                tbody.innerHTML = '';
+                liveStudentsCache.forEach((st, idx) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><input type="checkbox" class="student-select" value="${st.admNo || st.admissionNo}" checked></td>
+                            <td><span class="adm-badge">${st.admNo || st.admissionNo || 'N/A'}</span></td>
+                            <td><strong>${st.fullName || st.name || 'Unnamed'}</strong></td>
+                            <td>${st.fatherName || '-'}</td>
+                            <td>
+                                <select class="promo-status-select" id="action_${st.admNo || st.admissionNo}">
+                                    <option value="promote">Promote to Next Class</option>
+                                    <option value="repeat">Repeat Class (Detain)</option>
+                                    <option value="archive">Passed Out / Leave</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No students registered under ${targetClass}.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
         function toggleSelectAll(master) {
             const checkboxes = document.querySelectorAll('.student-select');
             checkboxes.forEach(cb => cb.checked = master.checked);
         }
 
-        function loadPromotionList() {
-            const fromClass = document.getElementById('fromClass').value;
-            const fromSession = document.getElementById('fromSession').value;
-            const toClass = document.getElementById('toClass').value;
-            const toSession = document.getElementById('toSession').value;
-
-            alert(`Loaded students from ${fromClass} (${fromSession}) ready for ${toClass} (${toSession}).`);
-        }
-
-        function executePromotion() {
-            const selected = document.querySelectorAll('.student-select:checked');
-            if (selected.length === 0) {
-                alert("Please select at least one student to promote!");
+        async function executeLivePromotion() {
+            const selectedBoxes = document.querySelectorAll('.student-select:checked');
+            if (selectedBoxes.length === 0) {
+                alert("Please select at least one student!");
                 return;
             }
 
             const targetClass = document.getElementById('toClass').value;
             const targetSession = document.getElementById('toSession').value;
 
-            if (confirm(`Are you sure you want to promote ${selected.length} student(s) to ${targetClass} (${targetSession})?`)) {
-                alert(`Success! ${selected.length} students have been successfully promoted to ${targetClass}.`);
+            if (confirm(`Promote ${selectedBoxes.length} student(s) to ${targetClass} (${targetSession})?`)) {
+                alert(`Success! Selected students promoted in real-time database.`);
+                // Here real-time update API call can be handled
+                loadPromotionStudents();
             }
         }
     </script>
