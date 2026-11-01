@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Salary Management - MDA Mustafa Digital Ai School</title>
+    <title>Teacher Salary Tracking & Payroll - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,8 +17,23 @@
         .net-salary-banner { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .net-salary-banner h3 { font-size: 24px; color: #16a34a; }
         .net-salary-banner p { font-size: 11px; color: #15803d; font-weight: 600; }
-        .btn-disburse { background: #16a34a; color: #fff; border: none; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+        
+        .btn-disburse {
+            background: #16a34a; color: #fff; border: none; padding: 14px; border-radius: 6px;
+            font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
+        }
         .btn-disburse:hover { background: #15803d; }
+
+        .status-badge-paid { background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+        .status-badge-unpaid { background: #fee2e2; color: #b91c1c; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+        
+        .btn-pay-single {
+            background: #7c3aed; color: #fff; border: none; padding: 5px 12px; border-radius: 4px;
+            font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+        }
+        .btn-pay-single:hover { background: #6d28d9; }
+
         @media (max-width: 992px) { .payroll-grid-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -99,7 +114,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Salary Management</h2>
+                <h2>Teacher Monthly Salary Tracking</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -108,90 +123,132 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Process monthly payroll live via Google Database (PKR)</p>
+                <p class="breadcrumb">Track monthly teacher salaries, pending payroll, and issue disbursement slips</p>
             </div>
 
-            <!-- WORKSPACE -->
+            <!-- MONTH SELECTOR & LIVE SUMMARY STATS -->
+            <div style="background:#fff; padding:15px 20px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <label style="font-size:13px; font-weight:700; color:#334155;"><i class="fas fa-calendar-alt text-primary"></i> SELECT PAYROLL MONTH:</label>
+                    <select id="selectedPayrollMonth" onchange="loadMonthlyPayrollStatus()" style="padding:8px 14px; border-radius:6px; border:1.5px solid #7c3aed; font-size:13px; font-weight:600; outline:none; background:#faf5ff;">
+                        <option value="November 2026">November 2026 (Current)</option>
+                        <option value="December 2026">December 2026</option>
+                        <option value="October 2026">October 2026</option>
+                        <option value="September 2026">September 2026</option>
+                    </select>
+                </div>
+                <button class="btn-search" onclick="loadMonthlyPayrollStatus()"><i class="fas fa-sync-alt"></i> Refresh Status</button>
+            </div>
+
+            <!-- LIVE STATS CARDS -->
+            <div class="enquiry-stats-grid">
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-purple"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div>
+                        <h3 id="statTotalTeachers">0</h3>
+                        <p>Total Faculty Staff</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-green"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <h3 id="statPaidCount" style="color:#16a34a;">0 Paid</h3>
+                        <p id="statPaidAmount">Rs. 0 Disbursed</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h3 id="statUnpaidCount" style="color:#dc2626;">0 Pending</h3>
+                        <p id="statPendingBudget">Rs. 0 Due</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN WORKSPACE -->
             <div class="payroll-grid-layout">
                 
-                <!-- LEFT: FORM -->
+                <!-- LEFT: PAY SALARY FORM -->
                 <div class="form-section" style="margin-bottom: 0;">
-                    <h4 class="section-heading" style="color:#16a34a;"><i class="fas fa-hand-holding-usd"></i> Pay Salary & Voucher</h4>
+                    <h4 class="section-heading" style="color:#16a34a;"><i class="fas fa-hand-holding-usd"></i> Disburse Teacher Salary</h4>
                     
-                    <form id="liveSalaryForm">
+                    <form id="disburseSalaryForm">
                         <div class="input-group mb-15">
-                            <label>SELECT STAFF MEMBER *</label>
-                            <select id="salStaffSelect" onchange="populateSalary()" required>
-                                <option value="">-- Loading Staff from DB --</option>
+                            <label>TEACHER / STAFF MEMBER *</label>
+                            <select id="salStaffSelect" onchange="onStaffSelectChange()" required>
+                                <option value="">-- Choose Staff Member --</option>
                             </select>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
-                                <label>SALARY MONTH</label>
-                                <input type="text" value="November 2026" readonly style="background:#f1f3f5;">
+                                <label>PAYROLL MONTH</label>
+                                <input type="text" id="formDisplayMonth" value="November 2026" readonly style="background:#f1f3f5; font-weight:600;">
                             </div>
                             <div class="input-group">
                                 <label>BASIC SALARY (Rs.)</label>
-                                <input type="number" id="salBasic" value="0" readonly style="background:#f1f3f5; font-weight:600;">
+                                <input type="number" id="salBasic" value="0" readonly style="background:#f1f3f5; font-weight:700;">
                             </div>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
-                                <label>ALLOWANCES</label>
-                                <input type="number" id="salAllowance" value="0" oninput="calcNet()">
+                                <label>ALLOWANCE / BONUS (Rs.)</label>
+                                <input type="number" id="salAllowance" value="0" oninput="calculateNetSalary()">
                             </div>
                             <div class="input-group">
-                                <label>DEDUCTIONS</label>
-                                <input type="number" id="salDeduction" value="0" oninput="calcNet()">
+                                <label>DEDUCTIONS (LEAVES/TAX)</label>
+                                <input type="number" id="salDeduction" value="0" oninput="calculateNetSalary()">
                             </div>
                         </div>
 
+                        <!-- NET SALARY DISPLAY -->
                         <div class="net-salary-banner">
                             <div>
                                 <p>NET PAYABLE SALARY</p>
                                 <h3 id="displayNetSalary">Rs. 0</h3>
                             </div>
-                            <i class="fas fa-calculator" style="font-size: 26px; color:#16a34a;"></i>
+                            <i class="fas fa-receipt" style="font-size: 24px; color:#16a34a;"></i>
                         </div>
 
                         <div class="input-group mb-20">
                             <label>PAYMENT MODE *</label>
-                            <select id="salMode">
-                                <option value="Bank Transfer">Bank Transfer / Raast</option>
-                                <option value="Cash">Cash (Naqad)</option>
-                                <option value="Easypaisa">Easypaisa</option>
-                                <option value="JazzCash">JazzCash</option>
+                            <select id="salMode" required>
+                                <option value="Bank Transfer (UBL / Raast)">Bank Transfer (UBL / Raast)</option>
+                                <option value="Easypaisa (03105784772)">Easypaisa</option>
+                                <option value="JazzCash (03105784772)">JazzCash</option>
+                                <option value="Cash (Naqad)">Cash</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn-disburse"><i class="fas fa-check-circle"></i> Disburse Salary & Sync Live</button>
+                        <button type="submit" id="btnDisburseSubmit" class="btn-disburse">
+                            <i class="fas fa-check-circle"></i> Pay Salary & Mark as Paid
+                        </button>
                     </form>
                 </div>
 
-                <!-- RIGHT: TABLE -->
+                <!-- RIGHT: MONTHLY TEACHER SALARY STATUS TABLE -->
                 <div class="data-table-card">
-                    <div class="card-header">
-                        <h4><i class="fas fa-list text-primary"></i> Disbursed Salaries Log</h4>
-                        <span class="badge" id="salCountBadge">Loading...</span>
+                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <h4><i class="fas fa-user-check text-primary"></i> <span id="tableHeaderMonthTitle">November 2026</span> Salary Status</h4>
+                        <span class="badge" id="payrollStatusBadge">Tracking Live</span>
                     </div>
 
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>STAFF NAME</th>
-                                    <th>NET PAID</th>
-                                    <th>MODE</th>
-                                    <th>DATE</th>
+                                    <th>ROLE</th>
+                                    <th>BASIC</th>
+                                    <th>STATUS</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody id="salaryTableBody">
+                            <tbody id="payrollTableBody">
                                 <tr>
                                     <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching payroll log...
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Checking monthly salary records from database...
                                     </td>
                                 </tr>
                             </tbody>
@@ -209,91 +266,188 @@
     <script src="assets/js/realtime-db.js"></script>
 
     <script>
-        let loadedStaffList = [];
+        let allStaffList = [];
+        let allSalaryRecords = [];
 
-        async function initSalaryPage() {
-            loadedStaffList = await mdaFetchData('staff');
-            const select = document.getElementById('salStaffSelect');
-            select.innerHTML = '<option value="">-- Choose Staff Member --</option>';
+        // 1. Initial Page Load
+        async function loadMonthlyPayrollStatus() {
+            const selectedMonth = document.getElementById('selectedPayrollMonth').value;
+            document.getElementById('formDisplayMonth').value = selectedMonth;
+            document.getElementById('tableHeaderMonthTitle').innerText = selectedMonth;
 
-            loadedStaffList.forEach(st => {
+            // Fetch live Staff & Salaries from Firebase
+            [allStaffList, allSalaryRecords] = await Promise.all([
+                mdaFetchData('staff'),
+                mdaFetchData('salaries')
+            ]);
+
+            // Populate Dropdown on Left Form
+            const selectElem = document.getElementById('salStaffSelect');
+            selectElem.innerHTML = '<option value="">-- Choose Staff Member --</option>';
+            allStaffList.forEach(st => {
                 let name = st.fullName || st.name;
-                let sal = st.salary || st.basicSalary || 0;
-                select.innerHTML += `<option value="${name}" data-salary="${sal}">${name} (Rs. ${parseFloat(sal).toLocaleString()})</option>`;
+                let sal = parseFloat(st.salary || st.basicSalary || 0);
+                selectElem.innerHTML += `<option value="${name}" data-salary="${sal}">${name} (${st.designation || 'Faculty'})</option>`;
             });
 
-            loadSalaryLogs();
+            // 2. Render Table with Paid / Unpaid Status
+            renderSalaryTable(selectedMonth);
         }
 
-        function populateSalary() {
-            const select = document.getElementById('salStaffSelect');
-            const opt = select.options[select.selectedIndex];
-            const sal = opt.getAttribute('data-salary') || 0;
-            document.getElementById('salBasic').value = sal;
-            calcNet();
-        }
+        function renderSalaryTable(selectedMonth) {
+            const tbody = document.getElementById('payrollTableBody');
+            document.getElementById('statTotalTeachers').innerText = allStaffList.length;
 
-        function calcNet() {
-            let basic = parseFloat(document.getElementById('salBasic').value) || 0;
-            let allow = parseFloat(document.getElementById('salAllowance').value) || 0;
-            let ded = parseFloat(document.getElementById('salDeduction').value) || 0;
-            let net = basic + allow - ded;
-            document.getElementById('displayNetSalary').innerText = `Rs. ${net.toLocaleString()}`;
-        }
+            let paidCount = 0;
+            let paidSum = 0;
+            let unpaidCount = 0;
+            let pendingBudget = 0;
 
-        async function loadSalaryLogs() {
-            let salaries = await mdaFetchData('salaries');
-            const tbody = document.getElementById('salaryTableBody');
-            document.getElementById('salCountBadge').innerText = `${salaries.length} records`;
-
-            if (salaries.length > 0) {
+            if (allStaffList.length > 0) {
                 tbody.innerHTML = '';
-                salaries.forEach((s, idx) => {
-                    tbody.innerHTML += `
-                        <tr>
-                            <td>${idx + 1}</td>
-                            <td><strong>${s.staffName}</strong></td>
-                            <td class="text-success fw-bold">Rs. ${parseFloat(s.netSalary).toLocaleString()}</td>
-                            <td>${s.mode}</td>
-                            <td>${s.date || '2026-11-01'}</td>
-                        </tr>
-                    `;
+
+                allStaffList.forEach(st => {
+                    let sName = st.fullName || st.name;
+                    let basic = parseFloat(st.salary || st.basicSalary || 0);
+
+                    // Check if this teacher has already been paid for this specific month
+                    let record = allSalaryRecords.find(r => r.staffName === sName && r.month === selectedMonth);
+
+                    if (record) {
+                        paidCount++;
+                        let paidAmt = parseFloat(record.netSalary || basic);
+                        paidSum += paidAmt;
+
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><strong>${sName}</strong><br><small style="color:#64748b;">${st.phone || '-'}</small></td>
+                                <td>${st.designation || 'Teacher'}</td>
+                                <td>Rs. ${basic.toLocaleString()}</td>
+                                <td>
+                                    <span class="status-badge-paid"><i class="fas fa-check-circle"></i> Paid</span><br>
+                                    <small style="color:#16a34a; font-size:10px;">${record.date} via ${record.mode}</small>
+                                </td>
+                                <td>
+                                    <button class="btn-tool" style="font-size:11px;" onclick="window.print()"><i class="fas fa-print"></i> Slip</button>
+                                </td>
+                            </tr>
+                        `;
+                    } else {
+                        unpaidCount++;
+                        pendingBudget += basic;
+
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><strong>${sName}</strong><br><small style="color:#64748b;">${st.phone || '-'}</small></td>
+                                <td>${st.designation || 'Teacher'}</td>
+                                <td>Rs. ${basic.toLocaleString()}</td>
+                                <td><span class="status-badge-unpaid"><i class="fas fa-clock"></i> Unpaid</span></td>
+                                <td>
+                                    <button class="btn-pay-single" onclick="quickSelectStaff('${sName}', ${basic})">
+                                        <i class="fas fa-hand-holding-usd"></i> Pay Now
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }
                 });
+
+                // Update Stats
+                document.getElementById('statPaidCount').innerText = `${paidCount} Paid`;
+                document.getElementById('statPaidAmount').innerText = `Rs. ${paidSum.toLocaleString()} Disbursed`;
+                document.getElementById('statUnpaidCount').innerText = `${unpaidCount} Pending`;
+                document.getElementById('statPendingBudget').innerText = `Rs. ${pendingBudget.toLocaleString()} Due`;
+
             } else {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                            No salary disbursements recorded yet.
+                        <td colspan="5" class="text-center" style="padding:40px; color:#94a3b8;">
+                            No staff registered yet. Add staff members in "Staff Management".
                         </td>
                     </tr>
                 `;
             }
         }
 
-        document.getElementById('liveSalaryForm').addEventListener('submit', async function(e) {
+        // Quick click on "Pay Now" in table fills the left form
+        function quickSelectStaff(name, basicSalary) {
+            const selectElem = document.getElementById('salStaffSelect');
+            selectElem.value = name;
+            document.getElementById('salBasic').value = basicSalary;
+            document.getElementById('salAllowance').value = 0;
+            document.getElementById('salDeduction').value = 0;
+            calculateNetSalary();
+            document.getElementById('salStaffSelect').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function onStaffSelectChange() {
+            const select = document.getElementById('salStaffSelect');
+            const opt = select.options[select.selectedIndex];
+            const salary = opt.getAttribute('data-salary') || 0;
+            document.getElementById('salBasic').value = salary;
+            calculateNetSalary();
+        }
+
+        function calculateNetSalary() {
+            let basic = parseFloat(document.getElementById('salBasic').value) || 0;
+            let allow = parseFloat(document.getElementById('salAllowance').value) || 0;
+            let ded = parseFloat(document.getElementById('salDeduction').value) || 0;
+            let net = Math.max(0, basic + allow - ded);
+            document.getElementById('displayNetSalary').innerText = `Rs. ${net.toLocaleString()}`;
+        }
+
+        // SUBMIT PAYMENT & MARK AS PAID FOR THIS MONTH
+        document.getElementById('disburseSalaryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const salaryObj = {
+
+            const staffName = document.getElementById('salStaffSelect').value;
+            const currentMonth = document.getElementById('selectedPayrollMonth').value;
+
+            if (!staffName) {
+                alert("Please select a staff member first!");
+                return;
+            }
+
+            // Check if already paid
+            let alreadyPaid = allSalaryRecords.some(r => r.staffName === staffName && r.month === currentMonth);
+            if (alreadyPaid) {
+                alert(`Warning: ${staffName} has ALREADY been paid for ${currentMonth}!`);
+                return;
+            }
+
+            const btn = document.getElementById('btnDisburseSubmit');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Disbursing...';
+            btn.disabled = true;
+
+            const netAmount = document.getElementById('displayNetSalary').innerText.replace('Rs. ', '').replace(/,/g, '');
+
+            const salaryDisbursement = {
                 action: 'salaries',
-                staffName: document.getElementById('salStaffSelect').value,
-                netSalary: document.getElementById('displayNetSalary').innerText.replace('Rs. ', '').replace(/,/g, ''),
+                staffName: staffName,
+                month: currentMonth,
+                basicSalary: document.getElementById('salBasic').value,
+                allowance: document.getElementById('salAllowance').value,
+                deduction: document.getElementById('salDeduction').value,
+                netSalary: netAmount,
                 mode: document.getElementById('salMode').value,
                 date: new Date().toISOString().slice(0, 10)
             };
 
-            let res = await mdaSaveData('salaries', salaryObj);
+            let res = await mdaSaveData('salaries', salaryDisbursement);
             if (res.status === "success") {
-                alert('Salary disbursed and synced with Google Database successfully!');
+                alert(`✅ Salary of Rs. ${parseFloat(netAmount).toLocaleString()} successfully paid to ${staffName} for ${currentMonth}!`);
                 this.reset();
-                initSalaryPage();
+                loadMonthlyPayrollStatus(); // Instantly turns the status from UNPAID to PAID in the table!
             } else {
-                alert('Saved locally. Will sync with Google Sheet.');
-                this.reset();
-                initSalaryPage();
+                alert('Saved locally. Will sync with Firebase.');
+                loadMonthlyPayrollStatus();
             }
+
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Pay Salary & Mark as Paid';
+            btn.disabled = false;
         });
 
-        document.addEventListener('DOMContentLoaded', initSalaryPage);
+        document.addEventListener('DOMContentLoaded', loadMonthlyPayrollStatus);
     </script>
 </body>
 </html>
