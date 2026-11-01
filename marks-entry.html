@@ -3,99 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Entry - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Marks Entry - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Global & Table CSS -->
+    <!-- Global & Modules CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tables.css">
     <link rel="stylesheet" href="assets/css/forms.css">
 
     <style>
-        .marks-grid-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 950px;
-        }
-
-        .marks-grid-table th {
-            text-align: center;
-            padding: 8px 10px;
-            font-size: 11px;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .th-subject-header {
-            background: #6b21a8; /* Deep Purple as per Image 5 */
-            color: #fff;
-            font-weight: 600;
-        }
-
-        .th-sub-header {
-            background: #581c87;
-            color: #f3e8ff;
-            font-size: 10px;
-        }
-
-        .marks-grid-table td {
-            padding: 8px 10px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .mark-input {
-            width: 55px;
-            padding: 6px;
-            text-align: center;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            outline: none;
-            transition: 0.2s;
-        }
-        .mark-input:focus {
-            border-color: #7239ea;
-            box-shadow: 0 0 0 2px rgba(114, 57, 234, 0.2);
-            background: #faf5ff;
-        }
-
-        .subject-config-badge {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-        .subject-config-badge input {
-            width: 45px;
-            padding: 2px 4px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            text-align: center;
-            font-size: 11px;
-        }
-
-        .grade-badge-table {
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 11px;
-        }
+        .marks-grid-table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        .marks-grid-table th { text-align: center; padding: 8px 10px; font-size: 11px; border: 1px solid rgba(255,255,255,0.15); }
+        .th-subject-header { background: #6b21a8; color: #fff; font-weight: 600; }
+        .th-sub-header { background: #581c87; color: #f3e8ff; font-size: 10px; }
+        .marks-grid-table td { padding: 8px 10px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px; }
+        .mark-input { width: 60px; padding: 6px; text-align: center; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; font-weight: 600; outline: none; }
+        .mark-input:focus { border-color: #7239ea; background: #faf5ff; }
+        .grade-badge-table { padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px; }
         .grade-pass { background: #dcfce7; color: #15803d; }
         .grade-fail { background: #fee2e2; color: #b91c1c; }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -170,7 +102,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Marks Entry Sheet</h2>
+                <h2>Real-Time Marks Entry</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -179,197 +111,159 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Enter and update subject-wise marks for examinations</p>
+                <p class="breadcrumb">Enter student examination marks synced with Google Database</p>
             </div>
 
-            <!-- EXAM SELECTION BAR -->
+            <!-- FILTER BAR -->
             <div class="filter-section">
                 <div class="filter-grid" style="align-items: flex-end;">
                     <div class="filter-group">
-                        <label>SELECT EXAM</label>
-                        <select id="examSelect">
-                            <option value="Mid Term Exam 2026">Mid Term Exam 2026</option>
-                            <option value="First Term Assessment">First Term Assessment</option>
-                            <option value="Annual Exam 2027">Annual Exam 2027</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
                         <label>SELECT CLASS</label>
-                        <select id="classSelect">
+                        <select id="marksClass">
                             <option value="Class 10">Class 10</option>
                             <option value="Class 9">Class 9</option>
                         </select>
                     </div>
                     <div class="filter-group button-group">
-                        <button class="btn-search" onclick="alert('Student marks sheet loaded!')"><i class="fas fa-sync-alt"></i> Load Sheet</button>
+                        <button class="btn-search" onclick="loadLiveMarksSheet()"><i class="fas fa-sync-alt"></i> Load Student Register</button>
                     </div>
                 </div>
             </div>
 
-            <!-- SUBJECTS MAX MARKS CONFIGURATION (Image 5 style) -->
-            <div class="form-section" style="margin-bottom: 20px;">
-                <h4 class="section-heading" style="font-size: 13px; margin-bottom: 12px;">
-                    <i class="fas fa-sliders-h text-purple"></i> Configured Subjects & Max Marks for this Exam
-                </h4>
-                <div>
-                    <span class="subject-config-badge">
-                        <strong>English</strong> Theory: <input type="number" value="100" readonly>
-                    </span>
-                    <span class="subject-config-badge">
-                        <strong>Urdu</strong> Theory: <input type="number" value="100" readonly>
-                    </span>
-                    <span class="subject-config-badge">
-                        <strong>Mathematics</strong> Theory: <input type="number" value="100" readonly>
-                    </span>
-                    <span class="subject-config-badge">
-                        <strong>Computer Science</strong> Theory: <input type="number" value="50" readonly> Pract: <input type="number" value="50" readonly>
-                    </span>
-                </div>
-                <small style="color: #64748b; font-size: 11px;">Note: An empty cell means the student was absent. Pass percentage: 40%.</small>
-            </div>
-
-            <!-- MARKS ENTRY TABLE (Image 5 exact layout) -->
-            <div class="data-table-card">
+            <!-- MARKS TABLE -->
+            <div class="data-table-card mt-20">
                 <div class="card-header" style="justify-content: space-between;">
-                    <h4><i class="fas fa-pen text-primary"></i> Mid Term Exam 2026 — Class 10 Marks Register</h4>
-                    <div>
-                        <button class="btn-export" style="background:#16a34a;" onclick="saveMarks()"><i class="fas fa-save"></i> Save All Marks</button>
-                    </div>
+                    <h4><i class="fas fa-pen text-primary"></i> Examination Marks Register</h4>
+                    <button class="btn-export" style="background:#16a34a;" onclick="saveLiveMarks()"><i class="fas fa-save"></i> Save All Marks</button>
                 </div>
 
                 <div class="table-responsive">
                     <table class="marks-grid-table">
                         <thead>
                             <tr>
-                                <th rowspan="2" style="background:#581c87; color:#fff;" width="4%">#</th>
-                                <th rowspan="2" style="background:#581c87; color:#fff; text-align:left;" width="22%">STUDENT</th>
-                                
-                                <!-- English -->
-                                <th class="th-subject-header">ENGLISH<br><span style="font-weight:400; font-size:10px;">OUT OF 100</span></th>
-                                <!-- Urdu -->
-                                <th class="th-subject-header">URDU<br><span style="font-weight:400; font-size:10px;">OUT OF 100</span></th>
-                                <!-- Math -->
-                                <th class="th-subject-header">MATH<br><span style="font-weight:400; font-size:10px;">OUT OF 100</span></th>
-                                
-                                <!-- Computer Science (Theory + Practical) -->
-                                <th colspan="2" class="th-subject-header">COMPUTER SCIENCE<br><span style="font-weight:400; font-size:10px;">OUT OF 100</span></th>
-                                
-                                <th rowspan="2" style="background:#581c87; color:#fff;" width="8%">TOTAL<br><small>/ 400</small></th>
-                                <th rowspan="2" style="background:#581c87; color:#fff;" width="7%">%</th>
-                                <th rowspan="2" style="background:#581c87; color:#fff;" width="8%">GRADE</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="5%">#</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff; text-align:left;" width="25%">STUDENT NAME</th>
+                                <th class="th-subject-header" colspan="2">ENGLISH / URDU / MATH</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="10%">TOTAL / 300</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="10%">%</th>
+                                <th rowspan="2" style="background:#581c87; color:#fff;" width="10%">GRADE</th>
                             </tr>
                             <tr>
-                                <th class="th-sub-header">THEORY /100</th>
-                                <th class="th-sub-header">THEORY /100</th>
-                                <th class="th-sub-header">THEORY /100</th>
-                                <th class="th-sub-header">THEORY /50</th>
-                                <th class="th-sub-header">PRACT /50</th>
+                                <th class="th-sub-header">ENG /100</th>
+                                <th class="th-sub-header">MATH /100</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Student 1 -->
-                            <tr id="row_1">
-                                <td>1</td>
-                                <td style="text-align: left;">
-                                    <strong>ALI RAZA</strong><br>
-                                    <small style="color:#64748b;">Roll: 2026-0001</small>
+                        <tbody id="marksTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    Select class and click "Load Student Register" to fetch live students.
                                 </td>
-                                <td><input type="number" class="mark-input s-eng" value="85" max="100" oninput="calculateRow(1)"></td>
-                                <td><input type="number" class="mark-input s-urd" value="78" max="100" oninput="calculateRow(1)"></td>
-                                <td><input type="number" class="mark-input s-mat" value="92" max="100" oninput="calculateRow(1)"></td>
-                                <td><input type="number" class="mark-input s-cpt" value="44" max="50" oninput="calculateRow(1)"></td>
-                                <td><input type="number" class="mark-input s-cpp" value="46" max="50" oninput="calculateRow(1)"></td>
-                                <td><strong id="tot_1">345</strong></td>
-                                <td><strong id="per_1">86.2%</strong></td>
-                                <td><span class="grade-badge-table grade-pass" id="grd_1">A+</span></td>
-                            </tr>
-
-                            <!-- Student 2 -->
-                            <tr id="row_2">
-                                <td>2</td>
-                                <td style="text-align: left;">
-                                    <strong>FATIMA ZAHRA</strong><br>
-                                    <small style="color:#64748b;">Roll: 2026-0002</small>
-                                </td>
-                                <td><input type="number" class="mark-input s-eng" value="65" max="100" oninput="calculateRow(2)"></td>
-                                <td><input type="number" class="mark-input s-urd" value="70" max="100" oninput="calculateRow(2)"></td>
-                                <td><input type="number" class="mark-input s-mat" value="55" max="100" oninput="calculateRow(2)"></td>
-                                <td><input type="number" class="mark-input s-cpt" value="35" max="50" oninput="calculateRow(2)"></td>
-                                <td><input type="number" class="mark-input s-cpp" value="40" max="50" oninput="calculateRow(2)"></td>
-                                <td><strong id="tot_2">265</strong></td>
-                                <td><strong id="per_2">66.2%</strong></td>
-                                <td><span class="grade-badge-table grade-pass" id="grd_2">B</span></td>
-                            </tr>
-
-                            <!-- Student 3 -->
-                            <tr id="row_3">
-                                <td>3</td>
-                                <td style="text-align: left;">
-                                    <strong>USMAN TARIQ</strong><br>
-                                    <small style="color:#64748b;">Roll: 2026-0003</small>
-                                </td>
-                                <td><input type="number" class="mark-input s-eng" value="35" max="100" oninput="calculateRow(3)"></td>
-                                <td><input type="number" class="mark-input s-urd" value="40" max="100" oninput="calculateRow(3)"></td>
-                                <td><input type="number" class="mark-input s-mat" value="28" max="100" oninput="calculateRow(3)"></td>
-                                <td><input type="number" class="mark-input s-cpt" value="15" max="50" oninput="calculateRow(3)"></td>
-                                <td><input type="number" class="mark-input s-cpp" value="20" max="50" oninput="calculateRow(3)"></td>
-                                <td><strong id="tot_3">138</strong></td>
-                                <td><strong id="per_3">34.5%</strong></td>
-                                <td><span class="grade-badge-table grade-fail" id="grd_3">F</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Footer Save Action -->
                 <div style="padding: 15px 20px; background: #fafafa; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end;">
-                    <button class="btn-submit" style="background:#7239ea;" onclick="saveMarks()"><i class="fas fa-check"></i> Submit & Lock Marks</button>
+                    <button class="btn-submit" style="background:#7239ea;" onclick="saveLiveMarks()"><i class="fas fa-check"></i> Submit Marks to Google DB</button>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- LIVE MARKS CALCULATION SCRIPT -->
     <script>
-        function calculateRow(id) {
-            const row = document.getElementById(`row_${id}`);
+        let classStudentsCache = [];
+
+        async function loadLiveMarksSheet() {
+            const cls = document.getElementById('marksClass').value;
+            let students = await mdaFetchData('students');
+            classStudentsCache = students.filter(st => (st.class || "").trim() === cls);
+
+            const tbody = document.getElementById('marksTableBody');
+            if (classStudentsCache.length > 0) {
+                tbody.innerHTML = '';
+                classStudentsCache.forEach((st, idx) => {
+                    let adm = st.admNo || st.admissionNo;
+                    let name = st.fullName || st.name;
+                    tbody.innerHTML += `
+                        <tr id="row_${idx}">
+                            <td>${idx + 1}</td>
+                            <td style="text-align: left;"><strong>${name}</strong><br><small style="color:#64748b;">${adm}</small></td>
+                            <td><input type="number" class="mark-input m-eng" value="75" max="100" oninput="calculateLiveRow(${idx})"></td>
+                            <td><input type="number" class="mark-input m-mat" value="80" max="100" oninput="calculateLiveRow(${idx})"></td>
+                            <td><strong id="tot_${idx}">155</strong></td>
+                            <td><strong id="per_${idx}">77.5%</strong></td>
+                            <td><span class="grade-badge-table grade-pass" id="grd_${idx}">A</span></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No students registered under ${cls}.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function calculateLiveRow(idx) {
+            const row = document.getElementById(`row_${idx}`);
             const inputs = row.querySelectorAll('.mark-input');
             let total = 0;
-            const maxMarks = 400; // 100 + 100 + 100 + 50 + 50
+            const maxMarks = 200; // 100 + 100
 
-            inputs.forEach(input => {
-                let val = parseFloat(input.value) || 0;
-                total += val;
+            inputs.forEach(inp => {
+                total += parseFloat(inp.value) || 0;
             });
 
             let percentage = ((total / maxMarks) * 100).toFixed(1);
+            document.getElementById(`tot_${idx}`).innerText = total;
+            document.getElementById(`per_${idx}`).innerText = percentage + '%';
 
-            document.getElementById(`tot_${id}`).innerText = total;
-            document.getElementById(`per_${id}`).innerText = percentage + '%';
-
-            // Grade calculation
-            const gradeBadge = document.getElementById(`grd_${id}`);
+            const badge = document.getElementById(`grd_${idx}`);
             let grade = 'F';
-            gradeBadge.className = 'grade-badge-table grade-pass';
+            badge.className = 'grade-badge-table grade-pass';
 
             if (percentage >= 80) { grade = 'A+'; }
             else if (percentage >= 70) { grade = 'A'; }
             else if (percentage >= 60) { grade = 'B'; }
             else if (percentage >= 50) { grade = 'C'; }
             else if (percentage >= 40) { grade = 'D'; }
-            else { 
-                grade = 'F'; 
-                gradeBadge.className = 'grade-badge-table grade-fail';
-            }
+            else { grade = 'F'; badge.className = 'grade-badge-table grade-fail'; }
 
-            gradeBadge.innerText = grade;
+            badge.innerText = grade;
         }
 
-        function saveMarks() {
-            alert('All student examination marks have been saved successfully!');
+        async function saveLiveMarks() {
+            if (classStudentsCache.length === 0) {
+                alert("No students loaded to save marks!");
+                return;
+            }
+
+            for (let idx = 0; idx < classStudentsCache.length; idx++) {
+                let st = classStudentsCache[idx];
+                let row = document.getElementById(`row_${idx}`);
+                let total = document.getElementById(`tot_${idx}`).innerText;
+                let grade = document.getElementById(`grd_${idx}`).innerText;
+
+                let markObj = {
+                    action: 'marks',
+                    admNo: st.admNo || st.admissionNo,
+                    studentName: st.fullName || st.name,
+                    class: st.class,
+                    totalMarks: total,
+                    grade: grade
+                };
+                await mdaSaveData('marks', markObj);
+            }
+
+            alert("Exam marks saved successfully to Google Database!");
         }
     </script>
 </body>
