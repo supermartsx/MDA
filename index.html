@@ -69,13 +69,16 @@
             btn.disabled = true;
 
             try {
-                // Firebase Database se direct password check karna (Exact Path)
+                // Firebase Database se direct password check karna
                 let response = await fetch(`${FIREBASE_DB_URL}/settings/admin_password.json`);
                 let data = await response.json();
                 
-                let liveAdminPass = "mda12345"; // Fail-safe fallback agar DB mein password na ho
-                if (data && data.value) {
-                    liveAdminPass = data.value;
+                let liveAdminPass = "mda12345"; // Default fallback
+                
+                // Bada 'V' ho ya chota 'v', dono ko pakar lega
+                if (data) {
+                    if (data.value) { liveAdminPass = data.value; }
+                    else if (data.Value) { liveAdminPass = data.Value; }
                 }
 
                 if (passwordInput === liveAdminPass) {
