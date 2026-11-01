@@ -3,139 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print ID Card - MDA Mustafa Digital Ai School</title>
+    <title>Digital Student Card - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- ID Card Specific CSS -->
-    <link rel="stylesheet" href="assets/css/id-card.css">
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        body { background-color:#52565e; color:#1e293b; min-height:100vh; padding-bottom:50px; }
+
+        .top-control-bar {
+            background:#ffffff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000;
+        }
+        .btn-back { background:#f1f5f9; color:#334155; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
+        .btn-print { background:#2563eb; color:#ffffff; border:none; padding:9px 22px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; }
+
+        .cards-preview-container { display:flex; justify-content:center; align-items:center; gap:30px; padding:30px 15px; flex-wrap:wrap; }
+
+        .id-card-frame {
+            width:320px; height:500px; background:#ffffff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.3);
+            overflow:hidden; position:relative; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Front Card */
+        .front-top-header { background:linear-gradient(135deg, #1e1e2d, #4338ca); color:#fff; padding:20px 15px 35px; text-align:center; }
+        .front-top-header h3 { font-size:13.5px; font-weight:700; text-transform:uppercase; }
+        .front-top-header p { font-size:10px; color:#c7d2fe; margin-top:2px; }
+
+        .student-photo-wrapper {
+            width:95px; height:95px; border-radius:50%; border:4px solid #fff; margin:-48px auto 8px;
+            overflow:hidden; background:#fff; position:relative; z-index:5; box-shadow:0 4px 10px rgba(0,0,0,0.15);
+        }
+        .student-photo-wrapper img { width:100%; height:100%; object-fit:cover; }
+
+        .front-body { text-align:center; padding:0 20px 15px; flex:1; }
+        .front-body h2 { font-size:18px; color:#0f172a; margin-bottom:2px; }
+        .class-badge-pill { background:#e0e7ff; color:#4338ca; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:600; display:inline-block; margin-bottom:15px; }
+
+        .student-info-table { width:100%; font-size:11px; text-align:left; border-collapse:collapse; }
+        .student-info-table td { padding:4px 0; border-bottom:1px dashed #f1f5f9; }
+        .student-info-table td:first-child { color:#64748b; font-weight:600; width:95px; }
+        .student-info-table td:last-child { color:#1e293b; font-weight:600; }
+
+        .card-footer-sign { display:flex; justify-content:space-between; align-items:flex-end; padding:10px 20px 15px; border-top:1px solid #f1f5f9; background:#fafafa; }
+        .sign-box-area { text-align:center; }
+        .sign-line-draw { width:80px; border-bottom:1px solid #333; margin-bottom:3px; }
+
+        /* Back Card */
+        .back-top-strip { background:#1e1e2d; color:#fff; padding:12px 15px; text-align:center; font-size:12px; font-weight:700; }
+        .back-body-content { padding:15px 20px; flex:1; font-size:11px; text-align:center; }
+        .qr-section img { width:95px; height:95px; border:1px solid #e2e8f0; padding:3px; border-radius:6px; margin:5px 0; }
+        .rules-list { font-size:9px; color:#64748b; line-height:1.5; padding-left:15px; margin:10px 0; text-align:left; }
+        .emergency-contact-box { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:8px; border-radius:6px; font-size:10px; }
+        .card-bottom-strip { background:#4338ca; color:#ffffff; text-align:center; padding:8px 10px; font-size:9.5px; font-weight:600; }
+
+        @media print {
+            body { background:#ffffff !important; margin:0 !important; padding:0 !important; }
+            .no-print { display:none !important; }
+            .cards-preview-container { padding:10mm 0 !important; gap:15mm !important; }
+            .id-card-frame { box-shadow:none !important; border:1px solid #cbd5e1 !important; page-break-inside:avoid; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- TOP CONTROL BAR (Ye print me show nahi hoga) -->
     <div class="top-control-bar no-print">
-        <div class="controls-left">
-            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Profile</a>
-        </div>
-        
-        <!-- Theme Colors (Just for display as per Image 18) -->
-        <div class="color-switcher">
-            <span>Theme:</span>
-            <div class="color-dot active" style="background: #800020;"></div> <!-- Maroon -->
-            <div class="color-dot" style="background: #003366;"></div> <!-- Navy Blue -->
-            <div class="color-dot" style="background: #004d00;"></div> <!-- Green -->
-            <div class="color-dot" style="background: #4b0082;"></div> <!-- Purple -->
-        </div>
-
-        <div class="controls-right">
-            <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print ID Card</button>
-        </div>
+        <a href="student-home.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print ID Card</button>
     </div>
 
-    <!-- ID CARD PREVIEW AREA -->
-    <div class="id-card-wrapper">
-        
-        <!-- FRONT SIDE -->
-        <div class="id-card front-card">
-            <!-- Maroon Striped Background -->
-            <div class="card-bg-stripes"></div>
-            
-            <!-- Curved Header -->
-            <div class="card-header">
-                <div class="school-logo-circle">D</div>
-                <div class="school-header-text">
-                    <h2>DATA CLICK IT HUB</h2>
-                    <p>Bharwari Kaushambi</p>
-                </div>
-            </div>
-            
-            <!-- Yellow Curve Border -->
-            <div class="yellow-curve"></div>
-
-            <!-- Student Photo -->
-            <div class="student-photo-box">
-                <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=200" alt="Student Photo">
+    <div class="cards-preview-container">
+        <!-- FRONT CARD (DYNAMIC DATA) -->
+        <div class="id-card-frame">
+            <div class="front-top-header">
+                <h3>MDA Mustafa Digital Ai School</h3>
+                <p>Digital Student Identity Card</p>
             </div>
 
-            <!-- Student Name & Class -->
-            <h1 class="student-name">RAJ KUMAR</h1>
-            <div class="class-badge">Class 10 • Science</div>
+            <div class="student-photo-wrapper">
+                <img id="cardStudentImg" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Student">
+            </div>
 
-            <!-- Student Details -->
-            <div class="student-details">
-                <table class="details-table">
-                    <tr><td>ADM NO</td><td>: ADM002</td></tr>
-                    <tr><td>FATHER</td><td>: RAM SHARMA</td></tr>
-                    <tr><td>D.O.B.</td><td>: 22-01-2010</td></tr>
-                    <tr><td>MOBILE</td><td>: 7310095239</td></tr>
-                    <tr><td>ADDRESS</td><td>: XXXXXXXX</td></tr>
+            <div class="front-body">
+                <h2 id="cardStudentName">Student Name</h2>
+                <span class="class-badge-pill" id="cardStudentClass">Class 10 — Science</span>
+
+                <table class="student-info-table">
+                    <tr><td>ADMISSION NO:</td><td><strong id="cardAdmNo">MDA-26-0000</strong></td></tr>
+                    <tr><td>FATHER'S NAME:</td><td id="cardFatherName">Father Name</td></tr>
+                    <tr><td>D.O.B:</td><td id="cardDob">2010-01-01</td></tr>
+                    <tr><td>B-FORM / CNIC:</td><td id="cardCnic">35201-XXXXXXX-X</td></tr>
+                    <tr><td>BLOOD GROUP:</td><td id="cardBlood">B+ Positive</td></tr>
                 </table>
             </div>
 
-            <!-- Footer -->
-            <div class="card-footer">
-                <div class="session-box">
-                    <span>SESSION</span>
-                    <strong>2026-27</strong>
-                </div>
-                <div class="sign-box">
-                    <div class="sign-line"></div>
-                    <p>Principal</p>
+            <div class="card-footer-sign">
+                <span style="font-size:10px; font-weight:600; color:#475569;">SESSION: 2026-27</span>
+                <div class="sign-box-area">
+                    <div class="sign-line-draw"></div>
+                    <small style="font-size:9px; font-weight:700;">PRINCIPAL</small>
                 </div>
             </div>
         </div>
 
-        <!-- BACK SIDE -->
-        <div class="id-card back-card">
-            <div class="card-bg-stripes-top"></div>
-            
-            <div class="back-header">
-                <h2>DATA CLICK IT HUB</h2>
-                <p>STUDENT IDENTITY CARD</p>
-            </div>
-
-            <div class="back-details">
-                <table class="details-table-back">
-                    <tr><td>MOTHER</td><td>RADHA SHARMA</td></tr>
-                    <tr><td>ADDRESS</td><td>XXXXXXXX - 000000</td></tr>
-                </table>
-            </div>
-
-            <!-- Emergency Contact -->
-            <div class="emergency-box">
-                <span class="em-title">EMERGENCY CONTACT</span>
-                <strong>RAM SHARMA - 7310095239</strong>
-            </div>
-
-            <!-- QR Code Box -->
-            <div class="qr-code-section">
-                <div class="qr-img">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=ADM002-Raj-Kumar" alt="QR Code">
+        <!-- BACK CARD (DYNAMIC VERIFICATION QR) -->
+        <div class="id-card-frame">
+            <div class="back-top-strip">CARD VERIFICATION & RULES</div>
+            <div class="back-body-content">
+                <div class="qr-section">
+                    <img id="cardQrCode" src="" alt="Verification QR Code">
+                    <p style="font-size:9px; color:#64748b;">Scan QR to verify student identity</p>
                 </div>
-                <div class="qr-text">
-                    <strong>SCAN TO VERIFY</strong>
-                    <p>ADM002</p>
-                    <small>Valid for session<br>2026-27</small>
+
+                <ul class="rules-list">
+                    <li>This card is institutional property and must be displayed daily.</li>
+                    <li>If found, please return to the school administration office.</li>
+                    <li>Duplicate card fee will apply in case of damage or loss.</li>
+                </ul>
+
+                <div class="emergency-contact-box">
+                    <strong>EMERGENCY CONTACT (CAMPUS)</strong><br>
+                    <span>+92 310 5784772 | info@mdaschool.edu.pk</span>
                 </div>
             </div>
-
-            <!-- Return Text -->
-            <div class="return-box">
-                <strong>IF FOUND, PLEASE RETURN TO</strong>
-                <p>Data Click IT Hub<br>Bharwari Kaushambi<br>Ph: 7310095239<br>dataclickeducation@gmail.com</p>
-            </div>
-
-            <!-- Disclaimer -->
-            <div class="disclaimer">
-                Note: This card must be carried daily and shown on demand. It is not transferable. Loss of the card must be reported to the school office at once.
-            </div>
-
-            <div class="bottom-stripe">
-                THIS CARD IS THE PROPERTY OF THE SCHOOL
-            </div>
+            <div class="card-bottom-strip">MDA MUSTAFA DIGITAL AI SCHOOL</div>
         </div>
-
     </div>
 
+    <!-- DYNAMIC DATA INJECTION SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Read active student from sessionStorage
+            let activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
+
+            // Agar direct page khola ho toh default fallback uthao
+            if (!activeStudent) {
+                activeStudent = {
+                    name: "Ali Raza",
+                    fatherName: "Tariq Mehmood",
+                    admNo: "MDA-26-1002",
+                    class: "Class 10 (Science)",
+                    dob: "2010-05-14",
+                    cnic: "35201-1234567-1",
+                    bloodGroup: "B+"
+                };
+            }
+
+            // Fill card dynamically
+            document.getElementById('cardStudentName').innerText = activeStudent.name || activeStudent.fullName;
+            document.getElementById('cardStudentClass').innerText = activeStudent.class || "Class 10";
+            document.getElementById('cardAdmNo').innerText = activeStudent.admNo || activeStudent.admissionNo;
+            document.getElementById('cardFatherName').innerText = activeStudent.fatherName || "Father Name";
+            document.getElementById('cardDob').innerText = activeStudent.dob || "2010-01-01";
+            document.getElementById('cardCnic').innerText = activeStudent.cnic || "35201-XXXXXXX-X";
+            document.getElementById('cardBlood').innerText = activeStudent.bloodGroup || "B+ Positive";
+
+            // Update photo avatar
+            document.getElementById('cardStudentImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeStudent.name || 'Student')}&background=4338ca&color=fff&size=150`;
+
+            // Generate Dynamic QR Code
+            const qrData = `MDA School Verified Student\nName: ${activeStudent.name}\nAdmNo: ${activeStudent.admNo}\nClass: ${activeStudent.class}`;
+            document.getElementById('cardQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
+        });
+    </script>
 </body>
 </html>
