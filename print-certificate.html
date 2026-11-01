@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Certificate of Completion - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ALL-IN-ONE EMBEDDED STYLES (A4 LANDSCAPE PRINT & RESPONSIVE SCREEN) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background-color: #52565e;
+            color: #1e293b;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Top Bar (No Print) */
+        .top-control-bar {
+            background: #ffffff;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .btn-back {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-print-cert {
+            background: #d97706;
+            color: #ffffff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-print-cert:hover { background: #b45309; }
+
+        /* A4 Landscape Paper Layout */
+        .cert-screen-wrapper {
+            padding: 25px 15px;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        .a4-landscape-cert {
+            width: 100%;
+            max-width: 1050px;
+            aspect-ratio: 297 / 210; /* Standard A4 Landscape Ratio */
+            background: #ffffff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+            padding: 22px;
+            position: relative;
+            background-image: radial-gradient(#fbf9f4 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        /* Elegant Double Border with Gold Diamonds (Image 4 Exact) */
+        .outer-border-box {
+            border: 3.5px solid #0f172a; /* Deep Navy Outer */
+            height: 100%;
+            padding: 8px;
+            position: relative;
+        }
+
+        .inner-border-box {
+            border: 1.5px solid #d4af37; /* Gold Inner */
+            height: 100%;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Decorative Gold Corner Diamonds */
+        .corner-diamond {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #d4af37;
+            transform: rotate(45deg);
+        }
+        .diamond-tl { top: -8px; left: -8px; }
+        .diamond-tr { top: -8px; right: -8px; }
+        .diamond-bl { bottom: -8px; left: -8px; }
+        .diamond-br { bottom: -8px; right: -8px; }
+
+        /* Certificate Typography */
+        .institute-title {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .institute-sub {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .main-heading-cert {
+            font-family: 'Cinzel', serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #b45309; /* Elegant Bronze / Gold */
+            letter-spacing: 6px;
+            margin: 8px 0 2px 0;
+            text-transform: uppercase;
+        }
+        .cert-of-completion {
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            color: #0f172a;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .cert-this-certifies {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        /* Student Name Highlight */
+        .cert-student-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 34px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 4px 0 6px;
+            border-bottom: 2px solid #e2e8f0;
+            display: inline-block;
+            padding: 0 40px 6px;
+        }
+
+        .cert-student-meta {
+            font-size: 11.5px;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+        .cert-student-meta strong { color: #0f172a; }
+
+        /* Paragraph Description */
+        .cert-description-text {
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: #334155;
+            max-width: 820px;
+            margin: 0 auto 10px;
+        }
+        .cert-description-text strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        /* Gold Medal Stamp Emblem (Center Badge - Image 4) */
+        .cert-gold-medal {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 50%;
+            margin: 5px auto 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            border: 2px dashed #fef3c7;
+            position: relative;
+        }
+        .cert-gold-medal i { font-size: 20px; margin-bottom: 2px; }
+        .cert-gold-medal span { font-size: 7.5px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* Bottom Row (Signatures & Verification) */
+        .cert-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 15px;
+        }
+
+        .qr-verify-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+        .qr-verify-box img {
+            width: 65px;
+            height: 65px;
+            border: 1px solid #cbd5e1;
+            padding: 2px;
+            border-radius: 4px;
+        }
+        .qr-verify-box small {
+            font-size: 9px;
+            color: #64748b;
+            display: block;
+            line-height: 1.3;
+        }
+
+        .sign-area-col {
+            text-align: center;
+            width: 200px;
+        }
+        .sign-digital-stamp {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 2px;
+        }
+        .sign-line-bar {
+            border-bottom: 1.5px solid #0f172a;
+            margin-bottom: 4px;
+        }
+        .sign-area-col p {
+            font-size: 10px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
+        .cert-serial-box {
+            text-align: right;
+            font-size: 10px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        .cert-serial-box strong { color: #0f172a; }
+
+        /* Print Settings (A4 Landscape Standard) */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
+            }
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .cert-screen-wrapper {
+                padding: 0 !important;
+            }
+            .a4-landscape-cert {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .a4-landscape-cert { aspect-ratio: auto; padding: 15px; }
+            .inner-border-box { padding: 18px 12px; }
+            .main-heading-cert { font-size: 26px; }
+            .cert-student-name { font-size: 22px; padding: 0 10px 4px; }
+            .cert-bottom-row { flex-direction: column; align-items: center; gap: 15px; }
+            .cert-serial-box { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR (SCREEN ONLY) -->
+    <div class="top-control-bar no-print">
+        <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Portal</a>
+        <div style="font-size:12px; font-weight:600; color:#475569;">
+            <i class="fas fa-certificate text-warning"></i> Digital Course Certificate of Completion
+        </div>
+        <button class="btn-print-cert" onclick="window.print()"><i class="fas fa-print"></i> Print A4 Certificate</button>
+    </div>
+
+    <!-- CERTIFICATE CANVAS -->
+    <div class="cert-screen-wrapper">
+        <div class="a4-landscape-cert">
+            <div class="outer-border-box">
+                
+                <!-- Inner Border Frame -->
+                <div class="inner-border-box">
+                    
+                    <!-- 4 Gold Corner Diamonds -->
+                    <div class="corner-diamond diamond-tl"></div>
+                    <div class="corner-diamond diamond-tr"></div>
+                    <div class="corner-diamond diamond-bl"></div>
+                    <div class="corner-diamond diamond-br"></div>
+
+                    <!-- Header -->
+                    <div>
+                        <h1 class="institute-title">MDA Mustafa Digital Ai School</h1>
+                        <p class="institute-sub">Recognized Center for Computer, Artificial Intelligence & Digital Technologies</p>
+                    </div>
+
+                    <!-- Title -->
+                    <div>
+                        <h2 class="main-heading-cert">CERTIFICATE</h2>
+                        <div class="cert-of-completion">OF COMPLETION</div>
+                        <p class="cert-this-certifies">This is to certify that</p>
+                    </div>
+
+                    <!-- Student Name & Roll No (Dynamic) -->
+                    <div>
+                        <h3 class="cert-student-name" id="certStudentName">Loading Student...</h3>
+                        <div class="cert-student-meta">
+                            S/O <strong id="certFatherName">-</strong> &nbsp;|&nbsp; 
+                            Roll / Reg No: <strong id="certAdmNo">MDA-26-XXXX</strong>
+                        </div>
+                    </div>
+
+                    <!-- Paragraph Body (Dynamic Course & Grade) -->
+                    <div>
+                        <p class="cert-description-text">
+                            has successfully completed the course <strong id="certCourseName">Diploma in Computer Application & AI</strong> of <strong id="certDuration">6 Months</strong> duration at <strong>MDA Mustafa Digital Ai School</strong> and has been awarded Grade <strong id="certGrade">A+</strong>. This is to certify that the student has completed all theoretical and practical project requirements.
+                        </p>
+                    </div>
+
+                    <!-- Official Golden Center Stamp -->
+                    <div class="cert-gold-medal">
+                        <i class="fas fa-star"></i>
+                        <span>OFFICIAL CERTIFIED</span>
+                    </div>
+
+                    <!-- Bottom Signatures & QR Row -->
+                    <div class="cert-bottom-row">
+                        
+                        <!-- QR Code Verification -->
+                        <div class="qr-verify-box">
+                            <img id="certQrImg" src="" alt="Verify QR">
+                            <div>
+                                <small><strong>SCAN TO VERIFY</strong><br>Online Database Authenticated</small>
+                            </div>
+                        </div>
+
+                        <!-- Controller of Exam Signature -->
+                        <div class="sign-area-col">
+                            <div style="height:35px;"></div>
+                            <div class="sign-line-bar"></div>
+                            <p>Controller of Examinations</p>
+                        </div>
+
+                        <!-- Director / Principal Digital Signature -->
+                        <div class="sign-area-col">
+                            <div class="sign-digital-stamp">
+                                <span>Nazim Mustafa</span>
+                            </div>
+                            <div class="sign-line-bar"></div>
+                            <p>Director / Authorized Head</p>
+                        </div>
+
+                        <!-- Serial & Issue Date -->
+                        <div class="cert-serial-box">
+                            <div>Certificate No: <strong id="certSerialNo">CERT-2026-0001</strong></div>
+                            <div>Date of Issue: <strong id="certDateOfIssue">-</strong></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-Time Firebase Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        async function loadLiveCertificate() {
+            // 1. Get Admission No from URL (?adm=MDA-26-XXXX)
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm');
+
+            if (!targetAdm) {
+                let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+                if (active) targetAdm = active.admNo || active.admissionNo;
+            }
+
+            // 2. Fetch live data from Firebase
+            let [students, marksList] = await Promise.all([
+                mdaFetchData('students'),
+                mdaFetchData('marks')
+            ]);
+
+            let student = null;
+            if (targetAdm) {
+                student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                student = students[0];
+                targetAdm = student.admNo || student.admissionNo;
+            }
+
+            if (!student) {
+                document.getElementById('certStudentName').innerText = "Student Not Found!";
+                return;
+            }
+
+            // 3. Inject Real Details
+            let sName = student.fullName || student.name || "Student Name";
+            let fName = student.fatherName || "Father Name";
+            let courseTitle = student.class || "Artificial Intelligence & Digital Applications";
+
+            document.getElementById('certStudentName').innerText = sName;
+            document.getElementById('certFatherName').innerText = fName;
+            document.getElementById('certAdmNo').innerText = targetAdm;
+            document.getElementById('certCourseName').innerText = courseTitle;
+
+            // 4. Calculate Grade from Firebase Marks
+            let studentMarks = marksList.filter(m => (m.admNo === targetAdm) || (m.studentName === sName));
+            let calculatedGrade = "A+";
+
+            if (studentMarks && studentMarks.length > 0) {
+                calculatedGrade = studentMarks[studentMarks.length - 1].grade || "A+";
+            }
+            document.getElementById('certGrade').innerText = calculatedGrade;
+
+            // Duration: If it's a course, default 3 to 6 months
+            document.getElementById('certDuration').innerText = courseTitle.includes("3") ? "3 Months" : "6 Months";
+
+            // Serial Number & Date
+            const today = new Date();
+            const dateFormatted = `${today.getDate()} November ${today.getFullYear()}`;
+            const certNo = `CERT-2026-${targetAdm.replace(/[^0-9]/g, '').slice(-4) || '1001'}`;
+
+            document.getElementById('certSerialNo').innerText = certNo;
+            document.getElementById('certDateOfIssue').innerText = dateFormatted;
+
+            // Dynamic Verification QR Code
+            const qrData = `MDA School Certified Course\nStudent: ${sName}\nCourse: ${courseTitle}\nGrade: ${calculatedGrade}\nCertNo: ${certNo}`;
+            document.getElementById('certQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrData)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadLiveCertificate);
+    </script>
+</body>
+</html>
