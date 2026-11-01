@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Management & Payroll - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Salary Management - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,54 +13,18 @@
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
-        .payroll-grid-layout {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .net-salary-banner {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .payroll-grid-layout { display: grid; grid-template-columns: 380px 1fr; gap: 20px; margin-bottom: 25px; }
+        .net-salary-banner { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
         .net-salary-banner h3 { font-size: 24px; color: #16a34a; }
         .net-salary-banner p { font-size: 11px; color: #15803d; font-weight: 600; }
-
-        .btn-disburse {
-            background: #16a34a;
-            color: #fff;
-            border: none;
-            padding: 14px;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
+        .btn-disburse { background: #16a34a; color: #fff; border: none; padding: 14px; border-radius: 6px; font-size: 15px; font-weight: 600; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
         .btn-disburse:hover { background: #15803d; }
-
-        @media (max-width: 992px) {
-            .payroll-grid-layout {
-                grid-template-columns: 1fr;
-            }
-        }
+        @media (max-width: 992px) { .payroll-grid-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -135,7 +99,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Salary Management</h2>
+                <h2>Real-Time Salary Management</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -144,173 +108,90 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Process monthly staff payroll, calculate allowances/deductions, and issue pay slips (PKR)</p>
+                <p class="breadcrumb">Process monthly payroll live via Google Database (PKR)</p>
             </div>
 
-            <!-- PAYROLL SUMMARY CARDS -->
-            <div class="enquiry-stats-grid">
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-purple"><i class="fas fa-money-check-alt"></i></div>
-                    <div>
-                        <h3>Rs. 540,000</h3>
-                        <p>Total Monthly Payroll</p>
-                    </div>
-                </div>
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-green"><i class="fas fa-check-circle"></i></div>
-                    <div>
-                        <h3>Rs. 345,000</h3>
-                        <p>Disbursed (Paid)</p>
-                    </div>
-                </div>
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-orange"><i class="fas fa-clock"></i></div>
-                    <div>
-                        <h3>Rs. 195,000</h3>
-                        <p>Pending Disbursal</p>
-                    </div>
-                </div>
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-blue"><i class="fas fa-users"></i></div>
-                    <div>
-                        <h3>18 Staff</h3>
-                        <p>Eligible for Salary</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TWO COLUMN WORKSPACE -->
+            <!-- WORKSPACE -->
             <div class="payroll-grid-layout">
                 
-                <!-- LEFT: PAY SALARY FORM -->
+                <!-- LEFT: FORM -->
                 <div class="form-section" style="margin-bottom: 0;">
                     <h4 class="section-heading" style="color:#16a34a;"><i class="fas fa-hand-holding-usd"></i> Pay Salary & Voucher</h4>
                     
-                    <form id="paySalaryForm">
+                    <form id="liveSalaryForm">
                         <div class="input-group mb-15">
                             <label>SELECT STAFF MEMBER *</label>
-                            <select id="salStaffSelect" onchange="loadStaffSalaryInfo()" required>
-                                <option value="">-- Choose Staff --</option>
-                                <option value="EMP-101" data-name="Sir Bilal Ahmad" data-salary="55000">Sir Bilal Ahmad (Senior Teacher - Rs. 55,000)</option>
-                                <option value="EMP-102" data-name="Madam Ayesha Tariq" data-salary="50000">Madam Ayesha Tariq (Senior Teacher - Rs. 50,000)</option>
-                                <option value="EMP-103" data-name="Sir Usman Ghani" data-salary="48000">Sir Usman Ghani (Senior Teacher - Rs. 48,000)</option>
-                                <option value="EMP-108" data-name="Muhammad Asif" data-salary="40000">Muhammad Asif (Accountant - Rs. 40,000)</option>
+                            <select id="salStaffSelect" onchange="populateSalary()" required>
+                                <option value="">-- Loading Staff from DB --</option>
                             </select>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
-                                <label>SALARY MONTH *</label>
-                                <select id="salMonth">
-                                    <option value="October 2026">October 2026</option>
-                                    <option value="September 2026">September 2026</option>
-                                </select>
+                                <label>SALARY MONTH</label>
+                                <input type="text" value="November 2026" readonly style="background:#f1f3f5;">
                             </div>
                             <div class="input-group">
                                 <label>BASIC SALARY (Rs.)</label>
-                                <input type="number" id="salBasic" value="55000" readonly style="background:#f1f3f5; font-weight:600;">
+                                <input type="number" id="salBasic" value="0" readonly style="background:#f1f3f5; font-weight:600;">
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
-                                <label>ALLOWANCES / BONUS</label>
-                                <input type="number" id="salAllowance" value="3000" oninput="calculateNetSalary()">
+                                <label>ALLOWANCES</label>
+                                <input type="number" id="salAllowance" value="0" oninput="calcNet()">
                             </div>
                             <div class="input-group">
-                                <label>DEDUCTIONS (LEAVES/TAX)</label>
-                                <input type="number" id="salDeduction" value="1000" oninput="calculateNetSalary()">
+                                <label>DEDUCTIONS</label>
+                                <input type="number" id="salDeduction" value="0" oninput="calcNet()">
                             </div>
                         </div>
 
-                        <!-- NET PAYABLE BANNER -->
                         <div class="net-salary-banner">
                             <div>
                                 <p>NET PAYABLE SALARY</p>
-                                <h3 id="displayNetSalary">Rs. 57,000</h3>
+                                <h3 id="displayNetSalary">Rs. 0</h3>
                             </div>
                             <i class="fas fa-calculator" style="font-size: 26px; color:#16a34a;"></i>
                         </div>
 
-                        <!-- PAKISTANI PAYMENT METHODS -->
                         <div class="input-group mb-20">
                             <label>PAYMENT MODE *</label>
-                            <select id="salPayMode" required>
+                            <select id="salMode">
                                 <option value="Bank Transfer">Bank Transfer / Raast</option>
                                 <option value="Cash">Cash (Naqad)</option>
                                 <option value="Easypaisa">Easypaisa</option>
                                 <option value="JazzCash">JazzCash</option>
-                                <option value="Cheque">Bank Cheque</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn-disburse">
-                            <i class="fas fa-check-circle"></i> Disburse Salary & Print Pay Slip
-                        </button>
+                        <button type="submit" class="btn-disburse"><i class="fas fa-check-circle"></i> Disburse Salary & Sync Live</button>
                     </form>
                 </div>
 
-                <!-- RIGHT: PAYROLL REGISTER TABLE -->
+                <!-- RIGHT: TABLE -->
                 <div class="data-table-card">
-                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                        <h4><i class="fas fa-list text-primary"></i> Monthly Payroll Sheet (October 2026)</h4>
-                        <span class="badge" style="background:#dcfce7; color:#15803d;">Active Disbursal</span>
+                    <div class="card-header">
+                        <h4><i class="fas fa-list text-primary"></i> Disbursed Salaries Log</h4>
+                        <span class="badge" id="salCountBadge">Loading...</span>
                     </div>
 
                     <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>EMP ID</th>
-                                    <th>STAFF MEMBER</th>
-                                    <th>BASIC</th>
-                                    <th>ALLOWANCE</th>
-                                    <th>DEDUCT</th>
-                                    <th>NET PAYABLE</th>
-                                    <th>STATUS</th>
-                                    <th>ACTION</th>
+                                    <th>#</th>
+                                    <th>STAFF NAME</th>
+                                    <th>NET PAID</th>
+                                    <th>MODE</th>
+                                    <th>DATE</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Staff 1 -->
+                            <tbody id="salaryTableBody">
                                 <tr>
-                                    <td><span class="adm-badge">EMP-101</span></td>
-                                    <td><strong>Sir Bilal Ahmad</strong><br><small style="color:#64748b;">Computer Science</small></td>
-                                    <td>Rs. 55,000</td>
-                                    <td class="text-success">+ Rs. 3,000</td>
-                                    <td class="text-danger">- Rs. 1,000</td>
-                                    <td class="fw-bold" style="color:#16a34a;">Rs. 57,000</td>
-                                    <td><span class="badge" style="background:#fef3c7; color:#b45309;">Unpaid</span></td>
-                                    <td>
-                                        <button class="btn-view" onclick="alert('Ready to disburse salary for Sir Bilal Ahmad')"><i class="fas fa-money-bill-wave"></i></button>
-                                    </td>
-                                </tr>
-
-                                <!-- Staff 2 -->
-                                <tr>
-                                    <td><span class="adm-badge">EMP-102</span></td>
-                                    <td><strong>Madam Ayesha Tariq</strong><br><small style="color:#64748b;">English</small></td>
-                                    <td>Rs. 50,000</td>
-                                    <td class="text-success">+ Rs. 2,000</td>
-                                    <td class="text-danger">- Rs. 0</td>
-                                    <td class="fw-bold" style="color:#16a34a;">Rs. 52,000</td>
-                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Paid</span></td>
-                                    <td>
-                                        <button class="btn-view" onclick="window.print()" title="Print Pay Slip"><i class="fas fa-print"></i></button>
-                                    </td>
-                                </tr>
-
-                                <!-- Staff 3 -->
-                                <tr>
-                                    <td><span class="adm-badge">EMP-108</span></td>
-                                    <td><strong>Muhammad Asif</strong><br><small style="color:#64748b;">Accounts Officer</small></td>
-                                    <td>Rs. 40,000</td>
-                                    <td class="text-success">+ Rs. 0</td>
-                                    <td class="text-danger">- Rs. 1,500</td>
-                                    <td class="fw-bold" style="color:#16a34a;">Rs. 38,500</td>
-                                    <td><span class="badge" style="background:#dcfce7; color:#15803d;">Paid</span></td>
-                                    <td>
-                                        <button class="btn-view" onclick="window.print()" title="Print Pay Slip"><i class="fas fa-print"></i></button>
+                                    <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching payroll log...
                                     </td>
                                 </tr>
                             </tbody>
@@ -323,40 +204,96 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Payroll Script -->
     <script>
-        function loadStaffSalaryInfo() {
-            const select = document.getElementById('salStaffSelect');
-            const selectedOption = select.options[select.selectedIndex];
-            const salary = selectedOption.getAttribute('data-salary') || 0;
+        let loadedStaffList = [];
 
-            document.getElementById('salBasic').value = salary;
-            calculateNetSalary();
+        async function initSalaryPage() {
+            loadedStaffList = await mdaFetchData('staff');
+            const select = document.getElementById('salStaffSelect');
+            select.innerHTML = '<option value="">-- Choose Staff Member --</option>';
+
+            loadedStaffList.forEach(st => {
+                let name = st.fullName || st.name;
+                let sal = st.salary || st.basicSalary || 0;
+                select.innerHTML += `<option value="${name}" data-salary="${sal}">${name} (Rs. ${parseFloat(sal).toLocaleString()})</option>`;
+            });
+
+            loadSalaryLogs();
         }
 
-        function calculateNetSalary() {
-            const basic = parseFloat(document.getElementById('salBasic').value) || 0;
-            const allowance = parseFloat(document.getElementById('salAllowance').value) || 0;
-            const deduction = parseFloat(document.getElementById('salDeduction').value) || 0;
+        function populateSalary() {
+            const select = document.getElementById('salStaffSelect');
+            const opt = select.options[select.selectedIndex];
+            const sal = opt.getAttribute('data-salary') || 0;
+            document.getElementById('salBasic').value = sal;
+            calcNet();
+        }
 
-            const net = basic + allowance - deduction;
+        function calcNet() {
+            let basic = parseFloat(document.getElementById('salBasic').value) || 0;
+            let allow = parseFloat(document.getElementById('salAllowance').value) || 0;
+            let ded = parseFloat(document.getElementById('salDeduction').value) || 0;
+            let net = basic + allow - ded;
             document.getElementById('displayNetSalary').innerText = `Rs. ${net.toLocaleString()}`;
         }
 
-        document.getElementById('paySalaryForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const select = document.getElementById('salStaffSelect');
-            const name = select.options[select.selectedIndex].getAttribute('data-name');
-            const net = document.getElementById('displayNetSalary').innerText;
-            const mode = document.getElementById('salPayMode').value;
+        async function loadSalaryLogs() {
+            let salaries = await mdaFetchData('salaries');
+            const tbody = document.getElementById('salaryTableBody');
+            document.getElementById('salCountBadge').innerText = `${salaries.length} records`;
 
-            if (confirm(`Confirm payment of ${net} to ${name} via ${mode}?`)) {
-                alert(`Salary Disbursed Successfully to ${name}!\nOpening Pay Slip for print...`);
-                window.print();
+            if (salaries.length > 0) {
+                tbody.innerHTML = '';
+                salaries.forEach((s, idx) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td><strong>${s.staffName}</strong></td>
+                            <td class="text-success fw-bold">Rs. ${parseFloat(s.netSalary).toLocaleString()}</td>
+                            <td>${s.mode}</td>
+                            <td>${s.date || '2026-11-01'}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No salary disbursements recorded yet.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        document.getElementById('liveSalaryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const salaryObj = {
+                action: 'salaries',
+                staffName: document.getElementById('salStaffSelect').value,
+                netSalary: document.getElementById('displayNetSalary').innerText.replace('Rs. ', '').replace(/,/g, ''),
+                mode: document.getElementById('salMode').value,
+                date: new Date().toISOString().slice(0, 10)
+            };
+
+            let res = await mdaSaveData('salaries', salaryObj);
+            if (res.status === "success") {
+                alert('Salary disbursed and synced with Google Database successfully!');
+                this.reset();
+                initSalaryPage();
+            } else {
+                alert('Saved locally. Will sync with Google Sheet.');
+                this.reset();
+                initSalaryPage();
             }
         });
+
+        document.addEventListener('DOMContentLoaded', initSalaryPage);
     </script>
 </body>
 </html>
