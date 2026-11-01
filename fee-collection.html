@@ -111,7 +111,7 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Collect student fees live and sync with Google Database (PKR)</p>
+                <p class="breadcrumb">Collect student fees and automatically clear pending dues in database (PKR)</p>
             </div>
 
             <!-- SEARCH BAR -->
@@ -138,19 +138,19 @@
                         <img src="https://ui-avatars.com/api/?name=Student&background=7239ea&color=fff&size=60" style="border-radius: 8px;">
                         <div>
                             <h4 style="margin: 0; color: #222;" id="displayStuName">Select a Student</h4>
-                            <p style="font-size: 12px; color: #666; margin: 3px 0;" id="displayStuMeta">Adm No: - | Class: -</p>
+                            <p style="font-size: 12px; color: #64748b; margin: 3px 0;" id="displayStuMeta">Adm No: - | Class: -</p>
                         </div>
                     </div>
 
                     <div class="due-amount-banner">
                         <div>
-                            <p>PENDING DUE</p>
+                            <p>CURRENT PENDING DUE</p>
                             <h3 id="displayDueAmount">Rs. 0</h3>
                         </div>
                         <i class="fas fa-exclamation-circle" style="font-size: 30px; color: #dc2626;"></i>
                     </div>
 
-                    <h5 style="font-size: 12px; color: #777; margin-bottom: 10px;">FEE COMPONENTS:</h5>
+                    <h5 style="font-size: 12px; color: #777; margin-bottom: 10px;">FEE HEADS:</h5>
                     <div class="fee-item-row">
                         <span>Tuition & General Dues</span>
                         <span class="fw-bold" id="displayComponentFee">Rs. 0</span>
@@ -159,13 +159,13 @@
 
                 <!-- RIGHT: PAYMENT FORM -->
                 <div class="receipt-card">
-                    <h4 class="section-heading" style="color: #16a34a;"><i class="fas fa-receipt"></i> Collect Payment & Generate Receipt</h4>
+                    <h4 class="section-heading" style="color: #16a34a;"><i class="fas fa-receipt"></i> Collect Payment & Clear Due</h4>
                     
                     <form id="liveFeeCollectionForm">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                             <div class="input-group">
                                 <label>RECEIPT NO</label>
-                                <input type="text" id="rcpNo" value="RCP-2610-1001" readonly style="background:#f1f3f5; font-weight:600;">
+                                <input type="text" id="rcpNo" value="RCP-2611-1001" readonly style="background:#f1f3f5; font-weight:600;">
                             </div>
                             <div class="input-group">
                                 <label>PAYMENT DATE</label>
@@ -190,11 +190,11 @@
 
                         <div class="input-group mb-20">
                             <label>REMARKS</label>
-                            <input type="text" id="payRemarks" placeholder="Optional notes">
+                            <input type="text" id="payRemarks" placeholder="e.g. Paid in full for term">
                         </div>
 
-                        <button type="submit" class="btn-pay-now">
-                            <i class="fas fa-check-circle"></i> Confirm Collection & Sync Live
+                        <button type="submit" id="btnSubmitFee" class="btn-pay-now">
+                            <i class="fas fa-check-circle"></i> Confirm Collection & Clear Due
                         </button>
                     </form>
                 </div>
@@ -209,21 +209,35 @@
     <script src="assets/js/realtime-db.js"></script>
 
     <script>
+        let currentLoadedStudent = null;
+
         document.addEventListener('DOMContentLoaded', () => {
             const rand = Math.floor(1000 + Math.random() * 9000);
             document.getElementById('rcpNo').value = `RCP-2611-${rand}`;
+
+            // Check if student is passed in URL (?adm=MDA-26-XXXX)
+            const urlParams = new URLSearchParams(window.location.search);
+            let prefillAdm = urlParams.get('adm');
+            if (prefillAdm) {
+                document.getElementById('feeStudentSearch').value = prefillAdm;
+                searchStudentFee();
+            }
         });
 
         async function searchStudentFee() {
-            let query = document.getElementById('feeStudentSearch').value.toUpperCase();
-            let students = await mdaFetchData('students');
-            
-            let found = students.find(s => (s.admNo || s.admissionNo || "").toUpperCase() === query || (s.fullName || s.name || "").toUpperCase().includes(query));
+            let query = document.getElementById('feeStudentSearch').value.toUpperCase().trim();
+            if (!query) return;
 
-            if (found) {
-                document.getElementById('displayStuName').innerText = found.fullName || found.name;
-                document.getElementById('displayStuMeta').innerText = `Adm No: ${found.admNo || found.admissionNo} | Class: ${found.class}`;
-                let due = parseFloat(found.pendingDue || 5000);
+            let students = await mdaFetchData('students');
+            currentLoadedStudent = students.find(s => (s.admNo || s.admissionNo || "").toUpperCase() === query || (s.fullName || s.name || "").toUpperCase().includes(query));
+
+            if (currentLoadedStudent) {
+                let sName = currentLoadedStudent.fullName || currentLoadedStudent.name;
+                let adm = currentLoadedStudent.admNo || currentLoadedStudent.admissionNo;
+                document.getElementById('displayStuName').innerText = sName;
+                document.getElementById('displayStuMeta').innerText = `Adm No: ${adm} | Class: ${currentLoadedStudent.class}`;
+                
+                let due = parseFloat(currentLoadedStudent.pendingDue || 0);
                 document.getElementById('displayDueAmount').innerText = `Rs. ${due.toLocaleString()}`;
                 document.getElementById('displayComponentFee').innerText = `Rs. ${due.toLocaleString()}`;
                 document.getElementById('payAmount').value = due;
@@ -232,33 +246,58 @@
             }
         }
 
+        // ================= SUBMIT & AUTO-CLEAR PENDING DUES =================
         document.getElementById('liveFeeCollectionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const paymentObj = {
-                action: 'fees',
-                receiptNo: document.getElementById('rcpNo').value,
-                date: document.getElementById('rcpDate').value,
-                studentName: document.getElementById('displayStuName').innerText,
-                amount: document.getElementById('payAmount').value,
-                mode: document.getElementById('payMode').value,
-                remarks: document.getElementById('payRemarks').value.trim()
-            };
-
-            if (paymentObj.studentName === "Select a Student") {
+            if (!currentLoadedStudent) {
                 alert("Please search and select a student first!");
                 return;
             }
 
-            let res = await mdaSaveData('fees', paymentObj);
-            if (res.status === "success") {
-                alert(`Fee collected successfully! Receipt #${paymentObj.receiptNo} saved to Google Database.`);
-                this.reset();
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Saved locally. Will sync with Google Sheet.');
-                window.location.href = 'dashboard.html';
+            const btn = document.getElementById('btnSubmitFee');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating Database...';
+            btn.disabled = true;
+
+            const paidAmt = parseFloat(document.getElementById('payAmount').value) || 0;
+            const rcpNumber = document.getElementById('rcpNo').value;
+            const sName = currentLoadedStudent.fullName || currentLoadedStudent.name;
+            const adm = currentLoadedStudent.admNo || currentLoadedStudent.admissionNo;
+
+            // 1. Create Payment Receipt Record
+            const paymentObj = {
+                action: 'fees',
+                receiptNo: rcpNumber,
+                admNo: adm,
+                date: document.getElementById('rcpDate').value,
+                studentName: sName,
+                amount: paidAmt,
+                mode: document.getElementById('payMode').value,
+                remarks: document.getElementById('payRemarks').value.trim()
+            };
+
+            // Save transaction to 'fees' node
+            await mdaSaveData('fees', paymentObj);
+
+            // 2. AUTO-REDUCE / CLEAR PENDING DUE FROM STUDENT RECORD
+            let currentDue = parseFloat(currentLoadedStudent.pendingDue || 0);
+            let updatedPendingDue = Math.max(0, currentDue - paidAmt); // Agar poori fees de di toh 0 ho jayega
+
+            try {
+                // Direct Firebase PATCH request to update the student's pendingDue
+                if (currentLoadedStudent.firebaseId) {
+                    await fetch(`${FIREBASE_DB_URL}/students/${currentLoadedStudent.firebaseId}.json`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ pendingDue: updatedPendingDue })
+                    });
+                }
+            } catch (err) {
+                console.error("Auto clear error:", err);
             }
+
+            alert(`✅ Payment of Rs. ${paidAmt.toLocaleString()} Collected!\nReceipt #${rcpNumber} Generated.\nNew Pending Balance: Rs. ${updatedPendingDue.toLocaleString()}`);
+            window.location.href = 'dashboard.html';
         });
     </script>
 </body>
