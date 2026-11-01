@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Students - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts -->
+    <title>Real-Time All Students - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Global CSS -->
+    <!-- Global & Table CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Table CSS (New File for this page) -->
     <link rel="stylesheet" href="assets/css/tables.css">
 </head>
 <body>
@@ -20,8 +18,16 @@
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
             <div class="sidebar-title">
-                <h4>MDA School</h4>
+                <h4 id="sidebarSchoolName">MDA School</h4>
                 <p>Management System</p>
+            </div>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
             </div>
         </div>
 
@@ -33,158 +39,171 @@
             <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
             <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
             <li><a href="all-students.html" class="active"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- TOP HEADER -->
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>All Students</h2>
+                <h2>All Active Students (Real-Time Directory)</h2>
             </div>
             <div class="header-right">
-                <button class="btn-export"><i class="fas fa-file-excel"></i> Export Excel</button>
+                <a href="new-admission.html" class="btn-export" style="background:#7239ea; text-decoration:none;"><i class="fas fa-user-plus"></i> Add New Student</a>
             </div>
         </header>
 
         <div class="dashboard-content">
-            
-            <!-- Filter Section (Matches Image 7) -->
+            <div class="page-top-bar">
+                <p class="breadcrumb">Live directory of all registered students fetched from Google Database</p>
+            </div>
+
+            <!-- FILTER SECTION -->
             <div class="filter-section">
                 <div class="filter-grid">
-                    <div class="filter-group">
-                        <label>SELECT SESSION</label>
-                        <select id="sessionFilter">
-                            <option value="2026-27">2026-27 (Current)</option>
-                            <option value="2025-26">2025-26</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>SELECT CLASS</label>
-                        <select id="classFilter">
-                            <option value="All">All Classes</option>
-                            <option value="10">Class 10</option>
-                            <option value="9">Class 9</option>
-                            <option value="8">Class 8</option>
-                        </select>
-                    </div>
                     <div class="filter-group filter-search-group">
-                        <label>SEARCH</label>
-                        <input type="text" id="searchInput" placeholder="Search Name / Adm No...">
+                        <label>SEARCH STUDENT</label>
+                        <input type="text" id="studentSearchInput" placeholder="Search by name, admission no or father name..." onkeyup="renderStudentTable()">
                     </div>
                     <div class="filter-group button-group">
-                        <button class="btn-search" onclick="filterTable()"><i class="fas fa-search"></i> Search</button>
-                        <button class="btn-clear" onclick="clearFilters()"><i class="fas fa-times"></i></button>
+                        <button class="btn-search" onclick="loadStudentsData()"><i class="fas fa-sync-alt"></i> Refresh List</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Student Data Table -->
+            <!-- STUDENT TABLE CARD -->
             <div class="data-table-card mt-20">
                 <div class="card-header">
-                    <h4><i class="fas fa-list"></i> Students List</h4>
-                    <span class="badge" id="totalStudents">2 students found</span>
+                    <h4><i class="fas fa-users text-primary"></i> Enrolled Students Directory</h4>
+                    <span class="badge" id="studentCountBadge">Loading...</span>
                 </div>
                 
                 <div class="table-responsive">
-                    <table id="studentsTable">
+                    <table id="allStudentsTable">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>ADM NO</th>
                                 <th>STUDENT NAME</th>
                                 <th>FATHER NAME</th>
-                                <th>GENDER</th>
                                 <th>CLASS</th>
+                                <th>PHONE</th>
+                                <th>PENDING DUE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Sample Data 1 -->
+                        <tbody id="studentTableBody">
                             <tr>
-                                <td>1</td>
-                                <td><span class="adm-badge">ADM-26-1052</span></td>
-                                <td><strong>RAJ KUMAR</strong></td>
-                                <td>RAM SHARMA</td>
-                                <td>Male</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td class="action-buttons">
-                                    <a href="student-profile.html" class="btn-view" title="View Profile"><i class="fas fa-eye"></i></a>
-                                    <button class="btn-edit" title="Edit"><i class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Sample Data 2 -->
-                            <tr>
-                                <td>2</td>
-                                <td><span class="adm-badge">ADM-26-1053</span></td>
-                                <td><strong>SITA SHARMA</strong></td>
-                                <td>RAM SHARMA</td>
-                                <td>Female</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td class="action-buttons">
-                                    <a href="student-profile.html" class="btn-view" title="View Profile"><i class="fas fa-eye"></i></a>
-                                    <button class="btn-edit" title="Edit"><i class="fas fa-edit"></i></button>
+                                <td colspan="8" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching students from Google Database...
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                
-                <!-- Pagination -->
-                <div class="pagination-footer">
-                    <div class="rows-per-page">
-                        Show 
-                        <select>
-                            <option>50</option>
-                            <option>100</option>
-                        </select> 
-                        per page
-                    </div>
-                    <div class="page-info">Showing 1-2 of 2</div>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
-    
-    <!-- Frontend Search Logic -->
+    <script src="assets/js/realtime-db.js"></script>
+
     <script>
-        function filterTable() {
-            let input = document.getElementById("searchInput").value.toUpperCase();
-            let table = document.getElementById("studentsTable");
-            let tr = table.getElementsByTagName("tr");
-            let count = 0;
+        let allStudentsCache = [];
 
-            for (let i = 1; i < tr.length; i++) {
-                let tdName = tr[i].getElementsByTagName("td")[2]; // Student Name Column
-                let tdAdm = tr[i].getElementsByTagName("td")[1];  // Adm No Column
-                
-                if (tdName || tdAdm) {
-                    let txtValueName = tdName.textContent || tdName.innerText;
-                    let txtValueAdm = tdAdm.textContent || tdAdm.innerText;
-                    
-                    if (txtValueName.toUpperCase().indexOf(input) > -1 || txtValueAdm.toUpperCase().indexOf(input) > -1) {
-                        tr[i].style.display = "";
-                        count++;
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }       
+        async function loadStudentsData() {
+            allStudentsCache = await mdaFetchData('students');
+            renderStudentTable();
+        }
+
+        function renderStudentTable() {
+            const query = document.getElementById('studentSearchInput').value.toUpperCase();
+            const tbody = document.getElementById('studentTableBody');
+            
+            let filtered = allStudentsCache.filter(st => {
+                let name = (st.fullName || st.name || "").toUpperCase();
+                let adm = (st.admNo || st.admissionNo || "").toUpperCase();
+                let fat = (st.fatherName || "").toUpperCase();
+                return name.includes(query) || adm.includes(query) || fat.includes(query);
+            });
+
+            document.getElementById('studentCountBadge').innerText = `${filtered.length} students found`;
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = '';
+                filtered.forEach((st, idx) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td><span class="adm-badge">${st.admNo || st.admissionNo || 'N/A'}</span></td>
+                            <td><strong>${st.fullName || st.name || 'Unnamed'}</strong></td>
+                            <td>${st.fatherName || '-'}</td>
+                            <td><span class="class-badge">${st.class || 'N/A'}</span></td>
+                            <td>${st.phone || '-'}</td>
+                            <td class="text-danger fw-bold">Rs. ${parseFloat(st.pendingDue || 0).toLocaleString()}</td>
+                            <td class="action-buttons">
+                                <a href="student-profile.html" class="btn-view" title="View Profile"><i class="fas fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-user-slash fa-2x" style="margin-bottom:8px; display:block;"></i>
+                            No students found in database. Click "Add New Student" to register.
+                        </td>
+                    </tr>
+                `;
             }
-            document.getElementById("totalStudents").innerText = count + " students found";
         }
 
-        function clearFilters() {
-            document.getElementById("searchInput").value = "";
-            filterTable();
-        }
+        document.addEventListener('DOMContentLoaded', loadStudentsData);
     </script>
 </body>
 </html>
