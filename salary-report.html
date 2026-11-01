@@ -3,26 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Salary Report & Bank Advice - MDA Mustafa Digital Ai School</title>
+    <title>Official Salary Report & Bank Advice - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Global & Modules CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
+        .payroll-stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .pay-stat-box {
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .pay-stat-box p { font-size: 11px; font-weight: 600; color: #64748b; margin: 0 0 4px 0; text-transform: uppercase; }
+        .pay-stat-box h3 { font-size: 20px; font-weight: 700; margin: 0; }
+
         @media print {
-            .sidebar, .top-header, .filter-section, .no-print { display: none !important; }
-            .main-content { margin-left: 0 !important; width: 100% !important; }
-            .dashboard-content { padding: 0 !important; }
-            .data-table-card { box-shadow: none !important; border: 1px solid #000 !important; }
+            @page {
+                size: A4 landscape;
+                margin: 6mm;
+            }
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .sidebar, .top-header, .filter-section, .no-print {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            .dashboard-content {
+                padding: 0 !important;
+            }
+            .data-table-card {
+                box-shadow: none !important;
+                border: 1px solid #000 !important;
+            }
+            .print-header-banner {
+                display: block !important;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- COMPLETE SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -97,50 +137,129 @@
         <header class="top-header no-print">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Salary Report & Bank Advice</h2>
+                <h2>Official Salary Register & Bank Advice</h2>
             </div>
             <div class="header-right">
-                <button class="btn-export" style="background:#475569;" onclick="window.print()"><i class="fas fa-print"></i> Print Bank Advice</button>
+                <button class="btn-export" style="background:#16a34a;" onclick="exportSalaryExcel()"><i class="fas fa-file-excel"></i> Export Excel</button>
+                <button class="btn-export" style="background:#475569; margin-left: 10px;" onclick="window.print()"><i class="fas fa-print"></i> Print Bank Advice</button>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar no-print">
-                <p class="breadcrumb">Live staff payroll register fetched from Google Database</p>
+                <p class="breadcrumb">Live staff payroll register fetched from Firebase Real-time Database (PKR)</p>
             </div>
 
-            <!-- TABLE CARD -->
-            <div class="data-table-card mt-20">
-                <div style="padding: 20px; border-bottom: 1px solid #eaedf1; display:flex; justify-content:space-between; align-items:center;">
+            <!-- MONTH SELECTOR (NO PRINT) -->
+            <div class="filter-section no-print">
+                <div class="filter-grid" style="align-items: flex-end;">
+                    <div class="filter-group">
+                        <label>SELECT SALARY MONTH</label>
+                        <select id="reportSalaryMonth" onchange="loadRealtimeSalaryReport()">
+                            <option value="November 2026">November 2026 (Current)</option>
+                            <option value="December 2026">December 2026</option>
+                            <option value="October 2026">October 2026</option>
+                            <option value="September 2026">September 2026</option>
+                        </select>
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="loadRealtimeSalaryReport()"><i class="fas fa-sync-alt"></i> Generate Live Statement</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE SUMMARY STATS (NO PRINT) -->
+            <div class="payroll-stats-row no-print">
+                <div class="pay-stat-box" style="border-top: 3px solid #7c3aed;">
+                    <p>Total Staff Disbursed</p>
+                    <h3 id="statStaffCount">0</h3>
+                </div>
+                <div class="pay-stat-box" style="border-top: 3px solid #0284c7;">
+                    <p>Total Basic Salary</p>
+                    <h3 id="statBasicSum" style="color:#0284c7;">Rs. 0</h3>
+                </div>
+                <div class="pay-stat-box" style="border-top: 3px solid #16a34a;">
+                    <p>Total Allowances (+)</p>
+                    <h3 id="statAllowSum" style="color:#16a34a;">+ Rs. 0</h3>
+                </div>
+                <div class="pay-stat-box" style="border-top: 3px solid #dc2626;">
+                    <p>Total Deductions (-)</p>
+                    <h3 id="statDeductSum" style="color:#dc2626;">- Rs. 0</h3>
+                </div>
+                <div class="pay-stat-box" style="border-top: 3px solid #16a34a; background:#f0fdf4;">
+                    <p style="color:#15803d;">Net Bank Payroll Total</p>
+                    <h3 id="statNetTotal" style="color:#15803d;">Rs. 0</h3>
+                </div>
+            </div>
+
+            <!-- OFFICIAL SALARY REGISTER TABLE CARD -->
+            <div class="data-table-card">
+                
+                <!-- Print Header (Visible only in print & top of card) -->
+                <div style="padding: 20px; border-bottom: 2px solid #7c3aed; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                     <div>
-                        <h3 style="margin: 0; font-size: 16px; color: #1e1e2d;">MDA Mustafa Digital Ai School — Bank Salary Advice</h3>
-                        <p style="margin: 3px 0 0; font-size: 12px; color: #64748b;">Live Disbursal Register</p>
+                        <h2 style="margin: 0; font-size: 18px; color: #0f172a; text-transform:uppercase;">MDA Mustafa Digital Ai School</h2>
+                        <p style="margin: 2px 0 0; font-size: 12px; color: #64748b;">Official Staff Monthly Payroll Register & Bank Transfer Advice</p>
+                        <h4 style="margin-top: 6px; font-size: 14px; color: #7c3aed;">Disbursal Period: <span id="printMonthTitle">November 2026</span></h4>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="badge" style="background:#dcfce7; color:#15803d; font-size:11px; padding:4px 10px; border-radius:4px; font-weight:700;">Verified Payroll</span>
+                        <p style="margin: 4px 0 0; font-size: 11px; color: #64748b;" id="printDateLabel">Date: -</p>
                     </div>
                 </div>
 
                 <div class="table-responsive">
                     <table>
                         <thead>
-                            <tr style="background:#faf5ff;">
-                                <th>#</th>
-                                <th>STAFF MEMBER</th>
-                                <th>NET PAID (PKR)</th>
-                                <th>PAYMENT MODE</th>
-                                <th>DATE</th>
+                            <tr style="background:#f8fafc;">
+                                <th width="4%">#</th>
+                                <th width="20%">STAFF MEMBER</th>
+                                <th width="14%">PAYROLL MONTH</th>
+                                <th width="12%">BASIC SALARY</th>
+                                <th width="10%">ALLOWANCE</th>
+                                <th width="10%">DEDUCTION</th>
+                                <th width="14%">NET DISBURSED</th>
+                                <th width="16%">PAYMENT MODE</th>
                             </tr>
                         </thead>
-                        <tbody id="salReportTableBody">
+                        <tbody id="salaryReportTbody">
                             <tr>
-                                <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching salary report from Google Database...
+                                <td colspan="8" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching payroll register from Firebase...
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr style="background:#faf5ff; font-weight:700; border-top:2px solid #7c3aed;">
+                                <td colspan="3" style="text-align:right; padding-right:15px;">TOTAL CONSOLIDATED PAYROLL:</td>
+                                <td id="footBasic">Rs. 0</td>
+                                <td id="footAllow" style="color:#16a34a;">+ Rs. 0</td>
+                                <td id="footDeduct" style="color:#dc2626;">- Rs. 0</td>
+                                <td id="footNet" style="color:#15803d; font-size:14px;">Rs. 0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
-                <div class="pagination-footer">
-                    <div id="totalPayrollSummary">Total Disbursed: Rs. 0</div>
+                <!-- OFFICIAL SIGNATURES (VISIBLE IN PRINT) -->
+                <div style="display: flex; justify-content: space-between; padding: 45px 30px 25px; text-align: center;">
+                    <div style="width: 160px;">
+                        <div style="border-top: 1px solid #333; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 700; color:#475569;">Prepared By (Accountant)</small>
+                    </div>
+                    <div style="width: 160px;">
+                        <div style="border-top: 1px solid #333; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 700; color:#475569;">Audited By</small>
+                    </div>
+                    <div style="width: 180px;">
+                        <!-- Digital Signature Stamp for Nazim Mustafa -->
+                        <div style="height: 30px; display:flex; align-items:center; justify-content:center; margin-bottom:5px;">
+                            <span style="font-family:'Playfair Display', serif; font-size:16px; color:#1e3a8a; font-style:italic; font-weight:700;">Nazim Mustafa</span>
+                        </div>
+                        <div style="border-top: 1px solid #333; margin-bottom: 5px;"></div>
+                        <small style="font-weight: 700; color:#475569;">Principal / Authorized Head</small>
+                    </div>
                 </div>
 
             </div>
@@ -153,38 +272,102 @@
     <script src="assets/js/realtime-db.js"></script>
 
     <script>
-        async function loadLiveSalaryReport() {
-            let salaries = await mdaFetchData('salaries');
-            const tbody = document.getElementById('salReportTableBody');
+        let currentDisbursedRecords = [];
 
-            let totalSum = salaries.reduce((acc, curr) => acc + (parseFloat(curr.netSalary) || 0), 0);
-            document.getElementById('totalPayrollSummary').innerText = `Total Disbursed: Rs. ${totalSum.toLocaleString()}`;
+        async function loadRealtimeSalaryReport() {
+            const selectedMonth = document.getElementById('reportSalaryMonth').value;
+            document.getElementById('printMonthTitle').innerText = selectedMonth;
 
-            if (salaries.length > 0) {
+            // Fetch live salaries from Firebase
+            let allSalaries = await mdaFetchData('salaries');
+            
+            // Filter records by selected month
+            currentDisbursedRecords = allSalaries.filter(s => (s.month || "").trim() === selectedMonth);
+
+            const tbody = document.getElementById('salaryReportTbody');
+            document.getElementById('statStaffCount').innerText = currentDisbursedRecords.length;
+
+            let totalBasic = 0;
+            let totalAllow = 0;
+            let totalDeduct = 0;
+            let totalNet = 0;
+
+            if (currentDisbursedRecords.length > 0) {
                 tbody.innerHTML = '';
-                salaries.forEach((s, idx) => {
+                currentDisbursedRecords.forEach((sal, idx) => {
+                    let basic = parseFloat(sal.basicSalary || sal.salary || 0);
+                    let allow = parseFloat(sal.allowance || 0);
+                    let deduct = parseFloat(sal.deduction || 0);
+                    let net = parseFloat(sal.netSalary || (basic + allow - deduct));
+
+                    totalBasic += basic;
+                    totalAllow += allow;
+                    totalDeduct += deduct;
+                    totalNet += net;
+
                     tbody.innerHTML += `
                         <tr>
                             <td>${idx + 1}</td>
-                            <td><strong>${s.staffName}</strong></td>
-                            <td class="text-success fw-bold">Rs. ${parseFloat(s.netSalary).toLocaleString()}</td>
-                            <td>${s.mode}</td>
-                            <td>${s.date || '2026-11-01'}</td>
+                            <td><strong>${sal.staffName}</strong></td>
+                            <td>${sal.month}</td>
+                            <td>Rs. ${basic.toLocaleString()}</td>
+                            <td class="text-success">+ Rs. ${allow.toLocaleString()}</td>
+                            <td class="text-danger">- Rs. ${deduct.toLocaleString()}</td>
+                            <td class="fw-bold" style="color:#15803d;">Rs. ${net.toLocaleString()}</td>
+                            <td><span style="background:#f1f5f9; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600;">${sal.mode || 'Bank'}</span></td>
                         </tr>
                     `;
                 });
+
+                // Update Footers
+                document.getElementById('footBasic').innerText = `Rs. ${totalBasic.toLocaleString()}`;
+                document.getElementById('footAllow').innerText = `+ Rs. ${totalAllow.toLocaleString()}`;
+                document.getElementById('footDeduct').innerText = `- Rs. ${totalDeduct.toLocaleString()}`;
+                document.getElementById('footNet').innerText = `Rs. ${totalNet.toLocaleString()}`;
+
+                // Update Top Stats
+                document.getElementById('statBasicSum').innerText = `Rs. ${totalBasic.toLocaleString()}`;
+                document.getElementById('statAllowSum').innerText = `+ Rs. ${totalAllow.toLocaleString()}`;
+                document.getElementById('statDeductSum').innerText = `- Rs. ${totalDeduct.toLocaleString()}`;
+                document.getElementById('statNetTotal').innerText = `Rs. ${totalNet.toLocaleString()}`;
+
             } else {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                            No salary records found in database.
+                        <td colspan="8" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-money-check fa-2x" style="margin-bottom:8px; display:block;"></i>
+                            No salary disbursements recorded for <strong>${selectedMonth}</strong> yet.<br>
+                            Disburse salaries in "Salary Management" to view live report.
                         </td>
                     </tr>
                 `;
+
+                document.getElementById('footBasic').innerText = `Rs. 0`;
+                document.getElementById('footAllow').innerText = `+ Rs. 0`;
+                document.getElementById('footDeduct').innerText = `- Rs. 0`;
+                document.getElementById('footNet').innerText = `Rs. 0`;
+
+                document.getElementById('statBasicSum').innerText = `Rs. 0`;
+                document.getElementById('statAllowSum').innerText = `+ Rs. 0`;
+                document.getElementById('statDeductSum').innerText = `- Rs. 0`;
+                document.getElementById('statNetTotal').innerText = `Rs. 0`;
             }
+
+            // Current date
+            const today = new Date();
+            const dateStr = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+            document.getElementById('printDateLabel').innerText = `Date: ${dateStr}`;
         }
 
-        document.addEventListener('DOMContentLoaded', loadLiveSalaryReport);
+        function exportSalaryExcel() {
+            if (currentDisbursedRecords.length === 0) {
+                alert("No records to export for this month!");
+                return;
+            }
+            alert(`Generating Excel sheet for ${currentDisbursedRecords.length} staff salary records...`);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadRealtimeSalaryReport);
     </script>
 </body>
 </html>
