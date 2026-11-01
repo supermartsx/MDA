@@ -3,201 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Fee Challan Voucher - MDA Mustafa Digital Ai School</title>
+    <title>Fee Ledger - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
-        body { background-color:#52565e; color:#000; min-height:100vh; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        body { background:#f8fafc; color:#1e293b; padding-bottom:60px; }
 
-        .top-control-bar {
-            background:#ffffff; padding:12px 25px; display:flex; justify-content:space-between; align-items:center;
-            box-shadow:0 4px 15px rgba(0,0,0,0.15); position:sticky; top:0; z-index:1000;
+        .top-nav {
+            background:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;
+            box-shadow:0 2px 10px rgba(0,0,0,0.04); position:sticky; top:0; z-index:100;
         }
-        .btn-back { background:#f1f5f9; color:#334155; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
-        .btn-print { background:#16a34a; color:#ffffff; border:none; padding:9px 22px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; }
+        .btn-back { background:#f1f5f9; color:#334155; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; }
 
-        .voucher-screen-wrapper { padding:20px 10px; display:flex; justify-content:center; overflow-x:auto; }
+        .container { max-width:850px; margin:20px auto; padding:0 15px; }
 
-        /* A4 Landscape Sheet (4 Slips side-by-side) */
-        .a4-landscape-sheet {
-            width:100%; max-width:1100px; background:#ffffff; box-shadow:0 10px 35px rgba(0,0,0,0.3);
-            padding:10px; display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; border-radius:4px;
+        .fee-card {
+            background:#fff; border-radius:14px; border:1px solid #e2e8f0; padding:22px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.02); margin-bottom:20px;
         }
+        .fee-header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
 
-        .challan-slip { border:1.5px solid #000; padding:8px; display:flex; flex-direction:column; justify-content:space-between; background:#fff; position:relative; }
-        .challan-slip:not(:last-child)::after {
-            content:"✂ -------------------------"; position:absolute; right:-18px; top:50%; transform:rotate(90deg); font-size:8px; color:#94a3b8;
+        /* Pakistani Payment Accounts Box */
+        .pak-bank-box {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1.5px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 22px;
         }
-
-        .slip-header { text-align:center; border-bottom:1px solid #000; padding-bottom:4px; margin-bottom:4px; }
-        .slip-header h4 { font-size:10.5px; font-weight:700; text-transform:uppercase; margin:0; line-height:1.2; }
-        .slip-sub-title { font-size:9px; font-weight:700; margin-top:2px; text-decoration:underline; }
-
-        /* Fixed Payment Account Information (Nazim Mustafa UBL & JazzCash) */
-        .bank-info-box { font-size:8.5px; line-height:1.25; text-align:center; margin:3px 0; padding-bottom:3px; border-bottom:1px solid #000; }
-        .acc-number-underline { font-size:8.5px; font-weight:700; border-bottom:1.5px solid #000; display:inline-block; font-family:monospace; }
-
-        .meta-table { width:100%; border-collapse:collapse; font-size:8.5px; margin-bottom:4px; }
-        .meta-table td { padding:2.5px 1px; border-bottom:1px solid #eee; }
-        .meta-table td.label-td { font-weight:600; color:#333; width:38%; }
-        .meta-table td.val-td { font-weight:700; color:#000; width:62%; }
-
-        .fee-table { width:100%; border-collapse:collapse; font-size:8.5px; margin:4px 0; border:1px solid #000; }
-        .fee-table th { background:#f1f5f9; border:1px solid #000; padding:2px; font-size:8px; font-weight:700; text-align:left; }
-        .fee-table td { border:1px solid #000; padding:2.5px; font-size:8.5px; }
-
-        .digital-acc-box { background:#f8fafc; border:1px dashed #000; padding:3px; font-size:7.5px; line-height:1.2; margin:3px 0; text-align:center; }
-
-        .sign-row { display:flex; justify-content:space-between; align-items:flex-end; margin-top:12px; padding-top:6px; font-size:7.5px; font-weight:600; }
-        .sign-cell { text-align:center; width:32%; border-top:1px solid #000; padding-top:2px; }
-        .copy-type-banner { text-align:center; font-size:9px; font-weight:700; margin-top:6px; padding-top:3px; border-top:1px solid #000; text-transform:uppercase; }
-
-        @media print {
-            @page { size:A4 landscape; margin:4mm; }
-            body { background:#ffffff !important; margin:0 !important; }
-            .no-print { display:none !important; }
-            .voucher-screen-wrapper { padding:0 !important; }
-            .a4-landscape-sheet { box-shadow:none !important; max-width:100% !important; width:100% !important; padding:0 !important; gap:5px !important; }
-            .challan-slip { border-width:1px !important; page-break-inside:avoid; }
+        .pak-bank-box h4 { color: #166534; font-size: 14px; margin-bottom: 12px; display:flex; align-items:center; gap:8px; }
+        .acc-detail-item {
+            display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px dashed #bbf7d0;
         }
-        @media (max-width:768px) {
-            .a4-landscape-sheet { grid-template-columns:1fr; gap:20px; }
-            .challan-slip::after { display:none; }
-        }
+        .acc-detail-item:last-child { border-bottom: none; }
+        .acc-detail-item strong { color: #14532d; }
+
+        .fee-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+        .fee-table th { background:#f1f5f9; padding:10px; text-align:left; color:#475569; font-weight:600; }
+        .fee-table td { padding:10px; border-bottom:1px solid #f1f5f9; color:#334155; }
     </style>
 </head>
 <body>
 
-    <div class="top-control-bar no-print">
+    <header class="top-nav">
         <a href="student-home.html" class="btn-back"><i class="fas fa-arrow-left"></i> Dashboard</a>
-        <div style="font-size:12px; color:#475569; font-weight:600;">
-            Personalized Fee Challan Voucher
+        <div style="font-size:12px; font-weight:600; color:#64748b;">Fee Ledger & Payments</div>
+    </header>
+
+    <div class="container">
+        
+        <!-- PAKISTANI PAYMENT ACCOUNTS DETAILS (Aapka UBL, JazzCash, Easypaisa) -->
+        <div class="pak-bank-box">
+            <h4><i class="fas fa-university"></i> Official School Bank & Mobile Wallet Accounts</h4>
+            <div class="acc-detail-item">
+                <span>Bank:</span> <strong>United Bank Limited (UBL)</strong>
+            </div>
+            <div class="acc-detail-item">
+                <span>Account Title:</span> <strong>Nazim Mustafa</strong>
+            </div>
+            <div class="acc-detail-item">
+                <span>A/C IBAN:</span> <strong style="font-family:monospace; font-size:13px;">PK79UNIL0109000409349746</strong>
+            </div>
+            <div class="acc-detail-item">
+                <span>Easypaisa / JazzCash:</span> <strong>03105784772 (Nazim Mustafa)</strong>
+            </div>
+            <small style="color:#166534; font-size:10.5px; display:block; margin-top:8px;">
+                * Fees ada karne ke baad raseed ka screenshot school ke WhatsApp (+92 310 5784772) par bheinjen.
+            </small>
         </div>
-        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print 4-Copy Voucher</button>
+
+        <!-- FEE CHALLAN DOWNLOAD BANNER -->
+        <div class="fee-card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; background:#eff6ff; border-color:#bfdbfe;">
+            <div>
+                <h4 style="font-size:14px; color:#1e40af;"><i class="fas fa-file-invoice-dollar"></i> Need Official 4-Copy Bank Challan?</h4>
+                <p style="font-size:11.5px; color:#1e3a8a; margin:2px 0 0;">Download & print official Bank / School / Student copy voucher.</p>
+            </div>
+            <a href="print-fee-voucher.html" target="_blank" class="btn-back" style="background:#2563eb; color:#fff;"><i class="fas fa-print"></i> Print 4-Copy Challan</a>
+        </div>
+
+        <!-- PAYMENT HISTORY TABLE -->
+        <div class="fee-card">
+            <div class="fee-header-row">
+                <h4 style="font-size:14px; color:#0f172a;"><i class="fas fa-history text-primary"></i> Fee Payments Record</h4>
+                <span style="font-size:11px; background:#dcfce7; color:#15803d; padding:3px 8px; border-radius:4px; font-weight:700;">Status: Paid</span>
+            </div>
+
+            <table class="fee-table">
+                <thead>
+                    <tr>
+                        <th>RECEIPT #</th>
+                        <th>PARTICULAR</th>
+                        <th>AMOUNT (RS.)</th>
+                        <th>PAYMENT MODE</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RCP-2610-01004</strong></td>
+                        <td>Tuition Fee (Current Term)</td>
+                        <td style="color:#16a34a; font-weight:700;">Rs. 5,000</td>
+                        <td>JazzCash (03105784772)</td>
+                        <td><span style="background:#dcfce7; color:#15803d; font-size:10px; padding:2px 6px; border-radius:3px;">Cleared</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-    <div class="voucher-screen-wrapper">
-        <div class="a4-landscape-sheet" id="challanContainer">
-            <!-- 4 SLIPS WILL RENDER HERE AUTOMATICALLY VIA DYNAMIC DATA -->
-        </div>
-    </div>
-
-    <script>
-        // 1. FIXED SCHOOL PAYMENT DETAILS (NAZIM MUSTAFA UBL & JAZZCASH)
-        const FIXED_PAYMENT_INFO = {
-            schoolName: "MDA Mustafa Digital Ai School",
-            bankName: "United Bank Limited (UBL)",
-            accTitle: "Nazim Mustafa",
-            accIban: "PK79UNIL0109000409349746",
-            easypaisaJazzCash: "03105784772 (Nazim Mustafa)"
-        };
-
-        // 2. DYNAMIC STUDENT DATA FROM LOGGED IN SESSION
-        function getActiveStudentData() {
-            let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
-            if (!active) {
-                active = {
-                    name: "Ali Raza",
-                    fatherName: "Tariq Mehmood",
-                    admNo: "MDA-26-1002",
-                    class: "Class 10 (Science)",
-                    cnic: "35201-1234567-1",
-                    tuitionFee: 5000,
-                    examFee: 500
-                };
-            }
-            return {
-                ...FIXED_PAYMENT_INFO,
-                voucherNo: "VCH-" + (active.admNo || "1002"),
-                issueDate: "01-Nov-2026",
-                dueDate: "10-Nov-2026",
-                studentName: active.name || active.fullName,
-                cnicBform: active.cnic || "35201-XXXXXXX-X",
-                fatherName: active.fatherName || "Father",
-                className: active.class || "Class 10",
-                session: "2026-2027",
-                tuitionFee: parseFloat(active.tuitionFee) || 5000,
-                examFee: parseFloat(active.examFee) || 500,
-                lateFeeFine: 200
-            };
-        }
-
-        const slipTypes = [
-            "Bank Copy",
-            "Account Office Copy",
-            "School / Admin Copy",
-            "Student's Copy"
-        ];
-
-        function renderChallan() {
-            const data = getActiveStudentData();
-            const container = document.getElementById('challanContainer');
-            container.innerHTML = '';
-
-            const totalNormal = data.tuitionFee + data.examFee;
-            const totalLate = totalNormal + data.lateFeeFine;
-
-            slipTypes.forEach((copyName) => {
-                container.innerHTML += `
-                    <div class="challan-slip">
-                        <div class="slip-header">
-                            <h4>${data.schoolName}</h4>
-                            <div class="slip-sub-title">BANK CREDIT VOUCHER</div>
-                        </div>
-
-                        <!-- Fixed Bank & Account Details -->
-                        <div class="bank-info-box">
-                            <div>Bank: <strong>${data.bankName}</strong></div>
-                            <div>Account Title: <strong>${data.accTitle}</strong></div>
-                            <div>A/C IBAN: <span class="acc-number-underline">${data.accIban}</span></div>
-                        </div>
-
-                        <!-- DYNAMIC LOGGED IN STUDENT DETAILS -->
-                        <table class="meta-table">
-                            <tr><td class="label-td">Voucher #:</td><td class="val-td">${data.voucherNo}</td></tr>
-                            <tr><td class="label-td">Due Date:</td><td class="val-td" style="color:#b91c1c;">${data.dueDate}</td></tr>
-                            <tr><td class="label-td">Name:</td><td class="val-td">${data.studentName}</td></tr>
-                            <tr><td class="label-td">CNIC/B-Form:</td><td class="val-td">${data.cnicBform}</td></tr>
-                            <tr><td class="label-td">F-Name:</td><td class="val-td">${data.fatherName}</td></tr>
-                            <tr><td class="label-td">Class:</td><td class="val-td">${data.className}</td></tr>
-                            <tr><td class="label-td">Session:</td><td class="val-td">${data.session}</td></tr>
-                        </table>
-
-                        <table class="fee-table">
-                            <thead><tr><th>Fee Particulars</th><th style="text-align:right;">Amount (Rs.)</th></tr></thead>
-                            <tbody>
-                                <tr><td>Tuition Fee</td><td style="text-align:right;">${data.tuitionFee}/-</td></tr>
-                                <tr><td>Exam / Term Fee</td><td style="text-align:right;">${data.examFee}/-</td></tr>
-                                <tr style="font-weight:700; background:#f8fafc;">
-                                    <td>Total (Within Due):</td><td style="text-align:right;">Rs. ${totalNormal}/-</td>
-                                </tr>
-                                <tr style="font-size:7.5px; color:#b91c1c;">
-                                    <td>Total (After Due):</td><td style="text-align:right;">Rs. ${totalLate}/-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <!-- Fixed Digital Payment Details -->
-                        <div class="digital-acc-box">
-                            <strong>Easypaisa / JazzCash:</strong> ${data.easypaisaJazzCash}
-                        </div>
-
-                        <div class="sign-row">
-                            <div class="sign-cell">Issued by</div>
-                            <div class="sign-cell">Checked by</div>
-                            <div class="sign-cell">Bank / Cashier</div>
-                        </div>
-
-                        <div class="copy-type-banner">${copyName}</div>
-                    </div>
-                `;
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', renderChallan);
-    </script>
 </body>
 </html>
