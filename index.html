@@ -2,49 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Ye line website ko har screen par responsive banati hai -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="assets/css/login.css">
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e1e2d, #7239ea);
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;
+        }
+        .login-container { width: 100%; max-width: 850px; }
+        .login-card {
+            background: #ffffff; border-radius: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            display: flex; overflow: hidden;
+        }
+        .login-branding {
+            flex: 1; background: linear-gradient(135deg, #121526, #2b1055); color: #ffffff;
+            padding: 40px 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .logo { max-width: 90px; margin-bottom: 20px; background: #fff; padding: 10px; border-radius: 50%; }
+        .login-branding h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .login-branding p { font-size: 13px; opacity: 0.75; }
+        .login-form-section { flex: 1; padding: 45px 35px; display: flex; flex-direction: column; justify-content: center; }
+        .login-form-section h3 { font-size: 26px; color: #1e1e2d; margin-bottom: 5px; font-weight: 700; }
+        .subtitle { color: #64748b; font-size: 13px; margin-bottom: 25px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 6px; color: #475569; font-size: 13px; font-weight: 500; }
+        .input-group input {
+            width: 100%; padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 8px;
+            font-size: 14px; outline: none; background: #f8fafc; transition: 0.3s;
+        }
+        .input-group input:focus { border-color: #7239ea; background: #fff; box-shadow: 0 0 0 3px rgba(114, 57, 234, 0.15); }
+        .login-btn {
+            width: 100%; background-color: #7239ea; color: white; border: none; padding: 13px;
+            border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .login-btn:hover { background-color: #5d2bcf; }
+        .error-message {
+            color: #dc2626; background: #ffeeec; border: 1px solid #fca5a5; padding: 10px;
+            border-radius: 6px; font-size: 13px; margin-bottom: 15px; text-align: center; display: none;
+        }
+        @media (max-width: 768px) {
+            .login-card { flex-direction: column; }
+            .login-branding { padding: 30px 20px; }
+            .login-form-section { padding: 35px 25px; }
+        }
+    </style>
 </head>
 <body>
 
     <div class="login-container">
         <div class="login-card">
-            <!-- Left Side Branding -->
             <div class="login-branding">
-                <img src="assets/images/logo.png" alt="MDA School Logo" class="logo">
+                <img src="assets/images/logo.png" alt="School Logo" class="logo" onerror="this.style.display='none'">
                 <h2>MDA Mustafa Digital Ai School</h2>
-                <p>Admin Control Panel</p>
+                <p>Google Sheet Secured Live Login</p>
             </div>
             
-            <!-- Right Side Form -->
             <div class="login-form-section">
                 <h3>Welcome Back</h3>
-                <p class="subtitle">Enter your admin password to continue</p>
+                <p class="subtitle">Checking live credentials from Google Database...</p>
                 
-                <form id="loginForm">
+                <div id="errorMessage" class="error-message">
+                    Invalid Password or Connection Error!
+                </div>
+
+                <form id="adminLoginForm">
                     <div class="input-group">
-                        <label for="adminPassword">Password *</label>
-                        <!-- type="password" password ko hide rakhega (dots show honge) -->
-                        <input type="password" id="adminPassword" placeholder="Enter Password" required>
-                    </div>
-                    
-                    <!-- Error Message Div (Hidden by default) -->
-                    <div id="errorMessage" class="error-message" style="display: none;">
-                        Incorrect Password! Please try again.
+                        <label for="adminPassword">Master Admin Password *</label>
+                        <input type="password" id="adminPassword" placeholder="Enter secure password" required>
                     </div>
 
-                    <button type="submit" class="login-btn">Secure Login</button>
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Secure Login
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- JS Link -->
-    <script src="assets/js/login.js"></script>
+    <!-- Real-Time Database Engine & Live Password Check -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const passwordInput = document.getElementById('adminPassword').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            const btn = document.getElementById('loginBtn');
+            
+            errorDiv.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking Google DB...';
+            btn.disabled = true;
+
+            try {
+                // 1. Fetch live settings from Google Sheet 'settings' tab
+                let settingsRows = await mdaFetchData('settings');
+                let liveAdminPass = "mda_password_123"; // Default fallback
+
+                if (settingsRows && settingsRows.length > 0) {
+                    let passRow = settingsRows.find(row => row.key === 'admin_password');
+                    if (passRow && passRow.value) {
+                        liveAdminPass = String(passRow.value).trim();
+                    }
+                }
+
+                if (passwordInput === liveAdminPass) {
+                    // Success
+                    sessionStorage.setItem('isMDAAdmin', 'true');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Wrong password
+                    errorDiv.innerText = "Incorrect Admin Password!";
+                    errorDiv.style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                errorDiv.innerText = "Failed to connect to Google Database. Check internet/URL.";
+                errorDiv.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
