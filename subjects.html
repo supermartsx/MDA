@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subjects Management - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Subjects Management - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,57 +13,15 @@
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
-        .subjects-layout-grid {
-            display: grid;
-            grid-template-columns: 360px 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .type-badge-theory {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-        .type-badge-both {
-            background: #f3e8ff;
-            color: #7e22ce;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .cat-badge-compulsory {
-            background: #dcfce7;
-            color: #15803d;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-        .cat-badge-elective {
-            background: #ffedd5;
-            color: #c2410c;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        @media (max-width: 992px) {
-            .subjects-layout-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .subjects-layout-grid { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 25px; }
+        .type-badge-theory { background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+        .cat-badge-compulsory { background: #dcfce7; color: #15803d; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+        @media (max-width: 992px) { .subjects-layout-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -138,7 +96,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Subjects Master</h2>
+                <h2>Real-Time Subjects Master</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -147,146 +105,65 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Define school subjects, subject codes, and curriculum categories</p>
+                <p class="breadcrumb">Define school subjects live in Google Database</p>
             </div>
 
-            <!-- TWO COLUMN WORKSPACE -->
+            <!-- WORKSPACE -->
             <div class="subjects-layout-grid">
                 
-                <!-- LEFT COLUMN: ADD NEW SUBJECT FORM -->
+                <!-- LEFT: FORM -->
                 <div class="form-section" style="margin-bottom: 0;">
                     <h4 class="section-heading"><i class="fas fa-plus-circle text-primary"></i> Add New Subject</h4>
                     
-                    <form id="addSubjectForm">
+                    <form id="liveSubjectForm">
                         <div class="input-group mb-15">
                             <label>SUBJECT NAME *</label>
-                            <input type="text" id="subName" placeholder="e.g. Computer Science / Mathematics" required>
+                            <input type="text" id="subName" placeholder="e.g. Computer Science" required>
                         </div>
-
                         <div class="input-group mb-15">
                             <label>SUBJECT CODE *</label>
-                            <input type="text" id="subCode" placeholder="e.g. CS-10, ENG-09, ISL-01" required>
+                            <input type="text" id="subCode" placeholder="e.g. CS-10" required>
                         </div>
-
                         <div class="input-group mb-15">
                             <label>SUBJECT TYPE *</label>
-                            <select id="subType" required>
+                            <select id="subType">
                                 <option value="Theory Only">Theory Only</option>
                                 <option value="Theory + Practical">Theory + Practical</option>
-                                <option value="Practical Only">Practical Only</option>
                             </select>
                         </div>
-
-                        <div class="input-group mb-15">
-                            <label>CATEGORY *</label>
-                            <select id="subCat" required>
-                                <option value="Compulsory">Compulsory (Laazmi)</option>
-                                <option value="Elective">Elective / Science (Ikhtiyari)</option>
-                                <option value="Optional">Optional / Religious</option>
-                            </select>
-                        </div>
-
                         <div class="input-group mb-20">
-                            <label>PASSING PERCENTAGE (%)</label>
-                            <input type="number" id="subPassMarks" value="40" placeholder="40">
+                            <label>CATEGORY *</label>
+                            <select id="subCat">
+                                <option value="Compulsory">Compulsory</option>
+                                <option value="Elective">Elective</option>
+                            </select>
                         </div>
-
-                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;">
-                            <i class="fas fa-save"></i> Save Subject
-                        </button>
+                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;"><i class="fas fa-save"></i> Save Subject</button>
                     </form>
                 </div>
 
-                <!-- RIGHT COLUMN: SUBJECTS DIRECTORY TABLE -->
+                <!-- RIGHT: TABLE -->
                 <div class="data-table-card">
-                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                        <h4><i class="fas fa-book text-primary"></i> Active Curriculum Subjects</h4>
-                        <span class="badge" id="subCountBadge">6 Subjects Defined</span>
+                    <div class="card-header">
+                        <h4><i class="fas fa-book text-primary"></i> Curriculum Subjects</h4>
+                        <span class="badge" id="subCountBadge">Loading...</span>
                     </div>
 
                     <div class="table-responsive">
-                        <table id="subjectsTable">
+                        <table>
                             <thead>
                                 <tr>
-                                    <th width="5%">#</th>
-                                    <th width="15%">CODE</th>
-                                    <th width="30%">SUBJECT NAME</th>
-                                    <th width="20%">TYPE</th>
-                                    <th width="20%">CATEGORY</th>
-                                    <th width="10%">ACTION</th>
+                                    <th>#</th>
+                                    <th>CODE</th>
+                                    <th>SUBJECT NAME</th>
+                                    <th>TYPE</th>
+                                    <th>CATEGORY</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Subject 1 -->
+                            <tbody id="subjectsTableBody">
                                 <tr>
-                                    <td>1</td>
-                                    <td><span class="adm-badge">ENG-10</span></td>
-                                    <td><strong>English Compulsory</strong></td>
-                                    <td><span class="type-badge-theory">Theory Only</span></td>
-                                    <td><span class="cat-badge-compulsory">Compulsory</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <!-- Subject 2 -->
-                                <tr>
-                                    <td>2</td>
-                                    <td><span class="adm-badge">URD-10</span></td>
-                                    <td><strong>Urdu Lazmi</strong></td>
-                                    <td><span class="type-badge-theory">Theory Only</span></td>
-                                    <td><span class="cat-badge-compulsory">Compulsory</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <!-- Subject 3 -->
-                                <tr>
-                                    <td>3</td>
-                                    <td><span class="adm-badge">ISL-10</span></td>
-                                    <td><strong>Islamiyat / Ethics</strong></td>
-                                    <td><span class="type-badge-theory">Theory Only</span></td>
-                                    <td><span class="cat-badge-compulsory">Compulsory</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <!-- Subject 4 -->
-                                <tr>
-                                    <td>4</td>
-                                    <td><span class="adm-badge">MTH-10</span></td>
-                                    <td><strong>Mathematics (Science)</strong></td>
-                                    <td><span class="type-badge-theory">Theory Only</span></td>
-                                    <td><span class="cat-badge-elective">Elective</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <!-- Subject 5 -->
-                                <tr>
-                                    <td>5</td>
-                                    <td><span class="adm-badge">CS-10</span></td>
-                                    <td><strong>Computer Science</strong></td>
-                                    <td><span class="type-badge-both">Theory + Practical</span></td>
-                                    <td><span class="cat-badge-elective">Elective</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <!-- Subject 6 -->
-                                <tr>
-                                    <td>6</td>
-                                    <td><span class="adm-badge">PHY-10</span></td>
-                                    <td><strong>Physics</strong></td>
-                                    <td><span class="type-badge-both">Theory + Practical</span></td>
-                                    <td><span class="cat-badge-elective">Elective</span></td>
-                                    <td class="action-buttons">
-                                        <button class="btn-edit" title="Edit"><i class="fas fa-pen"></i></button>
-                                        <button class="btn-view" style="background:#fee2e2; color:#dc2626;" title="Delete"><i class="fas fa-trash"></i></button>
+                                    <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching subjects from Google Database...
                                     </td>
                                 </tr>
                             </tbody>
@@ -299,18 +176,64 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Add Subject Script -->
     <script>
-        document.getElementById('addSubjectForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('subName').value;
-            const code = document.getElementById('subCode').value;
+        async function loadSubjectsData() {
+            let subjects = await mdaFetchData('subjects');
+            const tbody = document.getElementById('subjectsTableBody');
+            document.getElementById('subCountBadge').innerText = `${subjects.length} subjects`;
 
-            alert(`Subject "${name} (${code})" added successfully!`);
-            this.reset();
+            if (subjects.length > 0) {
+                tbody.innerHTML = '';
+                subjects.forEach((s, idx) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td><span class="adm-badge">${s.code || s.subCode}</span></td>
+                            <td><strong>${s.name || s.subName}</strong></td>
+                            <td><span class="type-badge-theory">${s.type || s.subType}</span></td>
+                            <td><span class="cat-badge-compulsory">${s.category || s.subCat}</span></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No subjects defined yet. Add a subject above.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        document.getElementById('liveSubjectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const newSub = {
+                action: 'subjects',
+                name: document.getElementById('subName').value.trim(),
+                code: document.getElementById('subCode').value.trim(),
+                type: document.getElementById('subType').value,
+                category: document.getElementById('subCat').value
+            };
+
+            let res = await mdaSaveData('subjects', newSub);
+            if (res.status === "success") {
+                alert('Subject saved and synced with Google Database successfully!');
+                this.reset();
+                loadSubjectsData();
+            } else {
+                alert('Saved locally. Will sync with Google Sheet.');
+                this.reset();
+                loadSubjectsData();
+            }
         });
+
+        document.addEventListener('DOMContentLoaded', loadSubjectsData);
     </script>
 </body>
 </html>
