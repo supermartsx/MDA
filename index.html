@@ -55,6 +55,7 @@
         </div>
     </div>
 
+    <!-- Real-Time Database Engine & Live Password Check -->
     <script src="assets/js/realtime-db.js"></script>
     <script>
         document.getElementById('adminLoginForm').addEventListener('submit', async function(event) {
@@ -69,35 +70,61 @@
             btn.disabled = true;
 
             try {
-                // Firebase Database se direct password check karna
-                let response = await fetch(`${FIREBASE_DB_URL}/settings/admin_password.json`);
+                // Aapki exact Firebase URL
+                const DB_URL = "https://mda-f36d3-default-rtdb.firebaseio.com";
+                
+                let response = await fetch(`${DB_URL}/settings/admin_password.json`);
                 let data = await response.json();
                 
-                let liveAdminPass = "mda12345"; // Default fallback
-                
-                // Bada 'V' ho ya chota 'v', dono ko pakar lega
-                if (data) {
-                    if (data.value) { liveAdminPass = data.value; }
-                    else if (data.Value) { liveAdminPass = data.Value; }
+                // 1. Agar Firebase rules (permissions) ka masla hai
+                if (data && data.error) {
+                    errorDiv.innerText = "Firebase Rules Error! Please go to Firebase > Rules and set .read and .write to true.";
+                    errorDiv.style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
+                    btn.disabled = false;
+                    return;
                 }
 
-                if (passwordInput === liveAdminPass) {
+                let liveAdminPass = "mda12345"; // Default fallback
+                
+                // 2. Har tarah ki spelling (value, Value, VALUE) ko theek se read karne ka tareeqa
+                if (data) {
+                    if (typeof data === 'string') {
+                        liveAdminPass = data;
+                    } else if (typeof data === 'object') {
+                        if (data.value) liveAdminPass = data.value;
+                        else if (data.Value) liveAdminPass = data.Value;
+                        else {
+                            let firstKey = Object.keys(data)[0];
+                            if(firstKey) liveAdminPass = data[firstKey];
+                        }
+                    }
+                }
+
+                // 3. Agar Firebase mein ghalti se double quotes (" ") lag gaye hain, toh unhe saaf karna
+                liveAdminPass = String(liveAdminPass).replace(/['"]/g, '').trim();
+                let typedPass = passwordInput.replace(/['"]/g, '').trim();
+
+                // 4. Final Password Check
+                if (typedPass === liveAdminPass) {
                     sessionStorage.setItem('isMDAAdmin', 'true');
                     window.location.href = 'dashboard.html';
                 } else {
-                    errorDiv.innerText = "Incorrect Admin Password!";
+                    // DEBUG MODE: Ab error mein show hoga ke Firebase mein asal password kya save hai!
+                    errorDiv.innerHTML = `<strong>Incorrect!</strong><br>Database mein yeh password save hai: <span style="color:blue;">${liveAdminPass}</span>`;
                     errorDiv.style.display = 'block';
                     btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
                     btn.disabled = false;
                 }
             } catch (err) {
                 console.error(err);
-                errorDiv.innerText = "Failed to connect to Firebase. Check URL & Internet.";
+                errorDiv.innerText = "Internet ya Firebase connection ka masla hai.";
                 errorDiv.style.display = 'block';
                 btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
                 btn.disabled = false;
             }
         });
     </script>
+    
 </body>
 </html>
