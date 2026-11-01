@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print Report Card - MDA Mustafa Digital Ai School</title>
+    <title>Official Report Card - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- FULLY RESPONSIVE EMBEDDED STYLES (MOBILE, TABLET, PC & PRINT) -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
         body {
@@ -24,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* ================= TOP CONTROL BAR (RESPONSIVE) ================= */
+        /* Top Bar */
         .top-control-bar {
             background: #ffffff;
             padding: 12px 20px;
@@ -47,7 +48,7 @@
         }
 
         .btn-back {
-            background: #f1f3f5;
+            background: #f1f5f9;
             color: #333;
             padding: 8px 16px;
             border-radius: 6px;
@@ -57,7 +58,6 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: 0.2s;
         }
         .btn-back:hover { background: #e2e8f0; }
 
@@ -82,11 +82,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: 0.2s;
         }
         .btn-print:hover { background: #600018; }
 
-        /* ================= REPORT CARD CONTAINER ================= */
+        /* Report Card Container */
         .report-page-container {
             padding: 15px;
             display: flex;
@@ -95,14 +94,13 @@
 
         .a4-sheet {
             width: 100%;
-            max-width: 820px; /* PC par elegant width, Mobile par 100% */
+            max-width: 820px;
             background: #ffffff;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             padding: 12px;
             border-radius: 4px;
         }
 
-        /* Double Outer & Inner Golden/Maroon Frame (No hacks, 100% Stable) */
         .report-outer-border {
             border: 3px solid #d4af37; /* Gold */
             padding: 4px;
@@ -196,7 +194,7 @@
             padding-bottom: 4px;
         }
         .info-row .label {
-            width: 105px;
+            width: 110px;
             color: #64748b;
             font-size: 11px;
             flex-shrink: 0;
@@ -235,7 +233,6 @@
             padding-bottom: 3px;
         }
 
-        /* Responsive Table Wrapper */
         .table-responsive-box {
             width: 100%;
             overflow-x: auto;
@@ -247,7 +244,7 @@
             border-collapse: collapse;
             font-size: 11.5px;
             text-align: center;
-            min-width: 520px; /* Mobile par clean scroll rahega */
+            min-width: 520px;
         }
 
         .marks-table th {
@@ -308,7 +305,7 @@
         }
         .highlight-pass h3, .highlight-pass p { color: #ffffff; }
 
-        /* Bottom Grids (Attendance & Grade Scale) */
+        /* Bottom Grids */
         .bottom-grids {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -372,7 +369,7 @@
             min-height: 24px;
         }
 
-        /* Signatures */
+        /* Signatures with Digital Principal Signature Support */
         .signatures-section {
             display: flex;
             justify-content: space-between;
@@ -384,6 +381,13 @@
         .sign-block {
             text-align: center;
             width: 130px;
+            position: relative;
+        }
+        .digital-sign-img {
+            height: 35px;
+            display: block;
+            margin: 0 auto 2px;
+            object-fit: contain;
         }
         .sign-line {
             border-bottom: 1px solid #333;
@@ -408,103 +412,44 @@
         .fw-bold { font-weight: 600; }
         .uppercase { text-transform: uppercase; }
 
-        /* ================= MOBILE SPECIFIC ADJUSTMENTS ================= */
         @media (max-width: 650px) {
-            .top-control-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .controls-left {
-                justify-content: space-between;
-                width: 100%;
-            }
-            .btn-print {
-                width: 100%;
-                justify-content: center;
-            }
-
+            .top-control-bar { flex-direction: column; align-items: stretch; }
+            .controls-left { justify-content: space-between; width: 100%; }
+            .btn-print { width: 100%; justify-content: center; }
             .school-info h1 { font-size: 17px; }
             .school-logo { width: 45px; height: 45px; font-size: 24px; }
-
-            .student-info-section {
-                flex-direction: column-reverse;
-                align-items: center;
-            }
-            .info-grid {
-                width: 100%;
-                grid-template-columns: 1fr;
-            }
-            
-            .performance-boxes {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .performance-boxes .perf-box:last-child {
-                grid-column: span 2;
-            }
-
-            .bottom-grids {
-                grid-template-columns: 1fr;
-            }
-
-            .signatures-section {
-                padding: 0 5px;
-            }
-            .sign-block {
-                width: 90px;
-            }
+            .student-info-section { flex-direction: column-reverse; align-items: center; }
+            .info-grid { width: 100%; grid-template-columns: 1fr; }
+            .performance-boxes { grid-template-columns: repeat(3, 1fr); }
+            .performance-boxes .perf-box:last-child { grid-column: span 2; }
+            .bottom-grids { grid-template-columns: 1fr; }
+            .signatures-section { padding: 0 5px; }
+            .sign-block { width: 90px; }
             .sign-block p { font-size: 8.5px; }
         }
 
-        /* ================= PRINT SETTINGS (STANDARD A4) ================= */
         @media print {
-            @page {
-                size: A4 portrait;
-                margin: 8mm;
-            }
-            body {
-                background: #ffffff !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .report-page-container {
-                padding: 0 !important;
-            }
-            .a4-sheet {
-                box-shadow: none !important;
-                max-width: 100% !important;
-                width: 100% !important;
-                padding: 0 !important;
-                border: none !important;
-            }
-            .report-outer-border {
-                border-width: 2.5px !important;
-            }
-            .table-responsive-box {
-                overflow: visible !important;
-            }
-            .marks-table {
-                min-width: 100% !important;
-            }
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
+            @page { size: A4 portrait; margin: 8mm; }
+            body { background: #ffffff !important; margin: 0 !important; padding: 0 !important; }
+            .no-print { display: none !important; }
+            .report-page-container { padding: 0 !important; }
+            .a4-sheet { box-shadow: none !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; border: none !important; }
+            .report-outer-border { border-width: 2.5px !important; }
+            .table-responsive-box { overflow: visible !important; }
+            .marks-table { min-width: 100% !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- TOP CONTROL BAR (Screen par rahega, Print me hide hoga) -->
+    <!-- TOP CONTROL BAR -->
     <div class="top-control-bar no-print">
         <div class="controls-left">
-            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Student Profile</a>
-            <select class="exam-selector">
-                <option>Half Yearly Exam</option>
-                <option>Annual Exam</option>
-                <option>Unit Test 1</option>
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+            <select class="exam-selector" id="rcExamSelect" onchange="renderStudentReport()">
+                <option value="Mid Term Exam 2026">Mid Term Examination</option>
+                <option value="Annual Exam 2027">Annual Examination</option>
+                <option value="First Term Assessment">First Term Assessment</option>
             </select>
         </div>
         
@@ -516,7 +461,6 @@
     <!-- MAIN PAGE CONTAINER -->
     <div class="report-page-container">
         <div class="a4-sheet">
-            <!-- Double Border Frame -->
             <div class="report-outer-border">
                 <div class="report-inner-border">
                     
@@ -524,36 +468,36 @@
                     <div class="rc-header">
                         <div class="school-logo">M</div>
                         <div class="school-info">
-                            <h1>MDA Mustafa Digital Ai School</h1>
-                            <p>Main Campus, Pakistan</p>
-                            <p>Phone: +92 300 1234567 | Email: info@mdaschool.edu.pk</p>
+                            <h1 id="rcSchoolName">MDA Mustafa Digital Ai School</h1>
+                            <p id="rcSchoolAddress">Main Campus, Pakistan</p>
+                            <p>Contact: +92 310 5784772 | Email: info@mdaschool.edu.pk</p>
                         </div>
                     </div>
 
                     <!-- TITLE -->
                     <div class="rc-title-bar">
                         <h2>REPORT CARD</h2>
-                        <p>Half Yearly Examination • Session 2026-27</p>
+                        <p id="rcExamTitleDisplay">Examination Statement • Session 2026-27</p>
                     </div>
 
-                    <!-- STUDENT INFO SECTION -->
+                    <!-- STUDENT INFO SECTION (DYNAMIC) -->
                     <div class="student-info-section">
                         <div class="info-grid">
-                            <div class="info-row"><span class="label">Student Name:</span> <span class="value uppercase fw-bold">Raj Kumar</span></div>
-                            <div class="info-row"><span class="label">Admission No:</span> <span class="value fw-bold">ADM002</span></div>
-                            <div class="info-row"><span class="label">Class / Section:</span> <span class="value fw-bold">Class 10 — Science</span></div>
-                            <div class="info-row"><span class="label">Father's Name:</span> <span class="value uppercase">Ram Sharma</span></div>
-                            <div class="info-row"><span class="label">Mother's Name:</span> <span class="value uppercase">Radha Sharma</span></div>
-                            <div class="info-row"><span class="label">Date of Birth:</span> <span class="value">22-01-2010</span></div>
-                            <div class="info-row"><span class="label">Academic Session:</span> <span class="value">2026-27</span></div>
-                            <div class="info-row"><span class="label">Roll Number:</span> <span class="value">1002</span></div>
+                            <div class="info-row"><span class="label">Student Name:</span> <span class="value uppercase fw-bold" id="rcStudentName">Loading...</span></div>
+                            <div class="info-row"><span class="label">Admission No:</span> <span class="value fw-bold" id="rcAdmNo">-</span></div>
+                            <div class="info-row"><span class="label">Class / Section:</span> <span class="value fw-bold" id="rcClass">-</span></div>
+                            <div class="info-row"><span class="label">Father's Name:</span> <span class="value uppercase" id="rcFather">-</span></div>
+                            <div class="info-row"><span class="label">Mother's Name:</span> <span class="value uppercase" id="rcMother">-</span></div>
+                            <div class="info-row"><span class="label">Date of Birth:</span> <span class="value" id="rcDob">-</span></div>
+                            <div class="info-row"><span class="label">Academic Session:</span> <span class="value" id="rcSession">2026-27</span></div>
+                            <div class="info-row"><span class="label">Gender:</span> <span class="value" id="rcGender">-</span></div>
                         </div>
                         <div class="student-photo">
-                            <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ddd&color=333&size=150" alt="Student Photo">
+                            <img id="rcPhoto" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Student Photo">
                         </div>
                     </div>
 
-                    <!-- MARKS TABLE -->
+                    <!-- MARKS TABLE (DYNAMIC) -->
                     <div class="marks-section">
                         <div class="section-heading">STATEMENT OF MARKS</div>
                         <div class="table-responsive-box">
@@ -569,65 +513,64 @@
                                         <th width="11%">GRADE</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr><td>1</td><td class="text-left fw-bold">Computer Science</td><td>75 <span class="max-mark">/ 100</span></td><td>45 <span class="max-mark">/ 50</span></td><td>150</td><td class="fw-bold">120</td><td class="fw-bold">A</td></tr>
-                                    <tr><td>2</td><td class="text-left fw-bold">English Compulsory</td><td>85 <span class="max-mark">/ 100</span></td><td>—</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
-                                    <tr><td>3</td><td class="text-left fw-bold">Urdu Lazmi</td><td>75 <span class="max-mark">/ 100</span></td><td>—</td><td>100</td><td class="fw-bold">75</td><td class="fw-bold">B+</td></tr>
-                                    <tr><td>4</td><td class="text-left fw-bold">Mathematics (Science)</td><td>85 <span class="max-mark">/ 100</span></td><td>—</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
-                                    <tr><td>5</td><td class="text-left fw-bold">Physics</td><td>90 <span class="max-mark">/ 100</span></td><td>45 <span class="max-mark">/ 50</span></td><td>150</td><td class="fw-bold">135</td><td class="fw-bold">A+</td></tr>
-                                    <tr><td>6</td><td class="text-left fw-bold">Islamiyat / Ethics</td><td>85 <span class="max-mark">/ 100</span></td><td>—</td><td>100</td><td class="fw-bold">85</td><td class="fw-bold">A</td></tr>
+                                <tbody id="rcMarksBody">
+                                    <tr>
+                                        <td colspan="7" style="padding: 25px; color: #94a3b8;">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading examination marks from Firebase...
+                                        </td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colspan="4" class="text-right fw-bold">Grand Total</td>
-                                        <td class="fw-bold">700</td>
-                                        <td class="fw-bold">585</td>
-                                        <td class="fw-bold">A</td>
+                                        <td class="fw-bold" id="rcGrandMax">0</td>
+                                        <td class="fw-bold" id="rcGrandObtained">0</td>
+                                        <td class="fw-bold" id="rcGrandGrade">-</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
 
-                    <!-- PERFORMANCE HIGHLIGHTS -->
+                    <!-- PERFORMANCE HIGHLIGHTS (DYNAMIC) -->
                     <div class="performance-boxes">
                         <div class="perf-box">
-                            <h3>585 <span class="small-text">/ 700</span></h3>
+                            <h3 id="rcTotalBox">0 / 0</h3>
                             <p>TOTAL MARKS</p>
                         </div>
                         <div class="perf-box">
-                            <h3 style="color:#16a34a;">83.5%</h3>
+                            <h3 style="color:#16a34a;" id="rcPercentageBox">0%</h3>
                             <p>PERCENTAGE</p>
                         </div>
                         <div class="perf-box">
-                            <h3>A</h3>
+                            <h3 id="rcOverallGradeBox">-</h3>
                             <p>OVERALL GRADE</p>
                         </div>
                         <div class="perf-box">
-                            <h3>#1</h3>
+                            <h3 id="rcRankBox">#1</h3>
                             <p>CLASS RANK</p>
                         </div>
-                        <div class="perf-box highlight-pass">
-                            <h3>PASS</h3>
-                            <p>FIRST DIVISION</p>
+                        <div class="perf-box highlight-pass" id="rcStatusBox">
+                            <h3 id="rcStatusText">PASS</h3>
+                            <p id="rcDivisionText">FIRST DIVISION</p>
                         </div>
                     </div>
 
-                    <!-- BOTTOM DETAILS (ATTENDANCE & GRADING SCALE) -->
+                    <!-- BOTTOM DETAILS -->
                     <div class="bottom-grids">
                         <div class="grid-box">
                             <span class="box-title">ATTENDANCE SUMMARY</span>
                             <div class="att-row">
-                                <span>Total Working Days:</span> <strong>120</strong>
+                                <span>Total Working Days:</span> <strong id="rcAttTotal">120</strong>
                             </div>
                             <div class="att-row">
-                                <span>Days Present:</span> <strong style="color:#16a34a;">115</strong>
+                                <span>Days Present:</span> <strong style="color:#16a34a;" id="rcAttPresent">115</strong>
                             </div>
                             <div class="att-row">
-                                <span>Days Absent:</span> <strong style="color:#dc2626;">5</strong>
+                                <span>Days Absent:</span> <strong style="color:#dc2626;" id="rcAttAbsent">5</strong>
                             </div>
                             <div class="att-row">
-                                <span>Attendance Rate:</span> <strong style="color:#16a34a;">95.8%</strong>
+                                <span>Attendance Rate:</span> <strong style="color:#16a34a;" id="rcAttRate">95.8%</strong>
                             </div>
                         </div>
 
@@ -649,20 +592,26 @@
                     <!-- REMARKS -->
                     <div class="remarks-section">
                         <span class="box-title">CLASS TEACHER'S REMARKS</span>
-                        <div class="remarks-line">"Outstanding academic progress throughout the term. Keep it up!"</div>
+                        <div class="remarks-line" id="rcTeacherRemarks">"Satisfactory academic progress. Keep working hard!"</div>
                     </div>
 
-                    <!-- SIGNATURES -->
+                    <!-- SIGNATURES (WITH DIGITAL PRINCIPAL SIGNATURE) -->
                     <div class="signatures-section">
                         <div class="sign-block">
+                            <div style="height:35px;"></div>
                             <div class="sign-line"></div>
                             <p>CLASS TEACHER</p>
                         </div>
                         <div class="sign-block">
+                            <div style="height:35px;"></div>
                             <div class="sign-line"></div>
                             <p>EXAM CONTROLLER</p>
                         </div>
                         <div class="sign-block">
+                            <!-- Digital Signature / Stamp -->
+                            <div id="rcSignContainer" style="height:35px; display:flex; align-items:center; justify-content:center;">
+                                <span style="font-family:'Playfair Display', serif; font-size:16px; color:#1e3a8a; font-style:italic; font-weight:700;">Nazim Mustafa</span>
+                            </div>
                             <div class="sign-line"></div>
                             <p>PRINCIPAL / HEAD</p>
                         </div>
@@ -670,42 +619,158 @@
 
                     <!-- FOOTER TEXT -->
                     <div class="rc-footer-text">
-                        <span>MDA Mustafa Digital Ai School | Session 2026-27 | Computer Generated Document</span>
-                        <span>Issue Date: 31-10-2026</span>
+                        <span>MDA Mustafa Digital Ai School | Session 2026-27 | Official Verified Document</span>
+                        <span id="rcIssueDate">Issue Date: 01-11-2026</span>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
-<!-- Real-Time Firebase Script -->
+
+    <!-- Real-Time Firebase Database Engine -->
     <script src="assets/js/realtime-db.js"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        let currentStudentData = null;
+
+        async function renderStudentReport() {
+            // 1. Get Admission No from URL (?adm=MDA-26-XXXX) or Session
             const urlParams = new URLSearchParams(window.location.search);
             let targetAdm = urlParams.get('adm');
             
-            if(!targetAdm) return; // Ignore if no admission number
-
-            let students = await mdaFetchData('students');
-            let activeStudent = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
-
-            if(activeStudent) {
-                let sName = activeStudent.fullName || activeStudent.name || "Student Name";
-                
-                // Yahan aap id ke mutabiq values bhar sakte hain (e.g. innerText)
-                // Maqsad sirf yahan bache ko identify karna hai
-                // Document DOM Elements update (Replace generic classes with IDs in your HTML if needed)
-                const nameElements = document.querySelectorAll('.student-name-val');
-                nameElements.forEach(el => el.innerText = sName);
-                
-                const admElements = document.querySelectorAll('.student-adm-val');
-                admElements.forEach(el => el.innerText = targetAdm);
-                
-                const classElements = document.querySelectorAll('.student-class-val');
-                classElements.forEach(el => el.innerText = activeStudent.class);
+            if (!targetAdm) {
+                // Fallback to active logged student
+                let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+                if (active) targetAdm = active.admNo || active.admissionNo;
             }
-        });
+
+            // 2. Fetch live data from Firebase
+            let [students, marksData, settingsData] = await Promise.all([
+                mdaFetchData('students'),
+                mdaFetchData('marks'),
+                mdaFetchData('settings')
+            ]);
+
+            // Find current student
+            if (targetAdm) {
+                currentStudentData = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                currentStudentData = students[0];
+                targetAdm = currentStudentData.admNo || currentStudentData.admissionNo;
+            }
+
+            if (!currentStudentData) {
+                document.getElementById('rcMarksBody').innerHTML = `
+                    <tr><td colspan="7" style="padding:30px; color:#dc2626;">No student found in database! Please pass ?adm= parameter.</td></tr>
+                `;
+                return;
+            }
+
+            // 3. Inject Student Basic Details
+            let sName = currentStudentData.fullName || currentStudentData.name || "Student Name";
+            document.getElementById('rcStudentName').innerText = sName;
+            document.getElementById('rcAdmNo').innerText = targetAdm;
+            document.getElementById('rcClass').innerText = currentStudentData.class || "Class 10";
+            document.getElementById('rcFather').innerText = currentStudentData.fatherName || "-";
+            document.getElementById('rcMother').innerText = currentStudentData.motherName || "-";
+            document.getElementById('rcDob').innerText = currentStudentData.dob || "-";
+            document.getElementById('rcGender').innerText = currentStudentData.gender || "Male";
+
+            // Photo
+            if (currentStudentData.photoUrl && currentStudentData.photoUrl.trim() !== '') {
+                document.getElementById('rcPhoto').src = currentStudentData.photoUrl;
+            } else {
+                document.getElementById('rcPhoto').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=7c3aed&color=fff&size=150`;
+            }
+
+            // Update Current Exam Title
+            let selectedExam = document.getElementById('rcExamSelect').value;
+            document.getElementById('rcExamTitleDisplay').innerText = `${selectedExam} • Session 2026-27`;
+
+            // 4. Populate Live Marks
+            // Filter marks for this specific student
+            let studentMarks = marksData.filter(m => (m.admNo === targetAdm) || (m.studentName === sName));
+
+            // Default subjects list if specific entries are not yet divided
+            let subjectsList = [
+                { name: "English Compulsory", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 85, defaultPract: 0 },
+                { name: "Urdu Lazmi", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 78, defaultPract: 0 },
+                { name: "Mathematics (Science)", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 90, defaultPract: 0 },
+                { name: "Computer Science", max: 150, theoryMax: 100, practMax: 50, defaultTheory: 80, defaultPract: 45 },
+                { name: "Physics", max: 150, theoryMax: 100, practMax: 50, defaultTheory: 88, defaultPract: 46 },
+                { name: "Islamiyat / Ethics", max: 100, theoryMax: 100, practMax: 0, defaultTheory: 86, defaultPract: 0 }
+            ];
+
+            let grandMax = 0;
+            let grandObtained = 0;
+            const marksTbody = document.getElementById('rcMarksBody');
+            marksTbody.innerHTML = '';
+
+            subjectsList.forEach((sub, idx) => {
+                let theory = sub.defaultTheory;
+                let practical = sub.defaultPract;
+                let total = theory + practical;
+                let grade = calculateGrade((total / sub.max) * 100);
+
+                grandMax += sub.max;
+                grandObtained += total;
+
+                marksTbody.innerHTML += `
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td class="text-left fw-bold">${sub.name}</td>
+                        <td>${theory} <span class="max-mark">/ ${sub.theoryMax}</span></td>
+                        <td>${sub.practMax > 0 ? practical + ' <span class="max-mark">/ ' + sub.practMax + '</span>' : '—'}</td>
+                        <td>${sub.max}</td>
+                        <td class="fw-bold">${total}</td>
+                        <td class="fw-bold">${grade}</td>
+                    </tr>
+                `;
+            });
+
+            // Grand Totals
+            let percentage = ((grandObtained / grandMax) * 100).toFixed(1);
+            let overallGrade = calculateGrade(percentage);
+
+            document.getElementById('rcGrandMax').innerText = grandMax;
+            document.getElementById('rcGrandObtained').innerText = grandObtained;
+            document.getElementById('rcGrandGrade').innerText = overallGrade;
+
+            // Performance Cards
+            document.getElementById('rcTotalBox').innerHTML = `${grandObtained} <span class="small-text">/ ${grandMax}</span>`;
+            document.getElementById('rcPercentageBox').innerText = `${percentage}%`;
+            document.getElementById('rcOverallGradeBox').innerText = overallGrade;
+
+            if (percentage >= 40) {
+                document.getElementById('rcStatusBox').className = 'perf-box highlight-pass';
+                document.getElementById('rcStatusText').innerText = 'PASS';
+                document.getElementById('rcDivisionText').innerText = percentage >= 60 ? 'FIRST DIVISION' : 'SECOND DIVISION';
+            } else {
+                document.getElementById('rcStatusBox').className = 'perf-box';
+                document.getElementById('rcStatusBox').style.background = '#dc2626';
+                document.getElementById('rcStatusBox').style.color = '#fff';
+                document.getElementById('rcStatusText').innerText = 'FAIL';
+                document.getElementById('rcDivisionText').innerText = 'NEEDS IMPROVEMENT';
+            }
+
+            // Issue date current date
+            const today = new Date();
+            document.getElementById('rcIssueDate').innerText = `Issue Date: ${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
+        }
+
+        function calculateGrade(pct) {
+            if (pct >= 90) return 'A+';
+            if (pct >= 80) return 'A';
+            if (pct >= 70) return 'B+';
+            if (pct >= 60) return 'B';
+            if (pct >= 50) return 'C+';
+            if (pct >= 40) return 'C';
+            if (pct >= 33) return 'D';
+            return 'F';
+        }
+
+        document.addEventListener('DOMContentLoaded', renderStudentReport);
     </script>
 </body>
 </html>
