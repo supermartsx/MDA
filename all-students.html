@@ -88,7 +88,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>All Active Students (Real-Time Directory)</h2>
+                <h2>All Active Students (Firebase Live Directory)</h2>
             </div>
             <div class="header-right">
                 <a href="new-admission.html" class="btn-export" style="background:#7239ea; text-decoration:none;"><i class="fas fa-user-plus"></i> Add New Student</a>
@@ -97,7 +97,7 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Live directory of all registered students fetched from Google Database</p>
+                <p class="breadcrumb">Live directory of all registered students fetched from Firebase Real-time Database</p>
             </div>
 
             <!-- FILTER SECTION -->
@@ -137,7 +137,7 @@
                         <tbody id="studentTableBody">
                             <tr>
                                 <td colspan="8" class="text-center" style="padding: 40px; color: #94a3b8;">
-                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching students from Google Database...
+                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching students from Firebase Database...
                                 </td>
                             </tr>
                         </tbody>
@@ -176,17 +176,20 @@
             if (filtered.length > 0) {
                 tbody.innerHTML = '';
                 filtered.forEach((st, idx) => {
+                    let currentAdm = st.admNo || st.admissionNo || 'N/A'; // Save AdmNo for URL link
+                    
                     tbody.innerHTML += `
                         <tr>
                             <td>${idx + 1}</td>
-                            <td><span class="adm-badge">${st.admNo || st.admissionNo || 'N/A'}</span></td>
+                            <td><span class="adm-badge">${currentAdm}</span></td>
                             <td><strong>${st.fullName || st.name || 'Unnamed'}</strong></td>
                             <td>${st.fatherName || '-'}</td>
                             <td><span class="class-badge">${st.class || 'N/A'}</span></td>
                             <td>${st.phone || '-'}</td>
                             <td class="text-danger fw-bold">Rs. ${parseFloat(st.pendingDue || 0).toLocaleString()}</td>
                             <td class="action-buttons">
-                                <a href="student-profile.html" class="btn-view" title="View Profile"><i class="fas fa-eye"></i></a>
+                                <!-- YAHAN LINK MEIN ?adm= LAGA DIYA HAI -->
+                                <a href="student-profile.html?adm=${currentAdm}" class="btn-view" title="View Profile"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                     `;
