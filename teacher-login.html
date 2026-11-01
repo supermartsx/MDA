@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal Login - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e1e2d 0%, #4c1d95 50%, #2e1065 100%);
+            background-attachment: fixed;
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 35px 25px 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .teacher-icon-wrap {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #faf5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7c3aed;
+            font-size: 32px;
+            border: 2px dashed #c084fc;
+        }
+
+        .error-alert-box {
+            display: none;
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #ef4444;
+            padding: 11px 14px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            animation: shake 0.3s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .login-card h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .login-card p {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .input-group-box {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .input-group-box label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+        .input-inner-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            transition: 0.2s;
+        }
+        .input-inner-wrapper:focus-within {
+            border-bottom-color: #7c3aed;
+        }
+        .input-inner-wrapper i {
+            color: #94a3b8;
+            width: 20px;
+            text-align: center;
+        }
+        .input-inner-wrapper input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #1e293b;
+            background: transparent;
+        }
+
+        .btn-teacher-login {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(90deg, #7c3aed 0%, #4f46e5 100%);
+            border: none;
+            border-radius: 25px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-teacher-login:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 11.5px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="teacher-icon-wrap">
+            <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+
+        <h2>Teacher Login</h2>
+        <p>MDA Mustafa Digital Ai School — Faculty Portal</p>
+
+        <!-- Dynamic Error Box -->
+        <div class="error-alert-box" id="errorAlertBox"></div>
+
+        <form id="teacherLoginForm">
+            <div class="input-group-box">
+                <label>TEACHER LOGIN ID</label>
+                <div class="input-inner-wrapper">
+                    <i class="fas fa-id-badge"></i>
+                    <input type="text" id="teacherIdInput" placeholder="e.g. TEA-101" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="input-group-box">
+                <label>PORTAL PASSWORD</label>
+                <div class="input-inner-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="teacherPasswordInput" placeholder="Enter portal password" required>
+                </div>
+            </div>
+
+            <button type="submit" id="btnSubmitLogin" class="btn-teacher-login">
+                <i class="fas fa-sign-in-alt"></i> Access Portal
+            </button>
+        </form>
+
+        <div class="footer-note">
+            Credentials misplaced? Contact school administration.
+        </div>
+    </div>
+
+    <!-- Real-Time Firebase Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        document.getElementById('teacherLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const tidInput = document.getElementById('teacherIdInput').value.trim().toUpperCase();
+            const passInput = document.getElementById('teacherPasswordInput').value.trim();
+            const errorBox = document.getElementById('errorAlertBox');
+            const btn = document.getElementById('btnSubmitLogin');
+
+            errorBox.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            btn.disabled = true;
+
+            try {
+                // Firebase se live staff fetch karna
+                let staffList = await mdaFetchData('staff');
+
+                // Teacher dhoondna ID aur Password ke sath
+                let matchedTeacher = staffList.find(st => {
+                    let tid = (st.teacherId || st.empId || '').trim().toUpperCase();
+                    let tpass = String(st.teacherPassword || st.password || '').trim();
+                    return tid === tidInput && tpass === passInput;
+                });
+
+                if (matchedTeacher) {
+                    // 1. Check if Teacher is Blocked by Admin
+                    if (matchedTeacher.status === 'Blocked') {
+                        errorBox.innerHTML = '<i class="fas fa-ban"></i> <strong>Account Blocked!</strong><br>Your portal access has been suspended by the Principal.';
+                        errorBox.style.display = 'block';
+                        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Portal';
+                        btn.disabled = false;
+                        return;
+                    }
+
+                    // 2. Login Successful -> Save active teacher session
+                    sessionStorage.setItem('mda_active_teacher', JSON.stringify(matchedTeacher));
+                    window.location.href = 'teacher-portal.html';
+
+                } else {
+                    errorBox.innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid Teacher ID or Password!';
+                    errorBox.style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Portal';
+                    btn.disabled = false;
+                }
+
+            } catch (err) {
+                console.error(err);
+                errorBox.innerHTML = '<i class="fas fa-wifi"></i> Connection error with Firebase database.';
+                errorBox.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Portal';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
