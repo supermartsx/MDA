@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Admission - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time New Admission - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/forms.css">
 </head>
@@ -13,23 +15,71 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-        <!-- Sidebar content same as before -->
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
             <div class="sidebar-title">
-                <h4>MDA School</h4>
+                <h4 id="sidebarSchoolName">MDA School</h4>
                 <p>Management System</p>
             </div>
         </div>
+        
+        <div class="user-info">
+            <div class="user-avatar">S</div>
+            <div class="user-details">
+                <h5>Super Administrator</h5>
+                <span><i class="fas fa-star"></i> Super Admin</span>
+            </div>
+        </div>
+
         <ul class="sidebar-menu">
             <li class="menu-label">MAIN</li>
             <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            
             <li class="menu-label">STUDENTS</li>
             <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
             <li><a href="new-admission.html" class="active"><i class="fas fa-user-plus"></i> New Admission</a></li>
             <li><a href="all-students.html"><i class="fas fa-users"></i> All Students</a></li>
+            <li><a href="archive.html"><i class="fas fa-archive"></i> Passed Out Archive</a></li>
+            <li><a href="promotion.html"><i class="fas fa-graduation-cap"></i> Promotion</a></li>
+            <li><a href="session-report.html"><i class="fas fa-file-alt"></i> Session Report</a></li>
+            
+            <li class="menu-label">FEES</li>
+            <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
+            <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            
+            <li class="menu-label">ACADEMICS</li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            
+            <li class="menu-label">FINANCE</li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            
+            <li class="menu-label">STAFF / PAYROLL</li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            
+            <li class="menu-label">COMMUNICATION</li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
+            
+            <li class="menu-label">ADMIN</li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+            
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
 
@@ -38,47 +88,48 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>New Admission</h2>
+                <h2>Real-Time New Admission</h2>
+            </div>
+            <div class="header-right">
+                <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Register a new student for Session 2026-27</p>
-                <a href="all-students.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Students</a>
+                <p class="breadcrumb">Register a new student directly into Google Database</p>
+                <a href="all-students.html" class="btn-back"><i class="fas fa-users"></i> View All Students</a>
             </div>
 
-            <!-- NAME ATTRIBUTES ADD KIYE GAYE HAIN -->
-            <form id="admissionForm" class="admission-form">
+            <form id="liveAdmissionForm" class="admission-form">
                 
-                <!-- Section 1 -->
+                <!-- Section 1: Basic Info -->
                 <div class="form-section">
                     <h4 class="section-heading"><i class="fas fa-address-card"></i> Basic Information</h4>
                     <div class="form-grid">
                         <div class="input-group">
-                            <label>Admission No *</label>
-                            <input type="text" name="admissionNo" value="ADM-26-1052" readonly>
+                            <label>ADMISSION NO *</label>
+                            <input type="text" id="admNo" value="MDA-26-1055" readonly>
                         </div>
                         <div class="input-group">
-                            <label>Full Name *</label>
-                            <input type="text" name="fullName" placeholder="Student full name" required>
+                            <label>FULL NAME *</label>
+                            <input type="text" id="fullName" placeholder="Student full name" required>
                         </div>
                         <div class="input-group">
-                            <label>Father's Name *</label>
-                            <input type="text" name="fatherName" placeholder="Father's name" required>
+                            <label>FATHER'S NAME *</label>
+                            <input type="text" id="fatherName" placeholder="Father's name" required>
                         </div>
                         <div class="input-group">
-                            <label>Mother's Name *</label>
-                            <input type="text" name="motherName" placeholder="Mother's name" required>
+                            <label>MOTHER'S NAME</label>
+                            <input type="text" id="motherName" placeholder="Mother's name">
                         </div>
                         <div class="input-group">
-                            <label>Date of Birth *</label>
-                            <input type="date" name="dob" required>
+                            <label>DATE OF BIRTH *</label>
+                            <input type="date" id="dob" required>
                         </div>
                         <div class="input-group">
-                            <label>Gender *</label>
-                            <select name="gender" required>
-                                <option value="">Select</option>
+                            <label>GENDER *</label>
+                            <select id="gender" required>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -86,61 +137,60 @@
                     </div>
                 </div>
 
-                <!-- Section 2 -->
+                <!-- Section 2: Class & Admission -->
                 <div class="form-section">
-                    <h4 class="section-heading"><i class="fas fa-graduation-cap"></i> Class & Admission</h4>
+                    <h4 class="section-heading"><i class="fas fa-graduation-cap"></i> Class & Session</h4>
                     <div class="form-grid">
                         <div class="input-group">
-                            <label>Class *</label>
-                            <select name="class" required>
-                                <option value="">Select Class</option>
-                                <option value="Nursery">Nursery</option>
-                                <option value="LKG">LKG</option>
-                                <option value="UKG">UKG</option>
-                                <option value="Class 1">Class 1</option>
+                            <label>CLASS *</label>
+                            <select id="className" required>
                                 <option value="Class 10">Class 10</option>
+                                <option value="Class 9">Class 9</option>
+                                <option value="Class 8">Class 8</option>
+                                <option value="Class 7">Class 7</option>
+                                <option value="Class 6">Class 6</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <label>Section</label>
-                            <select name="section">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
+                            <label>SECTION</label>
+                            <select id="section">
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <label>Admission Date *</label>
-                            <input type="date" name="admissionDate" required>
+                            <label>ADMISSION DATE *</label>
+                            <input type="date" id="admDate" value="2026-11-01" required>
                         </div>
                         <div class="input-group">
-                            <label>Religion</label>
-                            <input type="text" name="religion" placeholder="e.g. Islam">
+                            <label>INITIAL PENDING DUES (RS.)</label>
+                            <input type="number" id="pendingDue" value="5000" placeholder="0">
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 3 -->
+                <!-- Section 3: Contact Details -->
                 <div class="form-section">
                     <h4 class="section-heading"><i class="fas fa-phone-alt"></i> Contact Details</h4>
                     <div class="form-grid">
                         <div class="input-group">
-                            <label>Mobile No *</label>
-                            <input type="text" name="mobileNo" placeholder="+92 XXXXX XXXXX" required>
+                            <label>MOBILE NO *</label>
+                            <input type="text" id="phone" placeholder="03XXXXXXXXX" required>
                         </div>
                         <div class="input-group">
-                            <label>WhatsApp No</label>
-                            <input type="text" name="whatsappNo" placeholder="Optional">
+                            <label>B-FORM / CNIC</label>
+                            <input type="text" id="cnic" placeholder="35201-XXXXXXX-X">
                         </div>
                         <div class="input-group full-width">
-                            <label>Full Residential Address *</label>
-                            <textarea name="address" rows="3" placeholder="Enter complete address" required></textarea>
+                            <label>FULL RESIDENTIAL ADDRESS *</label>
+                            <textarea id="address" rows="2" placeholder="Complete home address" required></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- Submit Button -->
+                <!-- SUBMIT BUTTON -->
                 <div class="form-actions">
-                    <button type="submit" id="submitBtn" class="btn-submit"><i class="fas fa-save"></i> Save Admission</button>
+                    <button type="submit" id="btnSaveAdm" class="btn-submit"><i class="fas fa-save"></i> Save Real-Time Admission</button>
                     <button type="reset" class="btn-reset">Reset</button>
                 </div>
 
@@ -148,43 +198,49 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
     
-    <!-- GOOGLE SHEETS JAVASCRIPT LOGIC -->
     <script>
-        // Yahan aapko apni Google Apps Script ki URL dalni hai (Step 2 mein bataya hai)
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
-        
-        const form = document.getElementById('admissionForm');
-        const submitBtn = document.getElementById('submitBtn');
+        // Auto generate random admission number
+        document.addEventListener('DOMContentLoaded', () => {
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('admNo').value = `MDA-26-${rand}`;
+        });
 
-        form.addEventListener('submit', e => {
+        document.getElementById('liveAdmissionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Button ko loading state mein change karna
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to Google Sheets...';
-            submitBtn.disabled = true;
+            const btn = document.getElementById('btnSaveAdm');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving to Google Sheet...';
+            btn.disabled = true;
 
-            // Form ka saara data collect karna
-            let requestBody = new FormData(form);
+            const newStudent = {
+                action: 'students',
+                admNo: document.getElementById('admNo').value,
+                fullName: document.getElementById('fullName').value.trim(),
+                fatherName: document.getElementById('fatherName').value.trim(),
+                motherName: document.getElementById('motherName').value.trim(),
+                dob: document.getElementById('dob').value,
+                gender: document.getElementById('gender').value,
+                class: document.getElementById('className').value,
+                section: document.getElementById('section').value,
+                admissionDate: document.getElementById('admDate').value,
+                pendingDue: document.getElementById('pendingDue').value || 0,
+                phone: document.getElementById('phone').value.trim(),
+                cnic: document.getElementById('cnic').value.trim(),
+                address: document.getElementById('address').value.trim()
+            };
 
-            // Google Sheet par data bhejna
-            fetch(scriptURL, { method: 'POST', body: requestBody })
-                .then(response => {
-                    alert('Success! Student Admission saved to Google Sheets successfully.');
-                    form.reset(); // Form clear karna
-                    
-                    // Button ko normal state mein wapis lana
-                    submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Admission';
-                    submitBtn.disabled = false;
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    alert('Error saving data! Please check your connection.');
-                    
-                    submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Admission';
-                    submitBtn.disabled = false;
-                });
+            let res = await mdaSaveData('students', newStudent);
+            if (res.status === "success") {
+                alert('Student admission saved successfully to Google Database!');
+                this.reset();
+                window.location.href = 'all-students.html';
+            } else {
+                alert('Saved in local cache. Will sync with Google Sheet.');
+                window.location.href = 'all-students.html';
+            }
         });
     </script>
 </body>
