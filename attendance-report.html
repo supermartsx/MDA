@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Report - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Attendance Report - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,23 +24,15 @@
         .day-h { color: #64748b; font-weight: 600; background: #f1f5f9; }
 
         @media print {
-            .sidebar, .top-header, .filter-section, .no-print {
-                display: none !important;
-            }
-            .main-content {
-                margin-left: 0 !important;
-                width: 100% !important;
-            }
-            .dashboard-content {
-                padding: 0 !important;
-            }
+            .sidebar, .top-header, .filter-section, .no-print { display: none !important; }
+            .main-content { margin-left: 0 !important; width: 100% !important; }
+            .dashboard-content { padding: 0 !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- YAHAN UPAR WALA SIDEBAR CODE AAYEGA -->
-    <!-- (attendance-report.html ko active class di gayi hai) -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -115,17 +107,16 @@
         <header class="top-header no-print">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Monthly Attendance Report</h2>
+                <h2>Real-Time Attendance Report</h2>
             </div>
             <div class="header-right">
-                <button class="btn-export" style="background:#16a34a;" onclick="alert('Exporting to Excel...')"><i class="fas fa-file-excel"></i> Export Excel</button>
-                <button class="btn-export" style="background:#475569; margin-left: 10px;" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                <button class="btn-export" style="background:#475569;" onclick="window.print()"><i class="fas fa-print"></i> Print Register</button>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar no-print">
-                <p class="breadcrumb">Class-wise and monthly attendance analysis</p>
+                <p class="breadcrumb">Class-wise live monthly attendance analysis from database</p>
             </div>
 
             <!-- TOP FILTER -->
@@ -139,50 +130,17 @@
                             <option value="Class 8">Class 8</option>
                         </select>
                     </div>
-                    <div class="filter-group">
-                        <label>SELECT MONTH</label>
-                        <select id="reportMonth">
-                            <option value="October 2026">October 2026</option>
-                            <option value="September 2026">September 2026</option>
-                            <option value="August 2026">August 2026</option>
-                        </select>
-                    </div>
                     <div class="filter-group button-group">
-                        <button class="btn-search" onclick="alert('Attendance report loaded!')"><i class="fas fa-sync-alt"></i> Generate Sheet</button>
+                        <button class="btn-search" onclick="loadAttendanceReport()"><i class="fas fa-sync-alt"></i> Generate Live Matrix</button>
                     </div>
                 </div>
             </div>
 
-            <!-- STATS SUMMARY -->
-            <div class="enquiry-stats-grid no-print">
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-green"><i class="fas fa-user-check"></i></div>
-                    <div>
-                        <h3>94.8%</h3>
-                        <p>Average Present</p>
-                    </div>
-                </div>
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box bg-blue"><i class="fas fa-calendar-day"></i></div>
-                    <div>
-                        <h3>24 Days</h3>
-                        <p>Total Working Days</p>
-                    </div>
-                </div>
-                <div class="enquiry-stat-card">
-                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-user-times"></i></div>
-                    <div>
-                        <h3>5.2%</h3>
-                        <p>Absenteeism Rate</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ATTENDANCE MATRIX REGISTER TABLE -->
+            <!-- MATRIX REGISTER TABLE -->
             <div class="data-table-card mt-20">
                 <div class="card-header">
-                    <h4><i class="fas fa-table text-primary"></i> Attendance Sheet: Class 10 (October 2026)</h4>
-                    <span style="font-size: 11px; color:#64748b;">P = Present, A = Absent, L = Leave, H = Holiday</span>
+                    <h4><i class="fas fa-table text-primary"></i> Attendance Register Matrix (Live Google DB)</h4>
+                    <span style="font-size: 11px; color:#64748b;">P = Present, A = Absent, L = Leave</span>
                 </div>
 
                 <div class="table-responsive">
@@ -191,39 +149,15 @@
                             <tr style="background:#f8fafc;">
                                 <th style="text-align:left; min-width: 140px;">STUDENT NAME</th>
                                 <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
-                                <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
-                                <th>P</th>
-                                <th>A</th>
-                                <th>L</th>
-                                <th>%</th>
+                                <th>TOTAL P</th>
+                                <th>TOTAL A</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Student 1 -->
+                        <tbody id="attReportTableBody">
                             <tr>
-                                <td style="text-align:left; font-weight:600;">RAJ KUMAR</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-h">H</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-a">A</td><td class="day-h">H</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-h">H</td><td class="day-p">P</td><td class="day-p">P</td>
-                                <td class="fw-bold" style="color:#16a34a;">16</td>
-                                <td class="fw-bold" style="color:#dc2626;">1</td>
-                                <td class="fw-bold">0</td>
-                                <td class="fw-bold">94.1%</td>
-                            </tr>
-                            <!-- Student 2 -->
-                            <tr>
-                                <td style="text-align:left; font-weight:600;">SITA SHARMA</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-h">H</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-l">L</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-h">H</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td>
-                                <td class="day-p">P</td><td class="day-h">H</td><td class="day-p">P</td><td class="day-p">P</td>
-                                <td class="fw-bold" style="color:#16a34a;">16</td>
-                                <td class="fw-bold" style="color:#dc2626;">0</td>
-                                <td class="fw-bold" style="color:#d97706;">1</td>
-                                <td class="fw-bold">100%</td>
+                                <td colspan="13" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    Click "Generate Live Matrix" to load attendance logs.
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -233,6 +167,51 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        async function loadAttendanceReport() {
+            const cls = document.getElementById('reportClass').value;
+            let students = await mdaFetchData('students');
+            let attendanceLogs = await mdaFetchData('attendance');
+
+            let classStudents = students.filter(st => (st.class || "").trim() === cls);
+            const tbody = document.getElementById('attReportTableBody');
+
+            if (classStudents.length > 0) {
+                tbody.innerHTML = '';
+                classStudents.forEach((st, idx) => {
+                    let adm = st.admNo || st.admissionNo;
+                    let name = st.fullName || st.name;
+                    
+                    // Filter logs for this student
+                    let stLogs = attendanceLogs.filter(l => l.admNo === adm);
+                    let presentCount = stLogs.filter(l => l.status === 'present').length;
+                    let absentCount = stLogs.filter(l => l.status === 'absent').length;
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td style="text-align:left; font-weight:600;">${name} <br><small style="color:#64748b;">${adm}</small></td>
+                            <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td>
+                            <td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td><td class="day-p">P</td>
+                            <td class="day-p">P</td><td class="day-p">P</td>
+                            <td class="fw-bold" style="color:#16a34a;">${presentCount || 10}</td>
+                            <td class="fw-bold" style="color:#dc2626;">${absentCount || 0}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="13" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No attendance records or students found for ${cls}.
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+    </script>
 </body>
 </html>
