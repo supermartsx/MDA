@@ -3,20 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts -->
+    <title>Real-Time Student Profile - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Global & Modules CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tables.css">
-    <link rel="stylesheet" href="assets/css/profile.css"> <!-- New File for this page -->
+    <link rel="stylesheet" href="assets/css/profile.css">
+
+    <style>
+        .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; }
+        .action-buttons-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding: 15px; background: var(--white); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .btn-action { padding: 8px 15px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+        
+        .btn-outline { background: #fff; border: 1px solid #ddd; color: #444; }
+        .btn-outline:hover { background: #f8f9fa; border-color: #ccc; }
+        .btn-purple-outline { background: #fff; border: 1px solid #7c3aed; color: #7c3aed; }
+        .btn-purple-outline:hover { background: #f4eaff; }
+        .btn-danger-outline { background: #fff; border: 1px solid #dc2626; color: #dc2626; }
+        .btn-danger-outline:hover { background: #fef2f2; }
+        .btn-purple { background: #7c3aed; border: 1px solid #7c3aed; color: #fff; }
+        .btn-purple:hover { background: #6d28d9; }
+        .btn-success { background: #16a34a; border: 1px solid #16a34a; color: #fff; }
+        .btn-success:hover { background: #15803d; }
+
+        .profile-card { background: var(--white); padding: 25px 20px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); text-align: center; border-top: 4px solid #7c3aed; position: sticky; top: 80px; }
+        .profile-img-container { width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 10px; overflow: hidden; border: 3px solid #f4f6f9; }
+        .profile-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .student-name { font-size: 18px; color: var(--text-main); margin-bottom: 10px; font-weight: 700; text-transform: uppercase; }
+        .badges-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-bottom: 20px; }
+        .badge-pill { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+        
+        .details-list { text-align: left; }
+        .detail-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 12px; }
+        .detail-item span { color: #64748b; font-weight: 500; }
+        .detail-item strong { color: #1e293b; font-weight: 600; text-align: right; }
+
+        .section-card { background: var(--white); border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.03); overflow: hidden; margin-bottom: 20px; }
+        .fee-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; }
+        .fee-stat-box { padding: 15px; border-radius: 8px; text-align: center; }
+        .fee-stat-box h3 { font-size: 20px; margin-bottom: 5px; }
+        .fee-stat-box p { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; }
+        .box-total { background: #f4eaff; color: #7c3aed; border: 1px solid #e9d5ff; }
+        .box-paid { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+        .box-pending { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
+        @media (max-width: 992px) { .profile-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 576px) { .fee-stats-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
+        <!-- Sidebar content same as dashboard.html -->
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
             <div class="sidebar-title">
@@ -28,24 +69,21 @@
             <li class="menu-label">MAIN</li>
             <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li class="menu-label">STUDENTS</li>
-            <li><a href="admission-enquiry.html"><i class="fas fa-question-circle"></i> Admission Enquiry</a></li>
-            <li><a href="new-admission.html"><i class="fas fa-user-plus"></i> New Admission</a></li>
             <li><a href="all-students.html" class="active"><i class="fas fa-users"></i> All Students</a></li>
-            <li class="menu-label">ACCOUNT</li>
-            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <!-- ... other links ... -->
+            <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <!-- TOP HEADER -->
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Student Profile</h2>
+                <h2>Student Profile (Live Database)</h2>
             </div>
             <div class="header-right">
-                <a href="all-students.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+                <a href="all-students.html" class="btn-back" style="background:#f1f5f9; padding:8px 15px; border-radius:6px; font-size:13px; text-decoration:none; color:#333; font-weight:600;"><i class="fas fa-arrow-left"></i> Back</a>
             </div>
         </header>
 
@@ -53,14 +91,11 @@
             
             <!-- ACTION BUTTONS ROW -->
             <div class="action-buttons-row">
-                <button class="btn-action btn-outline"><i class="fas fa-file-alt"></i> TC Print</button>
-                <button class="btn-action btn-purple-outline"><i class="fas fa-certificate"></i> Character Certificate</button>
-                <button class="btn-action btn-outline"><i class="fas fa-id-badge"></i> ID Card</button>
-                <button class="btn-action btn-outline"><i class="fas fa-chart-bar"></i> Report Card</button>
-                <button class="btn-action btn-purple"><i class="fas fa-money-check-alt"></i> Fee Slip</button>
-                <button class="btn-action btn-success"><i class="fas fa-bolt"></i> Quick Fee Collect</button>
-                <button class="btn-action btn-outline"><i class="fas fa-edit"></i> Edit</button>
-                <button class="btn-action btn-danger-outline"><i class="fas fa-archive"></i> Archive</button>
+                <a href="print-tc.html" id="btnTcPrint" class="btn-action btn-outline"><i class="fas fa-file-alt"></i> TC Print</a>
+                <a href="print-id-card.html" id="btnIdPrint" class="btn-action btn-outline"><i class="fas fa-id-badge"></i> ID Card</a>
+                <a href="print-report-card.html" id="btnReportPrint" class="btn-action btn-outline"><i class="fas fa-chart-bar"></i> Report Card</a>
+                <a href="fee-collection.html" class="btn-action btn-success"><i class="fas fa-bolt"></i> Collect Fee</a>
+                <button class="btn-action btn-outline"><i class="fas fa-edit"></i> Edit Profile</button>
             </div>
 
             <div class="profile-grid">
@@ -69,35 +104,23 @@
                 <div class="profile-left">
                     <div class="profile-card">
                         <div class="profile-img-container">
-                            <img src="https://ui-avatars.com/api/?name=Sita+Sharma&background=7239ea&color=fff&size=100" alt="Student Photo">
+                            <img id="profImg" src="https://ui-avatars.com/api/?name=Loading&background=ddd&color=333" alt="Student Photo">
                         </div>
-                        <h3 class="student-name">SITA SHARMA</h3>
+                        <h3 class="student-name" id="profName">Loading...</h3>
                         
                         <div class="badges-row">
-                            <span class="badge class-badge">Class 10</span>
-                            <span class="badge active-badge">Active</span>
-                            <span class="badge gender-badge">Female</span>
-                            <span class="badge stream-badge">Science</span>
+                            <span class="badge-pill" style="background:#e0f2fe; color:#0369a1;" id="profClass">Class...</span>
+                            <span class="badge-pill" style="background:#dcfce7; color:#15803d;">Active</span>
+                            <span class="badge-pill" style="background:#f3e8ff; color:#7e22ce;" id="profGender">Gender</span>
                         </div>
 
                         <div class="details-list">
-                            <div class="detail-item"><span>Adm No:</span> <strong>ADM002</strong></div>
-                            <div class="detail-item"><span>Father:</span> <strong>RAM SHARMA</strong></div>
-                            <div class="detail-item"><span>Mother:</span> <strong>RADHA SHARMA</strong></div>
-                            <div class="detail-item"><span>D.O.B:</span> <strong>2010-01-22</strong></div>
-                            <div class="detail-item"><span>Phone:</span> <strong>7310095239</strong></div>
-                            <div class="detail-item"><span>Medium:</span> <strong>Hindi</strong></div>
-                        </div>
-
-                        <!-- Transport Fee Box -->
-                        <div class="transport-box mt-20">
-                            <h5><i class="fas fa-bus"></i> Transport Fee</h5>
-                            <div class="transport-input">
-                                <span>₹</span>
-                                <input type="number" value="0">
-                                <button class="btn-update">Update</button>
-                            </div>
-                            <small>Yearly total - updated automatically in the fee records</small>
+                            <div class="detail-item"><span>Adm No:</span> <strong id="profAdm">...</strong></div>
+                            <div class="detail-item"><span>Father:</span> <strong id="profFather">...</strong></div>
+                            <div class="detail-item"><span>Mother:</span> <strong id="profMother">...</strong></div>
+                            <div class="detail-item"><span>D.O.B:</span> <strong id="profDob">...</strong></div>
+                            <div class="detail-item"><span>Phone:</span> <strong id="profPhone">...</strong></div>
+                            <div class="detail-item"><span>CNIC/B-Form:</span> <strong id="profCnic">...</strong></div>
                         </div>
                     </div>
                 </div>
@@ -108,54 +131,45 @@
                     <!-- Fee Summary Section -->
                     <div class="section-card">
                         <div class="card-header">
-                            <h4><i class="fas fa-wallet"></i> Fee Summary</h4>
-                            <button class="btn-action btn-success"><i class="fas fa-bolt"></i> Quick Fee Collect</button>
+                            <h4><i class="fas fa-wallet text-success"></i> Real-Time Fee Summary</h4>
                         </div>
                         
                         <div class="fee-stats-grid">
                             <div class="fee-stat-box box-total">
-                                <h3>₹6,500</h3>
+                                <h3 id="statTotalFee">Rs. 0</h3>
                                 <p>TOTAL FEE</p>
                             </div>
                             <div class="fee-stat-box box-paid">
-                                <h3>₹0</h3>
-                                <p>PAID</p>
+                                <h3 id="statPaidFee">Rs. 0</h3>
+                                <p>TOTAL PAID</p>
                             </div>
                             <div class="fee-stat-box box-pending">
-                                <h3>₹6,500</h3>
-                                <p>PENDING</p>
+                                <h3 id="statPendingFee">Rs. 0</h3>
+                                <p>PENDING DUES</p>
                             </div>
                         </div>
+                    </div>
 
-                        <h5 class="sub-heading">FEE-WISE BREAKDOWN</h5>
+                    <!-- Fee Transactions Log Section -->
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h4><i class="fas fa-history text-primary"></i> Fee Transactions History</h4>
+                        </div>
                         <div class="table-responsive">
                             <table class="compact-table">
                                 <thead>
                                     <tr>
-                                        <th>FEE TYPE</th>
-                                        <th>SESSION</th>
-                                        <th>TOTAL</th>
-                                        <th>PAID</th>
+                                        <th>RECEIPT NO</th>
+                                        <th>DATE</th>
+                                        <th>AMOUNT</th>
+                                        <th>PAYMENT MODE</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="transactionsTableBody">
                                     <tr>
-                                        <td>Admission Fee</td>
-                                        <td>2026-27</td>
-                                        <td>₹500</td>
-                                        <td class="text-success">₹0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Computer Fee</td>
-                                        <td>2026-27</td>
-                                        <td>₹1,000</td>
-                                        <td class="text-success">₹0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tuition Fee</td>
-                                        <td>2026-27</td>
-                                        <td>₹5,000</td>
-                                        <td class="text-success">₹0</td>
+                                        <td colspan="4" style="text-align: center; padding: 20px; color: #94a3b8;">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading transactions from Firebase...
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -163,45 +177,27 @@
                     </div>
 
                     <!-- Assigned Subjects Section -->
-                    <div class="section-card mt-20">
+                    <div class="section-card">
                         <div class="card-header">
-                            <h4><i class="fas fa-book"></i> Assigned Subjects (6)</h4>
-                            <div class="header-actions">
-                                <button class="btn-action btn-outline btn-sm">Report Card</button>
-                                <button class="btn-action btn-purple btn-sm"><i class="fas fa-pen"></i> Fill Marks</button>
-                            </div>
+                            <h4><i class="fas fa-book text-warning"></i> Enrolled Curriculum Subjects</h4>
                         </div>
                         <div class="table-responsive">
                             <table class="compact-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>SUBJECT</th>
-                                        <th>THEORY MAX</th>
-                                        <th>PRACTICAL MAX</th>
-                                        <th>TOTAL MAX</th>
+                                        <th>SUBJECT NAME</th>
+                                        <th>TYPE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>1</td><td>Computer</td><td>100</td><td>50</td><td>150</td></tr>
-                                    <tr><td>2</td><td>English</td><td>100</td><td>50</td><td>150</td></tr>
-                                    <tr><td>3</td><td>Hindi</td><td>100</td><td>50</td><td>150</td></tr>
-                                    <tr><td>4</td><td>Mathematics</td><td>100</td><td>50</td><td>150</td></tr>
-                                    <tr><td>5</td><td>Science</td><td>100</td><td>50</td><td>150</td></tr>
-                                    <tr><td>6</td><td>Social Science</td><td>100</td><td>50</td><td>150</td></tr>
+                                    <tr><td>1</td><td><strong>English Compulsory</strong></td><td>Theory Only</td></tr>
+                                    <tr><td>2</td><td><strong>Mathematics</strong></td><td>Theory Only</td></tr>
+                                    <tr><td>3</td><td><strong>Computer Science</strong></td><td>Theory + Practical</td></tr>
+                                    <tr><td>4</td><td><strong>Physics</strong></td><td>Theory + Practical</td></tr>
+                                    <tr><td>5</td><td><strong>Urdu Lazmi</strong></td><td>Theory Only</td></tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-
-                    <!-- Fee Transactions Section -->
-                    <div class="section-card mt-20">
-                        <div class="card-header">
-                            <h4><i class="fas fa-history"></i> Fee Transactions</h4>
-                        </div>
-                        <div class="empty-state">
-                            <i class="fas fa-receipt"></i>
-                            <p>No fee records found</p>
                         </div>
                     </div>
 
@@ -210,6 +206,92 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+
+    <script>
+        async function loadStudentProfile() {
+            // Get Admission Number from URL (e.g. ?adm=MDA-26-1055)
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm') || sessionStorage.getItem('view_student_adm');
+
+            // 1. Fetch Students
+            let students = await mdaFetchData('students');
+            let student;
+            
+            if (targetAdm) {
+                student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                student = students[0]; // Fallback to first student if no URL parameter
+                targetAdm = student.admNo || student.admissionNo;
+            }
+
+            if (!student) {
+                document.querySelector('.profile-grid').innerHTML = `
+                    <div style="text-align:center; padding:50px; background:#fff; border-radius:10px; grid-column: span 2;">
+                        <h2 style="color:#dc2626;">Student Not Found!</h2>
+                        <p>No student record matches this Admission Number in Firebase.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Set Print Links with ADM parameter so they print correct data
+            document.getElementById('btnTcPrint').href = `print-tc.html?adm=${targetAdm}`;
+            document.getElementById('btnIdPrint').href = `print-id-card.html?adm=${targetAdm}`;
+            document.getElementById('btnReportPrint').href = `print-report-card.html?adm=${targetAdm}`;
+
+            // Populate Basic Info
+            let sName = student.fullName || student.name || "Unknown";
+            document.getElementById('profName').innerText = sName;
+            document.getElementById('profAdm').innerText = targetAdm;
+            document.getElementById('profClass').innerText = student.class || "N/A";
+            document.getElementById('profGender').innerText = student.gender || "N/A";
+            document.getElementById('profFather').innerText = student.fatherName || "N/A";
+            document.getElementById('profMother').innerText = student.motherName || "N/A";
+            document.getElementById('profDob').innerText = student.dob || "N/A";
+            document.getElementById('profPhone').innerText = student.phone || "N/A";
+            document.getElementById('profCnic').innerText = student.cnic || "N/A";
+
+            // Update Avatar
+            document.getElementById('profImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=7c3aed&color=fff&size=200`;
+
+            // 2. Fetch Fee Transactions for this student
+            let feesData = await mdaFetchData('fees');
+            let studentFees = feesData.filter(f => (f.admNo === targetAdm) || (f.studentName === sName));
+
+            // Calculate Fees
+            let totalPaid = 0;
+            const tbody = document.getElementById('transactionsTableBody');
+            tbody.innerHTML = '';
+
+            if (studentFees.length > 0) {
+                studentFees.forEach(f => {
+                    let amt = parseFloat(f.amount || f.paidAmount || 0);
+                    totalPaid += amt;
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><strong>${f.receiptNo || 'N/A'}</strong></td>
+                            <td>${f.date || '-'}</td>
+                            <td class="text-success fw-bold">Rs. ${amt.toLocaleString()}</td>
+                            <td><span class="badge-pill" style="background:#f1f5f9; color:#475569;">${f.mode || 'Cash'}</span></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #94a3b8;">No fee payments recorded yet.</td></tr>`;
+            }
+
+            let pending = parseFloat(student.pendingDue || 0);
+            let totalAssignedFee = totalPaid + pending;
+
+            document.getElementById('statTotalFee').innerText = `Rs. ${totalAssignedFee.toLocaleString()}`;
+            document.getElementById('statPaidFee').innerText = `Rs. ${totalPaid.toLocaleString()}`;
+            document.getElementById('statPendingFee').innerText = `Rs. ${pending.toLocaleString()}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadStudentProfile);
+    </script>
 </body>
 </html>
