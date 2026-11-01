@@ -132,6 +132,35 @@
 
         </div>
     </div>
+<!-- Real-Time Firebase Script -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let targetAdm = urlParams.get('adm');
+            
+            if(!targetAdm) return; // Ignore if no admission number
 
+            let students = await mdaFetchData('students');
+            let activeStudent = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+
+            if(activeStudent) {
+                let sName = activeStudent.fullName || activeStudent.name || "Student Name";
+                
+                // Yahan aap id ke mutabiq values bhar sakte hain (e.g. innerText)
+                // Maqsad sirf yahan bache ko identify karna hai
+                // Document DOM Elements update (Replace generic classes with IDs in your HTML if needed)
+                const nameElements = document.querySelectorAll('.student-name-val');
+                nameElements.forEach(el => el.innerText = sName);
+                
+                const admElements = document.querySelectorAll('.student-adm-val');
+                admElements.forEach(el => el.innerText = targetAdm);
+                
+                const classElements = document.querySelectorAll('.student-class-val');
+                classElements.forEach(el => el.innerText = activeStudent.class);
+            }
+        });
+    </script>
 </body>
+    
 </html>
