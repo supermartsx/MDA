@@ -3,122 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Fee Collect - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Quick Fee Collect - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Global & Modules CSS -->
+    <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/forms.css">
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
-        .quick-fee-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border: 1px solid #f0f0f0;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-        }
-
-        .quick-search-box {
-            position: relative;
-            margin-bottom: 25px;
-        }
-        .quick-search-box input {
-            width: 100%;
-            padding: 16px 20px 16px 50px;
-            font-size: 16px;
-            border: 2px solid #7239ea;
-            border-radius: 8px;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(114, 57, 234, 0.1);
-        }
-        .quick-search-box i {
-            position: absolute;
-            left: 18px;
-            top: 20px;
-            font-size: 20px;
-            color: #7239ea;
-        }
-
-        .student-quick-preview {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        .preview-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .preview-info img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .preset-amount-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .btn-preset {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            color: #334155;
-            transition: 0.2s;
-        }
-        .btn-preset:hover {
-            background: #7239ea;
-            border-color: #7239ea;
-            color: #fff;
-        }
-        .btn-preset.active {
-            background: #7239ea;
-            border-color: #7239ea;
-            color: #fff;
-        }
-
-        .btn-express-pay {
-            background: #16a34a;
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.25);
-            transition: 0.3s;
-        }
-        .btn-express-pay:hover {
-            background: #15803d;
-            transform: translateY(-2px);
-        }
+        .quick-fee-card { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; max-width: 800px; margin: 0 auto 30px auto; }
+        .quick-search-box { position: relative; margin-bottom: 25px; }
+        .quick-search-box input { width: 100%; padding: 16px 20px 16px 50px; font-size: 16px; border: 2px solid #7239ea; border-radius: 8px; outline: none; box-shadow: 0 0 0 4px rgba(114, 57, 234, 0.1); }
+        .quick-search-box i { position: absolute; left: 18px; top: 20px; font-size: 20px; color: #7239ea; }
+        .student-quick-preview { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .preset-amount-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .btn-preset { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; color: #334155; transition: 0.2s; }
+        .btn-preset:hover, .btn-preset.active { background: #7239ea; border-color: #7239ea; color: #fff; }
+        .btn-express-pay { background: #16a34a; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 600; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.25); transition: 0.3s; }
+        .btn-express-pay:hover { background: #15803d; }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -193,7 +102,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Quick Fee Collect</h2>
+                <h2>Real-Time Quick Fee Collect</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="fas fa-bolt text-warning"></i> Express Counter</span>
@@ -202,51 +111,42 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Fastest way to collect counter fee payments and print receipts (PKR)</p>
+                <p class="breadcrumb">Fastest counter fee collection synced with Google Database (PKR)</p>
             </div>
 
             <!-- QUICK COLLECTION CARD -->
             <div class="quick-fee-card">
                 
-                <!-- Fast Search / Barcode Scanner input -->
                 <div class="quick-search-box">
-                    <i class="fas fa-qrcode"></i>
-                    <input type="text" id="quickAdmSearch" placeholder="Scan QR Code or Type Admission No (e.g. ADM002)..." value="ADM002" autofocus>
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="quickAdmSearch" placeholder="Type Admission No (e.g. MDA-26-1055) and press Enter..." onkeyup="searchQuickStudent(event)">
                 </div>
 
-                <!-- Instant Student Preview -->
                 <div class="student-quick-preview">
-                    <div class="preview-info">
-                        <img src="https://ui-avatars.com/api/?name=Ramesh+Kumar&background=10b981&color=fff&size=50" alt="Student">
-                        <div>
-                            <h4 style="margin: 0; color: #1e293b;" id="qStudentName">RAMESH KUMAR</h4>
-                            <p style="margin: 2px 0 0; font-size: 12px; color: #64748b;">Class 10 • S/O Suresh Kumar</p>
-                        </div>
+                    <div>
+                        <h4 style="margin: 0; color: #1e293b;" id="qStudentName">Search a Student above</h4>
+                        <p style="margin: 2px 0 0; font-size: 12px; color: #64748b;" id="qStudentMeta">Class - • Father: -</p>
                     </div>
                     <div style="text-align: right;">
                         <span style="font-size: 11px; color: #dc2626; font-weight: 600;">PENDING DUE</span>
-                        <h3 style="margin: 0; color: #dc2626; font-size: 22px;" id="qStudentDue">Rs. 6,500</h3>
+                        <h3 style="margin: 0; color: #dc2626; font-size: 22px;" id="qStudentDue">Rs. 0</h3>
                     </div>
                 </div>
 
-                <!-- Form -->
                 <form id="quickPayForm">
-                    
-                    <!-- Preset Amount Buttons (PKR) -->
                     <label style="font-size: 12px; color: #64748b; font-weight: 500; margin-bottom: 8px; display: block;">QUICK PRESET AMOUNTS (PKR):</label>
                     <div class="preset-amount-buttons">
                         <button type="button" class="btn-preset" onclick="setQuickAmount(500)">Rs. 500</button>
                         <button type="button" class="btn-preset" onclick="setQuickAmount(1000)">Rs. 1,000</button>
                         <button type="button" class="btn-preset" onclick="setQuickAmount(2000)">Rs. 2,000</button>
                         <button type="button" class="btn-preset" onclick="setQuickAmount(5000)">Rs. 5,000</button>
-                        <button type="button" class="btn-preset active" onclick="setQuickAmount(6500)">Full (Rs. 6,500)</button>
+                        <button type="button" class="btn-preset active" onclick="setQuickAmount(6500)">Full Due</button>
                     </div>
 
-                    <!-- Custom Amount & Pakistani Payment Mode -->
                     <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; margin-bottom: 25px;">
                         <div class="input-group">
                             <label>COLLECTING AMOUNT (Rs.) *</label>
-                            <input type="number" id="quickPayAmount" value="6500" style="font-size: 20px; font-weight: 700; color: #16a34a; padding: 12px;" required>
+                            <input type="number" id="quickPayAmount" value="0" style="font-size: 20px; font-weight: 700; color: #16a34a; padding: 12px;" required>
                         </div>
                         <div class="input-group">
                             <label>PAYMENT MODE *</label>
@@ -259,73 +159,75 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="btn-express-pay">
-                        <i class="fas fa-print"></i> Collect & Print Instant Receipt
+                        <i class="fas fa-print"></i> Collect & Sync Live Receipt
                     </button>
                 </form>
 
             </div>
 
-            <!-- TODAY'S FAST LOGS TABLE -->
-            <div class="data-table-card mt-20" style="max-width: 800px; margin: 0 auto;">
-                <div class="card-header">
-                    <h4><i class="fas fa-bolt text-warning"></i> Today's Quick Collections</h4>
-                    <span class="badge" style="background:#dcfce7; color:#15803d;">Active Counter</span>
-                </div>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>RECEIPT</th>
-                                <th>STUDENT</th>
-                                <th>AMOUNT</th>
-                                <th>MODE</th>
-                                <th>TIME</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>RCP-2610-01005</td>
-                                <td><strong>ALI RAZA</strong></td>
-                                <td class="text-success fw-bold">Rs. 1,000</td>
-                                <td>Easypaisa</td>
-                                <td>10:45 AM</td>
-                            </tr>
-                            <tr>
-                                <td>RCP-2610-01004</td>
-                                <td><strong>FATIMA ZAHRA</strong></td>
-                                <td class="text-success fw-bold">Rs. 500</td>
-                                <td>JazzCash</td>
-                                <td>10:12 AM</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Quick Fee Logic -->
     <script>
+        let selectedStudentObj = null;
+
+        async function searchQuickStudent(e) {
+            if (e.key === 'Enter') {
+                let query = document.getElementById('quickAdmSearch').value.toUpperCase().trim();
+                let students = await mdaFetchData('students');
+                
+                selectedStudentObj = students.find(s => (s.admNo || s.admissionNo || "").toUpperCase() === query);
+
+                if (selectedStudentObj) {
+                    document.getElementById('qStudentName').innerText = selectedStudentObj.fullName || selectedStudentObj.name;
+                    document.getElementById('qStudentMeta').innerText = `Class ${selectedStudentObj.class} • Father: ${selectedStudentObj.fatherName}`;
+                    let due = parseFloat(selectedStudentObj.pendingDue || 5000);
+                    document.getElementById('qStudentDue').innerText = `Rs. ${due.toLocaleString()}`;
+                    document.getElementById('quickPayAmount').value = due;
+                } else {
+                    alert("Student admission number not found in database!");
+                }
+            }
+        }
+
         function setQuickAmount(amt) {
             document.getElementById('quickPayAmount').value = amt;
-            const buttons = document.querySelectorAll('.btn-preset');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
         }
 
-        document.getElementById('quickPayForm').addEventListener('submit', function(e) {
+        document.getElementById('quickPayForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const amount = document.getElementById('quickPayAmount').value;
-            const mode = document.getElementById('quickPayMode').value;
-            const student = document.getElementById('qStudentName').innerText;
+            if (!selectedStudentObj) {
+                alert("Please search and select a student first by typing Admission No and pressing Enter.");
+                return;
+            }
 
-            alert(`⚡ Quick Payment of Rs. ${amount} received via ${mode} for ${student}!\nOpening receipt print...`);
-            window.print();
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            const quickPayment = {
+                action: 'fees',
+                receiptNo: `RCP-Q-${rand}`,
+                date: new Date().toISOString().slice(0, 10),
+                studentName: selectedStudentObj.fullName || selectedStudentObj.name,
+                amount: document.getElementById('quickPayAmount').value,
+                mode: document.getElementById('quickPayMode').value,
+                remarks: 'Quick Counter Express Collect'
+            };
+
+            let res = await mdaSaveData('fees', quickPayment);
+            if (res.status === "success") {
+                alert(`Quick Payment of Rs. ${quickPayment.amount} synced successfully!`);
+                this.reset();
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Saved locally. Syncing with Google Sheet.');
+                window.location.href = 'dashboard.html';
+            }
         });
     </script>
 </body>
