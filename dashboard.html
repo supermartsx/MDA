@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Admin Dashboard - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,21 +23,21 @@
             margin-bottom: 8px;
             color: #cbd5e1;
         }
-        .refresh-btn {
+        .live-sync-btn {
             background: #f1f5f9;
             color: #475569;
             border: 1px solid #cbd5e1;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: 0.2s;
         }
-        .refresh-btn:hover { background: #e2e8f0; color: #0f172a; }
+        .live-sync-btn:hover { background: #7239ea; color: #fff; border-color: #7239ea; }
     </style>
 </head>
 <body>
@@ -118,10 +118,10 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Dashboard</h2>
+                <h2>Admin Dashboard</h2>
             </div>
             <div class="header-right">
-                <button class="refresh-btn" onclick="loadRealtimeData()"><i class="fas fa-sync-alt"></i> Live Refresh</button>
+                <button class="live-sync-btn" onclick="fetchLiveDashboardData()"><i class="fas fa-sync-alt" id="syncIcon"></i> Sync Google DB</button>
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
                 <div class="profile-icon">S</div>
             </div>
@@ -129,19 +129,19 @@
 
         <div class="dashboard-content">
             
-            <!-- REAL-TIME DYNAMIC STATS CARDS (NO DUMMY NUMBERS) -->
+            <!-- REAL-TIME DYNAMIC STATS CARDS -->
             <div class="stats-grid">
-                <!-- Active Students Card -->
+                <!-- Active Students -->
                 <div class="stat-card" style="border-top: 4px solid #17a2b8;">
                     <div class="stat-icon" style="color: #17a2b8; background: #e0f6f9;"><i class="fas fa-user-graduate"></i></div>
                     <div class="stat-info">
                         <h3 id="statActiveStudents">0</h3>
                         <p>Active Enrolled Students</p>
-                        <small class="text-success" id="statStudentBadge">+0 new admissions</small>
+                        <small class="text-success" id="statStudentSub">Database synced</small>
                     </div>
                 </div>
 
-                <!-- Total Collected Card -->
+                <!-- Total Collected -->
                 <div class="stat-card" style="border-top: 4px solid #28a745;">
                     <div class="stat-icon" style="color: #28a745; background: #e6f6eb;"><i class="fas fa-coins"></i></div>
                     <div class="stat-info">
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <!-- Pending Fees Card -->
+                <!-- Pending Fees -->
                 <div class="stat-card" style="border-top: 4px solid #dc3545;">
                     <div class="stat-icon" style="color: #dc3545; background: #fbe6e8;"><i class="fas fa-exclamation-triangle"></i></div>
                     <div class="stat-info">
@@ -161,7 +161,7 @@
                     </div>
                 </div>
 
-                <!-- Total Expenses Card -->
+                <!-- Total Expenses -->
                 <div class="stat-card" style="border-top: 4px solid #fd7e14;">
                     <div class="stat-icon" style="color: #fd7e14; background: #fef0e4;"><i class="fas fa-receipt"></i></div>
                     <div class="stat-info">
@@ -181,14 +181,14 @@
                 <a href="all-reports.html" class="action-btn"><i class="fas fa-chart-bar text-purple"></i> All Reports Hub</a>
             </div>
 
-            <!-- REAL-TIME TABLES SECTION -->
+            <!-- TABLES SECTION -->
             <div class="tables-grid">
                 
-                <!-- TOP FEE DEFAULTERS (DYNAMIC) -->
+                <!-- TOP FEE DEFAULTERS -->
                 <div class="data-table-card">
                     <div class="card-header">
                         <h4><i class="fas fa-exclamation-circle text-danger"></i> Pending Fee Defaulters</h4>
-                        <a href="whatsapp-reminder.html">WhatsApp Reminders</a>
+                        <a href="whatsapp-reminder.html">Reminders</a>
                     </div>
                     <div class="table-responsive">
                         <table>
@@ -201,11 +201,10 @@
                                 </tr>
                             </thead>
                             <tbody id="defaultersTableBody">
-                                <!-- Populated dynamically by JS -->
                                 <tr>
                                     <td colspan="4" class="empty-state-td">
-                                        <i class="fas fa-check-circle text-success"></i>
-                                        No pending fee defaulters. All dues are cleared!
+                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                        Loading real-time data from Google DB...
                                     </td>
                                 </tr>
                             </tbody>
@@ -213,7 +212,7 @@
                     </div>
                 </div>
 
-                <!-- RECENT PAYMENTS (DYNAMIC) -->
+                <!-- RECENT PAYMENTS -->
                 <div class="data-table-card">
                     <div class="card-header">
                         <h4><i class="fas fa-history text-success"></i> Recent Payment Transactions</h4>
@@ -230,11 +229,10 @@
                                 </tr>
                             </thead>
                             <tbody id="paymentsTableBody">
-                                <!-- Populated dynamically by JS -->
                                 <tr>
                                     <td colspan="4" class="empty-state-td">
-                                        <i class="fas fa-receipt text-muted"></i>
-                                        No payment transactions recorded yet.
+                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                        Loading real-time data from Google DB...
                                     </td>
                                 </tr>
                             </tbody>
@@ -247,102 +245,115 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
-
-    <!-- REAL-TIME DATA COMPUTATION SCRIPT (NO DUMMY DATA) -->
+    <script src="assets/js/realtime-db.js"></script>
+    
     <script>
-        function loadRealtimeData() {
-            // 1. Fetch Students from LocalStorage
-            let students = JSON.parse(localStorage.getItem('mda_students')) || [];
-            
-            // 2. Fetch Payments from LocalStorage
-            let payments = JSON.parse(localStorage.getItem('mda_payments')) || [];
+        async function fetchLiveDashboardData() {
+            const syncIcon = document.getElementById('syncIcon');
+            syncIcon.className = 'fas fa-spinner fa-spin';
 
-            // 3. Fetch Expenses from LocalStorage
-            let expenses = JSON.parse(localStorage.getItem('mda_expenses')) || [];
+            try {
+                // Fetch real-time tabs data in parallel from Google Sheet
+                const [students, fees, expenses] = await Promise.all([
+                    mdaFetchData('students'),
+                    mdaFetchData('fees'),
+                    mdaFetchData('expenses')
+                ]);
 
-            // ================= COMPUTE COUNTERS =================
-            // Active Students
-            document.getElementById('statActiveStudents').innerText = students.length;
-            document.getElementById('statStudentBadge').innerText = `+${students.length} registered students`;
+                // 1. Active Students Count
+                const activeCount = students.length || 0;
+                document.getElementById('statActiveStudents').innerText = activeCount;
+                document.getElementById('statStudentSub').innerText = `${activeCount} records live`;
 
-            // Total Collected Fees
-            let totalCollected = payments.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
-            document.getElementById('statTotalCollected').innerText = `Rs. ${totalCollected.toLocaleString()}`;
+                // 2. Fees Calculation
+                let totalCollected = 0;
+                let todayCollected = 0;
+                const todayStr = new Date().toISOString().slice(0, 10);
 
-            // Today's Collected Fees
-            const todayStr = new Date().toISOString().slice(0, 10);
-            let todayCollected = payments
-                .filter(p => p.date === todayStr)
-                .reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
-            document.getElementById('statTodayCollected').innerText = `Today: Rs. ${todayCollected.toLocaleString()}`;
+                fees.forEach(f => {
+                    let amt = parseFloat(f.amount || f.paidAmount || 0);
+                    totalCollected += amt;
+                    let fDate = String(f.date || "").slice(0, 10);
+                    if (fDate === todayStr) {
+                        todayCollected += amt;
+                    }
+                });
 
-            // Total Pending Fees & Defaulters
-            let defaulters = students.filter(s => parseFloat(s.pendingDue) > 0);
-            let totalPending = defaulters.reduce((acc, curr) => acc + (parseFloat(curr.pendingDue) || 0), 0);
-            document.getElementById('statPendingFees').innerText = `Rs. ${totalPending.toLocaleString()}`;
-            document.getElementById('statDefaulterCount').innerText = `${defaulters.length} students with dues`;
+                document.getElementById('statTotalCollected').innerText = `Rs. ${totalCollected.toLocaleString()}`;
+                document.getElementById('statTodayCollected').innerText = `Today: Rs. ${todayCollected.toLocaleString()}`;
 
-            // Total Expenses
-            let totalExpenses = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
-            document.getElementById('statTotalExpenses').innerText = `Rs. ${totalExpenses.toLocaleString()}`;
-            document.getElementById('statExpenseCount').innerText = `${expenses.length} expense vouchers`;
+                // 3. Pending Fees & Defaulters
+                let defaulters = students.filter(s => parseFloat(s.pendingDue || 0) > 0);
+                let totalPending = defaulters.reduce((acc, curr) => acc + (parseFloat(curr.pendingDue) || 0), 0);
+                document.getElementById('statPendingFees').innerText = `Rs. ${totalPending.toLocaleString()}`;
+                document.getElementById('statDefaulterCount').innerText = `${defaulters.length} students due`;
 
-            // ================= RENDER DEFAULTERS TABLE =================
-            const defBody = document.getElementById('defaultersTableBody');
-            if (defaulters.length > 0) {
-                defBody.innerHTML = '';
-                defaulters.slice(0, 5).forEach(st => {
-                    defBody.innerHTML += `
+                // Render Defaulters Table
+                const defBody = document.getElementById('defaultersTableBody');
+                if (defaulters.length > 0) {
+                    defBody.innerHTML = '';
+                    defaulters.slice(0, 5).forEach(st => {
+                        defBody.innerHTML += `
+                            <tr>
+                                <td><strong>${st.studentName || st.name || 'Student'}</strong><br><small style="color:#64748b;">${st.admNo || st.admissionNo || ''}</small></td>
+                                <td><span class="class-badge">${st.class || 'Class 10'}</span></td>
+                                <td class="text-danger font-weight-bold">Rs. ${parseFloat(st.pendingDue).toLocaleString()}</td>
+                                <td><a href="fee-collection.html" class="btn-collect" style="text-decoration:none;"><i class="fas fa-bolt"></i> Collect</a></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    defBody.innerHTML = `
                         <tr>
-                            <td><strong>${st.fullName || st.name}</strong><br><small style="color:#64748b;">${st.admNo}</small></td>
-                            <td><span class="class-badge">${st.class}</span></td>
-                            <td class="text-danger font-weight-bold">Rs. ${parseFloat(st.pendingDue).toLocaleString()}</td>
-                            <td>
-                                <a href="fee-collection.html" class="btn-collect" style="text-decoration:none;"><i class="fas fa-bolt"></i> Collect</a>
+                            <td colspan="4" class="empty-state-td">
+                                <i class="fas fa-check-circle text-success"></i>
+                                No pending fee defaulters found in database.
                             </td>
                         </tr>
                     `;
-                });
-            } else {
-                defBody.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="empty-state-td">
-                            <i class="fas fa-check-circle text-success"></i>
-                            No pending fee defaulters. All dues are cleared!
-                        </td>
-                    </tr>
-                `;
-            }
+                }
 
-            // ================= RENDER RECENT PAYMENTS TABLE =================
-            const payBody = document.getElementById('paymentsTableBody');
-            if (payments.length > 0) {
-                payBody.innerHTML = '';
-                payments.slice(-5).reverse().forEach(pm => {
-                    payBody.innerHTML += `
+                // 4. Expenses Calculation
+                let totalExpenses = expenses.reduce((acc, curr) => acc + (parseFloat(curr.amount || 0), 0), 0);
+                document.getElementById('statTotalExpenses').innerText = `Rs. ${totalExpenses.toLocaleString()}`;
+                document.getElementById('statExpenseCount').innerText = `${expenses.length} vouchers recorded`;
+
+                // 5. Recent Payments Table
+                const payBody = document.getElementById('paymentsTableBody');
+                if (fees.length > 0) {
+                    payBody.innerHTML = '';
+                    fees.slice(-5).reverse().forEach(pm => {
+                        payBody.innerHTML += `
+                            <tr>
+                                <td><strong>${pm.receiptNo || 'RCP-001'}</strong></td>
+                                <td>${pm.studentName || pm.name || 'Student'}</td>
+                                <td class="text-success font-weight-bold">Rs. ${parseFloat(pm.amount || pm.paidAmount || 0).toLocaleString()}</td>
+                                <td><span class="badge" style="background:#f1f5f9; color:#475569;">${pm.mode || 'Cash'}</span></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    payBody.innerHTML = `
                         <tr>
-                            <td><strong>${pm.receiptNo}</strong></td>
-                            <td>${pm.studentName}</td>
-                            <td class="text-success font-weight-bold">Rs. ${parseFloat(pm.amount).toLocaleString()}</td>
-                            <td><span class="badge" style="background:#f1f5f9; color:#475569;">${pm.mode}</span></td>
+                            <td colspan="4" class="empty-state-td">
+                                <i class="fas fa-receipt text-muted"></i>
+                                No payment transactions recorded yet.
+                            </td>
                         </tr>
                     `;
-                });
-            } else {
-                payBody.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="empty-state-td">
-                            <i class="fas fa-receipt text-muted"></i>
-                            No payment transactions recorded yet.
-                        </td>
-                    </tr>
-                `;
+                }
+
+            } catch (err) {
+                console.error("Dashboard sync error:", err);
+            } finally {
+                syncIcon.className = 'fas fa-sync-alt';
             }
         }
 
-        // On Page Load
-        document.addEventListener('DOMContentLoaded', loadRealtimeData);
+        // Load data on page open
+        document.addEventListener('DOMContentLoaded', fetchLiveDashboardData);
     </script>
 </body>
 </html>
