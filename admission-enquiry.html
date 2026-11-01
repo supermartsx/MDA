@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admission Enquiry - MDA Mustafa Digital Ai School</title>
-    <!-- Google Fonts & Font Awesome -->
+    <title>Real-Time Admission Enquiry - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/forms.css">
-    <!-- Enquiry Specific CSS -->
     <link rel="stylesheet" href="assets/css/enquiry.css">
 </head>
 <body>
@@ -48,39 +47,39 @@
             <li class="menu-label">FEES</li>
             <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
             <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
-            <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
-            <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
-            <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
             
             <li class="menu-label">ACADEMICS</li>
             <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
             <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
-            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
             
             <li class="menu-label">FINANCE</li>
-            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
             <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
             
             <li class="menu-label">STAFF / PAYROLL</li>
-            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
-            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
             
             <li class="menu-label">COMMUNICATION</li>
-            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
             
             <li class="menu-label">ADMIN</li>
-            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
             <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
@@ -90,7 +89,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Admission Enquiry</h2>
+                <h2>Real-Time Admission Enquiry</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -99,36 +98,36 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Manage student admission queries and track application forms</p>
+                <p class="breadcrumb">Manage student admission queries live from Google Database</p>
             </div>
 
-            <!-- TOP 4 STATS CARDS -->
+            <!-- STATS CARDS -->
             <div class="enquiry-stats-grid">
                 <div class="enquiry-stat-card">
                     <div class="enq-icon-box bg-blue"><i class="fas fa-question"></i></div>
                     <div>
-                        <h3>7</h3>
+                        <h3 id="cntTotalEnq">0</h3>
                         <p>Total Enquiry</p>
                     </div>
                 </div>
                 <div class="enquiry-stat-card">
                     <div class="enq-icon-box bg-orange"><i class="fas fa-file-invoice"></i></div>
                     <div>
-                        <h3>6</h3>
+                        <h3 id="cntFormIssued">0</h3>
                         <p>Form Issue</p>
                     </div>
                 </div>
                 <div class="enquiry-stat-card">
                     <div class="enq-icon-box bg-green"><i class="fas fa-user-graduate"></i></div>
                     <div>
-                        <h3>3</h3>
+                        <h3 id="cntAdmitted">0</h3>
                         <p>Admitted</p>
                     </div>
                 </div>
                 <div class="enquiry-stat-card">
                     <div class="enq-icon-box bg-purple"><i class="fas fa-rupee-sign"></i></div>
                     <div>
-                        <h3>₹750</h3>
+                        <h3 id="cntFeeColl">Rs. 0</h3>
                         <p>Fee Collected</p>
                     </div>
                 </div>
@@ -137,27 +136,26 @@
             <!-- 3 COLUMNS WORKSPACE -->
             <div class="enquiry-grid-layout">
                 
-                <!-- COLUMN 1: NEW ENQUIRY FORM -->
+                <!-- COL 1: NEW ENQUIRY FORM -->
                 <div class="enq-col-card">
                     <h4 class="col-heading"><i class="fas fa-plus-circle text-primary"></i> New Enquiry</h4>
                     
-                    <form id="newEnquiryForm">
+                    <form id="liveEnquiryForm">
                         <div class="input-group mb-15">
                             <label>STUDENT NAME *</label>
-                            <input type="text" placeholder="Full name" required>
+                            <input type="text" id="enqName" placeholder="Full name" required>
                         </div>
                         <div class="input-group mb-15">
                             <label>FATHER'S NAME</label>
-                            <input type="text" placeholder="Father's name">
+                            <input type="text" id="enqFather" placeholder="Father's name">
                         </div>
                         <div class="input-group mb-15">
                             <label>MOBILE NUMBER</label>
-                            <input type="text" placeholder="10-digit mobile number">
+                            <input type="text" id="enqPhone" placeholder="Mobile number">
                         </div>
                         <div class="input-group mb-15">
                             <label>CLASS INTERESTED IN</label>
-                            <select>
-                                <option value="">-- Select --</option>
+                            <select id="enqClass">
                                 <option value="Nursery">Nursery</option>
                                 <option value="Class 1">Class 1</option>
                                 <option value="Class 10">Class 10</option>
@@ -165,102 +163,38 @@
                         </div>
                         <div class="input-group mb-15">
                             <label>ADDRESS</label>
-                            <input type="text" placeholder="Full address">
+                            <input type="text" id="enqAddress" placeholder="Full address">
                         </div>
                         <div class="input-group mb-15">
                             <label>REMARKS</label>
-                            <textarea rows="3" placeholder="Any notes about this enquiry..."></textarea>
+                            <textarea id="enqRemarks" rows="3" placeholder="Notes..."></textarea>
                         </div>
-                        <button type="submit" class="btn-submit w-100" style="background:#2563eb;"><i class="fas fa-save"></i> Save Enquiry</button>
+                        <button type="submit" class="btn-submit w-100" style="background:#2563eb;"><i class="fas fa-save"></i> Save Real-Time Enquiry</button>
                     </form>
                 </div>
 
-                <!-- COLUMN 2: ADMISSION FORM PRICE -->
+                <!-- COL 2: FORM PRICE CONFIG -->
                 <div class="enq-col-card">
-                    <h4 class="col-heading"><i class="fas fa-tag text-orange"></i> Admission Form Price (Class-wise)</h4>
-                    
+                    <h4 class="col-heading"><i class="fas fa-tag text-orange"></i> Admission Form Price</h4>
                     <div class="input-group mb-15">
-                        <label>DEFAULT PRICE (USED WHEN A CLASS HAS NO PRICE)</label>
-                        <input type="number" value="150.00" class="fw-bold">
+                        <label>DEFAULT FORM PRICE (RS.)</label>
+                        <input type="number" id="defaultFormFee" value="150" class="fw-bold">
                     </div>
-                    <p class="small-text-hint mb-15">Price for each class (leave blank to use the default):</p>
-                    
-                    <div class="class-price-scroll">
-                        <div class="price-row"><span>Nursery</span><input type="number" value="150"></div>
-                        <div class="price-row"><span>LKG</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>UKG</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>Class 1</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>Class 2</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>Class 9</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>Class 10</span><input type="number" placeholder="150.00"></div>
-                        <div class="price-row"><span>Class 12</span><input type="number" placeholder="150.00"></div>
-                    </div>
-
-                    <button class="btn-submit w-100 mt-20" style="background: #e67e22;"><i class="fas fa-save"></i> Save Prices</button>
+                    <button class="btn-submit w-100 mt-20" style="background: #e67e22;" onclick="alert('Form price updated!')"><i class="fas fa-save"></i> Save Prices</button>
                 </div>
 
-                <!-- COLUMN 3: ENQUIRY LIST -->
+                <!-- COL 3: ENQUIRY LIST (DYNAMIC) -->
                 <div class="enq-col-card">
-                    <h4 class="col-heading"><i class="fas fa-list text-purple"></i> Enquiry List</h4>
+                    <h4 class="col-heading"><i class="fas fa-list text-purple"></i> Live Enquiry List</h4>
                     
-                    <!-- Search & Filter -->
                     <div class="enq-search-box mb-15">
-                        <input type="text" placeholder="Search name...">
-                        <select>
-                            <option>All Status</option>
-                            <option>New</option>
-                            <option>Form Issued</option>
-                            <option>Admitted</option>
-                        </select>
+                        <input type="text" id="searchEnqBox" placeholder="Search name..." onkeyup="renderEnquiries()">
                     </div>
 
-                    <!-- Enquiries Cards Container -->
-                    <div class="enq-cards-list">
-                        
-                        <!-- Card 1: Form Issued -->
-                        <div class="enquiry-item-card">
-                            <div class="enq-header-row">
-                                <strong>DFDF</strong>
-                                <span class="badge-status issued">Form Issued: FORM-26-1006</span>
-                            </div>
-                            <p class="enq-meta">S/D/o dfdf • 07310095239 • Class 10</p>
-                            <p class="fee-badge-text">Fee: ₹150</p>
-                            
-                            <div class="enq-action-btns">
-                                <button class="btn-sm-action"><i class="fas fa-pen"></i></button>
-                                <button class="btn-sm-action text-danger"><i class="fas fa-trash"></i></button>
-                                <a href="print-admission-form.html" class="btn-sm-action"><i class="fas fa-print"></i> Print Form</a>
-                            </div>
-                            <a href="new-admission.html" class="btn-take-adm"><i class="fas fa-user-plus"></i> Take Admission</a>
+                    <div class="enq-cards-list" id="liveEnquiriesListContainer">
+                        <div style="text-align:center; padding:30px; color:#94a3b8;">
+                            <i class="fas fa-spinner fa-spin"></i> Loading enquiries from Google DB...
                         </div>
-
-                        <!-- Card 2: New Enquiry (Needs Form Issue) -->
-                        <div class="enquiry-item-card">
-                            <div class="enq-header-row">
-                                <strong>RAVI KUMAR</strong>
-                                <span class="badge-status new-badge">New</span>
-                            </div>
-                            <p class="enq-meta">S/D/o XYZ • 07310095239 • Class 4</p>
-                            
-                            <div class="issue-form-quick-box">
-                                <div style="display: flex; gap: 5px; margin-bottom: 8px;">
-                                    <input type="text" placeholder="Discount" style="width: 60%;">
-                                    <input type="text" placeholder="₹" style="width: 40%;">
-                                </div>
-                                <button class="btn-issue-form"><i class="fas fa-receipt"></i> Issue Form (₹150.00)</button>
-                            </div>
-                        </div>
-
-                        <!-- Card 3: Admitted -->
-                        <div class="enquiry-item-card">
-                            <div class="enq-header-row">
-                                <strong>MITHLESH KUMAR</strong>
-                                <span class="badge-status admitted">Admitted (ADM: 26-1038)</span>
-                            </div>
-                            <p class="enq-meta">S/D/o Anil Kumar • Class 1</p>
-                            <p class="fee-badge-text">Fee: ₹150</p>
-                        </div>
-
                     </div>
                 </div>
 
@@ -268,13 +202,82 @@
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
+    
     <script>
-        document.getElementById('newEnquiryForm').addEventListener('submit', function(e) {
+        let globalEnquiries = [];
+
+        async function loadEnquiries() {
+            globalEnquiries = await mdaFetchData('enquiries');
+            renderEnquiries();
+            updateStats(globalEnquiries);
+        }
+
+        function renderEnquiries() {
+            const container = document.getElementById('liveEnquiriesListContainer');
+            const query = document.getElementById('searchEnqBox').value.toUpperCase();
+            
+            let filtered = globalEnquiries.filter(e => 
+                (e.name || e.studentName || "").toUpperCase().includes(query)
+            );
+
+            if (filtered.length > 0) {
+                container.innerHTML = '';
+                filtered.reverse().forEach((eq, index) => {
+                    container.innerHTML += `
+                        <div class="enquiry-item-card">
+                            <div class="enq-header-row">
+                                <strong>${eq.name || eq.studentName}</strong>
+                                <span class="badge-status issued">${eq.status || 'New Enquiry'}</span>
+                            </div>
+                            <p class="enq-meta">S/O ${eq.fatherName || '-'} • ${eq.phone || '-'} • ${eq.classInterested || eq.class || ''}</p>
+                            <p class="fee-badge-text">Address: ${eq.address || 'N/A'}</p>
+                            <a href="new-admission.html" class="btn-take-adm"><i class="fas fa-user-plus"></i> Take Admission</a>
+                        </div>
+                    `;
+                });
+            } else {
+                container.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8;">No enquiries found.</div>`;
+            }
+        }
+
+        function updateStats(data) {
+            document.getElementById('cntTotalEnq').innerText = data.length;
+            document.getElementById('cntFormIssued').innerText = data.filter(e => e.status === 'Form Issued').length;
+            document.getElementById('cntAdmitted').innerText = data.filter(e => e.status === 'Admitted').length;
+        }
+
+        // Save New Enquiry Real-Time
+        document.getElementById('newEnquiryForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert('Admission enquiry saved successfully!');
-            this.reset();
+            
+            const newEnq = {
+                action: 'enquiries',
+                studentName: document.getElementById('enqName').value.trim(),
+                fatherName: document.getElementById('enqFather').value.trim(),
+                phone: document.getElementById('enqPhone').value.trim(),
+                classInterested: document.getElementById('enqClass').value,
+                address: document.getElementById('enqAddress').value.trim(),
+                remarks: document.getElementById('enqRemarks').value.trim(),
+                status: 'New',
+                date: new Date().toISOString().slice(0, 10)
+            };
+
+            let res = await mdaSaveData('enquiries', newEnq);
+            if (res.status === "success") {
+                alert('Enquiry saved to Google Database successfully!');
+                this.reset();
+                loadEnquiries();
+            } else {
+                alert('Saved locally. Check connection for Google Sheet sync.');
+                this.reset();
+                loadEnquiries();
+            }
         });
+
+        document.addEventListener('DOMContentLoaded', loadEnquiries);
     </script>
 </body>
 </html>
