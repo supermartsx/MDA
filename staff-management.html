@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Staff Management - MDA Mustafa Digital Ai School</title>
+    <title>Staff Management (Edit, Delete, Block) - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,14 +13,103 @@
     <link rel="stylesheet" href="assets/css/tables.css">
 
     <style>
-        .staff-workspace-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; margin-bottom: 25px; }
-        .role-badge-teacher { background: #ede9fe; color: #6d28d9; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-        @media (max-width: 992px) { .staff-workspace-grid { grid-template-columns: 1fr; } }
+        .staff-workspace-grid {
+            display: grid;
+            grid-template-columns: 440px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .role-badge-teacher {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .bank-badge {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 10.5px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .iban-text {
+            font-family: monospace;
+            font-size: 11px;
+            color: #334155;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .login-cred-box {
+            background: #faf5ff;
+            border: 1.5px solid #d8b4fe;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 18px;
+        }
+
+        .cred-badge {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10.5px;
+            font-family: monospace;
+            color: #0f172a;
+        }
+
+        /* Action Buttons */
+        .btn-action-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .btn-edit-tool { background: #e0f2fe; color: #0284c7; }
+        .btn-edit-tool:hover { background: #bae6fd; }
+        .btn-block-tool { background: #fef3c7; color: #d97706; }
+        .btn-block-tool:hover { background: #fde68a; }
+        .btn-del-tool { background: #fee2e2; color: #dc2626; }
+        .btn-del-tool:hover { background: #fecaca; }
+
+        .btn-cancel-edit {
+            background: #64748b;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .staff-workspace-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- COMPLETE SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -95,7 +184,7 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Staff Management</h2>
+                <h2>Staff Management (Edit, Delete & Block)</h2>
             </div>
             <div class="header-right">
                 <span class="session-badge"><i class="far fa-calendar-alt"></i> Session 2026-27</span>
@@ -104,7 +193,7 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Manage school faculty and staff records live via Google Database</p>
+                <p class="breadcrumb">Register, edit credentials, block access, or delete faculty records in live database</p>
             </div>
 
             <!-- STATS -->
@@ -113,7 +202,21 @@
                     <div class="enq-icon-box bg-purple"><i class="fas fa-users-cog"></i></div>
                     <div>
                         <h3 id="statTotalStaff">0</h3>
-                        <p>Total Registered Staff</p>
+                        <p>Total Staff Members</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box bg-green"><i class="fas fa-user-check"></i></div>
+                    <div>
+                        <h3 id="statActiveStaff">0 Active</h3>
+                        <p>Allowed Portal Access</p>
+                    </div>
+                </div>
+                <div class="enquiry-stat-card">
+                    <div class="enq-icon-box" style="background:#fee2e2; color:#dc2626;"><i class="fas fa-user-slash"></i></div>
+                    <div>
+                        <h3 id="statBlockedStaff">0 Blocked</h3>
+                        <p>Suspended Accounts</p>
                     </div>
                 </div>
             </div>
@@ -121,43 +224,125 @@
             <!-- WORKSPACE -->
             <div class="staff-workspace-grid">
                 
-                <!-- LEFT: FORM -->
+                <!-- LEFT: FORM (BOTH FOR CREATE & EDIT) -->
                 <div class="form-section" style="margin-bottom: 0;">
-                    <h4 class="section-heading"><i class="fas fa-user-plus text-primary"></i> Register New Staff</h4>
+                    <h4 class="section-heading" id="formHeading"><i class="fas fa-user-plus text-primary"></i> Register Staff & Teacher</h4>
                     
                     <form id="liveStaffForm">
+                        
                         <div class="input-group mb-15">
                             <label>FULL NAME *</label>
-                            <input type="text" id="staffName" placeholder="e.g. Sir Bilal Ahmad" required>
+                            <input type="text" id="staffName" placeholder="e.g. Sir Bilal Ahmad" oninput="autoFillData(this.value)" required>
                         </div>
+
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
                                 <label>DESIGNATION *</label>
-                                <select id="staffRole">
+                                <select id="staffRole" required>
                                     <option value="Senior Teacher">Senior Teacher</option>
                                     <option value="Junior Teacher">Junior Teacher</option>
                                     <option value="Accountant">Accountant</option>
+                                    <option value="Lab Incharge">Lab Incharge</option>
+                                    <option value="Admin Officer">Admin Officer</option>
                                     <option value="Security Guard">Security Guard</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <label>BASIC SALARY (Rs.) *</label>
-                                <input type="number" id="staffSalary" placeholder="e.g. 45000" style="font-weight:700; color:#16a34a;" required>
+                                <label>DEPARTMENT *</label>
+                                <select id="staffDept">
+                                    <option value="Science & IT">Science & IT</option>
+                                    <option value="Humanities">Humanities</option>
+                                    <option value="Administration">Administration</option>
+                                    <option value="General">General</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="input-group mb-20">
-                            <label>MOBILE NO *</label>
-                            <input type="text" id="staffPhone" placeholder="03XXXXXXXXX" required>
+
+                        <!-- TEACHER CREDENTIALS -->
+                        <div class="login-cred-box">
+                            <h5 style="color:#6d28d9; font-size:12px; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                                <i class="fas fa-key"></i> Teacher Portal Login Credentials
+                            </h5>
+
+                            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px;">
+                                <div class="input-group">
+                                    <label>TEACHER LOGIN ID *</label>
+                                    <input type="text" id="teacherLoginId" placeholder="e.g. TEA-101" required style="font-weight:700; color:#6d28d9;">
+                                </div>
+                                <div class="input-group">
+                                    <label>PORTAL PASSWORD *</label>
+                                    <input type="text" id="teacherPassword" placeholder="Set password" required style="font-weight:600;">
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;"><i class="fas fa-save"></i> Register Staff</button>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
+                            <div class="input-group">
+                                <label>MOBILE / WHATSAPP *</label>
+                                <input type="text" id="staffPhone" placeholder="03XXXXXXXXX" required>
+                            </div>
+                            <div class="input-group">
+                                <label>BASIC SALARY (Rs.) *</label>
+                                <input type="number" id="staffSalary" placeholder="e.g. 50000" style="font-weight:700; color:#16a34a;" required>
+                            </div>
+                        </div>
+
+                        <!-- Bank Details -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px; margin-bottom:18px;">
+                            <h5 style="color:#166534; font-size:12px; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                                <i class="fas fa-university"></i> Bank Account for Salary Disbursal
+                            </h5>
+
+                            <div class="input-group mb-15">
+                                <label>BANK / WALLET NAME *</label>
+                                <select id="staffBankName" required>
+                                    <option value="Meezan Bank Ltd">Meezan Bank Ltd</option>
+                                    <option value="United Bank Limited (UBL)">United Bank Limited (UBL)</option>
+                                    <option value="Habib Bank Limited (HBL)">Habib Bank Limited (HBL)</option>
+                                    <option value="Bank Alfalah">Bank Alfalah</option>
+                                    <option value="Easypaisa Wallet">Easypaisa Wallet</option>
+                                    <option value="JazzCash Wallet">JazzCash Wallet</option>
+                                    <option value="Cash in Hand (No Bank)">Cash in Hand (No Bank)</option>
+                                </select>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px;">
+                                <div class="input-group">
+                                    <label>ACCOUNT TITLE</label>
+                                    <input type="text" id="staffAccTitle" placeholder="Holder Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>ACCOUNT / IBAN *</label>
+                                    <input type="text" id="staffIban" placeholder="PK89MEZN... or Phone" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-20">
+                            <div class="input-group">
+                                <label>CNIC (NATIONAL ID)</label>
+                                <input type="text" id="staffCnic" placeholder="35201-XXXXXXX-X">
+                            </div>
+                            <div class="input-group">
+                                <label>JOINING DATE</label>
+                                <input type="date" id="staffJoinDate" value="2026-11-01">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btnSaveStaff" class="btn-submit w-100" style="background:#7239ea;">
+                            <i class="fas fa-save"></i> Save Staff & Generate Teacher Login
+                        </button>
+                        <button type="button" id="btnCancelEdit" class="btn-cancel-edit" onclick="cancelEdit()">
+                            <i class="fas fa-times"></i> Cancel Edit Mode
+                        </button>
                     </form>
                 </div>
 
-                <!-- RIGHT: TABLE -->
+                <!-- RIGHT: DIRECTORY TABLE (WITH ACTIONS: EDIT, BLOCK, DELETE) -->
                 <div class="data-table-card">
-                    <div class="card-header">
-                        <h4><i class="fas fa-address-book text-primary"></i> Active Faculty Directory</h4>
-                        <span class="badge" id="staffCountBadge">Loading...</span>
+                    <div class="card-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <h4><i class="fas fa-address-book text-primary"></i> Faculty & Staff Credentials Directory</h4>
+                        <input type="text" id="staffSearchInput" placeholder="Search staff, ID..." onkeyup="filterStaffTable()" style="padding: 6px 12px; font-size: 12px; border: 1px solid #ddd; border-radius: 4px; outline: none;">
                     </div>
 
                     <div class="table-responsive">
@@ -165,16 +350,18 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>NAME</th>
-                                    <th>DESIGNATION</th>
-                                    <th>PHONE</th>
-                                    <th>BASIC SALARY</th>
+                                    <th>TEACHER ID</th>
+                                    <th>NAME & PHONE</th>
+                                    <th>PORTAL PASS</th>
+                                    <th>BANK DETAILS</th>
+                                    <th>STATUS</th>
+                                    <th>ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody id="staffTableBody">
                                 <tr>
-                                    <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching staff from Google Database...
+                                    <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching faculty credentials from Database...
                                     </td>
                                 </tr>
                             </tbody>
@@ -192,57 +379,258 @@
     <script src="assets/js/realtime-db.js"></script>
 
     <script>
-        async function loadStaffData() {
-            let staff = await mdaFetchData('staff');
-            const tbody = document.getElementById('staffTableBody');
-            document.getElementById('staffCountBadge').innerText = `${staff.length} staff members`;
-            document.getElementById('statTotalStaff').innerText = staff.length;
+        let allLiveStaffCache = [];
+        let editingStaffFirebaseId = null;
 
-            if (staff.length > 0) {
+        function autoFillData(val) {
+            if (!editingStaffFirebaseId) {
+                document.getElementById('staffAccTitle').value = val;
+                if (!document.getElementById('teacherLoginId').value) {
+                    const rand = Math.floor(100 + Math.random() * 900);
+                    document.getElementById('teacherLoginId').value = `TEA-${rand}`;
+                }
+                if (!document.getElementById('teacherPassword').value) {
+                    document.getElementById('teacherPassword').value = `mda${Math.floor(1000 + Math.random() * 9000)}`;
+                }
+            }
+        }
+
+        async function loadStaffData() {
+            allLiveStaffCache = await mdaFetchData('staff');
+            renderStaffTable();
+        }
+
+        function renderStaffTable() {
+            const tbody = document.getElementById('staffTableBody');
+            const query = document.getElementById('staffSearchInput').value.toUpperCase();
+
+            let filtered = allLiveStaffCache.filter(st => {
+                let name = (st.fullName || st.name || "").toUpperCase();
+                let tid = (st.teacherId || st.empId || "").toUpperCase();
+                let role = (st.designation || "").toUpperCase();
+                return name.includes(query) || tid.includes(query) || role.includes(query);
+            });
+
+            document.getElementById('statTotalStaff').innerText = allLiveStaffCache.length;
+            let activeCount = allLiveStaffCache.filter(st => st.status !== 'Blocked').length;
+            let blockedCount = allLiveStaffCache.filter(st => st.status === 'Blocked').length;
+
+            document.getElementById('statActiveStaff').innerText = `${activeCount} Active`;
+            document.getElementById('statBlockedStaff').innerText = `${blockedCount} Blocked`;
+
+            if (filtered.length > 0) {
                 tbody.innerHTML = '';
-                staff.forEach((st, idx) => {
+                filtered.forEach((st, idx) => {
+                    let sName = st.fullName || st.name;
+                    let tid = st.teacherId || st.empId || `TEA-${101 + idx}`;
+                    let tpass = st.teacherPassword || st.password || '******';
+                    let bank = st.bankName || "Cash";
+                    let iban = st.accountIban || "-";
+                    let isBlocked = st.status === 'Blocked';
+
+                    let statusBadge = isBlocked 
+                        ? `<span class="badge" style="background:#fee2e2; color:#b91c1c;"><i class="fas fa-ban"></i> Blocked</span>` 
+                        : `<span class="badge" style="background:#dcfce7; color:#15803d;"><i class="fas fa-check-circle"></i> Active</span>`;
+
+                    let blockBtnIcon = isBlocked 
+                        ? `<i class="fas fa-unlock text-success"></i>` 
+                        : `<i class="fas fa-ban text-warning"></i>`;
+
                     tbody.innerHTML += `
                         <tr>
                             <td>${idx + 1}</td>
-                            <td><strong>${st.fullName || st.name}</strong></td>
-                            <td><span class="role-badge-teacher">${st.role || st.designation}</span></td>
-                            <td>${st.phone || '-'}</td>
-                            <td class="text-success fw-bold">Rs. ${parseFloat(st.salary || st.basicSalary || 0).toLocaleString()}</td>
+                            <td>
+                                <span class="badge" style="background:#ede9fe; color:#6d28d9; font-weight:700; font-size:11px;">
+                                    <i class="fas fa-id-badge"></i> ${tid}
+                                </span>
+                            </td>
+                            <td>
+                                <strong>${sName}</strong><br>
+                                <small style="color:#64748b;">${st.phone || '-'}</small>
+                            </td>
+                            <td>
+                                <span class="cred-badge"><i class="fas fa-key text-warning"></i> ${tpass}</span>
+                            </td>
+                            <td>
+                                <span class="bank-badge"><i class="fas fa-university"></i> ${bank}</span>
+                                <span class="iban-text">${iban}</span>
+                            </td>
+                            <td>${statusBadge}</td>
+                            <td>
+                                <div style="display:flex; gap:6px;">
+                                    <!-- EDIT BUTTON -->
+                                    <button class="btn-action-icon btn-edit-tool" onclick="editStaff('${st.firebaseId}')" title="Edit Teacher Details">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                    
+                                    <!-- BLOCK / UNBLOCK BUTTON -->
+                                    <button class="btn-action-icon btn-block-tool" onclick="toggleBlockStaff('${st.firebaseId}', '${sName}', '${st.status || 'Active'}')" title="${isBlocked ? 'Unblock Teacher' : 'Block Teacher Access'}">
+                                        ${blockBtnIcon}
+                                    </button>
+
+                                    <!-- DELETE BUTTON -->
+                                    <button class="btn-action-icon btn-del-tool" onclick="deleteStaff('${st.firebaseId}', '${sName}')" title="Delete Permanently">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     `;
                 });
             } else {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="5" class="text-center" style="padding: 40px; color: #94a3b8;">
-                            No staff registered yet. Register a staff member above.
+                        <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            No staff registered yet. Fill the form on the left to add staff with login credentials.
                         </td>
                     </tr>
                 `;
             }
         }
 
+        function filterStaffTable() {
+            renderStaffTable();
+        }
+
+        // ================= EDIT STAFF FUNCTION =================
+        function editStaff(firebaseId) {
+            let st = allLiveStaffCache.find(s => s.firebaseId === firebaseId);
+            if (!st) return;
+
+            editingStaffFirebaseId = firebaseId;
+
+            document.getElementById('staffName').value = st.fullName || st.name || '';
+            document.getElementById('staffRole').value = st.designation || 'Senior Teacher';
+            document.getElementById('staffDept').value = st.department || 'Science & IT';
+            document.getElementById('teacherLoginId').value = st.teacherId || st.empId || '';
+            document.getElementById('teacherPassword').value = st.teacherPassword || st.password || '';
+            document.getElementById('staffPhone').value = st.phone || '';
+            document.getElementById('staffSalary').value = st.salary || '';
+            document.getElementById('staffBankName').value = st.bankName || 'Meezan Bank Ltd';
+            document.getElementById('staffAccTitle').value = st.accountTitle || '';
+            document.getElementById('staffIban').value = st.accountIban || '';
+            document.getElementById('staffCnic').value = st.cnic || '';
+            document.getElementById('staffJoinDate').value = st.joiningDate || '2026-11-01';
+
+            // UI Switch to Edit Mode
+            document.getElementById('formHeading').innerHTML = '<i class="fas fa-edit text-warning"></i> Edit Staff Details';
+            const btn = document.getElementById('btnSaveStaff');
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Update Staff in Database';
+            btn.style.background = '#2563eb';
+            document.getElementById('btnCancelEdit').style.display = 'block';
+
+            document.getElementById('liveStaffForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelEdit() {
+            editingStaffFirebaseId = null;
+            document.getElementById('liveStaffForm').reset();
+            document.getElementById('formHeading').innerHTML = '<i class="fas fa-user-plus text-primary"></i> Register Staff & Teacher';
+            const btn = document.getElementById('btnSaveStaff');
+            btn.innerHTML = '<i class="fas fa-save"></i> Save Staff & Generate Teacher Login';
+            btn.style.background = '#7239ea';
+            document.getElementById('btnCancelEdit').style.display = 'none';
+        }
+
+        // ================= BLOCK / UNBLOCK STAFF FUNCTION =================
+        async function toggleBlockStaff(firebaseId, name, currentStatus) {
+            let newStatus = currentStatus === 'Blocked' ? 'Active' : 'Blocked';
+            let actionText = newStatus === 'Blocked' ? 'BLOCK' : 'UNBLOCK';
+
+            if (!confirm(`Are you sure you want to ${actionText} "${name}" from accessing the Teacher Portal?`)) return;
+
+            try {
+                await fetch(`${FIREBASE_DB_URL}/staff/${firebaseId}.json`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                alert(`Staff member "${name}" is now marked as ${newStatus}!`);
+                loadStaffData();
+            } catch (err) {
+                alert("Error updating status in database.");
+                console.error(err);
+            }
+        }
+
+        // ================= DELETE STAFF FUNCTION =================
+        async function deleteStaff(firebaseId, name) {
+            if (!confirm(`⚠️ ARE YOU SURE?\n\nDo you want to permanently delete "${name}" from the database?\nThis action cannot be undone!`)) return;
+
+            try {
+                await fetch(`${FIREBASE_DB_URL}/staff/${firebaseId}.json`, {
+                    method: 'DELETE'
+                });
+
+                alert(`Staff member "${name}" deleted permanently from database!`);
+                if (editingStaffFirebaseId === firebaseId) {
+                    cancelEdit();
+                }
+                loadStaffData();
+            } catch (err) {
+                alert("Error deleting staff from database.");
+                console.error(err);
+            }
+        }
+
+        // ================= SAVE / UPDATE HANDLER =================
         document.getElementById('liveStaffForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const newStaff = {
-                action: 'staff',
+
+            const btn = document.getElementById('btnSaveStaff');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            const staffPayload = {
                 fullName: document.getElementById('staffName').value.trim(),
+                teacherId: document.getElementById('teacherLoginId').value.trim(),
+                teacherPassword: document.getElementById('teacherPassword').value.trim(),
                 designation: document.getElementById('staffRole').value,
+                department: document.getElementById('staffDept').value,
+                phone: document.getElementById('staffPhone').value.trim(),
                 salary: document.getElementById('staffSalary').value,
-                phone: document.getElementById('staffPhone').value.trim()
+                bankName: document.getElementById('staffBankName').value,
+                accountTitle: document.getElementById('staffAccTitle').value.trim(),
+                accountIban: document.getElementById('staffIban').value.trim(),
+                cnic: document.getElementById('staffCnic').value.trim(),
+                joiningDate: document.getElementById('staffJoinDate').value
             };
 
-            let res = await mdaSaveData('staff', newStaff);
-            if (res.status === "success") {
-                alert('Staff registered and synced with Google Database successfully!');
-                this.reset();
-                loadStaffData();
+            if (editingStaffFirebaseId) {
+                // EDIT MODE (PATCH request to Firebase)
+                try {
+                    await fetch(`${FIREBASE_DB_URL}/staff/${editingStaffFirebaseId}.json`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(staffPayload)
+                    });
+
+                    alert(`✅ Details for "${staffPayload.fullName}" updated successfully in Firebase!`);
+                    cancelEdit();
+                    loadStaffData();
+                } catch (err) {
+                    alert("Error updating staff details.");
+                    console.error(err);
+                }
             } else {
-                alert('Saved locally. Will sync with Google Sheet.');
-                this.reset();
-                loadStaffData();
+                // CREATE MODE (POST request to Firebase)
+                staffPayload.action = 'staff';
+                staffPayload.status = 'Active'; // Default active status
+
+                let res = await mdaSaveData('staff', staffPayload);
+                if (res.status === "success") {
+                    alert(`✅ Staff "${staffPayload.fullName}" registered successfully!\n\nTeacher Login ID: ${staffPayload.teacherId}\nPassword: ${staffPayload.teacherPassword}`);
+                    this.reset();
+                    loadStaffData();
+                } else {
+                    alert('Saved locally. Will sync with Firebase.');
+                    this.reset();
+                    loadStaffData();
+                }
             }
+
+            btn.disabled = false;
         });
 
         document.addEventListener('DOMContentLoaded', loadStaffData);
