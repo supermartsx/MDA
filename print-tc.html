@@ -4,163 +4,512 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer Certificate - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Certificates CSS -->
-    <link rel="stylesheet" href="assets/css/certificate.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            background-color: #5c6270;
+            color: #222;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .top-control-bar {
+            background: #fff;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .controls-left { display: flex; align-items: center; gap: 10px; }
+        .btn-back {
+            background: #f1f5f9;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-back:hover { background: #e2e8f0; }
+
+        .btn-print {
+            background: #1d4ed8;
+            color: #fff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-print:hover { background: #1e40af; }
+
+        /* A4 Sheet & Frame */
+        .a4-sheet-wrapper {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .a4-sheet {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            padding: 10mm;
+            position: relative;
+        }
+
+        .certificate-frame {
+            border: 6px solid #f9f0d1; /* Outer gold border */
+            outline: 1.5px solid #c8a951;
+            outline-offset: -2px;
+            padding: 2px;
+            height: 100%;
+            position: relative;
+        }
+
+        .certificate-inner-frame {
+            border: 2px solid #222;
+            padding: 22px 25px;
+            height: 100%;
+        }
+
+        /* Header */
+        .cert-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .cert-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+        .cert-header p {
+            font-size: 11px;
+            color: #555;
+            margin: 1px 0;
+        }
+
+        /* Title */
+        .cert-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .cert-title h2 {
+            font-size: 18px;
+            color: #800020;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 4px;
+        }
+        .title-line {
+            width: 140px;
+            height: 2.5px;
+            background: #c8a951;
+            margin: 0 auto;
+        }
+
+        /* Meta Row */
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 11px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        .meta-col { display: flex; flex-direction: column; }
+        .meta-label { font-size: 9.5px; color: #777; font-weight: 600; margin-bottom: 1px; }
+
+        /* Section Labels */
+        .section-label {
+            background: #f8fafc;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            border-left: 3.5px solid #800020;
+            margin: 12px 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Info Table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            margin-bottom: 10px;
+        }
+        .info-table td {
+            padding: 4.5px 4px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #333;
+        }
+        .fw-bold { font-weight: 600; color: #000; }
+
+        /* Attendance Grid */
+        .attendance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .att-box {
+            text-align: center;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .att-box h3 { font-size: 16px; margin-bottom: 2px; }
+        .att-box p { font-size: 9px; font-weight: 600; color: #64748b; }
+
+        /* Fee Clearance Box */
+        .fee-clearance-box {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fee-due-alert { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+        .fee-clear-alert { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+
+        /* Paragraph */
+        .cert-paragraph {
+            font-size: 12px;
+            line-height: 1.7;
+            text-align: justify;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Signatures */
+        .signatures-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding: 0 10px;
+        }
+        .sign-block {
+            text-align: center;
+            width: 140px;
+        }
+        .digital-sign-stamp {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #1e3a8a;
+            font-size: 15px;
+        }
+        .sign-line {
+            border-top: 1px solid #333;
+            margin-bottom: 4px;
+        }
+        .sign-block p {
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .pen-number-box {
+            margin-top: 25px;
+            padding: 10px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 4px;
+        }
+        .pen-label {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .cert-footer-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8.5px;
+            color: #94a3b8;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 6px;
+        }
+
+        @media print {
+            @page { size: A4 portrait; margin: 6mm; }
+            body { background: #fff !important; margin: 0 !important; }
+            .no-print { display: none !important; }
+            .a4-sheet-wrapper { padding: 0 !important; }
+            .a4-sheet { box-shadow: none !important; border: none !important; width: 100% !important; padding: 0 !important; }
+        }
+
+        @media (max-width: 800px) {
+            .a4-sheet { width: 100%; min-height: auto; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- TOP CONTROL BAR (Print mein hide ho jayega) -->
+    <!-- TOP CONTROL BAR -->
     <div class="top-control-bar no-print">
         <div class="controls-left">
-            <a href="student-profile.html" class="btn-back"><i class="fas fa-arrow-left"></i> Student Profile</a>
-            <a href="all-students.html" class="btn-back" style="margin-left: 10px;"><i class="fas fa-users"></i> All Students</a>
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+            <a href="all-students.html" class="btn-back"><i class="fas fa-users"></i> All Students</a>
         </div>
-        
-        <div class="controls-right">
+        <div>
             <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Transfer Certificate</button>
         </div>
     </div>
 
     <!-- A4 PAPER SHEET -->
-    <div class="a4-sheet">
-        <!-- Elegant Border Frame -->
-        <div class="certificate-frame">
-            
-            <!-- HEADER -->
-            <div class="cert-header">
-                <h1>MDA Mustafa Digital Ai School</h1>
-                <p>Bharwari Kaushambi</p>
-                <p>Phone: 7310095239 | Email: dataclickeducation@gmail.com</p>
-            </div>
+    <div class="a4-sheet-wrapper">
+        <div class="a4-sheet">
+            <div class="certificate-frame">
+                <div class="certificate-inner-frame">
+                    
+                    <!-- HEADER -->
+                    <div class="cert-header">
+                        <h1>MDA Mustafa Digital Ai School</h1>
+                        <p>Main Campus, Pakistan</p>
+                        <p>Contact: +92 310 5784772 | Email: info@mdaschool.edu.pk</p>
+                    </div>
 
-            <!-- TITLE -->
-            <div class="cert-title">
-                <h2>TRANSFER CERTIFICATE</h2>
-                <div class="title-line"></div>
-            </div>
+                    <!-- TITLE -->
+                    <div class="cert-title">
+                        <h2>TRANSFER CERTIFICATE</h2>
+                        <div class="title-line"></div>
+                    </div>
 
-            <!-- META INFO (TC No, Year, Date) -->
-            <div class="meta-row">
-                <div class="meta-col">
-                    <span class="meta-label">TC NUMBER</span>
-                    <strong>TC-26-0001</strong>
+                    <!-- META INFO -->
+                    <div class="meta-row">
+                        <div class="meta-col">
+                            <span class="meta-label">TC NUMBER</span>
+                            <strong id="tcSerialNo">-</strong>
+                        </div>
+                        <div class="meta-col" style="text-align: center;">
+                            <span class="meta-label">ACADEMIC YEAR</span>
+                            <strong id="tcYear">2026-27</strong>
+                        </div>
+                        <div class="meta-col" style="text-align: right;">
+                            <span class="meta-label">DATE OF ISSUE</span>
+                            <strong id="tcIssueDate">-</strong>
+                        </div>
+                    </div>
+
+                    <!-- STUDENT INFORMATION -->
+                    <div class="section-label"><i class="fas fa-user"></i> STUDENT INFORMATION</div>
+                    <table class="info-table">
+                        <tr><td width="35%">Student Full Name</td><td class="fw-bold" id="tcStudentName">Loading student data...</td></tr>
+                        <tr><td>Father's Name</td><td class="fw-bold" id="tcFatherName">-</td></tr>
+                        <tr><td>Mother's Name</td><td class="fw-bold" id="tcMotherName">-</td></tr>
+                        <tr><td>Date of Birth</td><td class="fw-bold" id="tcDob">-</td></tr>
+                        <tr><td>Gender</td><td class="fw-bold" id="tcGender">-</td></tr>
+                        <tr><td>Admission Number</td><td class="fw-bold" id="tcAdmNo">-</td></tr>
+                        <tr><td>Class (Last Attended)</td><td class="fw-bold" id="tcClass">-</td></tr>
+                        <tr><td>Date of Admission</td><td class="fw-bold" id="tcAdmDate">-</td></tr>
+                        <tr><td>B-Form / CNIC</td><td class="fw-bold" id="tcCnic">-</td></tr>
+                        <tr><td>Nationality</td><td class="fw-bold">Pakistani</td></tr>
+                        <tr><td>Residential Address</td><td class="fw-bold" id="tcAddress">-</td></tr>
+                    </table>
+
+                    <!-- ATTENDANCE SUMMARY (DYNAMIC) -->
+                    <div class="section-label"><i class="fas fa-calendar-alt"></i> ATTENDANCE RECORD</div>
+                    <div class="attendance-grid">
+                        <div class="att-box" style="color: #0284c7; background: #f0f9ff;">
+                            <h3 id="tcTotalDays">0</h3><p>TOTAL WORKING DAYS</p>
+                        </div>
+                        <div class="att-box" style="color: #16a34a; background: #f0fdf4;">
+                            <h3 id="tcDaysPresent">0</h3><p>DAYS PRESENT</p>
+                        </div>
+                        <div class="att-box" style="color: #dc2626; background: #fef2f2;">
+                            <h3 id="tcDaysAbsent">0</h3><p>DAYS ABSENT</p>
+                        </div>
+                    </div>
+
+                    <!-- FEE CLEARANCE (DYNAMIC) -->
+                    <div class="section-label"><i class="fas fa-rupee-sign"></i> FEE ACCOUNT STATUS</div>
+                    <div class="fee-clearance-box fee-clear-alert" id="tcFeeClearanceBox">
+                        <i class="fas fa-check-circle"></i> <span id="tcFeeStatusText">All school dues cleared. No pending balance.</span>
+                    </div>
+
+                    <!-- CERTIFICATE TEXT (DYNAMIC) -->
+                    <div class="section-label"><i class="fas fa-scroll"></i> OFFICIAL CERTIFICATION</div>
+                    <div class="cert-paragraph">
+                        This is to certify that <strong id="tcCertStudentName">-</strong>, Son/Daughter of <strong id="tcCertFatherName">-</strong>, was a bonafide student of this institution. The student was admitted on <strong id="tcCertAdmDate">-</strong> and was studying in <strong id="tcCertClass">-</strong>. The student's conduct and character during the entire period of study was found to be <em>Good</em>. This Transfer Certificate is issued on the request of the parent/guardian for the purpose of admission to another institution.
+                    </div>
+
+                    <!-- SIGNATURES (WITH PRINCIPAL DIGITAL STAMP) -->
+                    <div class="signatures-section">
+                        <div class="sign-block">
+                            <div style="height: 35px;"></div>
+                            <div class="sign-line"></div>
+                            <p>CLASS TEACHER</p>
+                        </div>
+                        <div class="sign-block">
+                            <div style="height: 35px;"></div>
+                            <div class="sign-line"></div>
+                            <p>OFFICE INCHARGE</p>
+                        </div>
+                        <div class="sign-block">
+                            <!-- Digital Signature / Stamp -->
+                            <div class="digital-sign-stamp">
+                                <span>Nazim Mustafa</span>
+                            </div>
+                            <div class="sign-line"></div>
+                            <p>PRINCIPAL / HEAD</p>
+                        </div>
+                    </div>
+
+                    <!-- B-Form / ID Footer Reference -->
+                    <div class="pen-number-box">
+                        <div class="pen-label">STUDENT B-FORM / CNIC REF: <span id="tcPenRef">____________________________________</span></div>
+                    </div>
+
+                    <!-- FOOTER TEXT -->
+                    <div class="cert-footer-text">
+                        <span id="tcFooterSerial">TC Ref: - • MDA Mustafa Digital Ai School</span>
+                        <span>Official Computer Generated Certificate</span>
+                    </div>
+
                 </div>
-                <div class="meta-col text-center">
-                    <span class="meta-label">ACADEMIC YEAR</span>
-                    <strong>2026-27</strong>
-                </div>
-                <div class="meta-col text-right">
-                    <span class="meta-label">DATE OF ISSUE</span>
-                    <strong>31-10-2026</strong>
-                </div>
             </div>
-
-            <!-- SECTION LABEL -->
-            <div class="section-label"><i class="fas fa-user"></i> STUDENT INFORMATION</div>
-
-            <!-- STUDENT INFO TABLE -->
-            <table class="info-table">
-                <tr><td width="35%">Student Name</td><td class="fw-bold">SITA SHARMA</td></tr>
-                <tr><td>Father's Name</td><td class="fw-bold">RAM SHARMA</td></tr>
-                <tr><td>Mother's Name</td><td class="fw-bold">RADHA SHARMA</td></tr>
-                <tr><td>Date of Birth</td><td class="fw-bold">2010-01-22</td></tr>
-                <tr><td>Gender</td><td class="fw-bold">Female</td></tr>
-                <tr><td>Admission Number</td><td class="fw-bold">ADM002</td></tr>
-                <tr><td>Class (Last Attended)</td><td class="fw-bold">Class 10</td></tr>
-                <tr><td>Date of Admission</td><td class="fw-bold">2026-09-26</td></tr>
-                <tr><td>Category</td><td class="fw-bold">General</td></tr>
-                <tr><td>Nationality</td><td class="fw-bold">Indian</td></tr>
-                <tr><td>Address</td><td class="fw-bold">XXXXXXXX</td></tr>
-            </table>
-
-            <!-- ATTENDANCE SUMMARY -->
-            <div class="section-label"><i class="fas fa-calendar-alt"></i> ATTENDANCE SUMMARY</div>
-            <div class="attendance-grid">
-                <div class="att-box" style="color: #0284c7; background: #f0f9ff; border-color: #bae6fd;">
-                    <h3>120</h3><p>TOTAL WORKING DAYS</p>
-                </div>
-                <div class="att-box" style="color: #16a34a; background: #f0fdf4; border-color: #bbf7d0;">
-                    <h3>115</h3><p>DAYS PRESENT</p>
-                </div>
-                <div class="att-box" style="color: #dc2626; background: #fef2f2; border-color: #fecaca;">
-                    <h3>5</h3><p>DAYS ABSENT</p>
-                </div>
-            </div>
-
-            <!-- FEE CLEARANCE -->
-            <div class="section-label"><i class="fas fa-rupee-sign"></i> FEE CLEARANCE</div>
-            <div class="fee-clearance-box text-danger">
-                <i class="fas fa-exclamation-triangle"></i> Outstanding fee dues: ₹6,500.00
-            </div>
-
-            <!-- CERTIFICATE TEXT -->
-            <div class="section-label"><i class="fas fa-scroll"></i> CERTIFICATE</div>
-            <div class="cert-paragraph">
-                This is to certify that <strong>SITA SHARMA</strong>, Son/Daughter of <strong>RAM SHARMA</strong>, was a bonafide student of this institution. The student was admitted on <strong>2026-09-26</strong> and was studying in <strong>Class 10</strong>. The student's conduct and character during the entire period of study was found to be <em>Good</em>. This Transfer Certificate is issued on the request of the parent/guardian for the purpose of admission to another institution. The student is not a recipient of any scholarship from this school.
-            </div>
-
-            <!-- SIGNATURES -->
-            <div class="signatures-section">
-                <div class="sign-block">
-                    <div class="sign-line"></div>
-                    <p>CLASS TEACHER</p>
-                </div>
-                <div class="sign-block">
-                    <div class="sign-line"></div>
-                    <p>OFFICE SUPERINTENDENT</p>
-                </div>
-                <div class="sign-block">
-                    <div class="sign-line"></div>
-                    <p>PRINCIPAL / HEAD</p>
-                </div>
-            </div>
-
-            <!-- PEN NUMBER (Footer area inside frame) -->
-            <div class="pen-number-box">
-                <div class="pen-label">PEN NO. (PERMANENT EDUCATION NUMBER): <span>_______________________________________________</span></div>
-                <small>(Yadi PEN No. uplabdh na ho to haath se likhein / Fill manually if not available)</small>
-            </div>
-
-            <!-- FOOTER TEXT -->
-            <div class="cert-footer-text">
-                TC No: TC-26-0001 • Issued: 31-10-2026 • Prepared by: superadmin • MDA School • This is a computer generated certificate
-            </div>
-
         </div>
     </div>
-<!-- Real-Time Firebase Script -->
+
+    <!-- Real-Time Firebase Database Engine -->
     <script src="assets/js/realtime-db.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        async function renderTransferCertificate() {
+            // 1. Get Admission No from URL (?adm=MDA-26-XXXX)
             const urlParams = new URLSearchParams(window.location.search);
             let targetAdm = urlParams.get('adm');
-            
-            if(!targetAdm) return; // Ignore if no admission number
 
-            let students = await mdaFetchData('students');
-            let activeStudent = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
-
-            if(activeStudent) {
-                let sName = activeStudent.fullName || activeStudent.name || "Student Name";
-                
-                // Yahan aap id ke mutabiq values bhar sakte hain (e.g. innerText)
-                // Maqsad sirf yahan bache ko identify karna hai
-                // Document DOM Elements update (Replace generic classes with IDs in your HTML if needed)
-                const nameElements = document.querySelectorAll('.student-name-val');
-                nameElements.forEach(el => el.innerText = sName);
-                
-                const admElements = document.querySelectorAll('.student-adm-val');
-                admElements.forEach(el => el.innerText = targetAdm);
-                
-                const classElements = document.querySelectorAll('.student-class-val');
-                classElements.forEach(el => el.innerText = activeStudent.class);
+            if (!targetAdm) {
+                let active = JSON.parse(sessionStorage.getItem('mda_active_student'));
+                if (active) targetAdm = active.admNo || active.admissionNo;
             }
-        });
+
+            // 2. Fetch live records from Firebase
+            let [students, attendanceLogs] = await Promise.all([
+                mdaFetchData('students'),
+                mdaFetchData('attendance')
+            ]);
+
+            let student = null;
+            if (targetAdm) {
+                student = students.find(s => (s.admNo || s.admissionNo) === targetAdm);
+            } else if (students.length > 0) {
+                student = students[0];
+                targetAdm = student.admNo || student.admissionNo;
+            }
+
+            if (!student) {
+                document.getElementById('tcStudentName').innerHTML = `<span style="color:#dc2626;">No student found in database! Please pass ?adm= in URL.</span>`;
+                return;
+            }
+
+            // 3. Inject Student Information
+            let sName = student.fullName || student.name || "Student Name";
+            let fName = student.fatherName || "-";
+            let mName = student.motherName || "-";
+            let dob = student.dob || "-";
+            let gender = student.gender || "Male";
+            let cls = student.class || "Class 10";
+            let admDate = student.admissionDate || "2026-11-01";
+            let cnic = student.cnic || "35201-XXXXXXX-X";
+            let address = student.address || "-";
+
+            // Basic Details
+            document.getElementById('tcStudentName').innerText = sName;
+            document.getElementById('tcFatherName').innerText = fName;
+            document.getElementById('tcMotherName').innerText = mName;
+            document.getElementById('tcDob').innerText = dob;
+            document.getElementById('tcGender').innerText = gender;
+            document.getElementById('tcAdmNo').innerText = targetAdm;
+            document.getElementById('tcClass').innerText = cls;
+            document.getElementById('tcAdmDate').innerText = admDate;
+            document.getElementById('tcCnic').innerText = cnic;
+            document.getElementById('tcAddress').innerText = address;
+
+            // Certificate Text Block
+            document.getElementById('tcCertStudentName').innerText = sName;
+            document.getElementById('tcCertFatherName').innerText = fName;
+            document.getElementById('tcCertAdmDate').innerText = admDate;
+            document.getElementById('tcCertClass').innerText = cls;
+
+            // Serial & Date
+            const today = new Date();
+            const dateStr = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+            const serialNo = `TC-26-${targetAdm.replace(/[^0-9]/g, '').slice(-4) || '1001'}`;
+
+            document.getElementById('tcSerialNo').innerText = serialNo;
+            document.getElementById('tcIssueDate').innerText = dateStr;
+            document.getElementById('tcFooterSerial').innerText = `TC No: ${serialNo} • Issued: ${dateStr}`;
+            document.getElementById('tcPenRef').innerText = cnic;
+
+            // 4. Calculate Attendance
+            let stAttendance = attendanceLogs.filter(a => a.admNo === targetAdm);
+            let totalDays = stAttendance.length;
+            let presentDays = stAttendance.filter(a => a.status === 'present').length;
+            let absentDays = stAttendance.filter(a => a.status === 'absent').length;
+
+            document.getElementById('tcTotalDays').innerText = totalDays;
+            document.getElementById('tcDaysPresent').innerText = presentDays;
+            document.getElementById('tcDaysAbsent').innerText = absentDays;
+
+            // 5. Fee Clearance Calculation (PKR Rs.)
+            let dueAmount = parseFloat(student.pendingDue || 0);
+            const feeBox = document.getElementById('tcFeeClearanceBox');
+            const feeText = document.getElementById('tcFeeStatusText');
+
+            if (dueAmount > 0) {
+                feeBox.className = 'fee-clearance-box fee-due-alert';
+                feeText.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Outstanding fee dues: <strong>Rs. ${dueAmount.toLocaleString()}</strong>`;
+            } else {
+                feeBox.className = 'fee-clearance-box fee-clear-alert';
+                feeText.innerHTML = `<i class="fas fa-check-circle"></i> All institutional fee dues cleared. No pending balance.`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTransferCertificate);
     </script>
 </body>
-    
 </html>
