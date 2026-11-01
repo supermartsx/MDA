@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passed Out Archive - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Passed Out Archive - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,43 +12,15 @@
     <link rel="stylesheet" href="assets/css/tables.css">
     
     <style>
-        .badge-archived {
-            background: #fee2e2;
-            color: #b91c1c;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-        .badge-tc {
-            background: #fef3c7;
-            color: #b45309;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-        }
-        .btn-restore {
-            background: #e0f2fe;
-            color: #0369a1;
-            border: 1px solid #bae6fd;
-        }
-        .btn-restore:hover {
-            background: #bae6fd;
-        }
-        .btn-print-sm {
-            background: #f3e8ff;
-            color: #7e22ce;
-            border: 1px solid #e9d5ff;
-        }
-        .btn-print-sm:hover {
-            background: #e9d5ff;
-        }
+        .badge-archived { background: #fee2e2; color: #b91c1c; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+        .badge-tc { background: #fef3c7; color: #b45309; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+        .btn-restore { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; cursor: pointer; padding: 5px 10px; border-radius: 4px; }
+        .btn-restore:hover { background: #bae6fd; }
     </style>
 </head>
 <body>
 
-    <!-- COMPLETE SIDEBAR -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
@@ -81,39 +53,39 @@
             <li class="menu-label">FEES</li>
             <li><a href="fee-structure.html"><i class="fas fa-list-alt"></i> Fee Structure</a></li>
             <li><a href="fee-collection.html"><i class="fas fa-money-bill-wave"></i> Fee Collection</a></li>
-            <li><a href="#"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
-            <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
-            <li><a href="#"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
+            <li><a href="quick-fee.html"><i class="fas fa-bolt"></i> Quick Fee Collect</a></li>
+            <li><a href="whatsapp-reminder.html"><i class="fab fa-whatsapp"></i> WhatsApp Reminder</a></li>
+            <li><a href="fee-deletion-log.html"><i class="fas fa-trash-alt text-danger"></i> Fee Deletion Log</a></li>
             
             <li class="menu-label">ACADEMICS</li>
             <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
-            <li><a href="#"><i class="fas fa-clipboard-list"></i> Exams</a></li>
+            <li><a href="attendance-report.html"><i class="fas fa-chart-line"></i> Attendance Report</a></li>
+            <li><a href="exams.html"><i class="fas fa-clipboard-list"></i> Exams</a></li>
             <li><a href="marks-entry.html"><i class="fas fa-pen"></i> Marks Entry</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Class Result</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Subjects</a></li>
-            <li><a href="#"><i class="fas fa-link"></i> Class-Subject Map</a></li>
-            <li><a href="#"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
+            <li><a href="class-result.html"><i class="fas fa-trophy"></i> Class Result</a></li>
+            <li><a href="subjects.html"><i class="fas fa-book"></i> Subjects</a></li>
+            <li><a href="class-subject-map.html"><i class="fas fa-link"></i> Class-Subject Map</a></li>
+            <li><a href="exam-schedule.html"><i class="fas fa-calendar-alt"></i> Exam Schedule</a></li>
             
             <li class="menu-label">FINANCE</li>
-            <li><a href="#"><i class="fas fa-receipt"></i> Expenses</a></li>
+            <li><a href="expenses.html"><i class="fas fa-receipt"></i> Expenses</a></li>
             <li><a href="all-reports.html"><i class="fas fa-chart-bar"></i> All Reports</a></li>
-            <li><a href="#"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
+            <li><a href="income-vs-expense.html"><i class="fas fa-balance-scale text-purple"></i> Income vs Expense</a></li>
             
             <li class="menu-label">STAFF / PAYROLL</li>
-            <li><a href="#"><i class="fas fa-user-tie"></i> Staff Management</a></li>
-            <li><a href="#"><i class="fas fa-money-check"></i> Salary Management</a></li>
-            <li><a href="#"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
+            <li><a href="staff-management.html"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+            <li><a href="salary-management.html"><i class="fas fa-money-check"></i> Salary Management</a></li>
+            <li><a href="salary-report.html"><i class="fas fa-chart-pie"></i> Salary Report</a></li>
             
             <li class="menu-label">COMMUNICATION</li>
-            <li><a href="#"><i class="fas fa-bell"></i> Notices</a></li>
+            <li><a href="notices.html"><i class="fas fa-bell"></i> Notices</a></li>
             
             <li class="menu-label">ADMIN</li>
-            <li><a href="#"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
+            <li><a href="admin-settings.html"><i class="fas fa-sliders-h"></i> Admin Settings</a></li>
             <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             
             <li class="menu-label">ACCOUNT</li>
-            <li><a href="#"><i class="fas fa-key"></i> Password Change</a></li>
+            <li><a href="password-change.html"><i class="fas fa-key"></i> Password Change</a></li>
             <li><a href="#" id="logoutBtn" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </aside>
@@ -123,55 +95,36 @@
         <header class="top-header">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Passed Out Archive</h2>
+                <h2>Passed Out & Left Students Archive</h2>
             </div>
             <div class="header-right">
-                <button class="btn-export"><i class="fas fa-file-excel"></i> Export Archive</button>
+                <button class="btn-export" onclick="loadArchiveData()"><i class="fas fa-sync-alt"></i> Refresh Archive</button>
             </div>
         </header>
 
         <div class="dashboard-content">
             <div class="page-top-bar">
-                <p class="breadcrumb">Search and manage records of graduated and departed students</p>
+                <p class="breadcrumb">Live database register of graduated and departed students</p>
             </div>
 
             <!-- FILTER BAR -->
             <div class="filter-section">
                 <div class="filter-grid">
-                    <div class="filter-group">
-                        <label>EXIT / PASSING SESSION</label>
-                        <select id="archiveSessionFilter">
-                            <option value="All">All Sessions</option>
-                            <option value="2025-26">2025-26</option>
-                            <option value="2024-25">2024-25</option>
-                            <option value="2023-24">2023-24</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>LAST CLASS COMPLETED</label>
-                        <select id="archiveClassFilter">
-                            <option value="All">All Classes</option>
-                            <option value="Class 10">Class 10</option>
-                            <option value="Class 12">Class 12</option>
-                            <option value="Class 8">Class 8</option>
-                        </select>
-                    </div>
                     <div class="filter-group filter-search-group">
-                        <label>SEARCH STUDENT</label>
-                        <input type="text" id="archiveSearchInput" placeholder="Name, Adm No, TC No...">
+                        <label>SEARCH ARCHIVE</label>
+                        <input type="text" id="archiveSearchInput" placeholder="Name, Adm No..." onkeyup="renderArchiveTable()">
                     </div>
                     <div class="filter-group button-group">
-                        <button class="btn-search" onclick="filterArchive()"><i class="fas fa-search"></i> Search</button>
-                        <button class="btn-clear" onclick="clearArchiveFilter()"><i class="fas fa-times"></i></button>
+                        <button class="btn-search" onclick="loadArchiveData()"><i class="fas fa-search"></i> Search</button>
                     </div>
                 </div>
             </div>
 
-            <!-- ARCHIVE DATA TABLE -->
+            <!-- ARCHIVE TABLE CARD -->
             <div class="data-table-card mt-20">
                 <div class="card-header">
-                    <h4><i class="fas fa-archive text-danger"></i> Archived Records</h4>
-                    <span class="badge" id="archiveCount">2 students found</span>
+                    <h4><i class="fas fa-archive text-danger"></i> Archived Records (Google DB)</h4>
+                    <span class="badge" id="archiveCountBadge">Loading...</span>
                 </div>
                 
                 <div class="table-responsive">
@@ -183,97 +136,78 @@
                                 <th>STUDENT NAME</th>
                                 <th>FATHER NAME</th>
                                 <th>LAST CLASS</th>
-                                <th>EXIT SESSION</th>
-                                <th>TC NUMBER</th>
                                 <th>STATUS</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Record 1 -->
+                        <tbody id="archiveTableBody">
                             <tr>
-                                <td>1</td>
-                                <td><span class="adm-badge">ADM-24-0821</span></td>
-                                <td><strong>AHMAD ALI</strong></td>
-                                <td>TARIQ ALI</td>
-                                <td><span class="class-badge">Class 10</span></td>
-                                <td>2024-25</td>
-                                <td><span class="badge-tc">TC-25-0014</span></td>
-                                <td><span class="badge-archived">TC Issued</span></td>
-                                <td class="action-buttons">
-                                    <a href="print-tc.html" class="btn-print-sm" title="View & Print TC"><i class="fas fa-print"></i></a>
-                                    <button class="btn-restore" title="Restore to Active Students" onclick="restoreStudent('ADM-24-0821', 'AHMAD ALI')"><i class="fas fa-undo"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Record 2 -->
-                            <tr>
-                                <td>2</td>
-                                <td><span class="adm-badge">ADM-23-0512</span></td>
-                                <td><strong>FATIMA ZAHRA</strong></td>
-                                <td>MUHAMMAD HUSSAIN</td>
-                                <td><span class="class-badge">Class 12</span></td>
-                                <td>2024-25</td>
-                                <td><span class="badge-tc">TC-25-0029</span></td>
-                                <td><span class="badge-archived">Graduated</span></td>
-                                <td class="action-buttons">
-                                    <a href="print-tc.html" class="btn-print-sm" title="View & Print TC"><i class="fas fa-print"></i></a>
-                                    <button class="btn-restore" title="Restore to Active Students" onclick="restoreStudent('ADM-23-0512', 'FATIMA ZAHRA')"><i class="fas fa-undo"></i></button>
+                                <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                                    <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching archive records...
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                
-                <!-- Pagination -->
-                <div class="pagination-footer">
-                    <div class="rows-per-page">
-                        Show 
-                        <select>
-                            <option>50</option>
-                            <option>100</option>
-                        </select> 
-                        per page
-                    </div>
-                    <div class="page-info">Showing 1-2 of 2</div>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Global JS & Real-Time Engine -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/realtime-db.js"></script>
 
-    <!-- Search & Restore Logic -->
     <script>
-        function filterArchive() {
-            let input = document.getElementById("archiveSearchInput").value.toUpperCase();
-            let table = document.getElementById("archiveTable");
-            let tr = table.getElementsByTagName("tr");
-            let count = 0;
+        let archiveCache = [];
 
-            for (let i = 1; i < tr.length; i++) {
-                let text = tr[i].textContent || tr[i].innerText;
-                if (text.toUpperCase().indexOf(input) > -1) {
-                    tr[i].style.display = "";
-                    count++;
-                } else {
-                    tr[i].style.display = "none";
-                }
+        async function loadArchiveData() {
+            archiveCache = await mdaFetchData('archive');
+            renderArchiveTable();
+        }
+
+        function renderArchiveTable() {
+            const query = document.getElementById('archiveSearchInput').value.toUpperCase();
+            const tbody = document.getElementById('archiveTableBody');
+            
+            let filtered = archiveCache.filter(st => {
+                let name = (st.fullName || st.name || "").toUpperCase();
+                let adm = (st.admNo || st.admissionNo || "").toUpperCase();
+                return name.includes(query) || adm.includes(query);
+            });
+
+            document.getElementById('archiveCountBadge').innerText = `${filtered.length} archived records`;
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = '';
+                filtered.forEach((st, idx) => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td><span class="adm-badge">${st.admNo || st.admissionNo || 'N/A'}</span></td>
+                            <td><strong>${st.fullName || st.name || 'Unnamed'}</strong></td>
+                            <td>${st.fatherName || '-'}</td>
+                            <td><span class="class-badge">${st.class || 'N/A'}</span></td>
+                            <td><span class="badge-archived">${st.status || 'Archived / TC Issued'}</span></td>
+                            <td class="action-buttons">
+                                <a href="print-tc.html" class="btn-view" title="Print TC"><i class="fas fa-print"></i></a>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center" style="padding: 40px; color: #94a3b8;">
+                            <i class="fas fa-box-open fa-2x" style="margin-bottom:8px; display:block;"></i>
+                            No passed out or archived students found in database.
+                        </td>
+                    </tr>
+                `;
             }
-            document.getElementById("archiveCount").innerText = count + " students found";
         }
 
-        function clearArchiveFilter() {
-            document.getElementById("archiveSearchInput").value = "";
-            filterArchive();
-        }
-
-        function restoreStudent(admNo, name) {
-            if (confirm(`Are you sure you want to restore ${name} (${admNo}) back to Active Students list?`)) {
-                alert(`${name} has been restored successfully!`);
-                // Future Google Sheet / database update yahan call hoga
-            }
-        }
+        document.addEventListener('DOMContentLoaded', loadArchiveData);
     </script>
 </body>
 </html>
