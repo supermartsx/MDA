@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Dashboard - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 50px; }
+
+        .top-header {
+            background: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 100;
+        }
+        .logout-btn { background: #fee2e2; color: #dc2626; border: none; padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: none; }
+
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+
+        .child-hero-card {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; border-radius: 14px; padding: 22px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25); margin-bottom: 22px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+        }
+        .child-avatar { width: 75px; height: 75px; border-radius: 50%; border: 3px solid #fff; overflow: hidden; background: #fff; }
+        .child-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .child-info h2 { font-size: 20px; font-weight: 700; margin: 0; }
+        .child-info p { font-size: 12.5px; opacity: 0.9; margin-top: 3px; }
+
+        .parent-modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .mod-box {
+            background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; transition: 0.2s;
+        }
+        .mod-box:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); border-color: #cbd5e1; }
+        .mod-left { display: flex; align-items: center; gap: 15px; }
+        .mod-icon { width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .mod-left h4 { font-size: 14px; color: #0f172a; margin-bottom: 2px; }
+        .mod-left p { font-size: 11px; color: #64748b; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; background:#2563eb; color:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700;">P</div>
+            <div>
+                <h3 style="font-size:13.5px; color:#0f172a; margin:0;">Parent Portal</h3>
+                <p style="font-size:10.5px; color:#64748b; margin:0;">MDA Digital School</p>
+            </div>
+        </div>
+        <a href="parent-login.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </header>
+
+    <div class="container">
+        
+        <!-- CHILD HERO CARD (DYNAMIC) -->
+        <div class="child-hero-card">
+            <div class="child-avatar">
+                <img id="parentChildPhoto" src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=150" alt="Child">
+            </div>
+            <div class="child-info">
+                <h2 id="parentChildName">Loading Child Name...</h2>
+                <p id="parentChildMeta">Class: - | Admission No: -</p>
+                <span id="parentChildFeeBadge" style="background:rgba(255,255,255,0.2); padding:2px 10px; border-radius:20px; font-size:10.5px; display:inline-block; margin-top:6px;">Fee Pending: Rs. 0</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <h3 style="font-size: 14px; color: #334155; text-transform: uppercase; letter-spacing: 0.5px;"><i class="fas fa-th-large text-primary"></i> Child Progress Modules</h3>
+        </div>
+
+        <!-- MODULES GRID -->
+        <div class="parent-modules-grid">
+            
+            <!-- 1. Report Card -->
+            <a href="#" id="linkReportCard" class="mod-box">
+                <div class="mod-left">
+                    <div class="mod-icon" style="background:#ede9fe; color:#7c3aed;"><i class="fas fa-award"></i></div>
+                    <div>
+                        <h4>Academic Report Card</h4>
+                        <p>View term results & grades</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-muted"></i>
+            </a>
+
+            <!-- 2. Student ID Card -->
+            <a href="#" id="linkIdCard" class="mod-box">
+                <div class="mod-left">
+                    <div class="mod-icon" style="background:#fef3c7; color:#d97706;"><i class="fas fa-id-badge"></i></div>
+                    <div>
+                        <h4>Digital Student ID Card</h4>
+                        <p>View & print student ID</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-muted"></i>
+            </a>
+
+            <!-- 3. Fee Ledger & Challan -->
+            <a href="#" id="linkFeeChallan" class="mod-box" target="_blank">
+                <div class="mod-left">
+                    <div class="mod-icon" style="background:#dcfce7; color:#16a34a;"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div>
+                        <h4>Fee Challan & Dues</h4>
+                        <p>Download 4-copy bank challan</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-muted"></i>
+            </a>
+
+            <!-- 4. Daily Homework Diary -->
+            <a href="student-diary.html" class="mod-box">
+                <div class="mod-left">
+                    <div class="mod-icon" style="background:#e0f2fe; color:#0284c7;"><i class="fas fa-pencil-alt"></i></div>
+                    <div>
+                        <h4>Daily Homework Diary</h4>
+                        <p>Check daily task submissions</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-muted"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Real-Time Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
+
+            if (!activeStudent) {
+                alert("Please login from Parent Portal first!");
+                window.location.href = 'parent-login.html';
+                return;
+            }
+
+            let sName = activeStudent.fullName || activeStudent.name || "Student";
+            let admNo = activeStudent.admNo || activeStudent.admissionNo || "MDA-26-0000";
+            let sClass = activeStudent.class || "Class 10";
+            let pending = parseFloat(activeStudent.pendingDue || 0);
+
+            // Fill Hero Card
+            document.getElementById('parentChildName').innerText = sName;
+            document.getElementById('parentChildMeta').innerText = `Class: ${sClass} • Admission No: ${admNo} • Father: ${activeStudent.fatherName || '-'}`;
+            document.getElementById('parentChildFeeBadge').innerText = `Pending Dues: Rs. ${pending.toLocaleString()}`;
+
+            if (activeStudent.photoUrl && activeStudent.photoUrl.trim() !== '') {
+                document.getElementById('parentChildPhoto').src = activeStudent.photoUrl;
+            } else {
+                document.getElementById('parentChildPhoto').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(sName)}&background=2563eb&color=fff&size=150`;
+            }
+
+            // Bind Dynamic Links for this specific child
+            document.getElementById('linkReportCard').href = `print-report-card.html?adm=${admNo}`;
+            document.getElementById('linkIdCard').href = `student-id-card.html?adm=${admNo}`;
+            document.getElementById('linkFeeChallan').href = `print-fee-voucher.html?adm=${admNo}`;
+        });
+    </script>
+</body>
+</html>
