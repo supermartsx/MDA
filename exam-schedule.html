@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Exam Schedule - MDA Mustafa Digital Ai School</title>
+    <title>Real-Time Exam Schedule (Date Sheet) - MDA Mustafa Digital Ai School</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,6 +14,10 @@
 
     <style>
         .datesheet-workspace { display: grid; grid-template-columns: 360px 1fr; gap: 20px; margin-bottom: 25px; }
+        .exam-instructions-box { background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; padding: 15px 20px; border-radius: 6px; margin-top: 20px; }
+        .exam-instructions-box h5 { color: #b45309; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .exam-instructions-box ul { font-size: 12px; color: #92400e; padding-left: 20px; line-height: 1.8; list-style: disc; }
+        
         @media print {
             .sidebar, .top-header, .filter-section, .no-print, .form-section { display: none !important; }
             .main-content { margin-left: 0 !important; width: 100% !important; }
@@ -101,7 +105,7 @@
         <header class="top-header no-print">
             <div class="header-left">
                 <button id="menuToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
-                <h2>Real-Time Exam Schedule</h2>
+                <h2>Real-Time Exam Schedule (Date Sheet)</h2>
             </div>
             <div class="header-right">
                 <button class="btn-export" style="background:#7239ea;" onclick="window.print()"><i class="fas fa-print"></i> Print Date Sheet</button>
@@ -110,22 +114,47 @@
 
         <div class="dashboard-content">
             <div class="page-top-bar no-print">
-                <p class="breadcrumb">Schedule papers live in Google Database and generate date sheets</p>
+                <p class="breadcrumb">Schedule papers live in Firebase Database and generate class-wise date sheets</p>
             </div>
 
-            <!-- WORKSPACE -->
+            <!-- FILTER SECTION -->
+            <div class="filter-section no-print">
+                <div class="filter-grid" style="align-items: flex-end;">
+                    <div class="filter-group">
+                        <label>SELECT CLASS</label>
+                        <select id="filterClass" onchange="loadScheduleData()">
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 9">Class 9</option>
+                            <option value="Class 8">Class 8</option>
+                        </select>
+                    </div>
+                    <div class="filter-group button-group">
+                        <button class="btn-search" onclick="loadScheduleData()"><i class="fas fa-sync-alt"></i> Load Schedule</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN WORKSPACE -->
             <div class="datesheet-workspace">
                 
-                <!-- LEFT: FORM -->
+                <!-- LEFT: FORM (NO PRINT) -->
                 <div class="form-section no-print" style="margin-bottom: 0;">
                     <h4 class="section-heading"><i class="fas fa-calendar-plus text-primary"></i> Add Paper to Schedule</h4>
                     
                     <form id="liveScheduleForm">
                         <div class="input-group mb-15">
+                            <label>TARGET CLASS *</label>
+                            <select id="schedClass" required>
+                                <option value="Class 10">Class 10</option>
+                                <option value="Class 9">Class 9</option>
+                                <option value="Class 8">Class 8</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-15">
                             <label>SUBJECT NAME *</label>
                             <input type="text" id="schedSub" placeholder="e.g. Computer Science" required>
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" class="mb-15">
                             <div class="input-group">
                                 <label>EXAM DATE *</label>
                                 <input type="date" id="schedDate" required>
@@ -139,15 +168,16 @@
                             <label>TIMING *</label>
                             <input type="text" id="schedTime" value="08:30 AM - 11:30 AM" required>
                         </div>
-                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;"><i class="fas fa-save"></i> Save Schedule</button>
+                        <button type="submit" class="btn-submit w-100" style="background:#7239ea;"><i class="fas fa-plus-circle"></i> Save to Database</button>
                     </form>
                 </div>
 
-                <!-- RIGHT: TABLE / PREVIEW -->
+                <!-- RIGHT: OFFICIAL DATE SHEET PREVIEW -->
                 <div class="data-table-card">
                     <div style="text-align: center; padding: 25px 20px 15px; border-bottom: 2px solid #7239ea;">
                         <h2 style="margin: 0; color: #1e1e2d; font-size: 18px; text-transform: uppercase;">MDA Mustafa Digital Ai School</h2>
-                        <p style="margin: 3px 0; font-size: 11px; color: #64748b;">Official Examination Date Sheet (Google DB)</p>
+                        <p style="margin: 3px 0; font-size: 11px; color: #64748b;">Official Examination Date Sheet • Session 2026-27</p>
+                        <h3 style="margin-top: 10px; color: #7239ea; font-size: 15px; letter-spacing: 0.5px;" id="displayTargetClassTitle">Class 10 — Date Sheet</h3>
                     </div>
 
                     <div class="table-responsive">
@@ -163,11 +193,20 @@
                             <tbody id="scheduleTableBody">
                                 <tr>
                                     <td colspan="4" class="text-center" style="padding: 40px; color: #94a3b8;">
-                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching date sheet from Google Database...
+                                        <i class="fas fa-spinner fa-spin fa-2x"></i><br>Fetching date sheet from Firebase...
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Instructions Notice -->
+                    <div class="exam-instructions-box">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Examination Rules & Instructions</h5>
+                        <ul>
+                            <li>Students must bring their official ID card and arrive 15 minutes before exam time.</li>
+                            <li>Mobile phones and smartwatches are strictly prohibited in the examination hall.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -182,7 +221,13 @@
 
     <script>
         async function loadScheduleData() {
-            let schedules = await mdaFetchData('schedules');
+            const selectedClass = document.getElementById('filterClass').value;
+            document.getElementById('displayTargetClassTitle').innerText = `${selectedClass} — Date Sheet`;
+
+            let allSchedules = await mdaFetchData('schedules');
+            // Filter by class
+            let schedules = allSchedules.filter(sc => (sc.targetClass || sc.class || "Class 10").trim() === selectedClass);
+            
             const tbody = document.getElementById('scheduleTableBody');
 
             if (schedules.length > 0) {
@@ -192,7 +237,7 @@
                         <tr>
                             <td><strong>${sc.date}</strong></td>
                             <td>${sc.day}</td>
-                            <td style="text-align: left;"><strong>${sc.subject}</strong></td>
+                            <td style="text-align: left;"><strong style="color:#1e293b;">${sc.subject}</strong></td>
                             <td>${sc.timing}</td>
                         </tr>
                     `;
@@ -201,7 +246,8 @@
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="4" class="text-center" style="padding: 40px; color: #94a3b8;">
-                            No papers scheduled yet. Add a paper above.
+                            <i class="fas fa-calendar-times fa-2x" style="margin-bottom:8px; display:block;"></i>
+                            No papers scheduled yet for ${selectedClass}. Add a paper using the form on the left.
                         </td>
                     </tr>
                 `;
@@ -213,6 +259,7 @@
             
             const newSched = {
                 action: 'schedules',
+                targetClass: document.getElementById('schedClass').value,
                 subject: document.getElementById('schedSub').value.trim(),
                 date: document.getElementById('schedDate').value,
                 day: document.getElementById('schedDay').value.trim(),
@@ -221,11 +268,11 @@
 
             let res = await mdaSaveData('schedules', newSched);
             if (res.status === "success") {
-                alert('Exam schedule saved and synced with Google Database successfully!');
+                alert('Exam schedule saved and synced with Firebase successfully!');
                 this.reset();
                 loadScheduleData();
             } else {
-                alert('Saved locally. Will sync with Google Sheet.');
+                alert('Saved locally. Check database connection.');
                 this.reset();
                 loadScheduleData();
             }
