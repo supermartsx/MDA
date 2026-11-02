@@ -10,10 +10,7 @@
 
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -36,122 +33,45 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        .reg-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+        .reg-header { text-align: center; margin-bottom: 25px; }
         .reg-logo-box {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 12px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #a855f7, #3b82f6);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 700;
+            width: 70px; height: 70px; margin: 0 auto 12px; border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7, #3b82f6); color: #fff;
+            display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700;
         }
-        .reg-header h2 {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 4px;
-        }
-        .reg-header p {
-            font-size: 12px;
-            color: #64748b;
-        }
+        .reg-header h2 { font-size: 24px; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+        .reg-header p { font-size: 12px; color: #64748b; }
 
-        /* Form Grid */
-        .form-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; outline: none; background: #f8fafc; color: #1e293b; transition: 0.2s;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 6px;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 13px;
-            outline: none;
-            background: #f8fafc;
-            color: #1e293b;
-            transition: 0.2s;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #a855f7;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #a855f7; background: #fff; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
         }
 
         .btn-register-submit {
-            width: 100%;
-            height: 50px;
-            background: linear-gradient(90deg, #06b6d4 0%, #a855f7 50%, #ec4899 100%);
-            border: none;
-            border-radius: 30px;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.35);
-            transition: 0.3s;
-            margin-top: 10px;
+            width: 100%; height: 50px; background: linear-gradient(90deg, #06b6d4 0%, #a855f7 50%, #ec4899 100%);
+            border: none; border-radius: 30px; color: #ffffff; font-size: 14px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer; box-shadow: 0 8px 20px rgba(168, 85, 247, 0.35);
+            transition: 0.3s; margin-top: 10px;
         }
-        .btn-register-submit:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-        }
+        .btn-register-submit:hover { opacity: 0.95; transform: translateY(-2px); }
 
-        .login-redirect-text {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12.5px;
-            color: #64748b;
-        }
-        .login-redirect-text a {
-            color: #3b82f6;
-            font-weight: 700;
-            text-decoration: none;
-        }
+        .login-redirect-text { text-align: center; margin-top: 20px; font-size: 12.5px; color: #64748b; }
+        .login-redirect-text a { color: #3b82f6; font-weight: 700; text-decoration: none; }
 
-        /* Success Card Popup */
+        /* Success Box */
         .success-box {
-            display: none;
-            text-align: center;
-            background: #f0fdf4;
-            border: 2px solid #86efac;
-            padding: 25px 20px;
-            border-radius: 12px;
-            margin-top: 15px;
+            display: none; text-align: center; background: #f0fdf4; border: 2px solid #86efac; padding: 25px 20px; border-radius: 12px; margin-top: 15px;
         }
         .success-box i { font-size: 40px; color: #16a34a; margin-bottom: 10px; }
         .success-box h3 { font-size: 18px; color: #15803d; margin-bottom: 6px; }
         .success-box p { font-size: 12px; color: #166534; margin-bottom: 15px; }
 
-        @media (max-width: 600px) {
-            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
-        }
+        @media (max-width: 600px) { .form-grid-2 { grid-template-columns: 1fr; gap: 0; } }
     </style>
 </head>
 <body>
@@ -161,7 +81,7 @@
         <div class="reg-header">
             <div class="reg-logo-box">M</div>
             <h2>MDA Online Admission</h2>
-            <p>MDA Mustafa Digital Ai School — Student Registration</p>
+            <p>MDA Mustafa Digital Ai School — Student Self-Registration</p>
         </div>
 
         <form id="onlineRegForm">
@@ -169,61 +89,60 @@
             <div class="form-grid-2">
                 <div class="form-group">
                     <label>STUDENT FULL NAME *</label>
-                    <input type="text" name="studentName" id="regName" placeholder="Enter student's name" required>
+                    <input type="text" id="regName" placeholder="Enter student's name" required>
                 </div>
                 <div class="form-group">
                     <label>FATHER'S NAME *</label>
-                    <input type="text" name="fatherName" id="regFather" placeholder="Father's full name" required>
+                    <input type="text" id="regFather" placeholder="Father's full name" required>
                 </div>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
                     <label>APPLYING FOR CLASS *</label>
-                    <select name="class" id="regClass" required>
-                        <option value="">-- Choose Class --</option>
+                    <select id="regClass" required>
                         <option value="Class 10">Class 10 (Matric)</option>
                         <option value="Class 9">Class 9</option>
                         <option value="Class 8">Class 8</option>
                         <option value="Class 7">Class 7</option>
                         <option value="Class 6">Class 6</option>
-                        <option value="Primary (1-5)">Class 1 to 5</option>
+                        <option value="Artificial Intelligence Course">AI & Tech Course</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>DATE OF BIRTH *</label>
-                    <input type="date" name="dob" id="regDob" required>
+                    <input type="date" id="regDob" required>
                 </div>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
                     <label>GENDER *</label>
-                    <select name="gender" id="regGender" required>
+                    <select id="regGender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>B-FORM / CNIC NUMBER *</label>
-                    <input type="text" name="cnic" id="regCnic" placeholder="e.g. 35201-XXXXXXX-X" required>
+                    <input type="text" id="regCnic" placeholder="35201-XXXXXXX-X" required>
                 </div>
             </div>
 
             <div class="form-grid-2">
                 <div class="form-group">
                     <label>WHATSAPP / MOBILE NO *</label>
-                    <input type="text" name="phone" id="regPhone" placeholder="03XXXXXXXXX" required>
+                    <input type="text" id="regPhone" placeholder="03XXXXXXXXX" required>
                 </div>
                 <div class="form-group">
-                    <label>CREATE LOGIN PASSWORD *</label>
-                    <input type="password" name="password" id="regPass" placeholder="Set your secret password" required minlength="6">
+                    <label>CREATE PORTAL PASSWORD *</label>
+                    <input type="password" id="regPass" placeholder="Set secret password" required minlength="6">
                 </div>
             </div>
 
             <div class="form-group">
                 <label>RESIDENTIAL ADDRESS *</label>
-                <textarea name="address" id="regAddress" rows="2" placeholder="Full home address" required></textarea>
+                <textarea id="regAddress" rows="2" placeholder="Full home address" required></textarea>
             </div>
 
             <button type="submit" id="btnSubmitReg" class="btn-register-submit">
@@ -231,18 +150,18 @@
             </button>
         </form>
 
-        <!-- Confirmation Card after Registration -->
+        <!-- Success Box with Auto Fee Challan Link -->
         <div class="success-box" id="regSuccessBox">
             <i class="fas fa-check-circle"></i>
-            <h3>Registration Completed!</h3>
-            <p>Your Online Admission has been submitted. Please note down your Admission Credentials:</p>
+            <h3>Registration Successful!</h3>
+            <p>Your admission form has been saved to Firebase. Use your credentials to log in.</p>
             <div style="background:#fff; border:1px dashed #86efac; padding:12px; border-radius:8px; margin-bottom:15px; font-size:13px;">
-                <strong>Admission Number:</strong> <span id="issuedAdmNo" style="color:#0284c7; font-weight:800;">MDA-26-1055</span><br>
-                <small style="color:#64748b;">(Use this Admission Number & your Password to Login)</small>
+                <strong>Assigned Admission No:</strong> <span id="issuedAdmNo" style="color:#0284c7; font-weight:800;">-</span><br>
+                <small style="color:#64748b;">(Use this Admission No & Password to Login)</small>
             </div>
             <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <a href="print-fee-voucher.html" class="btn-back" style="background:#22c55e; color:#fff;" target="_blank"><i class="fas fa-print"></i> Download Fee Challan</a>
-                <a href="student-login.html" class="btn-back" style="background:#3b82f6; color:#fff;"><i class="fas fa-sign-in-alt"></i> Go to Student Login</a>
+                <a href="#" id="btnDownloadChallan" class="btn-back" style="background:#16a34a; color:#fff; text-decoration:none;" target="_blank"><i class="fas fa-file-invoice-dollar"></i> Download Fee Challan</a>
+                <a href="student-login.html" class="btn-back" style="background:#2563eb; color:#fff; text-decoration:none;"><i class="fas fa-sign-in-alt"></i> Go to Student Login</a>
             </div>
         </div>
 
@@ -252,31 +171,54 @@
 
     </div>
 
+    <!-- Global JS & Real-Time Engine -->
+    <script src="assets/js/realtime-db.js"></script>
     <script>
-        // GOOGLE APPS SCRIPT URL (PASTE YOUR URL HERE)
-        const SCRIPT_URL = ""; 
-
-        document.getElementById('onlineRegForm').addEventListener('submit', function(e) {
+        document.getElementById('onlineRegForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitReg');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting to Firebase...';
             btn.disabled = true;
 
-            // Generate clean unique Admission Number
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const generatedAdm = `MDA-26-${randomNum}`;
-            const studentPass = document.getElementById('regPass').value;
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            const generatedAdm = `MDA-26-${rand}`;
+            const studentName = document.getElementById('regName').value.trim();
+            const fatherName = document.getElementById('regFather').value.trim();
+            const studentClass = document.getElementById('regClass').value;
+            const studentCnic = document.getElementById('regCnic').value.trim();
+            const studentPhone = document.getElementById('regPhone').value.trim();
+            const studentPass = document.getElementById('regPass').value.trim();
 
-            // Save login credentials in session/storage for instant login capability
-            sessionStorage.setItem('mda_registered_adm', generatedAdm);
-            sessionStorage.setItem('mda_registered_pass', studentPass);
+            const studentPayload = {
+                action: 'students',
+                admNo: generatedAdm,
+                fullName: studentName,
+                fatherName: fatherName,
+                class: studentClass,
+                dob: document.getElementById('regDob').value,
+                gender: document.getElementById('regGender').value,
+                cnic: studentCnic,
+                phone: studentPhone,
+                password: studentPass,
+                pendingDue: 5000, // Default admission/term fee
+                status: 'Active'
+            };
 
-            // Display success
+            // Save live to Firebase
+            let res = await mdaSaveData('students', studentPayload);
+
+            // Save active student in session for instant login preview
+            sessionStorage.setItem('mda_active_student', JSON.stringify(studentPayload));
+
             setTimeout(() => {
                 document.getElementById('onlineRegForm').style.display = 'none';
                 document.getElementById('issuedAdmNo').innerText = generatedAdm;
+                
+                // Link Fee Challan dynamically with student's admNo
+                document.getElementById('btnDownloadChallan').href = `print-fee-voucher.html?adm=${generatedAdm}`;
+                
                 document.getElementById('regSuccessBox').style.display = 'block';
-            }, 600);
+            }, 500);
         });
     </script>
 </body>
