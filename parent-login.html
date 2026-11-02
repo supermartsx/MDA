@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Portal Login - MDA Mustafa Digital Ai School</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; -webkit-tap-highlight-color:transparent; }
+        body {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
+            background-attachment: fixed;
+        }
+        .login-card {
+            background: #ffffff; width: 100%; max-width: 420px; border-radius: 20px; padding: 35px 25px 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); text-align: center;
+        }
+        .parent-icon-wrap {
+            width: 80px; height: 80px; margin: 0 auto 15px; border-radius: 50%; background: #eff6ff;
+            display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 30px; border: 2px dashed #93c5fd;
+        }
+        .error-alert-box {
+            display: none; background: #fee2e2; border: 1px solid #fca5a5; color: #ef4444; padding: 10px;
+            border-radius: 8px; font-size: 12.5px; font-weight: 600; margin-bottom: 20px;
+        }
+        .login-card h2 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .login-card p { font-size: 12px; color: #64748b; margin-bottom: 25px; }
+        .input-group-box { text-align: left; margin-bottom: 20px; }
+        .input-group-box label { display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+        .input-inner-wrapper { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .input-inner-wrapper:focus-within { border-bottom-color: #2563eb; }
+        .input-inner-wrapper i { color: #94a3b8; width: 20px; text-align: center; }
+        .input-inner-wrapper input { width: 100%; border: none; outline: none; font-size: 13.5px; color: #1e293b; background: transparent; }
+        .btn-parent-login {
+            width: 100%; height: 48px; background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+            border: none; border-radius: 25px; color: #ffffff; font-size: 14px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35); transition: 0.3s;
+        }
+        .btn-parent-login:hover { transform: translateY(-2px); opacity: 0.95; }
+        .back-home-link { margin-top: 20px; font-size: 12px; color: #64748b; }
+        .back-home-link a { color: #2563eb; font-weight: 700; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="parent-icon-wrap"><i class="fas fa-users"></i></div>
+        <h2>Parent Portal</h2>
+        <p>MDA Mustafa Digital Ai School — Parent Access</p>
+
+        <div class="error-alert-box" id="errorAlertBox">Invalid Student Admission No or Password!</div>
+
+        <form id="parentLoginForm">
+            <div class="input-group-box">
+                <label>STUDENT ADMISSION NO</label>
+                <div class="input-inner-wrapper">
+                    <i class="far fa-user"></i>
+                    <input type="text" id="parentAdmInput" placeholder="e.g. MDA-26-1055" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="input-group-box">
+                <label>STUDENT PASSWORD</label>
+                <div class="input-inner-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="parentPassInput" placeholder="Enter student portal password" required>
+                </div>
+            </div>
+
+            <button type="submit" id="btnParentLogin" class="btn-parent-login">
+                <i class="fas fa-sign-in-alt"></i> View Child Progress
+            </button>
+        </form>
+
+        <div class="back-home-link">
+            Are you a student? <a href="student-login.html">Student Login</a>
+        </div>
+    </div>
+
+    <!-- Real-Time Database Engine -->
+    <script src="assets/js/realtime-db.js"></script>
+    <script>
+        document.getElementById('parentLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const adm = document.getElementById('parentAdmInput').value.trim().toUpperCase();
+            const pass = document.getElementById('parentPassInput').value.trim();
+            const errBox = document.getElementById('errorAlertBox');
+            const btn = document.getElementById('btnParentLogin');
+
+            errBox.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking Database...';
+            btn.disabled = true;
+
+            try {
+                let students = await mdaFetchData('students');
+                let foundStudent = students.find(s => {
+                    let sAdm = (s.admNo || s.admissionNo || '').trim().toUpperCase();
+                    let sPass = String(s.password || '').trim();
+                    return sAdm === adm && sPass === pass;
+                });
+
+                if (foundStudent) {
+                    // Save active student data for parent view
+                    sessionStorage.setItem('mda_active_student', JSON.stringify(foundStudent));
+                    window.location.href = 'parent-dashboard.html';
+                } else {
+                    errBox.innerText = "Invalid Admission No or Password!";
+                    errBox.style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> View Child Progress';
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                errBox.innerText = "Database connection error.";
+                errBox.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> View Child Progress';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
