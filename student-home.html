@@ -23,7 +23,7 @@
             padding-bottom: 80px; /* Space for fixed bottom bar */
         }
 
-        /* ================= TOP CURVED GRADIENT HEADER (Image 1 Exact) ================= */
+        /* ================= TOP CURVED GRADIENT HEADER ================= */
         .portal-hero-header {
             background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #6366f1 100%);
             color: #ffffff;
@@ -80,6 +80,7 @@
             border: 2px solid #ffffff;
             overflow: hidden;
             background: #e2e8f0;
+            cursor: pointer;
         }
         .user-avatar-circle img {
             width: 100%;
@@ -104,7 +105,7 @@
             margin-top: 2px;
         }
 
-        /* Floating Search Bar (Image 1 Exact) */
+        /* Floating Search Bar */
         .search-bar-container {
             max-width: 500px;
             margin: -22px auto 20px;
@@ -120,6 +121,7 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f1f5f9;
         }
         .search-box-pill i {
             color: #6366f1;
@@ -162,7 +164,7 @@
             text-decoration: none;
         }
 
-        /* ================= QUICK ACCESS 3-COLUMNS GRID (Image 1 Exact) ================= */
+        /* ================= QUICK ACCESS 3-COLUMNS GRID ================= */
         .quick-access-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -179,7 +181,7 @@
             align-items: flex-start;
             text-decoration: none;
             position: relative;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             border: 1px solid #f1f5f9;
             transition: all 0.25s ease;
         }
@@ -200,7 +202,7 @@
             margin-bottom: 10px;
         }
 
-        /* Pastel Colors */
+        /* Pastel Colors Matching Image 1 */
         .icon-profile { background: #ede9fe; color: #6366f1; }
         .icon-events { background: #ffedd5; color: #f97316; }
         .icon-staff { background: #dbeafe; color: #2563eb; }
@@ -248,7 +250,7 @@
             border-radius: 10px;
         }
 
-        /* ================= UPCOMING EVENTS SECTION (Image 1 Exact) ================= */
+        /* ================= UPCOMING EVENTS SECTION ================= */
         .events-list-wrapper {
             display: flex;
             flex-direction: column;
@@ -306,7 +308,7 @@
             font-weight: 600;
         }
 
-        /* ================= FIXED BOTTOM NAV BAR (Image 1 Exact) ================= */
+        /* ================= FIXED BOTTOM NAV BAR ================= */
         .bottom-nav-bar {
             position: fixed;
             bottom: 0;
@@ -342,14 +344,14 @@
     <!-- TOP CURVED GRADIENT HEADER -->
     <header class="portal-hero-header">
         <div class="header-top-row">
-            <i class="fas fa-bars nav-menu-icon"></i>
+            <i class="fas fa-bars nav-menu-icon" onclick="alert('Menu drawer')"></i>
             <div class="header-user-side">
-                <div class="bell-icon-wrap" onclick="alert('No new notifications!')">
+                <div class="bell-icon-wrap" onclick="window.location.href='notices.html'">
                     <i class="far fa-bell"></i>
                     <span class="bell-badge">3</span>
                 </div>
-                <div class="user-avatar-circle" onclick="window.location.href='student-id-card.html'">
-                    <img src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=100" alt="Avatar">
+                <div class="user-avatar-circle" onclick="window.location.href='student-id-card.html'" title="View ID Card">
+                    <img src="https://ui-avatars.com/api/?name=Student&background=ddd&color=333&size=100" alt="Avatar" id="userAvatarImg">
                 </div>
             </div>
         </div>
@@ -365,14 +367,14 @@
     <div class="search-bar-container">
         <div class="search-box-pill">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search anything...">
+            <input type="text" placeholder="Search anything (e.g. Fees, Exams, Library)..." id="portalSearchInput">
         </div>
     </div>
 
     <!-- MAIN BODY -->
     <div class="main-body-container">
         
-        <!-- QUICK ACCESS SECTION -->
+        <!-- QUICK ACCESS SECTION (12 CONNECTED CARDS) -->
         <div class="section-header-row">
             <h3>Quick Access</h3>
             <a href="#">View All</a>
@@ -380,7 +382,7 @@
 
         <div class="quick-access-grid">
             
-            <!-- 1. Profile -->
+            <!-- 1. Profile -> student-id-card.html -->
             <a href="student-id-card.html" class="quick-card-btn">
                 <div class="card-icon-round icon-profile"><i class="fas fa-user"></i></div>
                 <span class="card-title-text">Profile</span>
@@ -388,39 +390,39 @@
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 2. Events -->
-            <a href="javascript:void(0)" class="quick-card-btn">
+            <!-- 2. Events -> student-timetable.html -->
+            <a href="student-timetable.html" class="quick-card-btn">
                 <div class="card-icon-round icon-events"><i class="fas fa-calendar-alt"></i></div>
                 <span class="card-title-text">Events</span>
                 <span class="card-desc-text">School events</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 3. Staffs -->
-            <a href="javascript:void(0)" class="quick-card-btn">
+            <!-- 3. Staffs -> staff-management.html (or faculty directory) -->
+            <a href="staff-management.html" class="quick-card-btn">
                 <div class="card-icon-round icon-staff"><i class="fas fa-user-friends"></i></div>
                 <span class="card-title-text">Staffs</span>
                 <span class="card-desc-text">Faculty directory</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 4. Attendance -->
-            <a href="javascript:void(0)" class="quick-card-btn">
+            <!-- 4. Attendance -> attendance.html -->
+            <a href="attendance.html" class="quick-card-btn">
                 <div class="card-icon-round icon-attendance"><i class="fas fa-clipboard-check"></i></div>
                 <span class="card-title-text">Attendance</span>
                 <span class="card-desc-text">Check attendance</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 5. Chatbox -->
-            <a href="javascript:void(0)" class="quick-card-btn">
+            <!-- 5. Chatbox -> student-live-class.html -->
+            <a href="student-live-class.html" class="quick-card-btn">
                 <div class="card-icon-round icon-chatbox"><i class="fas fa-comment-dots"></i></div>
                 <span class="card-title-text">Chatbox</span>
-                <span class="card-desc-text">Message & support</span>
+                <span class="card-desc-text">Live Meet & support</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 6. GradeSheet (Report Card) -->
+            <!-- 6. GradeSheet -> print-report-card.html -->
             <a href="print-report-card.html" class="quick-card-btn">
                 <div class="card-icon-round icon-gradesheet"><i class="fas fa-chart-bar"></i></div>
                 <span class="card-title-text">GradeSheet</span>
@@ -428,15 +430,15 @@
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 7. Gallery -->
-            <a href="javascript:void(0)" class="quick-card-btn">
-                <div class="card-icon-round icon-gallery"><i class="fas fa-image"></i></div>
+            <!-- 7. Gallery -> student-lectures.html -->
+            <a href="student-lectures.html" class="quick-card-btn">
+                <div class="card-icon-round icon-gallery"><i class="fab fa-youtube"></i></div>
                 <span class="card-title-text">Gallery</span>
-                <span class="card-desc-text">Photos & albums</span>
+                <span class="card-desc-text">Video lectures</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 8. Fees Details (Challan Voucher) -->
+            <!-- 8. Fees Details -> print-fee-voucher.html -->
             <a href="print-fee-voucher.html" class="quick-card-btn">
                 <div class="card-icon-round icon-fees"><i class="fas fa-file-invoice-dollar"></i></div>
                 <span class="card-title-text">Fees Details</span>
@@ -444,8 +446,8 @@
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 9. Notices -->
-            <a href="javascript:void(0)" class="quick-card-btn">
+            <!-- 9. Notices -> notices.html -->
+            <a href="notices.html" class="quick-card-btn">
                 <span class="badge-new-pill">NEW</span>
                 <div class="card-icon-round icon-notices"><i class="fas fa-file-alt"></i></div>
                 <span class="card-title-text">Notices</span>
@@ -453,7 +455,7 @@
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 10. Assignments -->
+            <!-- 10. Assignments -> student-diary.html -->
             <a href="student-diary.html" class="quick-card-btn">
                 <div class="card-icon-round icon-assignments"><i class="fas fa-book-open"></i></div>
                 <span class="card-title-text">Assignments</span>
@@ -461,15 +463,15 @@
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 11. Exams (Live / Timetable) -->
-            <a href="student-live-class.html" class="quick-card-btn">
-                <div class="card-icon-round icon-exams"><i class="fas fa-video"></i></div>
+            <!-- 11. Exams -> exam-schedule.html -->
+            <a href="exam-schedule.html" class="quick-card-btn">
+                <div class="card-icon-round icon-exams"><i class="fas fa-calendar-check"></i></div>
                 <span class="card-title-text">Exams</span>
                 <span class="card-desc-text">Schedule & results</span>
                 <i class="fas fa-chevron-right card-arrow-icon"></i>
             </a>
 
-            <!-- 12. Library -->
+            <!-- 12. Library -> student-e-library.html -->
             <a href="student-e-library.html" class="quick-card-btn">
                 <div class="card-icon-round icon-library"><i class="fas fa-book"></i></div>
                 <span class="card-title-text">Library</span>
@@ -519,10 +521,6 @@
             </div>
         </div>
 
-        <div style="text-align:center; margin-top:15px;">
-            <a href="#" style="font-size:12px; color:#4f46e5; font-weight:700; text-decoration:none;">View All Events</a>
-        </div>
-
     </div>
 
     <!-- FIXED BOTTOM NAVIGATION BAR -->
@@ -531,15 +529,15 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item-link">
+        <a href="student-timetable.html" class="nav-item-link">
             <i class="far fa-calendar-alt"></i>
             <span>Calendar</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item-link">
+        <a href="student-live-class.html" class="nav-item-link">
             <i class="far fa-comment-dots"></i>
             <span>Messages</span>
         </a>
-        <a href="javascript:void(0)" class="nav-item-link" onclick="window.location.href='student-login.html'">
+        <a href="student-id-card.html" class="nav-item-link">
             <i class="fas fa-th-large"></i>
             <span>More</span>
         </a>
@@ -548,9 +546,16 @@
     <!-- Dynamic Session Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const loggedStudent = sessionStorage.getItem('mda_logged_student_adm');
-            if (loggedStudent) {
-                document.getElementById('headerStudentName').innerText = loggedStudent;
+            const activeStudent = JSON.parse(sessionStorage.getItem('mda_active_student'));
+            if (activeStudent) {
+                let name = activeStudent.fullName || activeStudent.name || "Student";
+                document.getElementById('headerStudentName').innerText = name;
+                document.getElementById('userAvatarImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=3b82f6&color=fff&size=100`;
+            } else {
+                let fallbackAdm = sessionStorage.getItem('mda_logged_student_adm');
+                if (fallbackAdm) {
+                    document.getElementById('headerStudentName').innerText = fallbackAdm;
+                }
             }
         });
     </script>
